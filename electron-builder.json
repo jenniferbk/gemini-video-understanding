@@ -1,0 +1,39 @@
+{
+  "appId": "edu.uga.gemini-video-understanding",
+  "productName": "Gemini Video Understanding",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json"
+  ],
+  "mac": {
+    "category": "public.app-category.education",
+    "target": ["dmg"],
+    "minimumSystemVersion": "11.0",
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false
+  },
+  "dmg": {
+    "title": "Gemini Video Understanding ${version}",
+    "icon": null,
+    "iconSize": 100,
+    "contents": [
+      {
+        "x": 130,
+        "y": 220
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ],
+    "window": {
+      "width": 540,
+      "height": 380
+    }
+  }
+}

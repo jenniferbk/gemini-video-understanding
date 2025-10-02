@@ -1,0 +1,307 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--uga-red) 0%, var(--uga-brown) 100%);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.header h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.headerButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.headerButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.settingsButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.settingsButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.content {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 3rem;
+}
+
+/* Video Info */
+.videoInfo {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.infoRow:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.value {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Warning */
+.warning {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #92400e;
+}
+
+.warningIcon {
+  font-size: 1.25rem;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.sectionLabel {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.promptDescription {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Quality Presets */
+.presets {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.preset {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset:hover {
+  border-color: #d1d5db;
+  background: #f9fafb;
+}
+
+.preset input[type="radio"] {
+  cursor: pointer;
+}
+
+.preset input[type="radio"]:checked ~ .presetContent {
+  color: var(--primary-600);
+}
+
+.preset:has(input[type="radio"]:checked) {
+  border-color: var(--primary-600);
+  background: var(--primary-50);
+}
+
+.presetContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.presetName {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.presetTime {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Advanced Settings */
+.advancedToggle {
+  background: none;
+  border: none;
+  color: var(--primary-600);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.advancedToggle:hover {
+  color: var(--primary-700);
+}
+
+.advanced {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.advancedRow {
+  margin-bottom: 1rem;
+}
+
+.advancedRow:last-child {
+  margin-bottom: 0;
+}
+
+.advancedLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.numberInput {
+  width: 80px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.numberInput:focus {
+  outline: none;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(186, 12, 47, 0.1);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Estimates */
+.estimates {
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.estimate {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.estimate:last-child {
+  margin-bottom: 0;
+}
+
+.estimateLabel {
+  font-size: 0.9rem;
+  color: var(--primary-600);
+}
+
+.estimateValue {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--primary-700);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}

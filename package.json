@@ -1,0 +1,44 @@
+{
+  "name": "gemini-video-understanding",
+  "version": "1.0.0",
+  "description": "Desktop application for transcribing classroom videos using Google Gemini AI",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "npm run build && electron .",
+    "start": "electron .",
+    "package": "npm run build && electron-builder --config electron-builder.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "video",
+    "transcription",
+    "gemini",
+    "education"
+  ],
+  "author": "Jennifer Kleiman (UGA COMS Research)",
+  "license": "ISC",
+  "dependencies": {
+    "marked": "^16.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sqlite3": "^5.1.7",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/uuid": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12",
+    "html-webpack-plugin": "^5.6.4",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.0",
+    "webpack-cli": "^6.0.1"
+  }
+}

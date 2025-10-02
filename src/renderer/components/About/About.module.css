@@ -1,0 +1,274 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--gray-500);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+}
+
+.content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  color: var(--primary-600);
+}
+
+.version {
+  text-align: center;
+  font-size: 14px;
+  color: var(--gray-600);
+  margin-bottom: 8px;
+}
+
+.description {
+  text-align: center;
+  font-size: 16px;
+  color: var(--gray-700);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 12px 0;
+}
+
+.institution {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-600);
+  margin: 0 0 4px 0;
+}
+
+.detail {
+  font-size: 14px;
+  color: var(--gray-600);
+  margin: 0;
+}
+
+.leadRole {
+  margin-bottom: 20px;
+  padding: 16px;
+  background-color: var(--primary-50);
+  border-left: 3px solid var(--primary-600);
+  border-radius: 6px;
+}
+
+.leadRole strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-700);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.leadName {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 8px 0;
+}
+
+.leadDescription {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.teamMembers {
+  margin-top: 16px;
+}
+
+.teamMembers strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+
+.contributors {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contributors li {
+  font-size: 15px;
+  color: var(--gray-700);
+  padding: 6px 0;
+}
+
+.grant {
+  font-size: 14px;
+  color: var(--gray-700);
+  margin: 0 0 12px 0;
+}
+
+.grants {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.grants li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.grants li:last-child {
+  border-bottom: none;
+}
+
+.grants strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.grantDetail {
+  display: block;
+  font-size: 13px;
+  color: var(--gray-600);
+  font-style: italic;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: var(--gray-600);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+  padding: 12px;
+  background-color: var(--gray-50);
+  border-radius: 6px;
+}
+
+.tech {
+  font-size: 14px;
+  color: var(--gray-700);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.techList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.techList li {
+  padding: 8px 0 8px 24px;
+  position: relative;
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+
+.techList li:before {
+  content: "▪";
+  position: absolute;
+  left: 8px;
+  color: var(--primary-600);
+  font-size: 16px;
+}
+
+.techList strong {
+  color: var(--gray-900);
+}
+
+.techNote {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.5;
+  margin: 0;
+  padding: 12px;
+  background-color: var(--gray-50);
+  border-radius: 6px;
+  font-style: italic;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
