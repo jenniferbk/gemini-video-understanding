@@ -35,3 +35,70 @@ npm-debug.log*
 *.mp4
 *_transcription_*/
 *.txt
+__pycache__/video_transcription_pipeline_v03.cpython-313.pyc
+__pycache__/video_transcription_pipeline_v04.cpython-313.pyc
+AvaDay4SG3Clip1.mov
+AvaDay4SG3Clip1_transcription/processing_summary.json
+AvaDay4SG3Clip2.mov
+AvaDay4SG3Clip3.mov
+AvaDay4SG3Clip4.mov
+AvaDay4SG3Clip5.mov
+AvaDay4SG3Clip6.mov
+AvaDay4SG3First15.mov
+AvaDay4SG3Second15.mov
+AvaDay4SG3Third15.mov
+AvaDay4SG_5v10.mov
+AvaDay4SG_5v10_transcription/processing_summary.json
+batch_process_v04.py
+chunks/240920_4Science_Ava_Post_0509_audio.wav
+chunks/250124_3Science_Faith_Day4_0408_audio.wav
+chunks/250214_5Science_Jake_FG2_0509_audio.wav
+compare_v03_v04.py
+consensus_analysis_script.js
+consensus_tester.py
+fix_float_issue.py
+fix_thinking_parameter.py
+fix_v04_setup.sh
+package-lock.json
+patch_v04.py
+PHASE1_COMPLETE.md
+PHASE2_COMPLETE.md
+PHASE3_PROGRESS.md
+prompts.json
+README_V04.md
+setup_v04.sh
+test_imports.py
+test_rtf_output.py
+test_v04_installation.py
+TODO_MVP.md
+V03_to_V04_Migration_Guide.md
+v04_config_generator.py
+V04_IMPLEMENTATION_SUMMARY.md
+v04_migration_tool.py
+v04_processing_summary.json
+V04_QUICK_FIX_INSTRUCTIONS.md
+video_chunks/AvaDay4SG3First15_chunk_001.mov
+video_chunks/AvaDay4SG3First15_chunk_002.mov
+video_chunks/AvaDay4SG3First15_chunk_003.mov
+video_chunks/AvaDay4SG3First15_chunk_004.mov
+video_splitter.py
+video_transcription_pipeline copy 2.py
+video_transcription_pipeline copy 3.py
+video_transcription_pipeline copy.py
+video_transcription_pipeline.py
+video_transcription_pipeline_fixed.py
+video_transcription_pipeline_fixed_timestamps copy.py
+video_transcription_pipeline_fixed_timestamps.py
+video_transcription_pipeline_v02 copy 2.py
+video_transcription_pipeline_v02 copy 3.py
+video_transcription_pipeline_v02 copy.py
+video_transcription_pipeline_v02.py
+video_transcription_pipeline_v03 copy.py
+video_transcription_pipeline_v03.py
+video_transcription_pipeline_v04 copy.py
+video_transcription_pipeline_v04.py
+video_transcription_pipeline_v04_simple.py
+video_transcription_pipeline_v05 copy.py
+video_transcription_pipeline_v05.py
+video_transcription_pipeline_v2_genai.py
+video_transcription_simple_working.py
