@@ -12,14 +12,13 @@ Desktop application for transcribing classroom videos using Google Gemini AI wit
 
 ### Key Features
 
-- 🎬 **Drag-and-drop video upload** - Simple interface for video selection
-- 🤖 **Google Gemini AI integration** - Advanced multimodal transcription
-- 👥 **Speaker diarization** - Automatic speaker identification and labeling
-- 🎯 **Custom prompts** - Tailored transcription for different classroom contexts
-- ⚡ **Quality presets** - Quick, Standard, and High Quality options
-- 📊 **Real-time progress tracking** - Monitor transcription status
-- 🎨 **UGA branding** - Official University of Georgia styling
-- 📝 **Transana-compatible output** - Ready for qualitative analysis
+- **Multimodal AI transcription** using Google Gemini's advanced language models
+- **Automatic speaker diarization** with confidence scoring for verification
+- **Context-aware prompts** tailored to specific classroom interaction types (whole class, small group, lab work)
+- **Consensus-based transcription** with configurable quality levels to improve accuracy
+- **Transana integration** with output formatted for qualitative video analysis workflows
+- **Batch processing** with real-time progress monitoring
+- **Cost estimation** and transparent API usage tracking
 
 ## Installation
 
@@ -156,14 +155,11 @@ For issues, questions, or feature requests, please [open an issue](https://githu
 
 ## Version History
 
-### v1.0.0 (2025-01-XX)
+### v1.0.0 (January 2025)
 - Initial production release
-- Desktop application with drag-and-drop interface
-- Google Gemini integration with speaker diarization
-- Quality presets and custom prompts
-- UGA branding
-- macOS packaging
-
----
-
-**Made with ❤️ at the University of Georgia**
+- Multimodal AI transcription with Google Gemini
+- Automatic speaker diarization with confidence scoring
+- Configurable quality presets for accuracy-speed tradeoffs
+- Context-aware classroom prompts
+- Transana-compatible output format
+- macOS native application
