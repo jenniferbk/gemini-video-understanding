@@ -164,32 +164,36 @@ class TranscriptValidator:
 
 class PromptManager:
     """Manage transcription prompts from external files"""
-    
+
     def __init__(self, prompts_file: str = "prompts.json"):
-        self.prompts_file = Path(prompts_file)
+        # Resolve prompts file relative to this script's directory
+        if not Path(prompts_file).is_absolute():
+            script_dir = Path(__file__).parent
+            self.prompts_file = script_dir / prompts_file
+        else:
+            self.prompts_file = Path(prompts_file)
         self.prompts = self._load_prompts()
-    
+
     def _load_prompts(self) -> Dict:
         """Load prompts from JSON file"""
-        if not self.prompts_file.exists():
-            # Create default prompts file if it doesn't exist
-            default_prompts = {
-                "basic": {
-                    "name": "Basic Transcription",
-                    "description": "Simple speaker identification and timestamps",
-                    "prompt": "Transcribe this classroom video with speaker identification and timestamps.\n\nSpeakers to identify:\n- Ava (teacher)\n- A06 (student, boy)\n- A04 (student, girl)\n- BS (Background Student)\n\nFormat: (HH:MM:SS.d) Speaker: content\n\nInclude brief [visual actions] when relevant to learning.\n\nPlease provide an accurate, concise transcript."
-                }
+        default_prompts = {
+            "basic": {
+                "name": "Basic Transcription",
+                "description": "Simple speaker identification and timestamps",
+                "prompt": "Transcribe this classroom video with speaker identification and timestamps.\n\nSpeakers to identify:\n- Ava (teacher)\n- A06 (student, boy)\n- A04 (student, girl)\n- BS (Background Student)\n\nFormat: (HH:MM:SS.d) Speaker: content\n\nInclude brief [visual actions] when relevant to learning.\n\nPlease provide an accurate, concise transcript."
             }
-            with open(self.prompts_file, 'w') as f:
-                json.dump(default_prompts, f, indent=2)
+        }
+
+        if not self.prompts_file.exists():
+            # Return default prompts without trying to write (app bundle is read-only)
             return default_prompts
-        
+
         try:
             with open(self.prompts_file, 'r') as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError) as e:
             print(f"Error loading prompts from {self.prompts_file}: {e}")
-            return {"basic": {"name": "Basic", "description": "Default prompt", "prompt": "Transcribe this video."}}
+            return default_prompts
     
     def get_prompt(self, key: str) -> str:
         """Get prompt text by key"""

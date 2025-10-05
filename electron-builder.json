@@ -8,6 +8,21 @@
     "dist/**/*",
     "package.json"
   ],
+  "extraResources": [
+    {
+      "from": "venv",
+      "to": "python",
+      "filter": ["**/*"]
+    },
+    {
+      "from": "src/python",
+      "to": "python",
+      "filter": ["*.py", "*.json"]
+    }
+  ],
+  "asarUnpack": [
+    "**/python/**/*"
+  ],
   "mac": {
     "category": "public.app-category.education",
     "target": ["dmg"],
