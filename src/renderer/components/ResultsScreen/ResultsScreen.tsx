@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ResultsScreen.module.css';
 import { Button } from '../shared/Button';
+import { About } from '../About/About';
 
 interface ResultsScreenProps {
   jobId: number;
@@ -26,6 +27,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
   const [result, setResult] = useState<TranscriptionResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showAbout, setShowAbout] = useState(false);
 
   useEffect(() => {
     async function loadResults() {
@@ -111,8 +113,13 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <h1>Transcription Complete!</h1>
-          <div className={styles.successIcon}>✓</div>
+          <div className={styles.headerContent}>
+            <h1>Transcription Complete!</h1>
+            <div className={styles.successIcon}>✓</div>
+          </div>
+          <button className={styles.aboutButton} onClick={() => setShowAbout(true)} title="About">
+            ℹ️
+          </button>
         </div>
 
         {/* Statistics */}
@@ -169,6 +176,9 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
             New Transcription
           </Button>
         </div>
+
+        {/* About Modal */}
+        {showAbout && <About onClose={() => setShowAbout(false)} />}
       </div>
     </div>
   );

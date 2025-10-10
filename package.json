@@ -1,13 +1,14 @@
 {
   "name": "gemini-video-understanding",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Desktop application for transcribing classroom videos using Google Gemini AI",
   "main": "dist/main.js",
   "scripts": {
     "build": "webpack",
+    "build:python": "bash scripts/build-python.sh",
     "dev": "npm run build && electron .",
     "start": "electron .",
-    "package": "npm run build && electron-builder --config electron-builder.json",
+    "package": "npm run build && npm run build:python && electron-builder --config electron-builder.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

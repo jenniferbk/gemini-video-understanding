@@ -138,6 +138,36 @@
   font-size: 0.95rem;
 }
 
+.promptHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.promptHeader .sectionLabel {
+  margin-bottom: 0;
+}
+
+.managePromptsButton {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.managePromptsButton:hover {
+  background: #2563eb;
+}
+
 .promptDescription {
   margin-top: 0.5rem;
   font-size: 0.875rem;

@@ -5,6 +5,10 @@ node_modules/
 dist/
 release/
 
+# Python portable build
+python-portable/
+cpython-*.tar.gz
+
 # macOS
 .DS_Store
 

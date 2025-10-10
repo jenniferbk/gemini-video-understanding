@@ -10,13 +10,13 @@
   ],
   "extraResources": [
     {
-      "from": "venv",
+      "from": "python-portable",
       "to": "python",
       "filter": ["**/*"]
     },
     {
       "from": "src/python",
-      "to": "python",
+      "to": "python/scripts",
       "filter": ["*.py", "*.json"]
     }
   ],

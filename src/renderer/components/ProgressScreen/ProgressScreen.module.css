@@ -17,19 +17,43 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
-.content h1 {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.headerContent {
+  flex: 1;
+  text-align: center;
+}
+
+.headerContent h1 {
   margin: 0 0 0.5rem 0;
   font-size: 2rem;
   font-weight: 600;
   color: #111827;
-  text-align: center;
 }
 
 .subtitle {
-  margin: 0 0 2rem 0;
+  margin: 0;
   font-size: 0.875rem;
   color: #6b7280;
-  text-align: center;
+}
+
+.aboutButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.aboutButton:hover {
+  background-color: #f3f4f6;
 }
 
 /* Progress Section */

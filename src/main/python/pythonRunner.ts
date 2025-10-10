@@ -58,10 +58,11 @@ export class PythonTranscriptionRunner extends EventEmitter {
    */
   private getScriptPath(): string {
     if (app.isPackaged) {
-      // Production
+      // Production: scripts are in python/scripts subdirectory
       return path.join(
         process.resourcesPath,
         'python',
+        'scripts',
         'video_transcription_pipeline_v04.py'
       );
     } else {

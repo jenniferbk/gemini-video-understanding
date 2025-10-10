@@ -35,11 +35,18 @@ Download the latest release from the [Releases page](https://github.com/jennifer
 
 ### Setup Instructions
 
-1. **Download** the `.dmg` file from releases
-2. **Open** the DMG and drag the app to Applications
-3. **Right-click** the app and select "Open" (first launch only)
-4. **Get API key** from [Google AI Studio](https://aistudio.google.com/apikey)
-5. **Enter API key** in the app settings
+1. **Download** the `.dmg` file from [Releases](https://github.com/jenniferbk/gemini-video-understanding/releases)
+2. **Open** the DMG and drag the app to Applications folder
+3. **Open Terminal** (Applications → Utilities → Terminal)
+4. **Run this command** to allow the app to run (copy and paste):
+   ```bash
+   xattr -cr "/Applications/Gemini Video Understanding.app"
+   ```
+5. **Launch the app** from Applications
+6. **Get your API key** from [Google AI Studio](https://aistudio.google.com/apikey)
+7. **Enter API key** when prompted on first launch
+
+**Why the Terminal command?** This app is not code-signed with an Apple Developer certificate, so macOS blocks it by default. The `xattr` command removes the quarantine flag, allowing it to run safely.
 
 For detailed installation instructions, see [INSTALLATION.md](INSTALLATION.md).
 
@@ -154,6 +161,13 @@ Developed as part of the C4OMS project and AI4STEM Center at the University of G
 For issues, questions, or feature requests, please [open an issue](https://github.com/jenniferbk/gemini-video-understanding/issues).
 
 ## Version History
+
+### v1.0.2 (October 2025)
+- Fixed prompt selection dropdown to dynamically load and update prompts
+- Added info button (ℹ️) to all screens for easy access to About information
+- Updated About screen to correctly show Gemini 2.5 Pro
+- Moved "Manage Prompts" button to prompt selection area for better UX
+- Fixed Python bundling with portable distribution for reliable installation
 
 ### v1.0.0 (January 2025)
 - Initial production release

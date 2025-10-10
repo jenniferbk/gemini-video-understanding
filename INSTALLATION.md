@@ -32,26 +32,25 @@ Save this file to your Downloads folder.
 4. **Close** the installer window
 5. You can now **delete** the `.dmg` file from Downloads (optional)
 
-### Step 3: First Launch
+### Step 3: Remove macOS Security Block
 
-#### On First Open:
+Because this app is not code-signed with an Apple Developer certificate, macOS will block it from opening. You'll need to remove the security block using Terminal:
 
-1. Open your **Applications** folder
-2. Find **"Gemini Video Understanding"**
-3. **Right-click** (or Control+click) on the app
-4. Select **"Open"** from the menu
-5. You'll see a security warning because the app isn't code-signed by Apple
-6. Click **"Open"** to confirm
+1. Open **Terminal** (Applications → Utilities → Terminal)
+2. **Copy and paste** this command:
+   ```
+   xattr -cr "/Applications/Gemini Video Understanding.app"
+   ```
+3. Press **Enter**
+   - No output means it worked!
 
-**Why this step?** macOS requires you to explicitly approve apps from unidentified developers on first launch. After this one-time approval, you can open the app normally by double-clicking.
+**What does this do?** It removes the quarantine flag that macOS adds to downloaded apps. This is safe and commonly used for legitimate unsigned applications.
 
-#### Alternative Method (if Right-click doesn't work):
+### Step 4: Launch the App
 
-1. Try to open the app normally (double-click)
-2. If blocked, go to **System Settings** → **Privacy & Security**
-3. Scroll down to find a message about "Gemini Video Understanding"
-4. Click **"Open Anyway"**
-5. Confirm by clicking **"Open"**
+1. Go to your **Applications** folder
+2. **Double-click** "Gemini Video Understanding"
+3. The app should now open successfully!
 
 ---
 
@@ -125,14 +124,22 @@ The app will securely store your key in your Mac's Keychain.
 
 ## Troubleshooting
 
-### "App is damaged and can't be opened"
+### "App can't be opened" or "App is damaged"
 
-This happens if macOS security settings are strict:
+If you see this error, it means you missed Step 3 (removing the security block):
 
 1. Open **Terminal** (in Applications → Utilities)
-2. Type: `xattr -cr "/Applications/Gemini Video Understanding.app"`
-3. Press Enter
+2. Copy and paste: `xattr -cr "/Applications/Gemini Video Understanding.app"`
+3. Press **Enter**
 4. Try opening the app again
+
+### Alternative Security Bypass (if Terminal method doesn't work)
+
+1. Try to open the app normally (double-click) - it will be blocked
+2. Go to **System Settings** → **Privacy & Security**
+3. Scroll down to find "Gemini Video Understanding was blocked"
+4. Click **"Open Anyway"**
+5. Confirm by clicking **"Open"**
 
 ### "Invalid API Key" Error
 
