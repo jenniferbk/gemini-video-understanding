@@ -36,6 +36,15 @@ from collections import Counter, defaultdict
 import statistics
 import warnings
 
+# FFmpeg path resolution for bundled app
+def get_ffmpeg_path() -> str:
+    """Get path to ffmpeg binary (bundled or system)"""
+    return os.environ.get('FFMPEG_PATH', 'ffmpeg')
+
+def get_ffprobe_path() -> str:
+    """Get path to ffprobe binary (bundled or system)"""
+    return os.environ.get('FFPROBE_PATH', 'ffprobe')
+
 # Core dependencies
 try:
     import google.generativeai as genai
@@ -685,7 +694,7 @@ class VADInformedChunker:
         """Get video duration in minutes"""
         try:
             cmd = [
-                "ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                get_ffprobe_path(), "-v", "quiet", "-show_entries", "format=duration",
                 "-of", "default=noprint_wrappers=1:nokey=1", video_path
             ]
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
@@ -698,9 +707,9 @@ class VADInformedChunker:
     def _extract_audio(self, video_path: Path, output_dir: Path) -> str:
         """Extract audio track from video for VAD analysis"""
         audio_path = output_dir / f"{video_path.stem}_audio.wav"
-        
+
         cmd = [
-            "ffmpeg", "-i", str(video_path),
+            get_ffmpeg_path(), "-i", str(video_path),
             "-vn", "-acodec", "pcm_s16le", "-ar", "16000", "-ac", "1",
             str(audio_path), "-y"
         ]
@@ -715,7 +724,7 @@ class VADInformedChunker:
     def _extract_video_chunk(self, input_path: str, output_path: str, start_time: float, duration: float) -> bool:
         """Extract video chunk using FFmpeg"""
         cmd = [
-            "ffmpeg", "-ss", str(start_time), "-i", input_path,
+            get_ffmpeg_path(), "-ss", str(start_time), "-i", input_path,
             "-t", str(duration), "-c:v", "libx264", "-c:a", "aac",
             "-preset", "fast", output_path, "-y"
         ]
@@ -731,9 +740,9 @@ class VADInformedChunker:
         """Extract audio from video chunk"""
         chunk_path_obj = Path(chunk_path)
         audio_path = chunk_path_obj.parent / f"{chunk_path_obj.stem}_audio.wav"
-        
+
         cmd = [
-            "ffmpeg", "-i", chunk_path,
+            get_ffmpeg_path(), "-i", chunk_path,
             "-vn", "-acodec", "pcm_s16le", "-ar", "16000", "-ac", "1",
             str(audio_path), "-y"
         ]

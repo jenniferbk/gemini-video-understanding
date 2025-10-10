@@ -1,6 +1,6 @@
 {
   "name": "gemini-video-understanding",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Desktop application for transcribing classroom videos using Google Gemini AI",
   "main": "dist/main.js",
   "scripts": {

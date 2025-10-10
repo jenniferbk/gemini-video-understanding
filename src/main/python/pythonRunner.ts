@@ -77,6 +77,34 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
+   * Get path to bundled FFmpeg binary
+   */
+  private getFFmpegPath(): string {
+    if (app.isPackaged) {
+      // Production: bundled in resources/bin
+      return path.join(process.resourcesPath, 'bin', 'ffmpeg');
+    } else {
+      // Development: use system ffmpeg or bundled binaries
+      const devBundledPath = path.join(app.getAppPath(), 'binaries', 'macos-arm64', 'ffmpeg');
+      return devBundledPath;
+    }
+  }
+
+  /**
+   * Get path to bundled FFprobe binary
+   */
+  private getFFprobePath(): string {
+    if (app.isPackaged) {
+      // Production: bundled in resources/bin
+      return path.join(process.resourcesPath, 'bin', 'ffprobe');
+    } else {
+      // Development: use system ffprobe or bundled binaries
+      const devBundledPath = path.join(app.getAppPath(), 'binaries', 'macos-arm64', 'ffprobe');
+      return devBundledPath;
+    }
+  }
+
+  /**
    * Start transcription process
    */
   start(config: TranscriptionConfig): void {
@@ -115,9 +143,14 @@ export class PythonTranscriptionRunner extends EventEmitter {
       video: config.videoPath
     });
 
-    // Spawn Python process
+    // Spawn Python process with FFmpeg paths in environment
     this.process = spawn(this.pythonPath, args, {
-      env: { ...process.env, PYTHONUNBUFFERED: '1' },
+      env: {
+        ...process.env,
+        PYTHONUNBUFFERED: '1',
+        FFMPEG_PATH: this.getFFmpegPath(),
+        FFPROBE_PATH: this.getFFprobePath()
+      },
       stdio: ['ignore', 'pipe', 'pipe']
     });
 

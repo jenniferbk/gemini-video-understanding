@@ -18,10 +18,16 @@
       "from": "src/python",
       "to": "python/scripts",
       "filter": ["*.py", "*.json"]
+    },
+    {
+      "from": "binaries/macos-arm64",
+      "to": "bin",
+      "filter": ["ffmpeg", "ffprobe"]
     }
   ],
   "asarUnpack": [
-    "**/python/**/*"
+    "**/python/**/*",
+    "**/bin/**/*"
   ],
   "mac": {
     "category": "public.app-category.education",
