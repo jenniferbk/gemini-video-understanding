@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ProgressScreen.module.css';
 import { Button } from '../shared/Button';
+import { About } from '../About/About';
 
 interface ProgressScreenProps {
   jobId: number;
@@ -31,6 +32,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
   const [showLogs, setShowLogs] = useState(false);
   const [cancelling, setCancelling] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   useEffect(() => {
     // Listen for progress updates
@@ -90,8 +92,15 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1>Transcription in Progress</h1>
-        <p className={styles.subtitle}>Job ID: {jobId}</p>
+        <div className={styles.header}>
+          <div className={styles.headerContent}>
+            <h1>Transcription in Progress</h1>
+            <p className={styles.subtitle}>Job ID: {jobId}</p>
+          </div>
+          <button className={styles.aboutButton} onClick={() => setShowAbout(true)} title="About">
+            ℹ️
+          </button>
+        </div>
 
         {/* Progress Bar */}
         <div className={styles.progressSection}>
@@ -162,6 +171,9 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
             </Button>
           )}
         </div>
+
+        {/* About Modal */}
+        {showAbout && <About onClose={() => setShowAbout(false)} />}
       </div>
     </div>
   );

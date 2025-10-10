@@ -3,6 +3,7 @@ import styles from './ConfigScreen.module.css';
 import { Button } from '../shared/Button';
 import { Select } from '../shared/Select';
 import { PromptManager } from '../PromptManager/PromptManager';
+import { About } from '../About/About';
 
 interface Prompt {
   id: string;
@@ -68,26 +69,15 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   onStart,
   onOpenSettings
 }) => {
-  // Hardcoded prompts matching prompts.json
-  const prompts = [
-    { id: 'fullclass', name: 'Full Class', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup', name: 'Small Group', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_ava', name: 'Small Group - Ava', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_ava_full', name: 'Small Group - Ava Full', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_cora', name: 'Small Group - Cora', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_ava2', name: 'Small Group - Ava 2', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_jake', name: 'Small Group - Jake', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_jake2', name: 'Small Group - Jake 2', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_ben', name: 'Small Group - Ben', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' },
-    { id: 'smallgroup_daisy', name: 'Small Group - Daisy', description: 'VAD-guided transcription with hybrid speech detection and classroom optimization' }
-  ];
-
-  const [selectedPromptId, setSelectedPromptId] = useState<string>('smallgroup_jake');
+  // Load prompts dynamically from API
+  const [prompts, setPrompts] = useState<Prompt[]>([]);
+  const [selectedPromptId, setSelectedPromptId] = useState<string>('');
   const [qualityPreset, setQualityPreset] = useState<QualityPreset>('standard');
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [hasApiKey, setHasApiKey] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showPromptManager, setShowPromptManager] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   // Advanced settings
   const [consensusRuns, setConsensusRuns] = useState(3);
@@ -95,14 +85,26 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   const [vadEnabled, setVadEnabled] = useState(true);
   const [denoisingEnabled, setDenoisingEnabled] = useState(true);
 
-  // Check API key on mount
+  // Load prompts and check API key on mount
   useEffect(() => {
     async function loadData() {
       try {
+        // Load prompts
+        const loadedPrompts = await window.electronAPI.getPrompts();
+        setPrompts(loadedPrompts);
+
+        // Set default prompt if available
+        if (loadedPrompts.length > 0 && !selectedPromptId) {
+          // Try to find "smallgroup_jake" or just use first prompt
+          const defaultPrompt = loadedPrompts.find(p => p.id === 'smallgroup_jake') || loadedPrompts[0];
+          setSelectedPromptId(defaultPrompt.id);
+        }
+
+        // Check API key
         const { exists } = await window.electronAPI.hasApiKey();
         setHasApiKey(exists);
       } catch (error) {
-        console.error('Failed to check API key:', error);
+        console.error('Failed to load data:', error);
       } finally {
         setLoading(false);
       }
@@ -148,6 +150,25 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   };
 
   const estimatedMinutes = calculateProcessingTime();
+
+  // Function to reload prompts (called when PromptManager closes)
+  const reloadPrompts = useCallback(async () => {
+    try {
+      const loadedPrompts = await window.electronAPI.getPrompts();
+      setPrompts(loadedPrompts);
+
+      // If current selection is no longer valid, select first prompt
+      if (selectedPromptId && !loadedPrompts.find(p => p.id === selectedPromptId)) {
+        if (loadedPrompts.length > 0) {
+          setSelectedPromptId(loadedPrompts[0].id);
+        } else {
+          setSelectedPromptId('');
+        }
+      }
+    } catch (error) {
+      console.error('Failed to reload prompts:', error);
+    }
+  }, [selectedPromptId]);
 
   const handleStart = useCallback(async () => {
     if (!hasApiKey) {
@@ -209,8 +230,8 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
       <div className={styles.header}>
         <h1>Configure Transcription</h1>
         <div className={styles.headerButtons}>
-          <button className={styles.headerButton} onClick={() => setShowPromptManager(true)} title="Manage Prompts">
-            📝 Manage Prompts
+          <button className={styles.settingsButton} onClick={() => setShowAbout(true)} title="About">
+            ℹ️
           </button>
           <button className={styles.settingsButton} onClick={onOpenSettings} title="Settings">
             ⚙️
@@ -249,7 +270,12 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
 
         {/* Prompt Selection */}
         <div className={styles.section}>
-          <label className={styles.sectionLabel}>Select Prompt</label>
+          <div className={styles.promptHeader}>
+            <label className={styles.sectionLabel}>Select Prompt</label>
+            <button className={styles.managePromptsButton} onClick={() => setShowPromptManager(true)} title="Manage Prompts">
+              📝 Manage Prompts
+            </button>
+          </div>
           <Select
             value={selectedPromptId}
             onChange={(value) => setSelectedPromptId(value)}
@@ -395,8 +421,14 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
 
       {/* Prompt Manager Modal */}
       {showPromptManager && (
-        <PromptManager onClose={() => setShowPromptManager(false)} />
+        <PromptManager onClose={() => {
+          setShowPromptManager(false);
+          reloadPrompts(); // Reload prompts when manager closes
+        }} />
       )}
+
+      {/* About Modal */}
+      {showAbout && <About onClose={() => setShowAbout(false)} />}
     </div>
   );
 };

@@ -23,7 +23,7 @@ export const About: React.FC<AboutProps> = ({ onClose }) => {
           </div>
 
           <div className={styles.version}>
-            Version 1.0.0
+            Version 1.0.1
           </div>
 
           <div className={styles.description}>
@@ -99,7 +99,7 @@ export const About: React.FC<AboutProps> = ({ onClose }) => {
               <li><strong>Voice Activity Detection (VAD)</strong> – Silero VAD for intelligent audio segmentation</li>
               <li><strong>Audio Preprocessing</strong> – Noise reduction and signal enhancement</li>
               <li><strong>Adaptive Chunking</strong> – Intelligent video segmentation optimized for context</li>
-              <li><strong>Multimodal AI Analysis</strong> – Google Gemini 2.0 for simultaneous video and audio analysis</li>
+              <li><strong>Multimodal AI Analysis</strong> – Google Gemini 2.5 Pro for simultaneous video and audio analysis</li>
               <li><strong>Consensus Verification</strong> – Multiple-run analysis with semantic similarity scoring</li>
               <li><strong>Speaker Diarization</strong> – AI-powered speaker identification and turn-taking analysis</li>
             </ul>
