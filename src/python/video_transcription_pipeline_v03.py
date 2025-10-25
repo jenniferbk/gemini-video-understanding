@@ -25,15 +25,10 @@ from collections import Counter, defaultdict
 import statistics
 
 try:
-    import google.generativeai as genai
-    from google.generativeai.types import HarmCategory, HarmBlockThreshold
-    # File class for type hints (fallback if import fails)
-    try:
-        from google.generativeai.types import File
-    except ImportError:
-        File = object  # Fallback for older versions
+    from google import genai
+    from google.genai import types
 except ImportError:
-    print("Please install google-generativeai: pip install google-generativeai")
+    print("Please install google-genai: pip install google-genai")
     sys.exit(1)
 
 # Try to import BERT dependencies for hybrid similarity
@@ -983,46 +978,59 @@ class GeminiTranscriber:
     
     def __init__(self, api_key: str, config: TranscriptionConfig):
         self.config = config
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel(config.model_name)
-        
+        # Use new google-genai SDK
+        self.client = genai.Client(api_key=api_key)
+        self.model_name = config.model_name
+
         # Load prompts from file
         self.prompt_manager = PromptManager()
         self.base_transcription_prompt = self.prompt_manager.get_prompt(config.prompt_key)
-        
+
         # Initialize validation and consensus tools
         self.validator = TranscriptValidator(config.min_transcript_length)
         self.consensus_analyzer = ConsensusAnalyzer(config.consensus_threshold) if config.consensus_runs > 1 else None
-        
-        # Configure safety settings for educational content
-        self.safety_settings = {
-            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-        }
+
+        # Configure safety settings for educational content using new SDK
+        self.safety_settings = [
+            types.SafetySetting(
+                category='HARM_CATEGORY_HATE_SPEECH',
+                threshold='BLOCK_NONE'
+            ),
+            types.SafetySetting(
+                category='HARM_CATEGORY_HARASSMENT',
+                threshold='BLOCK_NONE'
+            ),
+            types.SafetySetting(
+                category='HARM_CATEGORY_SEXUALLY_EXPLICIT',
+                threshold='BLOCK_NONE'
+            ),
+            types.SafetySetting(
+                category='HARM_CATEGORY_DANGEROUS_CONTENT',
+                threshold='BLOCK_NONE'
+            ),
+        ]
     
     def upload_video_chunk(self, chunk_path: str):
-        """Upload video chunk using File API"""
+        """Upload video chunk using new google-genai SDK"""
         print(f"Uploading {Path(chunk_path).name}...")
-        
+
         try:
-            file = genai.upload_file(chunk_path)
-            
+            file = self.client.files.upload(file=chunk_path)
+
             # Wait for file to be processed
-            while file.state.name == "PROCESSING":
+            while file.state == "PROCESSING":
                 print("  Processing...", end="", flush=True)
                 time.sleep(2)
-                file = genai.get_file(file.name)
+                file = self.client.files.get(name=file.name)
                 print(".", end="", flush=True)
             print()
-            
-            if file.state.name == "FAILED":
+
+            if file.state == "FAILED":
                 raise Exception(f"File processing failed: {file.state}")
-                
+
             print(f"  Upload complete: {file.name}")
             return file
-            
+
         except Exception as e:
             print(f"Error uploading {chunk_path}: {e}")
             raise
@@ -1121,14 +1129,15 @@ class GeminiTranscriber:
         """Single transcription attempt - separated for retry logic"""
         print(f"Transcribing {file.display_name} at {self.config.fps} FPS...")
         
-        # Build content for File API request
-        response = self.model.generate_content(
-            [file, transcription_prompt],
-            safety_settings=self.safety_settings,
-            generation_config={
-                "temperature": 1.0,
-                "max_output_tokens": 4096,
-            }
+        # Build content for File API request using new google-genai SDK
+        response = self.client.models.generate_content(
+            model=self.model_name,
+            contents=[file, transcription_prompt],
+            config=types.GenerateContentConfig(
+                temperature=1.0,
+                max_output_tokens=4096,
+                safety_settings=self.safety_settings
+            )
         )
         
         # Check response structure
@@ -1255,9 +1264,9 @@ class GeminiTranscriber:
             return flagging_result['flagged_transcript']
     
     def _cleanup_file(self, file):
-        """Clean up uploaded file"""
+        """Clean up uploaded file using new google-genai SDK"""
         try:
-            genai.delete_file(file.name)
+            self.client.files.delete(name=file.name)
             print(f"  Cleaned up {file.name}")
         except Exception as e:
             print(f"  Warning: Failed to cleanup {file.name}: {e}")

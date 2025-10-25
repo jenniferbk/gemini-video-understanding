@@ -47,14 +47,10 @@ def get_ffprobe_path() -> str:
 
 # Core dependencies
 try:
-    import google.generativeai as genai
-    from google.generativeai.types import HarmCategory, HarmBlockThreshold
-    try:
-        from google.generativeai.types import File
-    except ImportError:
-        File = object
+    from google import genai
+    from google.genai import types
 except ImportError:
-    print("Please install google-generativeai: pip install google-generativeai")
+    print("Please install google-genai: pip install google-genai")
     sys.exit(1)
 
 # VAD and audio processing dependencies
@@ -1179,8 +1175,9 @@ class VADEnhancedTranscriber:
     
     def __init__(self, api_key: str, config: TranscriptionConfigV04):
         self.config = config
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel(config.model_name)
+        # Use new google-genai SDK
+        self.client = genai.Client(api_key=api_key)
+        self.model_name = config.model_name
         
         # Load enhanced prompts
         self.prompt_manager = PromptManager()
@@ -1195,13 +1192,25 @@ class VADEnhancedTranscriber:
                 config.consensus_threshold, config.vad_weight_in_consensus
             )
         
-        # Safety settings
-        self.safety_settings = {
-            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-        }
+        # Safety settings for new google-genai SDK
+        self.safety_settings = [
+            types.SafetySetting(
+                category='HARM_CATEGORY_HATE_SPEECH',
+                threshold='BLOCK_NONE'
+            ),
+            types.SafetySetting(
+                category='HARM_CATEGORY_HARASSMENT',
+                threshold='BLOCK_NONE'
+            ),
+            types.SafetySetting(
+                category='HARM_CATEGORY_SEXUALLY_EXPLICIT',
+                threshold='BLOCK_NONE'
+            ),
+            types.SafetySetting(
+                category='HARM_CATEGORY_DANGEROUS_CONTENT',
+                threshold='BLOCK_NONE'
+            ),
+        ]
     
     def _ensure_vad_prompts(self):
         """Ensure VAD-enhanced prompts exist"""
@@ -1324,14 +1333,15 @@ Begin transcription:
                 time.sleep(self.config.retry_delay)
             
             try:
-                # Generate with enhanced prompt
-                response = self.model.generate_content(
-                    [uploaded_file, enhanced_prompt],
-                    safety_settings=self.safety_settings,
-                    generation_config={
-                        "temperature": 0.1 if run_num == 1 else 0.3,  # Vary temperature for consensus
-                        "max_output_tokens": 4096,
-                    }
+                # Generate with enhanced prompt using new google-genai SDK
+                response = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=[uploaded_file, enhanced_prompt],
+                    config=types.GenerateContentConfig(
+                        temperature=0.1 if run_num == 1 else 0.3,  # Vary temperature for consensus
+                        max_output_tokens=4096,
+                        safety_settings=self.safety_settings
+                    )
                 )
                 
                 # Extract and validate transcript
@@ -1470,29 +1480,31 @@ Continue naturally from this context, maintaining speaker consistency."""
         return candidate.content.parts[0].text
     
     def _upload_video_chunk(self, chunk_path: str):
-        """Upload video chunk to Gemini"""
+        """Upload video chunk to Gemini using new google-genai SDK"""
         print(f"📤 Uploading {Path(chunk_path).name}...")
-        
-        file = genai.upload_file(chunk_path)
-        
+
+        # Use new google-genai SDK
+        file = self.client.files.upload(file=chunk_path)
+
         # Wait for processing
-        while file.state.name == "PROCESSING":
+        while file.state == "PROCESSING":
             print(".", end="", flush=True)
             time.sleep(2)
-            file = genai.get_file(file.name)
-        
+            file = self.client.files.get(name=file.name)
+
         print()
-        
-        if file.state.name == "FAILED":
+
+        if file.state == "FAILED":
             raise Exception(f"File processing failed: {file.state}")
-        
+
         print(f"✅ Upload complete: {file.name}")
         return file
     
     def _cleanup_file(self, file):
-        """Clean up uploaded file"""
+        """Clean up uploaded file using new google-genai SDK"""
         try:
-            genai.delete_file(file.name)
+            # Use new google-genai SDK
+            self.client.files.delete(name=file.name)
             print(f"🗑️  Cleaned up {file.name}")
         except Exception as e:
             print(f"⚠️  Cleanup warning: {e}")
