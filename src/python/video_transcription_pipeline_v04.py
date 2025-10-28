@@ -1173,14 +1173,17 @@ class VADEnhancedConsensusAnalyzer:
 class VADEnhancedTranscriber:
     """Enhanced transcriber using VAD preprocessing and context"""
     
-    def __init__(self, api_key: str, config: TranscriptionConfigV04):
+    def __init__(self, api_key: str, config: TranscriptionConfigV04, prompts_file: str = None):
         self.config = config
         # Use new google-genai SDK
         self.client = genai.Client(api_key=api_key)
         self.model_name = config.model_name
-        
-        # Load enhanced prompts
-        self.prompt_manager = PromptManager()
+
+        # Load enhanced prompts (use custom file if provided)
+        if prompts_file:
+            self.prompt_manager = PromptManager(prompts_file)
+        else:
+            self.prompt_manager = PromptManager()
         self._ensure_vad_prompts()
         
         # Initialize validation
@@ -1521,10 +1524,10 @@ Continue naturally from this context, maintaining speaker consistency."""
 class VideoTranscriptionPipelineV04:
     """Main V04 pipeline integrating all VAD enhancements"""
     
-    def __init__(self, api_key: str, config: TranscriptionConfigV04):
+    def __init__(self, api_key: str, config: TranscriptionConfigV04, prompts_file: str = None):
         self.config = config
         self.chunker = VADInformedChunker(config)
-        self.transcriber = VADEnhancedTranscriber(api_key, config)
+        self.transcriber = VADEnhancedTranscriber(api_key, config, prompts_file)
         self.cost_calculator = VideoCostCalculator()
 
     def _report_progress(self, chunk: int, total: int, status: str):
@@ -2009,6 +2012,7 @@ EXAMPLES:
     # Model and consensus arguments
     parser.add_argument("-m", "--model", default="gemini-2.5-pro-preview-05-06", help="Gemini model")
     parser.add_argument("-p", "--prompt", default="enhanced_vad", help="Prompt to use")
+    parser.add_argument("--prompts-file", help="Path to custom prompts.json file (default: bundled prompts.json)")
     parser.add_argument("--consensus-runs", type=int, default=1, help="Consensus runs per chunk (default: 1)")
     parser.add_argument("--consensus-threshold", type=float, default=0.7, help="Consensus threshold (default: 0.7)")
     
@@ -2103,7 +2107,7 @@ EXAMPLES:
             
         else:
             # Full processing mode
-            processor = VideoTranscriptionPipelineV04(api_key, config)
+            processor = VideoTranscriptionPipelineV04(api_key, config, args.prompts_file)
             result = processor.process_video(args.video_path, args.output)
             
     except KeyboardInterrupt:
