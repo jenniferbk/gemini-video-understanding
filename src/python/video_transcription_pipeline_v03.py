@@ -1156,10 +1156,18 @@ class GeminiTranscriber:
         
         candidate = response.candidates[0]
         
-        if candidate.finish_reason != 1:  # 1 = FINISH_REASON_STOP (natural completion)
+        # Check if generation completed normally
+        # New SDK uses string/enum, old SDK used integers
+        finish_reason_str = str(candidate.finish_reason)
+        is_normal_completion = (
+            candidate.finish_reason == 1 or  # Old SDK: integer 1
+            'STOP' in finish_reason_str      # New SDK: "STOP" or "FinishReason.STOP"
+        )
+
+        if not is_normal_completion:
             finish_reasons = {
                 0: "UNSPECIFIED",
-                1: "STOP", 
+                1: "STOP",
                 2: "MAX_TOKENS",
                 3: "SAFETY",
                 4: "RECITATION"
