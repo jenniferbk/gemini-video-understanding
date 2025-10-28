@@ -1,4 +1,14 @@
 {
+  "basic": {
+    "name": "Basic Classroom Transcription",
+    "description": "Standard classroom transcription with speaker diarization",
+    "prompt": "Please transcribe the attached classroom video with accurate speaker diarization. Identify speakers as Teacher and Student (with numbers if multiple students). Use the format MM:SS SPEAKER: Dialogue. Provide timestamps at the beginning of each new speaker's turn. Describe significant visual actions in brackets. Use [inaudible] for unclear speech. Capture all speech accurately and avoid repetition."
+  },
+  "enhanced_vad": {
+    "name": "VAD-Enhanced Transcription",
+    "description": "Voice activity detection enhanced transcription for better speech detection",
+    "prompt": "Please transcribe this classroom video using voice activity detection to improve speech recognition. Identify speakers as Teacher and Student (with numbers if multiple). Use the format MM:SS SPEAKER: Dialogue. Focus on capturing all speech segments accurately, especially quiet student remarks. Use [inaudible] for unclear speech and describe relevant visual actions in brackets."
+  },
   "fullclass": {
     "name": "V04 VAD-Enhanced Classroom Transcription",
     "description": "VAD-guided transcription with hybrid speech detection and classroom optimization",

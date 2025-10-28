@@ -868,8 +868,12 @@ class VideoChunker:
     def get_video_duration(video_path: str) -> float:
         """Get video duration in minutes using ffprobe"""
         try:
+            # Use FFPROBE_PATH environment variable if set, otherwise default to 'ffprobe'
+            import os
+            ffprobe_path = os.environ.get('FFPROBE_PATH', 'ffprobe')
+
             cmd = [
-                "ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                ffprobe_path, "-v", "quiet", "-show_entries", "format=duration",
                 "-of", "default=noprint_wrappers=1:nokey=1", video_path
             ]
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
@@ -908,10 +912,14 @@ class VideoChunker:
             chunk_file = output_dir / f"{base_name}_chunk_{chunk_num:02d}.mp4"
             
             # FFmpeg command to extract chunk
+            # Use FFMPEG_PATH environment variable if set
+            import os
+            ffmpeg_path = os.environ.get('FFMPEG_PATH', 'ffmpeg')
+
             if config.precise_chunking:
                 # Precise mode: re-encode for exact timing (slower but accurate)
                 cmd = [
-                    "ffmpeg", 
+                    ffmpeg_path, 
                     "-ss", str(start_time),  # Seek before input for speed
                     "-i", str(input_path),
                     "-t", str(end_time - start_time),
@@ -924,7 +932,7 @@ class VideoChunker:
             else:
                 # Fast mode: stream copy (faster but may have timing issues)
                 cmd = [
-                    "ffmpeg", 
+                    ffmpeg_path, 
                     "-ss", str(start_time),
                     "-i", str(input_path),
                     "-t", str(end_time - start_time),
@@ -940,8 +948,10 @@ class VideoChunker:
                 
                 # Verify chunk creation and get actual duration
                 try:
+                    import os
+                    ffprobe_path = os.environ.get('FFPROBE_PATH', 'ffprobe')
                     verify_cmd = [
-                        "ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                        ffprobe_path, "-v", "quiet", "-show_entries", "format=duration",
                         "-of", "default=noprint_wrappers=1:nokey=1", str(chunk_file)
                     ]
                     result = subprocess.run(verify_cmd, capture_output=True, text=True, check=True)
