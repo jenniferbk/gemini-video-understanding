@@ -1,6 +1,8 @@
 import { spawn, ChildProcess } from 'child_process';
 import { app } from 'electron';
 import * as path from 'path';
+import * as fs from 'fs';
+import * as os from 'os';
 import { EventEmitter } from 'events';
 
 export interface TranscriptionConfig {
@@ -31,6 +33,7 @@ export class PythonTranscriptionRunner extends EventEmitter {
   private process: ChildProcess | null = null;
   private pythonPath: string;
   private scriptPath: string;
+  private tempPromptsFile: string | null = null;
 
   constructor() {
     super();
@@ -105,12 +108,84 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
+   * Get path to user's prompts file
+   */
+  private getUserPromptsPath(): string {
+    const userDataPath = app.getPath('userData');
+    return path.join(userDataPath, 'prompts.json');
+  }
+
+  /**
+   * Convert Electron prompts format to Python format and write to temp file
+   * Electron format: {"prompts": [{"id": "...", "name": "...", "prompt_text": "..."}]}
+   * Python format: {"name": {"name": "...", "description": "...", "prompt": "..."}}
+   */
+  private convertAndWritePrompts(): string {
+    const userPromptsPath = this.getUserPromptsPath();
+
+    // Check if user prompts file exists
+    if (!fs.existsSync(userPromptsPath)) {
+      console.log('⚠️  User prompts file not found, Python will use bundled prompts');
+      return '';
+    }
+
+    try {
+      // Read user prompts
+      const electronPrompts = JSON.parse(fs.readFileSync(userPromptsPath, 'utf-8'));
+
+      if (!electronPrompts.prompts || !Array.isArray(electronPrompts.prompts)) {
+        console.log('⚠️  Invalid prompts format, Python will use bundled prompts');
+        return '';
+      }
+
+      // Convert to Python format
+      const pythonPrompts: any = {};
+      for (const prompt of electronPrompts.prompts) {
+        const key = prompt.name.toLowerCase().replace(/\s+/g, '_');
+        pythonPrompts[key] = {
+          name: prompt.name,
+          description: prompt.description || '',
+          prompt: prompt.prompt_text
+        };
+      }
+
+      // Write to temp file
+      const tempFile = path.join(os.tmpdir(), `gvu-prompts-${Date.now()}.json`);
+      fs.writeFileSync(tempFile, JSON.stringify(pythonPrompts, null, 2));
+
+      console.log(`✅ Converted prompts written to: ${tempFile}`);
+      return tempFile;
+    } catch (error) {
+      console.error('Failed to convert prompts:', error);
+      return '';
+    }
+  }
+
+  /**
+   * Clean up temporary prompts file
+   */
+  private cleanupTempPromptsFile(): void {
+    if (this.tempPromptsFile && fs.existsSync(this.tempPromptsFile)) {
+      try {
+        fs.unlinkSync(this.tempPromptsFile);
+        console.log(`🗑️  Cleaned up temp prompts file: ${this.tempPromptsFile}`);
+      } catch (error) {
+        console.error('Failed to delete temp prompts file:', error);
+      }
+      this.tempPromptsFile = null;
+    }
+  }
+
+  /**
    * Start transcription process
    */
   start(config: TranscriptionConfig): void {
     if (this.process) {
       throw new Error('Transcription already running');
     }
+
+    // Convert and write user prompts to temp file
+    this.tempPromptsFile = this.convertAndWritePrompts();
 
     // Build command arguments
     const args = [
@@ -128,6 +203,11 @@ export class PythonTranscriptionRunner extends EventEmitter {
       config.apiKey,
       '--json-progress' // Enable JSON output for Electron
     ];
+
+    // Add prompts file if successfully created
+    if (this.tempPromptsFile) {
+      args.push('--prompts-file', this.tempPromptsFile);
+    }
 
     // Add optional flags
     if (!config.vadEnabled) {
@@ -182,6 +262,9 @@ export class PythonTranscriptionRunner extends EventEmitter {
           fatal: true
         });
       }
+
+      // Clean up temp prompts file
+      this.cleanupTempPromptsFile();
 
       this.process = null;
     });
@@ -271,6 +354,9 @@ export class PythonTranscriptionRunner extends EventEmitter {
 
       this.process = null;
     }
+
+    // Clean up temp prompts file
+    this.cleanupTempPromptsFile();
   }
 
   /**
