@@ -37,13 +37,28 @@ import statistics
 import warnings
 
 # FFmpeg path resolution for bundled app
+try:
+    from bundled_resource_paths import setup_ffmpeg_environment
+    _FFMPEG_PATH, _FFPROBE_PATH = setup_ffmpeg_environment()
+    print(f"✅ Using bundled ffmpeg: {_FFMPEG_PATH}")
+    print(f"✅ Using bundled ffprobe: {_FFPROBE_PATH}")
+except ImportError:
+    print("⚠️  bundled_resource_paths module not found, using system PATH")
+    _FFMPEG_PATH = os.environ.get('FFMPEG_PATH', 'ffmpeg')
+    _FFPROBE_PATH = os.environ.get('FFPROBE_PATH', 'ffprobe')
+except Exception as e:
+    print(f"⚠️  Error setting up bundled resources: {e}")
+    print(f"⚠️  Falling back to system PATH")
+    _FFMPEG_PATH = os.environ.get('FFMPEG_PATH', 'ffmpeg')
+    _FFPROBE_PATH = os.environ.get('FFPROBE_PATH', 'ffprobe')
+
 def get_ffmpeg_path() -> str:
     """Get path to ffmpeg binary (bundled or system)"""
-    return os.environ.get('FFMPEG_PATH', 'ffmpeg')
+    return _FFMPEG_PATH
 
 def get_ffprobe_path() -> str:
     """Get path to ffprobe binary (bundled or system)"""
-    return os.environ.get('FFPROBE_PATH', 'ffprobe')
+    return _FFPROBE_PATH
 
 # Core dependencies
 try:

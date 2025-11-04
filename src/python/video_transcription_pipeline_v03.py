@@ -160,13 +160,26 @@ class TranscriptValidator:
 class PromptManager:
     """Manage transcription prompts from external files"""
 
-    def __init__(self, prompts_file: str = "prompts.json"):
-        # Resolve prompts file relative to this script's directory
-        if not Path(prompts_file).is_absolute():
-            script_dir = Path(__file__).parent
-            self.prompts_file = script_dir / prompts_file
+    def __init__(self, prompts_file: str = None):
+        # Auto-detect prompts.json location if not specified
+        if prompts_file is None:
+            try:
+                from bundled_resource_paths import get_bundled_prompts_path
+                self.prompts_file = get_bundled_prompts_path()
+                print(f"✅ Using prompts file: {self.prompts_file}")
+            except Exception as e:
+                print(f"⚠️  Could not auto-locate prompts.json: {e}")
+                # Fall back to default location
+                script_dir = Path(__file__).parent
+                self.prompts_file = script_dir / "prompts.json"
         else:
-            self.prompts_file = Path(prompts_file)
+            # Use provided path
+            if not Path(prompts_file).is_absolute():
+                script_dir = Path(__file__).parent
+                self.prompts_file = script_dir / prompts_file
+            else:
+                self.prompts_file = Path(prompts_file)
+
         self.prompts = self._load_prompts()
 
     def _load_prompts(self) -> Dict:
@@ -191,11 +204,40 @@ class PromptManager:
             return default_prompts
     
     def get_prompt(self, key: str) -> str:
-        """Get prompt text by key"""
-        if key not in self.prompts:
-            print(f"Warning: Prompt '{key}' not found. Using 'basic' instead.")
-            key = "basic"
-        return self.prompts[key]["prompt"]
+        """Get prompt text by key, with intelligent fallback"""
+        # Direct key match
+        if key in self.prompts:
+            return self.prompts[key]["prompt"]
+
+        # Try to find by UUID (for user-created prompts)
+        for prompt_key, prompt_data in self.prompts.items():
+            if isinstance(prompt_data, dict):
+                if prompt_data.get('id') == key or prompt_data.get('uuid') == key:
+                    print(f"✅ Found prompt by UUID: {key} -> {prompt_key}")
+                    return prompt_data["prompt"]
+
+        # Fallback to 'basic' if available
+        if "basic" in self.prompts:
+            print(f"⚠️  Prompt '{key}' not found. Using 'basic' instead.")
+            return self.prompts["basic"]["prompt"]
+
+        # Fallback to first available prompt
+        if self.prompts:
+            fallback_key = list(self.prompts.keys())[0]
+            print(f"⚠️  Prompt '{key}' not found, 'basic' also missing. Using '{fallback_key}' instead.")
+            return self.prompts[fallback_key]["prompt"]
+
+        # Last resort: inline basic prompt
+        print(f"⚠️  No prompts available in prompts.json. Using inline fallback prompt.")
+        return (
+            "Please transcribe this classroom video accurately. "
+            "For each line, identify the speaker (Teacher, Student1, Student2, etc.) "
+            "and provide the timestamp. Use this format:\n\n"
+            "MM:SS SpeakerName: Text of what was said\n\n"
+            "Example:\n"
+            "00:15 Teacher: Let's begin today's lesson.\n"
+            "00:23 Student1: Can I ask a question?"
+        )
     
     def list_prompts(self) -> None:
         """Display available prompts"""
