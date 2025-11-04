@@ -203,6 +203,33 @@ class PromptManager:
             print(f"Error loading prompts from {self.prompts_file}: {e}")
             return default_prompts
     
+    def validate_prompt(self, key: str) -> Tuple[bool, Optional[str], Optional[str]]:
+        """
+        Validate if a prompt exists WITHOUT fallback behavior.
+
+        Returns:
+            Tuple of (is_valid, prompt_text, matched_key)
+            - is_valid: True if prompt found, False otherwise
+            - prompt_text: The actual prompt text if found, None otherwise
+            - matched_key: The actual key that was matched (useful for UUID lookups), None otherwise
+        """
+        # Direct key match
+        if key in self.prompts:
+            return (True, self.prompts[key]["prompt"], key)
+
+        # Try to find by UUID (for user-created prompts)
+        for prompt_key, prompt_data in self.prompts.items():
+            if isinstance(prompt_data, dict):
+                if prompt_data.get('id') == key or prompt_data.get('uuid') == key:
+                    return (True, prompt_data["prompt"], prompt_key)
+
+        # Prompt not found - return False with no fallback
+        return (False, None, None)
+
+    def list_available_prompts(self) -> List[str]:
+        """Return list of all available prompt keys for error messages"""
+        return list(self.prompts.keys())
+
     def get_prompt(self, key: str) -> str:
         """Get prompt text by key, with intelligent fallback"""
         # Direct key match

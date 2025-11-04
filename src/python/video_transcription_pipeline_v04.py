@@ -2123,6 +2123,48 @@ EXAMPLES:
         else:
             # Full processing mode
             processor = VideoTranscriptionPipelineV04(api_key, config, args.prompts_file)
+
+            # VALIDATE PROMPT BEFORE STARTING EXPENSIVE PROCESSING
+            # This prevents wasting API money on wrong prompts
+            is_valid, prompt_text, matched_key = processor.transcriber.prompt_manager.validate_prompt(args.prompt)
+
+            if not is_valid:
+                available_prompts = processor.transcriber.prompt_manager.list_available_prompts()
+                error_msg = f"""
+❌ PROMPT VALIDATION FAILED
+
+The selected prompt '{args.prompt}' was not found in your prompts library.
+
+To avoid wasting API money, processing has been aborted.
+
+Available prompts:
+{chr(10).join(f"  • {p}" for p in available_prompts)}
+
+Please select one of these prompts using the --prompt flag.
+Example: python {sys.argv[0]} --prompt {available_prompts[0] if available_prompts else 'basic'} video.mp4
+"""
+                print(error_msg)
+
+                if config.json_progress:
+                    error_data = {
+                        "type": "error",
+                        "message": f"Prompt '{args.prompt}' not found",
+                        "available_prompts": available_prompts,
+                        "fatal": True
+                    }
+                    print(f"GVU_ERROR:{json.dumps(error_data)}", flush=True)
+
+                sys.exit(1)
+
+            # Prompt is valid - log which prompt we're using
+            if matched_key != args.prompt:
+                print(f"✅ Using prompt: '{matched_key}' (matched by UUID: {args.prompt})")
+            else:
+                print(f"✅ Using prompt: '{matched_key}'")
+
+            print(f"📝 Prompt preview: {prompt_text[:150]}{'...' if len(prompt_text) > 150 else ''}\n")
+
+            # Start processing with validated prompt
             result = processor.process_video(args.video_path, args.output)
             
     except KeyboardInterrupt:
