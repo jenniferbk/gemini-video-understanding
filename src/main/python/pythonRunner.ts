@@ -143,6 +143,8 @@ export class PythonTranscriptionRunner extends EventEmitter {
       for (const prompt of electronPrompts.prompts) {
         const key = prompt.name.toLowerCase().replace(/\s+/g, '_');
         pythonPrompts[key] = {
+          id: prompt.id,  // Include UUID for Python's UUID matching
+          uuid: prompt.id,  // Alternate field name for compatibility
           name: prompt.name,
           description: prompt.description || '',
           prompt: prompt.prompt_text
