@@ -5,19 +5,40 @@ import * as fs from 'fs';
 import * as os from 'os';
 import { EventEmitter } from 'events';
 
+export interface SpeakerInfo {
+  label: string;
+  description: string;
+  type: 'teacher' | 'student' | 'researcher';
+}
+
 export interface TranscriptionConfig {
   videoPath: string;
   prompt: string;
-  consensusRuns: number;
+  model: string;
+  resolution: 'LOW' | 'MEDIUM' | 'HIGH';
+  fps: number;
   chunkMinutes: number;
-  vadEnabled: boolean;
-  denoisingEnabled: boolean;
+  overlapSeconds: number;
+  thinkingBudget: number;
   outputPath: string;
   apiKey: string;
+  speakersManifestPath?: string;
+  audioOnly?: boolean;
+}
+
+export interface SpeakerDetectionConfig {
+  videoPath: string;
+  model: string;
+  resolution: 'LOW' | 'MEDIUM' | 'HIGH';
+  fps: number;
+  chunkMinutes: number;
+  overlapSeconds: number;
+  apiKey: string;
+  audioOnly?: boolean;
 }
 
 export interface ProgressUpdate {
-  type: 'progress' | 'log' | 'error' | 'complete';
+  type: 'progress' | 'log' | 'error' | 'complete' | 'speakers';
   chunk?: number;
   total?: number;
   percent?: number;
@@ -27,6 +48,7 @@ export interface ProgressUpdate {
   outputFile?: string;
   stats?: any;
   timestamp?: string;
+  speakers?: SpeakerInfo[];
 }
 
 export class PythonTranscriptionRunner extends EventEmitter {
@@ -57,24 +79,22 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
-   * Get path to Python transcription script
+   * Get path to Python transcription script (V10)
    */
   private getScriptPath(): string {
     if (app.isPackaged) {
-      // Production: scripts are in python/scripts subdirectory
       return path.join(
         process.resourcesPath,
         'python',
         'scripts',
-        'video_transcription_pipeline_v04.py'
+        'video_transcription_pipeline_v10.py'
       );
     } else {
-      // Development
       return path.join(
         app.getAppPath(),
         'src',
         'python',
-        'video_transcription_pipeline_v04.py'
+        'video_transcription_pipeline_v10.py'
       );
     }
   }
@@ -84,10 +104,8 @@ export class PythonTranscriptionRunner extends EventEmitter {
    */
   private getFFmpegPath(): string {
     if (app.isPackaged) {
-      // Production: bundled in resources/bin
       return path.join(process.resourcesPath, 'bin', 'ffmpeg');
     } else {
-      // Development: use system ffmpeg or bundled binaries
       const devBundledPath = path.join(app.getAppPath(), 'binaries', 'macos-arm64', 'ffmpeg');
       return devBundledPath;
     }
@@ -98,10 +116,8 @@ export class PythonTranscriptionRunner extends EventEmitter {
    */
   private getFFprobePath(): string {
     if (app.isPackaged) {
-      // Production: bundled in resources/bin
       return path.join(process.resourcesPath, 'bin', 'ffprobe');
     } else {
-      // Development: use system ffprobe or bundled binaries
       const devBundledPath = path.join(app.getAppPath(), 'binaries', 'macos-arm64', 'ffprobe');
       return devBundledPath;
     }
@@ -123,39 +139,35 @@ export class PythonTranscriptionRunner extends EventEmitter {
   private convertAndWritePrompts(): string {
     const userPromptsPath = this.getUserPromptsPath();
 
-    // Check if user prompts file exists
     if (!fs.existsSync(userPromptsPath)) {
-      console.log('⚠️  User prompts file not found, Python will use bundled prompts');
+      console.log('Warning: User prompts file not found, Python will use bundled prompts');
       return '';
     }
 
     try {
-      // Read user prompts
       const electronPrompts = JSON.parse(fs.readFileSync(userPromptsPath, 'utf-8'));
 
       if (!electronPrompts.prompts || !Array.isArray(electronPrompts.prompts)) {
-        console.log('⚠️  Invalid prompts format, Python will use bundled prompts');
+        console.log('Warning: Invalid prompts format, Python will use bundled prompts');
         return '';
       }
 
-      // Convert to Python format
       const pythonPrompts: any = {};
       for (const prompt of electronPrompts.prompts) {
         const key = prompt.name.toLowerCase().replace(/\s+/g, '_');
         pythonPrompts[key] = {
-          id: prompt.id,  // Include UUID for Python's UUID matching
-          uuid: prompt.id,  // Alternate field name for compatibility
+          id: prompt.id,
+          uuid: prompt.id,
           name: prompt.name,
           description: prompt.description || '',
           prompt: prompt.prompt_text
         };
       }
 
-      // Write to temp file
       const tempFile = path.join(os.tmpdir(), `gvu-prompts-${Date.now()}.json`);
       fs.writeFileSync(tempFile, JSON.stringify(pythonPrompts, null, 2));
 
-      console.log(`✅ Converted prompts written to: ${tempFile}`);
+      console.log(`Converted prompts written to: ${tempFile}`);
       return tempFile;
     } catch (error) {
       console.error('Failed to convert prompts:', error);
@@ -170,7 +182,7 @@ export class PythonTranscriptionRunner extends EventEmitter {
     if (this.tempPromptsFile && fs.existsSync(this.tempPromptsFile)) {
       try {
         fs.unlinkSync(this.tempPromptsFile);
-        console.log(`🗑️  Cleaned up temp prompts file: ${this.tempPromptsFile}`);
+        console.log(`Cleaned up temp prompts file: ${this.tempPromptsFile}`);
       } catch (error) {
         console.error('Failed to delete temp prompts file:', error);
       }
@@ -179,7 +191,94 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
-   * Start transcription process
+   * Detect speakers from video (Phase 1)
+   * Spawns V10 with detect-speakers subcommand
+   */
+  detectSpeakers(config: SpeakerDetectionConfig): void {
+    if (this.process) {
+      throw new Error('A process is already running');
+    }
+
+    const args = [
+      this.scriptPath,
+      'detect-speakers',
+      config.videoPath,
+      '--api-key',
+      config.apiKey,
+      '-m',
+      config.model,
+      '--resolution',
+      config.resolution,
+      '--fps',
+      config.fps.toString(),
+      '--chunk-minutes',
+      config.chunkMinutes.toString(),
+      '--overlap',
+      config.overlapSeconds.toString(),
+    ];
+
+    if (config.audioOnly) {
+      args.push('--audio-only');
+    }
+
+    console.log('Starting speaker detection:', {
+      python: this.pythonPath,
+      script: this.scriptPath,
+      video: config.videoPath
+    });
+
+    this.process = spawn(this.pythonPath, args, {
+      env: {
+        ...process.env,
+        PYTHONUNBUFFERED: '1',
+        FFMPEG_PATH: this.getFFmpegPath(),
+        FFPROBE_PATH: this.getFFprobePath()
+      },
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+
+    this.process.stdout?.on('data', (data) => {
+      this.handleStdout(data.toString());
+    });
+
+    this.process.stderr?.on('data', (data) => {
+      const message = data.toString().trim();
+      if (message) {
+        this.emit('log', {
+          type: 'log',
+          level: 'error',
+          message: message
+        });
+      }
+    });
+
+    this.process.on('exit', (code, signal) => {
+      console.log(`Speaker detection process exited: code=${code}, signal=${signal}`);
+
+      if (code !== 0 && code !== null) {
+        this.emit('error', {
+          type: 'error',
+          message: `Speaker detection exited with code ${code}`,
+          fatal: true
+        });
+      }
+
+      this.process = null;
+    });
+
+    this.process.on('error', (err) => {
+      console.error('Speaker detection process error:', err);
+      this.emit('error', {
+        type: 'error',
+        message: `Failed to start speaker detection: ${err.message}`,
+        fatal: true
+      });
+      this.process = null;
+    });
+  }
+
+  /**
+   * Start transcription process (Phase 2 - V10 process subcommand)
    */
   start(config: TranscriptionConfig): void {
     if (this.process) {
@@ -189,43 +288,58 @@ export class PythonTranscriptionRunner extends EventEmitter {
     // Convert and write user prompts to temp file
     this.tempPromptsFile = this.convertAndWritePrompts();
 
-    // Build command arguments
+    // Build V10 process subcommand arguments
     const args = [
       this.scriptPath,
+      'process',
       config.videoPath,
       '--prompt',
       config.prompt,
-      '--consensus-runs',
-      config.consensusRuns.toString(),
+      '-m',
+      config.model,
+      '--resolution',
+      config.resolution,
+      '--fps',
+      config.fps.toString(),
       '--chunk-minutes',
       config.chunkMinutes.toString(),
+      '--overlap',
+      config.overlapSeconds.toString(),
+      '--thinking-budget',
+      config.thinkingBudget.toString(),
       '--output',
       config.outputPath,
       '--api-key',
       config.apiKey,
-      '--json-progress' // Enable JSON output for Electron
+      '--json-progress',
+      '--no-confirm',
     ];
+
+    // Add speakers manifest if provided
+    if (config.speakersManifestPath) {
+      args.push('--speakers', config.speakersManifestPath);
+    }
 
     // Add prompts file if successfully created
     if (this.tempPromptsFile) {
       args.push('--prompts-file', this.tempPromptsFile);
     }
 
-    // Add optional flags
-    if (!config.vadEnabled) {
-      args.push('--no-vad');
-    }
-    if (!config.denoisingEnabled) {
-      args.push('--no-denoise');
+    // Audio-only mode
+    if (config.audioOnly) {
+      args.push('--audio-only');
     }
 
-    console.log('🚀 Starting Python transcription:', {
+    console.log('Starting V10 transcription:', {
       python: this.pythonPath,
       script: this.scriptPath,
-      video: config.videoPath
+      video: config.videoPath,
+      model: config.model,
+      resolution: config.resolution,
+      fps: config.fps
     });
 
-    // Spawn Python process with FFmpeg paths in environment
+    // Spawn Python process
     this.process = spawn(this.pythonPath, args, {
       env: {
         ...process.env,
@@ -293,7 +407,6 @@ export class PythonTranscriptionRunner extends EventEmitter {
       const trimmed = line.trim();
       if (!trimmed) continue;
 
-      // Parse our JSON protocol
       if (trimmed.startsWith('GVU_PROGRESS:')) {
         const json = trimmed.substring(13);
         try {
@@ -326,9 +439,19 @@ export class PythonTranscriptionRunner extends EventEmitter {
         } catch (e) {
           console.error('Failed to parse log JSON:', json, e);
         }
+      } else if (trimmed.startsWith('GVU_SPEAKERS:')) {
+        const json = trimmed.substring(13);
+        try {
+          const speakerData = JSON.parse(json);
+          this.emit('speakers', {
+            type: 'speakers',
+            speakers: speakerData.speakers
+          });
+        } catch (e) {
+          console.error('Failed to parse speakers JSON:', json, e);
+        }
       } else {
-        // Regular stdout (not JSON)
-        // Emit as log for debugging
+        // Regular stdout - emit as log for debugging
         this.emit('log', {
           type: 'log',
           level: 'info',
@@ -339,17 +462,17 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
-   * Cancel running transcription
+   * Cancel running process (works for both detection and transcription)
    */
   cancel(): void {
     if (this.process) {
-      console.log('Cancelling transcription process...');
+      console.log('Cancelling process...');
       this.process.kill('SIGTERM');
 
       // Force kill after 5 seconds if needed
       setTimeout(() => {
         if (this.process) {
-          console.log('Force killing transcription process');
+          console.log('Force killing process');
           this.process.kill('SIGKILL');
         }
       }, 5000);
@@ -362,7 +485,7 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
-   * Check if transcription is running
+   * Check if a process is running
    */
   isRunning(): boolean {
     return this.process !== null && !this.process.killed;

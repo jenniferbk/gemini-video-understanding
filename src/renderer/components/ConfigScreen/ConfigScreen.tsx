@@ -19,49 +19,71 @@ interface VideoInfo {
   durationMinutes?: number;
 }
 
-interface TranscriptionConfig {
+interface V10Config {
   videoPath: string;
   prompt: string;
-  consensusRuns: number;
+  model: string;
+  resolution: 'LOW' | 'MEDIUM' | 'HIGH';
+  fps: number;
   chunkMinutes: number;
-  vadEnabled: boolean;
-  denoisingEnabled: boolean;
-  outputPath: string;
-  apiKey: string;
+  overlapSeconds: number;
+  thinkingBudget: number;
+  audioOnly?: boolean;
 }
 
 interface ConfigScreenProps {
   videoInfo: VideoInfo;
   onBack: () => void;
-  onStart: (config: TranscriptionConfig) => void;
+  onStart: (config: V10Config) => void;
   onOpenSettings: () => void;
 }
 
-type QualityPreset = 'quick' | 'standard' | 'high';
+type QualityPreset = 'fast' | 'standard' | 'detailed';
 
 const QUALITY_PRESETS = {
-  quick: {
-    consensusRuns: 1,
-    chunkMinutes: 3,
-    vadEnabled: false,
-    denoisingEnabled: false,
-    estimatedMinutes: 30
+  fast: {
+    model: 'gemini-2.0-flash',
+    resolution: 'MEDIUM' as const,
+    fps: 1,
+    chunkMinutes: 1.0,
+    overlapSeconds: 15,
+    thinkingBudget: 2048,
+    label: 'Fast',
+    description: 'Lower cost, good for clear audio'
   },
   standard: {
-    consensusRuns: 3,
-    chunkMinutes: 2,
-    vadEnabled: true,
-    denoisingEnabled: true,
-    estimatedMinutes: 90
+    model: 'gemini-3-flash-preview',
+    resolution: 'HIGH' as const,
+    fps: 2,
+    chunkMinutes: 1.0,
+    overlapSeconds: 15,
+    thinkingBudget: 4096,
+    label: 'Standard',
+    description: 'Best balance of quality & cost'
   },
-  high: {
-    consensusRuns: 5,
-    chunkMinutes: 2,
-    vadEnabled: true,
-    denoisingEnabled: true,
-    estimatedMinutes: 150
+  detailed: {
+    model: 'gemini-3-flash-preview',
+    resolution: 'HIGH' as const,
+    fps: 4,
+    chunkMinutes: 1.0,
+    overlapSeconds: 15,
+    thinkingBudget: 4096,
+    label: 'Detailed',
+    description: 'Maximum detail'
   }
 };
+
+const MODEL_OPTIONS = [
+  { value: 'gemini-3-flash-preview', label: 'Gemini 3 Flash (recommended)' },
+  { value: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
+  { value: 'gemini-2.5-pro-preview-05-06', label: 'Gemini 2.5 Pro' },
+];
+
+const RESOLUTION_OPTIONS = [
+  { value: 'LOW', label: 'Low' },
+  { value: 'MEDIUM', label: 'Medium' },
+  { value: 'HIGH', label: 'High (recommended)' },
+];
 
 export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   videoInfo,
@@ -69,7 +91,6 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   onStart,
   onOpenSettings
 }) => {
-  // Load prompts dynamically from API
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [selectedPromptId, setSelectedPromptId] = useState<string>('');
   const [qualityPreset, setQualityPreset] = useState<QualityPreset>('standard');
@@ -79,28 +100,29 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   const [showPromptManager, setShowPromptManager] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
 
-  // Advanced settings
-  const [consensusRuns, setConsensusRuns] = useState(3);
-  const [chunkMinutes, setChunkMinutes] = useState(2);
-  const [vadEnabled, setVadEnabled] = useState(true);
-  const [denoisingEnabled, setDenoisingEnabled] = useState(true);
+  // V10 advanced settings
+  const [model, setModel] = useState('gemini-3-flash-preview');
+  const [resolution, setResolution] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('HIGH');
+  const [fps, setFps] = useState(2);
+  const [chunkMinutes, setChunkMinutes] = useState(1.0);
+  const [overlapSeconds, setOverlapSeconds] = useState(15);
+  const [thinkingBudget, setThinkingBudget] = useState(4096);
+  // Auto-detect audio-only mode from file extension
+  const isAudioFile = /\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(videoInfo.filename);
+  const [audioOnly, setAudioOnly] = useState(isAudioFile);
 
   // Load prompts and check API key on mount
   useEffect(() => {
     async function loadData() {
       try {
-        // Load prompts
         const loadedPrompts = await window.electronAPI.getPrompts();
         setPrompts(loadedPrompts);
 
-        // Set default prompt if available
         if (loadedPrompts.length > 0 && !selectedPromptId) {
-          // Try to find "smallgroup_jake" or just use first prompt
           const defaultPrompt = loadedPrompts.find(p => p.id === 'smallgroup_jake') || loadedPrompts[0];
           setSelectedPromptId(defaultPrompt.id);
         }
 
-        // Check API key
         const { exists } = await window.electronAPI.hasApiKey();
         setHasApiKey(exists);
       } catch (error) {
@@ -115,49 +137,66 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   // Update settings when preset changes
   useEffect(() => {
     const preset = QUALITY_PRESETS[qualityPreset];
-    setConsensusRuns(preset.consensusRuns);
+    setModel(preset.model);
+    setResolution(preset.resolution);
+    setFps(preset.fps);
     setChunkMinutes(preset.chunkMinutes);
-    setVadEnabled(preset.vadEnabled);
-    setDenoisingEnabled(preset.denoisingEnabled);
+    setOverlapSeconds(preset.overlapSeconds);
+    setThinkingBudget(preset.thinkingBudget);
   }, [qualityPreset]);
 
-  // Calculate estimated cost and time
-  const estimatedCost = ((videoInfo.sizeInMB / 1024) * consensusRuns * 0.15).toFixed(2);
+  // Cost estimate: ~$0.19/hr at standard settings
+  const calculateCostEstimate = () => {
+    const durationMinutes = videoInfo.durationMinutes || (videoInfo.sizeInMB / 15);
+    const durationHours = durationMinutes / 60;
 
-  // Calculate dynamic processing time based on actual video length and settings
+    // Token-based estimate
+    const tokensPerFrame: Record<string, Record<string, number>> = {
+      'gemini-3-flash-preview': { LOW: 70, MEDIUM: 70, HIGH: 280 },
+      'gemini-2.0-flash': { LOW: 70, MEDIUM: 70, HIGH: 70 },
+      'gemini-2.5-pro-preview-05-06': { LOW: 256, MEDIUM: 256, HIGH: 256 },
+    };
+
+    const tpf = tokensPerFrame[model]?.[resolution] ?? 70;
+    const framesPerChunk = audioOnly ? 0 : fps * chunkMinutes * 60;
+    const videoTokensPerChunk = framesPerChunk * tpf;
+    // Audio tokens: ~32 tokens/sec for audio
+    const audioTokensPerChunk = chunkMinutes * 60 * 32;
+    const numChunks = Math.ceil((durationMinutes * 60) / (chunkMinutes * 60 - overlapSeconds));
+    const totalInputTokens = numChunks * (videoTokensPerChunk + audioTokensPerChunk + 2000); // +2000 for prompt
+    const totalOutputTokens = numChunks * 4000; // ~4000 output tokens per chunk
+
+    // Pricing (approximate, per million tokens)
+    const inputPricePerMillion = model.includes('2.5-pro') ? 1.25 : 0.10;
+    const outputPricePerMillion = model.includes('2.5-pro') ? 10.0 : 0.40;
+
+    const inputCost = (totalInputTokens / 1_000_000) * inputPricePerMillion;
+    const outputCost = (totalOutputTokens / 1_000_000) * outputPricePerMillion;
+
+    return (inputCost + outputCost).toFixed(2);
+  };
+
+  const estimatedCost = calculateCostEstimate();
+
+  // Processing time estimate
   const calculateProcessingTime = () => {
-    if (!videoInfo.durationMinutes) {
-      // Fallback to preset if duration not available
-      return QUALITY_PRESETS[qualityPreset].estimatedMinutes;
-    }
+    const durationMinutes = videoInfo.durationMinutes || (videoInfo.sizeInMB / 15);
+    const numChunks = Math.ceil((durationMinutes * 60) / (chunkMinutes * 60 - overlapSeconds));
 
-    const numChunks = Math.ceil(videoInfo.durationMinutes / chunkMinutes);
+    // ~2 min per chunk for API call + overhead
+    const timePerChunk = 2.5;
+    const speakerDetectionTime = 3; // ~3 min for speaker detection
 
-    // Time estimates per chunk (in minutes):
-    // - Chunking overhead: ~0.5 min per chunk
-    // - VAD processing: ~1 min per chunk (if enabled)
-    // - Denoising: ~0.5 min per chunk (if enabled)
-    // - Gemini API call: ~2 min per chunk per consensus run
-    // - Consensus analysis: ~0.5 min per chunk (if multiple runs)
-
-    let timePerChunk = 0.5; // Base chunking overhead
-    if (vadEnabled) timePerChunk += 1;
-    if (denoisingEnabled) timePerChunk += 0.5;
-    timePerChunk += (2 * consensusRuns); // API calls
-    if (consensusRuns > 1) timePerChunk += 0.5; // Consensus analysis
-
-    return Math.round(numChunks * timePerChunk);
+    return Math.round(speakerDetectionTime + (numChunks * timePerChunk));
   };
 
   const estimatedMinutes = calculateProcessingTime();
 
-  // Function to reload prompts (called when PromptManager closes)
   const reloadPrompts = useCallback(async () => {
     try {
       const loadedPrompts = await window.electronAPI.getPrompts();
       setPrompts(loadedPrompts);
 
-      // If current selection is no longer valid, select first prompt
       if (selectedPromptId && !loadedPrompts.find(p => p.id === selectedPromptId)) {
         if (loadedPrompts.length > 0) {
           setSelectedPromptId(loadedPrompts[0].id);
@@ -181,39 +220,30 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
       return;
     }
 
-    try {
-      const { apiKey } = await window.electronAPI.getApiKey();
-      if (!apiKey) {
-        alert('Failed to retrieve API key. Please check Settings.');
-        return;
-      }
+    const config: V10Config = {
+      videoPath: videoInfo.path,
+      prompt: selectedPromptId,
+      model,
+      resolution,
+      fps,
+      chunkMinutes,
+      overlapSeconds,
+      thinkingBudget,
+      audioOnly,
+    };
 
-      const { path: outputPath } = await window.electronAPI.getOutputPath();
-
-      const config: TranscriptionConfig = {
-        videoPath: videoInfo.path,
-        prompt: selectedPromptId,
-        consensusRuns,
-        chunkMinutes,
-        vadEnabled,
-        denoisingEnabled,
-        outputPath,
-        apiKey
-      };
-
-      onStart(config);
-    } catch (error: any) {
-      console.error('Failed to start transcription:', error);
-      alert('Failed to start transcription: ' + error.message);
-    }
+    onStart(config);
   }, [
     hasApiKey,
     selectedPromptId,
     videoInfo.path,
-    consensusRuns,
+    model,
+    resolution,
+    fps,
     chunkMinutes,
-    vadEnabled,
-    denoisingEnabled,
+    overlapSeconds,
+    thinkingBudget,
+    audioOnly,
     onStart
   ]);
 
@@ -243,7 +273,7 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
         {/* Video Info */}
         <div className={styles.videoInfo}>
           <div className={styles.infoRow}>
-            <span className={styles.label}>Video:</span>
+            <span className={styles.label}>File:</span>
             <span className={styles.value}>{videoInfo.filename}</span>
           </div>
           <div className={styles.infoRow}>
@@ -258,6 +288,25 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
               </span>
             </div>
           )}
+        </div>
+
+        {/* Audio-Only Mode Toggle */}
+        <div className={styles.section}>
+          <label className={styles.audioOnlyToggle}>
+            <input
+              type="checkbox"
+              checked={audioOnly}
+              onChange={(e) => setAudioOnly(e.target.checked)}
+            />
+            <div className={styles.audioOnlyContent}>
+              <span className={styles.audioOnlyLabel}>Audio-Only Mode</span>
+              <span className={styles.audioOnlyDesc}>
+                {audioOnly
+                  ? 'Extracts audio only — speakers identified by voice characteristics, no visual descriptions'
+                  : 'Uses both video frames and audio for transcription with visual descriptions'}
+              </span>
+            </div>
+          </label>
         </div>
 
         {/* API Key Warning */}
@@ -293,45 +342,21 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
         <div className={styles.section}>
           <label className={styles.sectionLabel}>Quality Preset</label>
           <div className={styles.presets}>
-            <label className={styles.preset}>
-              <input
-                type="radio"
-                name="preset"
-                value="quick"
-                checked={qualityPreset === 'quick'}
-                onChange={() => setQualityPreset('quick')}
-              />
-              <div className={styles.presetContent}>
-                <span className={styles.presetName}>Quick</span>
-                <span className={styles.presetTime}>~30 min</span>
-              </div>
-            </label>
-            <label className={styles.preset}>
-              <input
-                type="radio"
-                name="preset"
-                value="standard"
-                checked={qualityPreset === 'standard'}
-                onChange={() => setQualityPreset('standard')}
-              />
-              <div className={styles.presetContent}>
-                <span className={styles.presetName}>Standard</span>
-                <span className={styles.presetTime}>~90 min</span>
-              </div>
-            </label>
-            <label className={styles.preset}>
-              <input
-                type="radio"
-                name="preset"
-                value="high"
-                checked={qualityPreset === 'high'}
-                onChange={() => setQualityPreset('high')}
-              />
-              <div className={styles.presetContent}>
-                <span className={styles.presetName}>High Quality</span>
-                <span className={styles.presetTime}>~150 min</span>
-              </div>
-            </label>
+            {(Object.keys(QUALITY_PRESETS) as QualityPreset[]).map((key) => (
+              <label key={key} className={styles.preset}>
+                <input
+                  type="radio"
+                  name="preset"
+                  value={key}
+                  checked={qualityPreset === key}
+                  onChange={() => setQualityPreset(key)}
+                />
+                <div className={styles.presetContent}>
+                  <span className={styles.presetName}>{QUALITY_PRESETS[key].label}</span>
+                  <span className={styles.presetDesc}>{QUALITY_PRESETS[key].description}</span>
+                </div>
+              </label>
+            ))}
           </div>
         </div>
 
@@ -348,48 +373,88 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
             <div className={styles.advanced}>
               <div className={styles.advancedRow}>
                 <label className={styles.advancedLabel}>
-                  Chunk Duration (minutes):
+                  Model:
+                  <select
+                    value={model}
+                    onChange={(e) => setModel(e.target.value)}
+                    className={styles.selectInput}
+                  >
+                    {MODEL_OPTIONS.map(opt => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              {!audioOnly && (
+                <>
+                  <div className={styles.advancedRow}>
+                    <label className={styles.advancedLabel}>
+                      Resolution:
+                      <select
+                        value={resolution}
+                        onChange={(e) => setResolution(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')}
+                        className={styles.selectInput}
+                      >
+                        {RESOLUTION_OPTIONS.map(opt => (
+                          <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
+                      </select>
+                    </label>
+                  </div>
+                  <div className={styles.advancedRow}>
+                    <label className={styles.advancedLabel}>
+                      FPS (frames/sec):
+                      <input
+                        type="number"
+                        min="1"
+                        max="4"
+                        value={fps}
+                        onChange={(e) => setFps(parseInt(e.target.value) || 1)}
+                        className={styles.numberInput}
+                      />
+                    </label>
+                  </div>
+                </>
+              )}
+              <div className={styles.advancedRow}>
+                <label className={styles.advancedLabel}>
+                  Chunk Duration (min):
                   <input
                     type="number"
-                    min="1"
+                    min="0.5"
                     max="5"
+                    step="0.5"
                     value={chunkMinutes}
-                    onChange={(e) => setChunkMinutes(parseInt(e.target.value))}
+                    onChange={(e) => setChunkMinutes(parseFloat(e.target.value) || 1.0)}
                     className={styles.numberInput}
                   />
                 </label>
               </div>
               <div className={styles.advancedRow}>
                 <label className={styles.advancedLabel}>
-                  Consensus Runs:
+                  Overlap (sec):
                   <input
                     type="number"
-                    min="1"
-                    max="10"
-                    value={consensusRuns}
-                    onChange={(e) => setConsensusRuns(parseInt(e.target.value))}
+                    min="0"
+                    max="30"
+                    value={overlapSeconds}
+                    onChange={(e) => setOverlapSeconds(parseInt(e.target.value) || 0)}
                     className={styles.numberInput}
                   />
                 </label>
               </div>
               <div className={styles.advancedRow}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.advancedLabel}>
+                  Thinking Budget:
                   <input
-                    type="checkbox"
-                    checked={vadEnabled}
-                    onChange={(e) => setVadEnabled(e.target.checked)}
+                    type="number"
+                    min="1024"
+                    max="16384"
+                    step="1024"
+                    value={thinkingBudget}
+                    onChange={(e) => setThinkingBudget(parseInt(e.target.value) || 4096)}
+                    className={styles.numberInput}
                   />
-                  VAD Preprocessing
-                </label>
-              </div>
-              <div className={styles.advancedRow}>
-                <label className={styles.checkboxLabel}>
-                  <input
-                    type="checkbox"
-                    checked={denoisingEnabled}
-                    onChange={(e) => setDenoisingEnabled(e.target.checked)}
-                  />
-                  Audio Denoising
                 </label>
               </div>
             </div>
@@ -414,7 +479,7 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
             Cancel
           </Button>
           <Button variant="primary" onClick={handleStart} disabled={!hasApiKey || !selectedPromptId}>
-            Start Transcription
+            Detect Speakers & Start
           </Button>
         </div>
       </div>
@@ -423,7 +488,7 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
       {showPromptManager && (
         <PromptManager onClose={() => {
           setShowPromptManager(false);
-          reloadPrompts(); // Reload prompts when manager closes
+          reloadPrompts();
         }} />
       )}
 

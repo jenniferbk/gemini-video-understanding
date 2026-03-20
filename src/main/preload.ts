@@ -37,6 +37,20 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return (file as any).path || null;
   },
 
+  // Speaker detection (Phase 1)
+  detectSpeakers: (config: any) =>
+    ipcRenderer.invoke('transcription:detectSpeakers', config),
+
+  saveSpeakerManifest: (speakers: any[]) =>
+    ipcRenderer.invoke('transcription:saveSpeakerManifest', speakers),
+
+  // Speaker detection progress
+  onSpeakerProgress: (callback: (data: any) => void) => {
+    const listener = (_event: IpcRendererEvent, data: any) => callback(data);
+    ipcRenderer.on('transcription:speakerProgress', listener);
+    return () => ipcRenderer.removeListener('transcription:speakerProgress', listener);
+  },
+
   // Transcription events (listen to progress updates)
   onProgress: (callback: (data: any) => void) => {
     const listener = (_event: IpcRendererEvent, data: any) => callback(data);
@@ -142,6 +156,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
 });
 
 // Type definitions for TypeScript
+export interface SpeakerInfo {
+  label: string;
+  description: string;
+  type: 'teacher' | 'student' | 'researcher';
+}
+
 export interface Prompt {
   id: string;
   name: string;
@@ -170,12 +190,27 @@ export interface Job {
 export interface TranscriptionConfig {
   videoPath: string;
   prompt: string;
-  consensusRuns: number;
+  model: string;
+  resolution: 'LOW' | 'MEDIUM' | 'HIGH';
+  fps: number;
   chunkMinutes: number;
-  vadEnabled: boolean;
-  denoisingEnabled: boolean;
+  overlapSeconds: number;
+  thinkingBudget: number;
   outputPath: string;
   apiKey: string;
+  speakersManifestPath?: string;
+  audioOnly?: boolean;
+}
+
+export interface SpeakerDetectionConfig {
+  videoPath: string;
+  model: string;
+  resolution: 'LOW' | 'MEDIUM' | 'HIGH';
+  fps: number;
+  chunkMinutes: number;
+  overlapSeconds: number;
+  apiKey: string;
+  audioOnly?: boolean;
 }
 
 export interface ElectronAPI {
@@ -195,6 +230,11 @@ export interface ElectronAPI {
   onComplete: (callback: (data: any) => void) => () => void;
   onError: (callback: (data: any) => void) => () => void;
   onTranscriptionProgress: (callback: (data: any) => void) => () => void;
+
+  // Speaker detection
+  detectSpeakers: (config: SpeakerDetectionConfig) => Promise<{speakers: SpeakerInfo[]}>;
+  saveSpeakerManifest: (speakers: SpeakerInfo[]) => Promise<{success: boolean; path: string}>;
+  onSpeakerProgress: (callback: (data: any) => void) => () => void;
 
   // Prompts
   getPrompts: () => Promise<Prompt[]>;

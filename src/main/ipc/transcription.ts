@@ -1,21 +1,104 @@
 import { ipcMain, BrowserWindow, shell, dialog } from 'electron';
-import { PythonTranscriptionRunner, TranscriptionConfig } from '../python/pythonRunner';
+import { PythonTranscriptionRunner, TranscriptionConfig, SpeakerDetectionConfig, SpeakerInfo } from '../python/pythonRunner';
 import { Database } from '../database/database';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as os from 'os';
 
 let pythonRunner: PythonTranscriptionRunner | null = null;
 let currentJobId: number | null = null;
+let speakerManifestPath: string | null = null;
 
 /**
  * Initialize transcription IPC handlers
  */
 export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Database): void {
 
-  // Start transcription
+  // Detect speakers (Phase 1)
+  ipcMain.handle('transcription:detectSpeakers', async (_event, config: SpeakerDetectionConfig) => {
+    try {
+      console.log('Starting speaker detection:', config.videoPath);
+
+      if (!fs.existsSync(config.videoPath)) {
+        throw new Error(`Video file not found: ${config.videoPath}`);
+      }
+
+      if (!config.apiKey || config.apiKey.trim() === '') {
+        throw new Error('API key is required');
+      }
+
+      // Create runner if needed
+      if (pythonRunner) {
+        pythonRunner.removeAllListeners();
+      }
+      pythonRunner = new PythonTranscriptionRunner();
+
+      return new Promise<{ speakers: SpeakerInfo[] }>((resolve, reject) => {
+        let resolved = false;
+
+        pythonRunner!.on('speakers', (data) => {
+          if (!resolved) {
+            resolved = true;
+            resolve({ speakers: data.speakers });
+          }
+        });
+
+        pythonRunner!.on('progress', (progress) => {
+          mainWindow.webContents.send('transcription:speakerProgress', progress);
+        });
+
+        pythonRunner!.on('log', (log) => {
+          mainWindow.webContents.send('transcription:log', log);
+        });
+
+        pythonRunner!.on('error', (error) => {
+          console.error('Speaker detection error:', error);
+          if (!resolved) {
+            resolved = true;
+            reject(new Error(error.message || 'Speaker detection failed'));
+          }
+        });
+
+        pythonRunner!.on('complete', () => {
+          // If we haven't received speakers by complete, something went wrong
+          if (!resolved) {
+            resolved = true;
+            reject(new Error('Speaker detection completed without returning speakers'));
+          }
+        });
+
+        pythonRunner!.detectSpeakers(config);
+      });
+
+    } catch (error: any) {
+      console.error('Failed to detect speakers:', error);
+      throw error;
+    }
+  });
+
+  // Save speaker manifest (between Phase 1 and Phase 2)
+  ipcMain.handle('transcription:saveSpeakerManifest', async (_event, speakers: SpeakerInfo[]) => {
+    try {
+      const tempFile = path.join(os.tmpdir(), `gvu-speakers-${Date.now()}.json`);
+      const manifestData = speakers.map(s => ({
+        label: s.label,
+        description: s.description,
+        type: s.type
+      }));
+      fs.writeFileSync(tempFile, JSON.stringify(manifestData, null, 2));
+      speakerManifestPath = tempFile;
+      console.log(`Speaker manifest saved: ${tempFile}`);
+      return { success: true, path: tempFile };
+    } catch (error: any) {
+      console.error('Failed to save speaker manifest:', error);
+      throw error;
+    }
+  });
+
+  // Start transcription (Phase 2)
   ipcMain.handle('transcription:start', async (_event, config: TranscriptionConfig) => {
     try {
-      console.log('📹 Starting transcription:', config.videoPath);
+      console.log('Starting transcription:', config.videoPath);
 
       // Validate video file exists
       if (!fs.existsSync(config.videoPath)) {
@@ -40,20 +123,20 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
         config: config
       });
 
-      console.log(`✅ Created job ${jobId} in database`);
+      console.log(`Created job ${jobId} in database`);
       currentJobId = jobId;
 
       // Update status to processing
       await db.updateJobStatus(jobId, 'processing');
 
       // Create Python runner if needed
-      if (!pythonRunner) {
-        pythonRunner = new PythonTranscriptionRunner();
+      if (pythonRunner) {
+        pythonRunner.removeAllListeners();
       }
+      pythonRunner = new PythonTranscriptionRunner();
 
       // Set up event listeners
       pythonRunner.on('progress', (progress) => {
-        // Forward progress to renderer
         mainWindow.webContents.send('transcription:progress', {
           jobId,
           ...progress
@@ -61,7 +144,6 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
       });
 
       pythonRunner.on('log', (log) => {
-        // Forward log to renderer
         mainWindow.webContents.send('transcription:log', {
           jobId,
           ...log
@@ -69,7 +151,7 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
       });
 
       pythonRunner.on('complete', async (completion) => {
-        console.log('✅ Transcription complete:', completion);
+        console.log('Transcription complete:', completion);
 
         // Update database
         await db.updateJobOutput(jobId, completion.outputFile || '', completion.stats || {});
@@ -80,11 +162,13 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
           ...completion
         });
 
+        // Clean up speaker manifest
+        cleanupSpeakerManifest();
         currentJobId = null;
       });
 
       pythonRunner.on('error', async (error) => {
-        console.error('❌ Transcription error:', error);
+        console.error('Transcription error:', error);
 
         // Update database
         await db.updateJobStatus(jobId, 'failed', error.message);
@@ -95,6 +179,8 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
           ...error
         });
 
+        // Clean up speaker manifest
+        cleanupSpeakerManifest();
         currentJobId = null;
       });
 
@@ -116,16 +202,15 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
     }
   });
 
-  // Cancel transcription
+  // Cancel transcription or speaker detection
   ipcMain.handle('transcription:cancel', async () => {
     try {
       if (!pythonRunner || !pythonRunner.isRunning()) {
-        throw new Error('No transcription is running');
+        throw new Error('No process is running');
       }
 
-      console.log('🛑 Cancelling transcription...');
+      console.log('Cancelling process...');
 
-      // Cancel Python process
       pythonRunner.cancel();
 
       // Update database
@@ -134,10 +219,13 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
         currentJobId = null;
       }
 
+      // Clean up speaker manifest
+      cleanupSpeakerManifest();
+
       return { success: true };
 
     } catch (error: any) {
-      console.error('Failed to cancel transcription:', error);
+      console.error('Failed to cancel:', error);
       throw error;
     }
   });
@@ -180,7 +268,6 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
         throw new Error(`Folder not found: ${folderPath}`);
       }
 
-      // Open folder in Finder (macOS) or File Explorer (Windows/Linux)
       await shell.openPath(folderPath);
 
       return { success: true };
@@ -190,14 +277,14 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
     }
   });
 
-  // Select video file using native dialog
+  // Select video/audio file using native dialog
   ipcMain.handle('transcription:selectVideo', async () => {
     try {
       const result = await dialog.showOpenDialog({
-        title: 'Select Video File',
+        title: 'Select Media File',
         properties: ['openFile'],
         filters: [
-          { name: 'Video Files', extensions: ['mp4', 'mov', 'avi', 'mkv', 'webm'] }
+          { name: 'Media Files', extensions: ['mp4', 'mov', 'avi', 'mkv', 'webm', 'mp3', 'wav', 'm4a', 'aac', 'ogg', 'flac'] }
         ]
       });
 
@@ -209,16 +296,14 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
       const stats = fs.statSync(videoPath);
       const sizeInMB = stats.size / (1024 * 1024);
 
-      // Rough estimate: assuming ~1MB per minute of video at standard quality
-      // This is a placeholder until we implement proper ffprobe duration detection
-      const estimatedDurationMinutes = sizeInMB / 15; // ~15MB per minute is more realistic for classroom videos
+      const estimatedDurationMinutes = sizeInMB / 15;
 
       return {
         success: true,
         path: videoPath,
         filename: path.basename(videoPath),
         sizeInMB: Math.round(sizeInMB * 100) / 100,
-        durationMinutes: Math.round(estimatedDurationMinutes * 10) / 10 // Round to 1 decimal
+        durationMinutes: Math.round(estimatedDurationMinutes * 10) / 10
       };
     } catch (error: any) {
       console.error('Failed to select video:', error);
@@ -226,17 +311,15 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
     }
   });
 
-  // Validate video file
+  // Validate video/audio file
   ipcMain.handle('transcription:validateVideo', async (_event, videoPath: string) => {
     try {
-      // Check if file exists
       if (!fs.existsSync(videoPath)) {
         return { valid: false, error: 'File not found' };
       }
 
-      // Check file extension
       const ext = path.extname(videoPath).toLowerCase();
-      const validExtensions = ['.mp4', '.mov', '.avi', '.mkv', '.webm'];
+      const validExtensions = ['.mp4', '.mov', '.avi', '.mkv', '.webm', '.mp3', '.wav', '.m4a', '.aac', '.ogg', '.flac'];
 
       if (!validExtensions.includes(ext)) {
         return {
@@ -245,12 +328,8 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
         };
       }
 
-      // Get file size
       const stats = fs.statSync(videoPath);
       const sizeInMB = stats.size / (1024 * 1024);
-
-      // TODO: Get video duration using ffprobe
-      // For now, just return basic info
 
       return {
         valid: true,
@@ -274,7 +353,6 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
 
       const content = fs.readFileSync(filePath, 'utf-8');
 
-      // Limit to first 100 lines for preview
       const lines = content.split('\n');
       const preview = lines.slice(0, 100).join('\n');
 
@@ -290,5 +368,20 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
     }
   });
 
-  console.log('✅ Transcription IPC handlers registered');
+  console.log('Transcription IPC handlers registered');
+}
+
+/**
+ * Clean up temporary speaker manifest file
+ */
+function cleanupSpeakerManifest(): void {
+  if (speakerManifestPath && fs.existsSync(speakerManifestPath)) {
+    try {
+      fs.unlinkSync(speakerManifestPath);
+      console.log(`Cleaned up speaker manifest: ${speakerManifestPath}`);
+    } catch (error) {
+      console.error('Failed to clean up speaker manifest:', error);
+    }
+    speakerManifestPath = null;
+  }
 }
