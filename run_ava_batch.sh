@@ -2,7 +2,7 @@
 # Batch process Ava 4S Science SG videos with V10
 # Runs 4 in parallel to stay within API rate limits
 
-export GOOGLE_API_KEY="REDACTED_GOOGLE_API_KEY"
+export GOOGLE_API_KEY="${GOOGLE_API_KEY:?Set GOOGLE_API_KEY env var before running}"
 PYTHON="/Users/jenniferkleiman/Documents/COMS/venv/bin/python3"
 SCRIPT="/Users/jenniferkleiman/Documents/COMS/video_transcription_pipeline_v10.py"
 OUTDIR="/Users/jenniferkleiman/Documents/COMS/batch_ava_4s_output"
