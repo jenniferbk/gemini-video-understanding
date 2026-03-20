@@ -107,3 +107,11 @@ video_transcription_pipeline_v05 copy.py
 video_transcription_pipeline_v05.py
 video_transcription_pipeline_v2_genai.py
 video_transcription_simple_working.py
+__pycache__/
+*.xlsx
+*.drawing
+CLAUDE.md.backup-*
+
+# Transcription output directories
+*_v10_*/
+batch_*_output/

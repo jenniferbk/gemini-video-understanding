@@ -1,0 +1,130 @@
+{
+  "version": "1.0.0",
+  "description": "Automatic skill activation rules for GeminiVideoUnderstanding project",
+  "hooks": {
+    "userPromptSubmit": {
+      "enabled": true,
+      "rules": [
+        {
+          "name": "Electron Development Guidelines",
+          "skill": "electron-dev-guidelines",
+          "conditions": {
+            "filePatterns": [
+              "src/main/**/*.ts",
+              "src/main/**/*.js",
+              "**/preload.ts",
+              "**/main.ts"
+            ],
+            "keywords": [
+              "ipc",
+              "electron",
+              "main process",
+              "renderer process",
+              "context bridge",
+              "browser window",
+              "preload",
+              "ipcMain",
+              "ipcRenderer"
+            ]
+          },
+          "priority": "high"
+        },
+        {
+          "name": "Python Integration",
+          "skill": "python-integration",
+          "conditions": {
+            "filePatterns": [
+              "src/main/python/**/*.ts",
+              "src/python/**/*.py",
+              "**/pythonRunner.ts",
+              "**/progressParser.ts"
+            ],
+            "keywords": [
+              "python",
+              "spawn",
+              "child process",
+              "venv",
+              "virtual environment",
+              "pip install",
+              "python script",
+              "stdout",
+              "stderr",
+              "GVU_PROGRESS",
+              "GVU_COMPLETE",
+              "GVU_ERROR"
+            ]
+          },
+          "priority": "high"
+        },
+        {
+          "name": "React TypeScript Patterns",
+          "skill": "react-typescript-patterns",
+          "conditions": {
+            "filePatterns": [
+              "src/renderer/**/*.tsx",
+              "src/renderer/**/*.ts",
+              "src/renderer/components/**/*",
+              "src/renderer/hooks/**/*"
+            ],
+            "keywords": [
+              "react",
+              "component",
+              "useState",
+              "useEffect",
+              "useCallback",
+              "useMemo",
+              "tsx",
+              "props",
+              "interface",
+              "material ui",
+              "mui"
+            ]
+          },
+          "priority": "high"
+        },
+        {
+          "name": "Database Operations",
+          "skill": "database-operations",
+          "conditions": {
+            "filePatterns": [
+              "src/main/database/**/*.ts",
+              "src/main/database/**/*.sql",
+              "**/database.ts",
+              "**/schema.sql"
+            ],
+            "keywords": [
+              "sqlite",
+              "database",
+              "sql",
+              "query",
+              "transaction",
+              "INSERT",
+              "UPDATE",
+              "DELETE",
+              "SELECT",
+              "CREATE TABLE",
+              "job history",
+              "settings table"
+            ]
+          },
+          "priority": "medium"
+        }
+      ]
+    },
+    "stop": {
+      "enabled": false,
+      "description": "Hook that runs when user stops a task - currently disabled"
+    }
+  },
+  "settings": {
+    "autoActivateSkills": true,
+    "maxConcurrentSkills": 2,
+    "verboseLogging": false
+  },
+  "notes": {
+    "usage": "Skills are automatically activated when file patterns or keywords match",
+    "priority": "high priority skills load first, medium/low load after",
+    "keywords": "Keywords are case-insensitive and can appear anywhere in the prompt",
+    "filePatterns": "File patterns use glob syntax and match against active file paths"
+  }
+}
