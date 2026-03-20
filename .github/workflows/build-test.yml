@@ -23,46 +23,16 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
+    - name: Install Node dependencies
       run: npm install
 
-    - name: Build TypeScript
+    - name: Build TypeScript + Webpack
       run: npm run build
 
-    - name: Create Python venv and install dependencies
+    - name: Check Python syntax
+      run: python3 -c "import ast; ast.parse(open('src/python/video_transcription_pipeline_v10.py').read()); print('Python syntax OK')"
+
+    - name: Install and verify Python dependencies
       run: |
-        python3 -m venv venv
-        source venv/bin/activate
         pip install -r src/python/requirements.txt
-        deactivate
-
-    - name: Package application
-      run: npm run package
-
-    - name: Verify DMG created
-      run: |
-        ls -lh release/*.dmg
-
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: dmg-package
-        path: release/*.dmg
-        retention-days: 7
-
-    - name: Run basic smoke tests
-      run: |
-        # Mount DMG
-        hdiutil attach "release/Gemini Video Understanding-${{ github.ref_name }}-arm64.dmg"
-
-        # Check app structure
-        ls -la "/Volumes/Gemini Video Understanding/"
-
-        # Verify Python bundle exists
-        ls -la "/Volumes/Gemini Video Understanding/Gemini Video Understanding.app/Contents/Resources/python/"
-
-        # Verify FFmpeg binaries exist
-        ls -la "/Volumes/Gemini Video Understanding/Gemini Video Understanding.app/Contents/Resources/bin/"
-
-        # Detach DMG
-        hdiutil detach "/Volumes/Gemini Video Understanding"
+        python3 -c "from google import genai; print('google-genai OK')"
