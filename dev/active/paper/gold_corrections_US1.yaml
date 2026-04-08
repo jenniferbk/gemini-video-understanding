@@ -1,0 +1,53 @@
+# TIMSS US1 gold transcript corrections.
+# Applied by apply_audit.py after the audit verdicts.
+#
+# Each entry matches a gold turn by (timestamp, original text). Action is
+# one of:
+#   remove  — drop the turn entirely (gold over-transcribed inaudible audio)
+#   edit    — replace text with `corrected` (gold transcription mistake)
+
+corrections:
+  - timestamp: "00:00:14"
+    original: "Dear..."
+    action: remove
+    reason: "Inaudible — no student speech at this moment (JK spot-check)"
+
+  - timestamp: "00:00:15"
+    original: "Thank you."
+    action: remove
+    reason: "Inaudible — no student speech (JK spot-check)"
+
+  - timestamp: "00:00:38"
+    original: "Ashley, can I have a piece of paper?"
+    action: edit
+    corrected: "Can I have a piece of paper?"
+    reason: '"Ashley" is inaudible in source audio; "can I have a piece of paper" is barely audible but present (JK spot-check)'
+
+  - timestamp: "00:01:01"
+    original: "Oh, (inaudible)."
+    action: remove
+    reason: "Inaudible — not discernible in audio (JK spot-check)"
+
+  - timestamp: "00:02:07"
+    original: "Y intercept and X intercept."
+    action: edit
+    corrected: "Y intercept."
+    reason: '"X intercept" was not actually said — gold over-claim (JK spot-check)'
+
+  - timestamp: "00:03:48"
+    original: "Mr. Ormsby, you know, when you put, like, a one in here, would you go like, times-"
+    action: edit
+    corrected: "When you put, like, a one in here, would you go like, times-"
+    reason: '"Mr. Ormsby, you know" is not clearly audible; remainder is audible (JK spot-check)'
+
+  - timestamp: "00:03:53"
+    original: "Ah, see, so now you've already forgotten, right? First of all zeros are our favorite number, right?"
+    action: edit
+    corrected: "Ah, see, so now you've already forgotten, right? First of all zero's our favorite number, right?"
+    reason: 'Gold transcribed the contraction wrong: "zero''s" not "zeros are" (JK spot-check)'
+
+  - timestamp: "00:04:52"
+    original: "You want to pick three as like-"
+    action: edit
+    corrected: "You want to pick threes? ... like-"
+    reason: 'Gold mis-heard: student says "threes" not "three as"; "like" trailing off (JK spot-check)'

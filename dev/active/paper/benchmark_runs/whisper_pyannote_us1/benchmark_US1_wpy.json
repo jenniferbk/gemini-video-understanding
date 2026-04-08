@@ -1,0 +1,1768 @@
+{
+  "lesson": "US1_wpy",
+  "youtube_url": "x",
+  "gold_path": "dev/active/paper/benchmark_runs/US1_gold_corrected.txt",
+  "v10_output_path": "dev/active/paper/benchmark_runs/whisper_pyannote_us1/US1_wpy_transcript.txt",
+  "n_gold_turns": 936,
+  "n_pred_turns": 1239,
+  "n_gold_words": 8075,
+  "n_pred_words": 8005,
+  "n_visual_events": 0,
+  "visual_events_per_minute": 0.0,
+  "wer": 0.2638,
+  "wer_strict": 0.3069,
+  "wer_per_role": {
+    "wer_weighted": 0.3817,
+    "wer_teacher": 0.2588,
+    "wer_student": 0.769,
+    "gold_teacher_words": 6131,
+    "gold_student_words": 1944,
+    "pred_teacher_words": 6264,
+    "pred_student_words": 1741
+  },
+  "content_equivalence": {
+    "window_seconds": 12.0,
+    "n_gold_words": 7622,
+    "n_pred_words": 7550,
+    "n_gold_matched": 7322,
+    "n_pred_matched": 7366,
+    "recall": 0.9606,
+    "precision": 0.9756,
+    "f1": 0.9681,
+    "wer_equivalent": 0.0635,
+    "gold_unmatched_count": 300,
+    "pred_unmatched_count": 184,
+    "gold_unmatched_sample": [
+      {
+        "t": 38,
+        "w": "piece"
+      },
+      {
+        "t": 58,
+        "w": "Sarah."
+      },
+      {
+        "t": 131,
+        "w": "Yeah."
+      },
+      {
+        "t": 168,
+        "w": "everybody"
+      },
+      {
+        "t": 219,
+        "w": "piece"
+      },
+      {
+        "t": 233,
+        "w": "zero's"
+      },
+      {
+        "t": 238,
+        "w": "Yeah."
+      },
+      {
+        "t": 251,
+        "w": "threes."
+      },
+      {
+        "t": 253,
+        "w": "maybe"
+      },
+      {
+        "t": 253,
+        "w": "zero,"
+      },
+      {
+        "t": 253,
+        "w": "three"
+      },
+      {
+        "t": 253,
+        "w": "be"
+      },
+      {
+        "t": 253,
+        "w": "good"
+      },
+      {
+        "t": 253,
+        "w": "with"
+      },
+      {
+        "t": 262,
+        "w": "Ormsby,"
+      },
+      {
+        "t": 262,
+        "w": "whoo-hoo."
+      },
+      {
+        "t": 285,
+        "w": "Yeah."
+      },
+      {
+        "t": 292,
+        "w": "threes?"
+      },
+      {
+        "t": 301,
+        "w": "middle."
+      },
+      {
+        "t": 332,
+        "w": "Ormsby."
+      },
+      {
+        "t": 341,
+        "w": "come"
+      },
+      {
+        "t": 341,
+        "w": "your"
+      },
+      {
+        "t": 348,
+        "w": "then-"
+      },
+      {
+        "t": 370,
+        "w": "knew"
+      },
+      {
+        "t": 377,
+        "w": "Cause"
+      },
+      {
+        "t": 377,
+        "w": "they're"
+      },
+      {
+        "t": 377,
+        "w": "both"
+      },
+      {
+        "t": 381,
+        "w": "Okay."
+      },
+      {
+        "t": 389,
+        "w": "\"times-ing\""
+      },
+      {
+        "t": 399,
+        "w": "totally"
+      },
+      {
+        "t": 399,
+        "w": "forgot"
+      },
+      {
+        "t": 399,
+        "w": "graph."
+      },
+      {
+        "t": 403,
+        "w": "liked-"
+      },
+      {
+        "t": 410,
+        "w": "remembered"
+      },
+      {
+        "t": 410,
+        "w": "fives,"
+      },
+      {
+        "t": 425,
+        "w": "Okay."
+      },
+      {
+        "t": 431,
+        "w": "Fifteen."
+      },
+      {
+        "t": 438,
+        "w": "Negative"
+      },
+      {
+        "t": 442,
+        "w": "Ormsby?"
+      },
+      {
+        "t": 444,
+        "w": "four?"
+      }
+    ],
+    "pred_unmatched_sample": [
+      {
+        "t": 145,
+        "w": "Robert?"
+      },
+      {
+        "t": 186,
+        "w": "relying"
+      },
+      {
+        "t": 186,
+        "w": "designated"
+      },
+      {
+        "t": 186,
+        "w": "grapher"
+      },
+      {
+        "t": 187,
+        "w": "rest"
+      },
+      {
+        "t": 187,
+        "w": "please,"
+      },
+      {
+        "t": 272,
+        "w": "Yeah."
+      },
+      {
+        "t": 276,
+        "w": "your"
+      },
+      {
+        "t": 278,
+        "w": "your"
+      },
+      {
+        "t": 280,
+        "w": "your"
+      },
+      {
+        "t": 290,
+        "w": "3's."
+      },
+      {
+        "t": 301,
+        "w": "10."
+      },
+      {
+        "t": 331,
+        "w": "Orsi."
+      },
+      {
+        "t": 340,
+        "w": "going"
+      },
+      {
+        "t": 375,
+        "w": "whole"
+      },
+      {
+        "t": 375,
+        "w": "sign?"
+      },
+      {
+        "t": 382,
+        "w": "Number"
+      },
+      {
+        "t": 387,
+        "w": "time"
+      },
+      {
+        "t": 396,
+        "w": "told"
+      },
+      {
+        "t": 396,
+        "w": "about"
+      },
+      {
+        "t": 397,
+        "w": "told"
+      },
+      {
+        "t": 397,
+        "w": "about"
+      },
+      {
+        "t": 398,
+        "w": "told"
+      },
+      {
+        "t": 398,
+        "w": "about"
+      },
+      {
+        "t": 398,
+        "w": "problem."
+      },
+      {
+        "t": 409,
+        "w": "5's."
+      },
+      {
+        "t": 410,
+        "w": "Well,"
+      },
+      {
+        "t": 441,
+        "w": "split?"
+      },
+      {
+        "t": 600,
+        "w": "negative."
+      },
+      {
+        "t": 603,
+        "w": "automatically"
+      },
+      {
+        "t": 609,
+        "w": "10."
+      },
+      {
+        "t": 613,
+        "w": "Then"
+      },
+      {
+        "t": 661,
+        "w": "Okay."
+      },
+      {
+        "t": 672,
+        "w": "them"
+      },
+      {
+        "t": 684,
+        "w": "5,"
+      },
+      {
+        "t": 684,
+        "w": "6,"
+      },
+      {
+        "t": 684,
+        "w": "7,"
+      },
+      {
+        "t": 684,
+        "w": "8,"
+      },
+      {
+        "t": 684,
+        "w": "10."
+      },
+      {
+        "t": 686,
+        "w": "straight"
+      }
+    ]
+  },
+  "speaker_role_content_aware": {
+    "role_accuracy": 0.7543,
+    "n_matched": 757,
+    "n_unmatched": 173,
+    "n_total_gold": 930,
+    "confusion": {
+      "T": {
+        "T": 398,
+        "student": 76
+      },
+      "student": {
+        "student": 173,
+        "T": 110
+      }
+    },
+    "window_seconds": 12.0,
+    "min_overlap": 0.5
+  },
+  "wer_n_words_ref": 8075,
+  "audit": null,
+  "speaker_label_accuracy": 0.5,
+  "speaker_confusion": {
+    "T": {
+      "T": 391,
+      "S": 104
+    },
+    "SN": {
+      "S": 99,
+      "T": 121
+    },
+    "S": {
+      "T": 141,
+      "S": 77
+    },
+    "SS": {
+      "T": 1,
+      "S": 2
+    }
+  },
+  "n_dropped_turns": 195,
+  "dropped_turns": [
+    {
+      "t_seconds": 38,
+      "speaker": "S",
+      "text": "Can I have a piece of paper?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Every one of you needs a blank sheet of paper."
+    },
+    {
+      "t_seconds": 62,
+      "speaker": "T",
+      "text": "Okay. Now- Here you go.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Okay."
+    },
+    {
+      "t_seconds": 131,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 141,
+      "speaker": "T",
+      "text": "So those are the two main ways, right, we can graph those equations? So right now I need you to get started.",
+      "best_pred_overlap": 0.417,
+      "best_pred_text": "So, those are the two main ways, right?"
+    },
+    {
+      "t_seconds": 163,
+      "speaker": "SN",
+      "text": "Where's the... oh, right here?",
+      "best_pred_overlap": 0.2,
+      "best_pred_text": "please make sure I check to make sure you did it right before you move on."
+    },
+    {
+      "t_seconds": 168,
+      "speaker": "S",
+      "text": "So everybody has to do one graph, right?",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Yeah, you're going to graph on that."
+    },
+    {
+      "t_seconds": 174,
+      "speaker": "T",
+      "text": "The rest of you kind of work together to make sure it's accurate. Okay? You going to do it? Good job, Nick.",
+      "best_pred_overlap": 0.308,
+      "best_pred_text": "The rest of you kind of work together."
+    },
+    {
+      "t_seconds": 183,
+      "speaker": "T",
+      "text": "All right, the grid paper- All right, you know what? Hey, listen up real quick.",
+      "best_pred_overlap": 0.455,
+      "best_pred_text": "Hey, listen up real quick."
+    },
+    {
+      "t_seconds": 222,
+      "speaker": "T",
+      "text": "All right? This is actually the- use the ruler, Robert. Use the ruler man. Make it neat. All right?",
+      "best_pred_overlap": 0.444,
+      "best_pred_text": "This is actually, use the ruler, Robert."
+    },
+    {
+      "t_seconds": 238,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 251,
+      "speaker": "S",
+      "text": "Um, threes.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 253,
+      "speaker": "T",
+      "text": "All right. So maybe zero, three and six would be good numbers to try with this one, right?",
+      "best_pred_overlap": 0.182,
+      "best_pred_text": "All right."
+    },
+    {
+      "t_seconds": 262,
+      "speaker": "SN",
+      "text": "Mr. Ormsby, whoo-hoo. Okay. Mister, I forgot how to do these again. Like how do you do X and Y?",
+      "best_pred_overlap": 0.308,
+      "best_pred_text": "Mr. Art, I forgot how to do this again."
+    },
+    {
+      "t_seconds": 269,
+      "speaker": "T",
+      "text": "Okay, so now wait a minute. You want to make a table then, right? So you're going to make an X Y table, okay?",
+      "best_pred_overlap": 0.462,
+      "best_pred_text": "So you're going to make an X-Y table."
+    },
+    {
+      "t_seconds": 285,
+      "speaker": "SN",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 301,
+      "speaker": "SN",
+      "text": "I got six (inaudible) in the middle.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Right, and if you want to just do 0, 3, 6 and stay away from negatives, you can do that too."
+    },
+    {
+      "t_seconds": 332,
+      "speaker": "S",
+      "text": "Ten. Okay I get it. Thank you Mr. Ormsby.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Okay, I get it."
+    },
+    {
+      "t_seconds": 377,
+      "speaker": "SN",
+      "text": "Cause they're both positive so-",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Try positive 3."
+    },
+    {
+      "t_seconds": 381,
+      "speaker": "T",
+      "text": "Okay.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 399,
+      "speaker": "SN",
+      "text": "All right, I just totally forgot um, you know, how to do the graph.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Alright, I just told you about it."
+    },
+    {
+      "t_seconds": 425,
+      "speaker": "S",
+      "text": "Okay.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 431,
+      "speaker": "S",
+      "text": "Fifteen.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 442,
+      "speaker": "SN",
+      "text": "Mr. Ormsby?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 461,
+      "speaker": "SN",
+      "text": "Mr. Ormsby.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 466,
+      "speaker": "T",
+      "text": "Use the whole paper, man. Look at these big grid lines here. Everyone, make it count one. Okay?",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Look at these big grid lines here."
+    },
+    {
+      "t_seconds": 476,
+      "speaker": "T",
+      "text": "Yeah, you're going to graph these five. That's why I want you to use the whole paper. Make a big coordinate system.",
+      "best_pred_overlap": 0.375,
+      "best_pred_text": "Yeah, you're going to graph these five."
+    },
+    {
+      "t_seconds": 488,
+      "speaker": "SN",
+      "text": "All right. So, we have to make one big, um-",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Make a big coordinate system."
+    },
+    {
+      "t_seconds": 500,
+      "speaker": "S",
+      "text": "We're out of (inaudible).",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "That way all the lines are nicely spaced out and everything."
+    },
+    {
+      "t_seconds": 502,
+      "speaker": "T",
+      "text": "Okay, well how do you want to graph it? Using an X Y table?",
+      "best_pred_overlap": 0.444,
+      "best_pred_text": "Well how you want to graph it?"
+    },
+    {
+      "t_seconds": 506,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 523,
+      "speaker": "S",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 549,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 558,
+      "speaker": "S",
+      "text": "So... to input this X do I have to put this number?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 571,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 589,
+      "speaker": "S",
+      "text": "Oh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 604,
+      "speaker": "T",
+      "text": "You alr- you should already know that is your Y intercept. All right, try three. Now just make that a positive three.",
+      "best_pred_overlap": 0.357,
+      "best_pred_text": "Now, just make that a positive 3."
+    },
+    {
+      "t_seconds": 639,
+      "speaker": "SN",
+      "text": "Thanks.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 653,
+      "speaker": "S",
+      "text": "I would go... negative nine. So, one, two, three, four, five.",
+      "best_pred_overlap": 0.444,
+      "best_pred_text": "I would go negative 9."
+    },
+    {
+      "t_seconds": 663,
+      "speaker": "S",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 669,
+      "speaker": "T",
+      "text": "Ah ha.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 674,
+      "speaker": "T",
+      "text": "Good. Now we only want to go nine. Here you go. Hey, you guys taught him pretty well then, huh?",
+      "best_pred_overlap": 0.467,
+      "best_pred_text": "Hey, you guys taught them pretty well then, huh?"
+    },
+    {
+      "t_seconds": 681,
+      "speaker": "S",
+      "text": "(inaudible)",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 698,
+      "speaker": "SN",
+      "text": "(inaudible) times two is six. Negative six.",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "5, 2, 6."
+    },
+    {
+      "t_seconds": 706,
+      "speaker": "SN",
+      "text": "I don't even know how to do this.",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "I don't get it."
+    },
+    {
+      "t_seconds": 713,
+      "speaker": "S",
+      "text": "Oh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 715,
+      "speaker": "S",
+      "text": "No, I just asked this guy and he said-",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "No, I just have to ."
+    },
+    {
+      "t_seconds": 730,
+      "speaker": "T",
+      "text": "I'll give you a choice, all right? You can pick either Ashley or Nick. Either way, I want- I want them to teach it to you. All right?",
+      "best_pred_overlap": 0.357,
+      "best_pred_text": "You can pick either Ashley or Nick."
+    },
+    {
+      "t_seconds": 747,
+      "speaker": "SN",
+      "text": "Mr. Ormsby, this is like the same thing as I did that one, right? That.",
+      "best_pred_overlap": 0.375,
+      "best_pred_text": "This is the same thing as I did not do before."
+    },
+    {
+      "t_seconds": 780,
+      "speaker": "SN",
+      "text": "Those are the ones that I have trouble with.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "I don't know if these are regular ones."
+    },
+    {
+      "t_seconds": 792,
+      "speaker": "S",
+      "text": "Nah, I could (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 805,
+      "speaker": "T",
+      "text": "Uh huh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 805,
+      "speaker": "S",
+      "text": "You're really slow. For these ones here-",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "No, it's for, for these ones we used."
+    },
+    {
+      "t_seconds": 813,
+      "speaker": "SN",
+      "text": "Uh huh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 833,
+      "speaker": "S",
+      "text": "Uh-",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 867,
+      "speaker": "T",
+      "text": "There I know. Hey two, that's that line. So this is the four line. Put the four right there. Okay? So both of those look excellent.",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "There I know, hey, two, that's that line."
+    },
+    {
+      "t_seconds": 875,
+      "speaker": "SN",
+      "text": "Six minus (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 887,
+      "speaker": "SN",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 898,
+      "speaker": "S",
+      "text": "Oh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 908,
+      "speaker": "SN",
+      "text": "Mr. Ormsby?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 913,
+      "speaker": "S",
+      "text": "We don't get number five.",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Number five. All right. First of all, you know the y-intercept is what? Negative five."
+    },
+    {
+      "t_seconds": 965,
+      "speaker": "S",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1023,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1054,
+      "speaker": "S",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1059,
+      "speaker": "S",
+      "text": "Thirteen.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1067,
+      "speaker": "SN",
+      "text": "(inaudible)",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1120,
+      "speaker": "S",
+      "text": "Uh, Isn't that, uh-",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1178,
+      "speaker": "SN",
+      "text": "Mr. Ormsby?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1183,
+      "speaker": "SN",
+      "text": "Check our answers.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1195,
+      "speaker": "SN",
+      "text": "Oh there it is. I found it. I found it. I- I- now I (inaudible) do.",
+      "best_pred_overlap": 0.2,
+      "best_pred_text": "There's 1, there's 2, there's 3, there's 4, there's 5."
+    },
+    {
+      "t_seconds": 1216,
+      "speaker": "SN",
+      "text": "Yep, that's what we're doing. We're starting (inaudible).",
+      "best_pred_overlap": 0.286,
+      "best_pred_text": "Julie, you're doing a great job, but please listen. Okay?"
+    },
+    {
+      "t_seconds": 1232,
+      "speaker": "SN",
+      "text": "Yep, all (inaudible).",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Yep."
+    },
+    {
+      "t_seconds": 1252,
+      "speaker": "SN",
+      "text": "Could you check ours?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "So please get going. Please make sure I check your first 5 and give you the okay to move on."
+    },
+    {
+      "t_seconds": 1255,
+      "speaker": "S",
+      "text": "Actually, I'm on four.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1256,
+      "speaker": "T",
+      "text": "I'll check yours real quick. Okay. All right, good. You guys numbered them?",
+      "best_pred_overlap": 0.417,
+      "best_pred_text": "I'll check yours real quick."
+    },
+    {
+      "t_seconds": 1262,
+      "speaker": "T",
+      "text": "Okay. There's one, slope. Equation three, two-thirds. Equation five looks good.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Equation 5 looks good."
+    },
+    {
+      "t_seconds": 1271,
+      "speaker": "T",
+      "text": "Okay. Then you've got four and two. It looks perfect so far.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "And you got 4 and 2."
+    },
+    {
+      "t_seconds": 1288,
+      "speaker": "S",
+      "text": "We're on-",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "On the left."
+    },
+    {
+      "t_seconds": 1326,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1329,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1332,
+      "speaker": "S",
+      "text": "Two.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1340,
+      "speaker": "SN",
+      "text": "Can I see this really quick?",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Oh, so you want me to just check 6 real quick, right?"
+    },
+    {
+      "t_seconds": 1342,
+      "speaker": "SN",
+      "text": "Mr. Ormsby?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1345,
+      "speaker": "SN",
+      "text": "Are you sure this is right? Because you're all-",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Alright. Guys?"
+    },
+    {
+      "t_seconds": 1372,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1378,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1387,
+      "speaker": "SN",
+      "text": "I'm helping him.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "I'm good."
+    },
+    {
+      "t_seconds": 1390,
+      "speaker": "SN",
+      "text": "The rest- we're done. We just want you to check.",
+      "best_pred_overlap": 0.167,
+      "best_pred_text": "Brandon? Good. That's what I want to see."
+    },
+    {
+      "t_seconds": 1397,
+      "speaker": "SN",
+      "text": "Okey-dokey.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1401,
+      "speaker": "S",
+      "text": "Okay. And you see the pattern in eight and 10? If I put- how many do you add for 10?",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "How many do you add to 10?"
+    },
+    {
+      "t_seconds": 1402,
+      "speaker": "T",
+      "text": "Okay? Let me start in order here. One looks good. Hold it. Wait a minute. Let me check one again.",
+      "best_pred_overlap": 0.231,
+      "best_pred_text": "1 looks good."
+    },
+    {
+      "t_seconds": 1423,
+      "speaker": "S",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1427,
+      "speaker": "S",
+      "text": "Hold on Brandon.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1434,
+      "speaker": "SN",
+      "text": "Yep, Jessie.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1443,
+      "speaker": "S",
+      "text": "Six. Oh yeah.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Oh, here's your mistake."
+    },
+    {
+      "t_seconds": 1483,
+      "speaker": "T",
+      "text": "You know what? Equation two I don't necessarily like either. Is this supposed to be two?",
+      "best_pred_overlap": 0.3,
+      "best_pred_text": "Negative 10, right? You're not starting at negative 10 here. What's this number? 2, 4. Somehow you're starting at negative 6. So what happened on equation 2, guys?"
+    },
+    {
+      "t_seconds": 1550,
+      "speaker": "SN",
+      "text": "Mr. Ormsby, whoo-hoo.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1559,
+      "speaker": "S",
+      "text": "(inaudible) two lines.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Okay. What are we doing here, guys? Hey, how come none of these lines are labeled?"
+    },
+    {
+      "t_seconds": 1583,
+      "speaker": "S",
+      "text": "Look what you made me do. You probably thought of it wrong.",
+      "best_pred_overlap": 0.167,
+      "best_pred_text": "Wait a minute. I don't like what I see here."
+    },
+    {
+      "t_seconds": 1594,
+      "speaker": "SN",
+      "text": "I don't know.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Aren't all these slopes positive? So all of these should be going up."
+    },
+    {
+      "t_seconds": 1596,
+      "speaker": "SN",
+      "text": "I don't know, it does it.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Aren't all these slopes positive? So all of these should be going up."
+    },
+    {
+      "t_seconds": 1633,
+      "speaker": "SN",
+      "text": "You made me do it (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1634,
+      "speaker": "SN",
+      "text": "Could you check our answers for (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1649,
+      "speaker": "SN",
+      "text": "Uh huh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1657,
+      "speaker": "S",
+      "text": "Uh huh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1672,
+      "speaker": "SN",
+      "text": "All right, I think I did it kinda-",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "All right."
+    },
+    {
+      "t_seconds": 1721,
+      "speaker": "S",
+      "text": "Oh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1797,
+      "speaker": "SN",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1808,
+      "speaker": "SN",
+      "text": "I used twos... (inaudible) threes.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "All right. Now, did you have to go by twos?"
+    },
+    {
+      "t_seconds": 1812,
+      "speaker": "S",
+      "text": "I- I don't- did I?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "All right. Now, did you have to go by twos?"
+    },
+    {
+      "t_seconds": 1831,
+      "speaker": "SN",
+      "text": "Mr. Ormsby? All right, never mind.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "All right, guys. Let's see what we can do here. Okay. Can I interrupt the whole class?"
+    },
+    {
+      "t_seconds": 1894,
+      "speaker": "SN",
+      "text": "Um, (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1959,
+      "speaker": "SN",
+      "text": "(inaudible)",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1963,
+      "speaker": "SN",
+      "text": "We got done and we (inaudible) like- where's the paper at?",
+      "best_pred_overlap": 0.143,
+      "best_pred_text": "Let's focus on this. All right. Ashley?"
+    },
+    {
+      "t_seconds": 1997,
+      "speaker": "SN",
+      "text": "Oh.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 1998,
+      "speaker": "SN",
+      "text": "Wait- No- the fastest-",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "No."
+    },
+    {
+      "t_seconds": 2020,
+      "speaker": "SN",
+      "text": "My stomach's hurting. Can I get a drink of water?",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "My stomach's got the right amount of water."
+    },
+    {
+      "t_seconds": 2029,
+      "speaker": "SN",
+      "text": "Two- 10.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2040,
+      "speaker": "S",
+      "text": "Negative- Oh yeah.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "So, you're going to get negative five because of the negative plus eight. What's negative"
+    },
+    {
+      "t_seconds": 2044,
+      "speaker": "SN",
+      "text": "Wait, is that how you do three?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Three."
+    },
+    {
+      "t_seconds": 2058,
+      "speaker": "S",
+      "text": "I always do my work in my head.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Okay. You didn't know that. You did that in your head, huh?"
+    },
+    {
+      "t_seconds": 2074,
+      "speaker": "SN",
+      "text": "Well, I have to (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2075,
+      "speaker": "T",
+      "text": "I'm coming to-",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2080,
+      "speaker": "SN",
+      "text": "Okay. We're doing fine.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Okay, I just kind of noticed out of the corner of my eye."
+    },
+    {
+      "t_seconds": 2099,
+      "speaker": "SN",
+      "text": "Why did I get it wrong- oh, I didn't write it.",
+      "best_pred_overlap": 0.125,
+      "best_pred_text": "Okay. You are on number ten. You want me to wait until you get number ten done?"
+    },
+    {
+      "t_seconds": 2112,
+      "speaker": "SN",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2126,
+      "speaker": "T",
+      "text": "Yeah, I know. I've been pretty busy. All right, let's start with six through 10.",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "Yeah, I know. I've been pretty busy."
+    },
+    {
+      "t_seconds": 2129,
+      "speaker": "SN",
+      "text": "Well, we're only on eight.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Well, because you've been over there, you know."
+    },
+    {
+      "t_seconds": 2136,
+      "speaker": "T",
+      "text": "All right. So I agree, that's plus 12. Wait a minute, which one are we doing? Number six.",
+      "best_pred_overlap": 0.462,
+      "best_pred_text": "All right. So, I agree. That's plus twelve."
+    },
+    {
+      "t_seconds": 2161,
+      "speaker": "T",
+      "text": "Okay. And number eight, I'm a little concerned. See how it's slanting up? See, eight's a negative one-third.",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "See, eight's a negative one-third."
+    },
+    {
+      "t_seconds": 2169,
+      "speaker": "T",
+      "text": "So are you ready? Well what does plus 12 mean? Up here. So erase number eight. Try number eight again. Okay?",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Well, what does plus twelve mean?"
+    },
+    {
+      "t_seconds": 2180,
+      "speaker": "S",
+      "text": "(inaudible)",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2182,
+      "speaker": "T",
+      "text": "Okay. All right, wait a minute Jessica- All right, let me slow down, then. Because trust me, I'm sick and I'm also tired but we-",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Okay. All right, Jessica."
+    },
+    {
+      "t_seconds": 2206,
+      "speaker": "T",
+      "text": "So three. All right, if I put a three here, DeCarlos, what's one-third of three?",
+      "best_pred_overlap": 0.455,
+      "best_pred_text": "If I put in three here, DeCarlos,"
+    },
+    {
+      "t_seconds": 2214,
+      "speaker": "T",
+      "text": "One, right? So that negative makes it a negative one plus 12, which was a positive- So you had these points exactly right.",
+      "best_pred_overlap": 0.455,
+      "best_pred_text": "So, that negative makes it a negative one plus twelve,"
+    },
+    {
+      "t_seconds": 2223,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2225,
+      "speaker": "SN",
+      "text": "Mr. Ormsby?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2231,
+      "speaker": "T",
+      "text": "Okay. If you don't mind I'll just take a quick glance. Spot-check a few of them because I'd like you to move on to the questions.",
+      "best_pred_overlap": 0.263,
+      "best_pred_text": "I'll just take a quick glance,"
+    },
+    {
+      "t_seconds": 2242,
+      "speaker": "T",
+      "text": "And the ones I'm looking at right now, like for example, this one here this is number seven. That looks good.",
+      "best_pred_overlap": 0.385,
+      "best_pred_text": "And the ones I'm looking at right now,"
+    },
+    {
+      "t_seconds": 2247,
+      "speaker": "T",
+      "text": "Number six, five over three, that looks perfect. Okay. Oh, let me see. You just finished 10, right?",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Let's see. You just finished ten, right?"
+    },
+    {
+      "t_seconds": 2255,
+      "speaker": "SN",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2255,
+      "speaker": "T",
+      "text": "And that one's also perfect. So I can safely say that you guys seem to know what you're doing. So now please answer these questions. All right?",
+      "best_pred_overlap": 0.3,
+      "best_pred_text": "So, I can safely say that you guys seem to know"
+    },
+    {
+      "t_seconds": 2264,
+      "speaker": "SN",
+      "text": "That's a lot of questions.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Let's see. You just finished ten, right?"
+    },
+    {
+      "t_seconds": 2265,
+      "speaker": "T",
+      "text": "For example- Well, just go one by one. You're going to have more time on Monday anyway.",
+      "best_pred_overlap": 0.417,
+      "best_pred_text": "well, just go one by one."
+    },
+    {
+      "t_seconds": 2280,
+      "speaker": "SN",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2282,
+      "speaker": "T",
+      "text": "That's why we always said they had a positive slope because the positive number in front of X, all right? Okay.",
+      "best_pred_overlap": 0.385,
+      "best_pred_text": "Because a positive number in front of x."
+    },
+    {
+      "t_seconds": 2289,
+      "speaker": "T",
+      "text": "All right, ladies and gentlemen. Shh. Listen up.",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "They all went up and to the right."
+    },
+    {
+      "t_seconds": 2308,
+      "speaker": "T",
+      "text": "What I'd like you to do now, whether you're done or not guys, I honestly hope that all of you have learned something today. Okay?",
+      "best_pred_overlap": 0.312,
+      "best_pred_text": "whether you're done or not, guys,"
+    },
+    {
+      "t_seconds": 2338,
+      "speaker": "T",
+      "text": "Or maybe you got better at making tables. On the same piece of paper, yes sir. Any questions on that?",
+      "best_pred_overlap": 0.417,
+      "best_pred_text": "Or maybe you got better at making tables."
+    },
+    {
+      "t_seconds": 2345,
+      "speaker": "T",
+      "text": "All right, quickwrite time guys. Let's get that done.",
+      "best_pred_overlap": 0.444,
+      "best_pred_text": "All right, quick write time, guys."
+    },
+    {
+      "t_seconds": 2354,
+      "speaker": "SN",
+      "text": "Nice drawing.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2364,
+      "speaker": "SN",
+      "text": "(inaudible)",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2366,
+      "speaker": "T",
+      "text": "Okay. But where's your own work, Dell?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "But where's your homework, though?"
+    },
+    {
+      "t_seconds": 2371,
+      "speaker": "S",
+      "text": "(inaudible)",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2379,
+      "speaker": "T",
+      "text": "All right. Now that I'm here, what else could you be doing right now? What did I talk about on the board there?",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "what else could you be doing right now?"
+    },
+    {
+      "t_seconds": 2392,
+      "speaker": "T",
+      "text": "And then I expect better results on Monday. I want you to finish this up on Monday. Fair enough? Okay Jeremy?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "And then I expect better results from you."
+    },
+    {
+      "t_seconds": 2400,
+      "speaker": "SN",
+      "text": "Mr. Ormsby? Number six, it says, what do you notice about the intersection between-",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "what do you know about the intersection between two..."
+    },
+    {
+      "t_seconds": 2411,
+      "speaker": "T",
+      "text": "Show me your equation six. Now, one thing that hopefully you understand is- See a line-",
+      "best_pred_overlap": 0.3,
+      "best_pred_text": "Show me your equation six."
+    },
+    {
+      "t_seconds": 2422,
+      "speaker": "T",
+      "text": "So take your ruler... and let's ext- actually extend this line. Be very careful. Be precise.",
+      "best_pred_overlap": 0.455,
+      "best_pred_text": "And let's actually extend this line."
+    },
+    {
+      "t_seconds": 2440,
+      "speaker": "T",
+      "text": "Good. Good. Good. Good. Now, that's good enough because the idea is, I'm asking about what? The intersection.",
+      "best_pred_overlap": 0.364,
+      "best_pred_text": "Now, that's good enough."
+    },
+    {
+      "t_seconds": 2453,
+      "speaker": "T",
+      "text": "Meet or cross each other, right? Look where these two lines meet or cross. What do you notice about the angles there?",
+      "best_pred_overlap": 0.467,
+      "best_pred_text": "So look where these two lines meet or cross."
+    },
+    {
+      "t_seconds": 2462,
+      "speaker": "T",
+      "text": "Well said. Right? So now in mathematics, this is something I haven't mentioned yet, that's also called perpendicular.",
+      "best_pred_overlap": 0.357,
+      "best_pred_text": "this is something I haven't mentioned yet,"
+    },
+    {
+      "t_seconds": 2471,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2472,
+      "speaker": "T",
+      "text": "So these two lines, therefore you would say are? Perpendicular. They make right angles. Right?",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "So, these two lines, therefore,"
+    },
+    {
+      "t_seconds": 2479,
+      "speaker": "S",
+      "text": "Mm hm.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2481,
+      "speaker": "SN",
+      "text": "My pencil.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2485,
+      "speaker": "SN",
+      "text": "Hi Mr. Ormsby.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2496,
+      "speaker": "SN",
+      "text": "No, because I was doing the graphing and Nathan has all the answers, so I have to write down all the answers.",
+      "best_pred_overlap": 0.444,
+      "best_pred_text": "No, because I was doing the graphing"
+    },
+    {
+      "t_seconds": 2501,
+      "speaker": "T",
+      "text": "Right now I want you to stop what you're doing and let's just say one paragraph now. Just write as much as you can.",
+      "best_pred_overlap": 0.438,
+      "best_pred_text": "Right now, I want you to stop what you're doing"
+    },
+    {
+      "t_seconds": 2512,
+      "speaker": "T",
+      "text": "You didn't learn- you didn't know how- learn how to make tables or understand slope or Y intercept or anything like that? Okay?",
+      "best_pred_overlap": 0.429,
+      "best_pred_text": "You didn't learn anything. You didn't learn how to make"
+    },
+    {
+      "t_seconds": 2534,
+      "speaker": "SN",
+      "text": "I said (inaudible) graph, I'm not gonna do it because I got messed up on the, um-",
+      "best_pred_overlap": 0.091,
+      "best_pred_text": "How come you crumpled it up?"
+    },
+    {
+      "t_seconds": 2538,
+      "speaker": "SN",
+      "text": "On the-",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2540,
+      "speaker": "SN",
+      "text": "Because I messed up.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "How come you crumpled it up?"
+    },
+    {
+      "t_seconds": 2542,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2543,
+      "speaker": "T",
+      "text": "So on Monday you're going to redo it.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "I'm not going to do that."
+    },
+    {
+      "t_seconds": 2549,
+      "speaker": "SN",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2550,
+      "speaker": "SN",
+      "text": "Do it all the way down.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2557,
+      "speaker": "SN",
+      "text": "We're getting our work done here, look.",
+      "best_pred_overlap": 0.143,
+      "best_pred_text": "Make it look professional."
+    },
+    {
+      "t_seconds": 2560,
+      "speaker": "T",
+      "text": "Last time ladies and gentlemen. Five, four, three, two, one, zero.",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Last time, ladies and gentlemen."
+    },
+    {
+      "t_seconds": 2578,
+      "speaker": "T",
+      "text": "And we're actually going to have a little discussion about not just graphing but also what I wanted you to discover about these lines, all right.",
+      "best_pred_overlap": 0.353,
+      "best_pred_text": "and we're actually going to have a little discussion about"
+    },
+    {
+      "t_seconds": 2587,
+      "speaker": "T",
+      "text": "Please make sure you put away all your work. Do not lose any of it.",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "put away all your work."
+    },
+    {
+      "t_seconds": 2593,
+      "speaker": "SN",
+      "text": "Where are we-",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2595,
+      "speaker": "S",
+      "text": "What do we do- What do we do with this?",
+      "best_pred_overlap": 0.2,
+      "best_pred_text": "Do not lose any of it."
+    },
+    {
+      "t_seconds": 2601,
+      "speaker": "SN",
+      "text": "Nope.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2602,
+      "speaker": "SN",
+      "text": "(inaudible) in your backpack.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2604,
+      "speaker": "SN",
+      "text": "What do we do with these?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2608,
+      "speaker": "SN",
+      "text": "Keep it till Monday in your backpack because if I take it, I'm going to lose it.",
+      "best_pred_overlap": 0.2,
+      "best_pred_text": "Keep it until Monday."
+    },
+    {
+      "t_seconds": 2613,
+      "speaker": "SN",
+      "text": "Mr. Ormsby, I'm not going to be here all next weekend.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "You're not even going to be here"
+    },
+    {
+      "t_seconds": 2617,
+      "speaker": "S",
+      "text": "Or all next week, 'cause we're going up to Seattle for um, Thanksgiving.",
+      "best_pred_overlap": 0.2,
+      "best_pred_text": "You're not even going to be here"
+    },
+    {
+      "t_seconds": 2622,
+      "speaker": "S",
+      "text": "And I'm gonna be (inaudible)-",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "You're not even going to be here"
+    },
+    {
+      "t_seconds": 2625,
+      "speaker": "S",
+      "text": "No, 'cause (inaudible).",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2631,
+      "speaker": "SN",
+      "text": "I will- I'll be back um, on the-",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "That'll be fine."
+    },
+    {
+      "t_seconds": 2636,
+      "speaker": "T",
+      "text": "Leave that on the desk. That will be fine. Okay, hurry up and go guys. Have a good weekend.",
+      "best_pred_overlap": 0.455,
+      "best_pred_text": "Okay, hurry up and go guys."
+    },
+    {
+      "t_seconds": 2642,
+      "speaker": "SN",
+      "text": "Wait, Mr. Ormsby. I'm taking off.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "Wait, Mr. R-E-E-R."
+    },
+    {
+      "t_seconds": 2649,
+      "speaker": "SN",
+      "text": "No.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 2651,
+      "speaker": "SN",
+      "text": "I had a blast.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Have a good weekend."
+    }
+  ],
+  "projection_warnings": []
+}

@@ -1,0 +1,22 @@
+# Speaker projection for Whisper+pyannote output.
+# pyannote produces anonymous SPEAKER_00 / SPEAKER_01 labels.
+# Best-case assumption: the dominant speaker is the teacher and everyone
+# else is lumped into a single "student" bucket (which is all pyannote can
+# distinguish without manual post-labeling).
+
+strip_patterns:
+  - '\*LOW CONFIDENCE[^*]*\*'
+  - '\*Speaker:[^*]*\*'
+  - '🚨|⚠️|✅'
+  - '\[[^\]]*\]'
+
+normalize:
+  '(inaudible)': '[inaudible]'
+
+speaker_map:
+  - pattern: '^SPEAKER_00$'   # most words spoken = likely teacher
+    label: T
+  - pattern: '^SPEAKER_\d+$'  # any other pyannote cluster = student bucket
+    label: S
+  - pattern: '^UNK$'
+    label: T                  # whisper lines that predate diarization overlap — default to T

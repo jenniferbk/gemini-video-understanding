@@ -1,0 +1,1509 @@
+================================================================================
+COMPLETE TRANSCRIPT - V10
+================================================================================
+Video: US1.mp4
+Generated: 2026-04-07 17:55:24
+Model: gemini-3-flash-preview
+Media Resolution: HIGH
+Chunk Duration: 60s, Overlap: 15s
+Speakers: T, S, SN, SS, BS
+================================================================================
+
+--- CHUNK 1 (00:00 - 01:00) ---
+00:00 [Students are seated at their desks in groups. T is at the back of the room.]
+00:06 T: Okay guys, let's get started here.
+00:09 T: Okay, listen closely.
+00:11 T: To save a little time, I won't bring out my overhead like you're usually accustomed to.
+00:16 T: Okay?
+00:17 T: Instead, let me just tell you. What I'm going to give you for each group is a little three-page packet. Okay?
+00:26 T: What I need for you to do right now is everyone of you get out a blank sheet of paper. Everyone of you needs a blank sheet of paper.
+00:33 [S-BlackShirt walks around the room handing out large sheets of white paper to each group.]
+00:34 SN: Thank you.
+00:40 [Close-up of a worksheet on a desk titled "ALGEBRA". It lists five linear equations: 1) y = 2/3x + 8, 2) y = -2/3x - 10, 3) y = 3x + 7, 4) y = -1/4x - 9, 5) y = x - 5. Instructions read: "Using a pencil and the large piece of graph paper, graph the following linear equations. After these 5 equations are graphed, check with me before continuing."]
+00:41 T: Just put it right on the table back there.
+00:43 SN: Thank you.
+00:45 [Students are opening binders and getting out paper and pencils. S-RedShirt is looking through a binder.]
+00:52 [T walks between desks, handing out the three-page packets to groups.]
+00:57 T: Thank you sir. Don't leave without it, alright?
+00:59 [inaudible conversation, ~1s]
+
+--- CHUNK 2 (00:45 - 01:45) ---
+01:00 [T walks past S-RedShirt and S-WhiteShirt towards the front of the room.]
+01:03 T: Okay. Now.
+01:04 [T walks to the back of the room and then turns back toward the front-right group.]
+01:12 T: All right.
+01:14 T: Okay.
+01:15 T: So, listen closely now. Everybody ready?
+01:15 [T stands in front of the group consisting of S-RedShirt, S-WhiteShirt, S-Floral, and S-Glasses.]
+01:20 S-WhiteShirt: Yep.
+01:21 T: Okay everybody within your group of four or three, you need to work together.
+01:26 [T gestures with his hands while talking to the group.]
+01:27 T: I know normally we work in pairs. Okay?
+01:30 T: But I figured today you have another pair of students, you know, a couple extra brains there to help you get through this little lesson. Okay?
+01:40 T: We've done this plenty times before.
+01:43 T: Some of you honestly are still a little shaky. So...
+
+--- CHUNK 3 (01:30 - 02:30) ---
+01:49 T: If you look at the packet, which you're all sharing as a group,
+01:49 [T stands in front of the group consisting of S-RedShirt, S-WhiteShirt, S-Floral, and S-Glasses.]
+01:54 T: page one has five equations. I want you to graph.
+01:54 [T gestures with his hands while explaining the graphing task.]
+01:58 T: Now you can graph it any way that you know how to do it, as long as you do it correctly.
+02:04 T: Can someone raise their hand and tell me what's one obvious thing I could do to graph? Nick.
+02:04 [T looks around the room and points to a student off-camera.]
+02:08 [T points towards S-Afro.]
+02:08 [Camera pans left to show S-Afro in a black hoodie.]
+02:09 S-Afro: Slope.
+02:10 T: Use the slope with the...
+02:11 S-Afro: Y-intercept.
+02:12 T: Y-intercept, right. That's probably the way you'll probably want to do it, right Nick?
+02:15 S-Afro: Yeah.
+02:16 T: Is there another way though? Robert.
+02:18 [Camera pans further left to show S-BoyBlonde in a black t-shirt.]
+02:19 S-BoyBlonde: Use the um, tables.
+02:21 T: Right. To make a table for the equation, right? And then plot the points from the table.
+02:25 T: Everyone got that? So those are the two main ways, right? We can graph those equations.
+02:25 [Camera pans back to the center of the room.]
+02:29 T: So right now I need you to get started. The key thing is when you're done with the first five...
+
+--- CHUNK 4 (02:15 - 03:15) ---
+02:30 [T stands by a group of four students, gesturing with a pen in his right hand.]
+02:30 T: ...that first page, as noted on your paper, please make sure I check to ensure everyone did it right before moving on.
+02:39 T: Okay? So go ahead and get started.
+02:40 [Instructor turns and begins walking towards back of this classroom.]
+02:42 [S-GirlPonytail raises her hand as Teacher walks past her desk.]
+02:43 [Teacher approaches a group of students including S-Afro and S-BoyUSA.]
+02:44 T: Yeah, y'all are going to graph on that. That is your result for this group.
+02:48 S-BoyUSA: Everybody must do a graph?
+02:49 T: Right. So someone here can assign themselves as a grapher or whatever. Others kind of work together to make sure it's accurate.
+02:58 T: Going to do it? Good job, Nick.
+03:00 [S-Afro starts looking through papers on his desk.]
+03:02 [Instructor moves to another table where S-BoyWhite and S-BoyBlondeSpiky are sitting.]
+03:04 T: Alright, this grid paper...
+03:06 T: Alright, know what? Hey, listen up real quick. Five, four, three, two, one, zero.
+03:10 [Students stop talking and look towards their teacher.]
+03:11 T: I probably forgot because I'm still a little nervous, okay? But that grid paper...
+
+--- CHUNK 5 (03:00 - 04:00) ---
+03:15 T: ...but the grid paper, you have one per group, right?
+03:22 T: So I'm relying on one of you in that group to be the designated grapher for the group.
+03:28 T: But the rest of you, please help out, you know, help each other get the graphs done correctly, okay?
+03:37 [T walks to a table where S-BoyWhite, S-BoyBlondeSpiky, and S-BoyBrownHair are sitting.]
+03:38 T: There you go, Robert.
+03:39 T: So while he's doing that, let's get started on this, guys.
+03:41 [T points to a worksheet on the desk.]
+03:41 T: What are we going to do?
+03:42 S-BoyBlondeSpiky: Do we write this on our piece of paper too?
+03:43 T: Yeah.
+03:44 S-BoyBlondeSpiky: Oh.
+03:44 [S-BoyWhite begins writing on a sheet of paper.]
+03:45 [S-BoyBlondeSpiky picks up a wooden ruler.]
+03:46 T: This is actually... use the ruler. Use the ruler, man. Make it neat, alright?
+03:50 [T leans over the table, looking at S-BoyBlondeSpiky's work.]
+03:51 S-BoyBlondeSpiky: So we do...?
+03:52 S-BoyWhite: When you put like a one in here, would you go like times...?
+03:56 T: Ah, see, so now you've already forgotten, right?
+03:58 [Close-up of a worksheet with five linear equations: 1) y = 2/3x + 8, 2) y = 3/5x - 10, 3) y = 3x + 7, 4) y = 1/4x - 9, 5) y = x - 5.]
+03:59 T: First of all, zero's our favorite number, right?
+04:01 [T points to the "x" in the first equation on the worksheet.]
+04:02 T: You put in zero, two-thirds times...
+
+--- CHUNK 6 (03:45 - 04:45) ---
+04:00 [T points to the "x" in the first equation on the worksheet: y = 2/3x + 8]
+04:01 T: ...zero's what?
+04:01 S-BoyBlondeSpiky: Zero.
+04:02 T: Plus eight is eight.
+04:03 [T points to the fraction "2/3" in the first equation on the worksheet]
+04:04 T: Now because this fraction is a two-thirds...
+04:06 [T looks at S-BoyBlondeSpiky]
+04:07 T: Do you remember what I told you what numbers you should pick now?
+04:10 S-BoyBlondeSpiky: Um, three?
+04:12 T: Right!
+04:13 [T gestures with his hand while talking to the group]
+04:13 T: So maybe zero, three, and six would be good numbers to try with this one, right?
+04:17 T: That way you don't have to worry about fractions or mixed numbers.
+04:20 T: Okay?
+04:21 S-BoyBlondeSpiky: Okay.
+04:22 [T stands up and walks across the classroom to another table]
+04:25 S-GirlStriped: Mister, I forgot how to do this again.
+04:27 [T leans over the table where S-GirlStriped and S-GirlRed are sitting]
+04:28 S-GirlStriped: Like, how do you do X and Y?
+04:29 T: Okay, so now wait a minute. You want to make a table then, right?
+04:32 T: So you're going to make an XY table.
+04:33 [S-GirlStriped begins drawing a T-chart on her paper]
+04:35 [Close-up of S-GirlStriped's hand drawing the table and writing "X" and "Y" at the top of the columns]
+04:38 T: The idea again is to make our points.
+04:39 [Close-up of the worksheet with equations: 1) y = 2/3x + 8, 2) y = 3/5x - 10, 3) y = 3x + 7, 4) y = 1/4x - 9, 5) y = x - 5]
+04:40 [T's finger points to the "x" in the first equation]
+04:41 T: We just pick any number we want for X.
+04:43 T: We can do that, right?
+04:44 T: Everybody agree? Jenna?
+04:45 S-GirlStriped: Yes.
+
+--- CHUNK 7 (04:30 - 05:30) ---
+04:45 [T points to the equation "y = 2/3x + 8" on the worksheet]
+04:48 S-GirlStriped: So zero, one, two, and three?
+04:49 T: Ah, that's true, except...
+04:51 [T points to the fraction "2/3" in the equation]
+04:52 T: ...because this is a two-thirds fraction...
+04:54 S-GirlStriped: You want to pick threes?
+04:55 T: Exactly.
+04:56 S-GirlStriped: Like negative three, zero, and three?
+04:58 T: Right. And if you want to just do zero, three, six and stay away from negatives, you can do that too.
+05:04 T: All right?
+05:05 S-GirlStriped: So zero, three, six.
+05:08 T: Right.
+05:10 T: And you think you can do it on your own now?
+05:12 [S-GirlStriped continues writing in her notebook]
+05:14 T: You just want to be on the camera.
+05:15 S-GirlStriped: No, that's not true.
+05:16 T: Okay.
+05:17 [T points to the first row of the table S-GirlStriped is writing]
+05:18 T: We're going to put in zero here, right?
+05:19 S-GirlStriped: Okay.
+05:20 T: What's two-thirds times zero?
+05:21 S-GirlStriped: Zero.
+05:22 T: Everybody watching, right?
+05:23 [S-GirlRed and S-GirlFloral look at the worksheet]
+05:24 T: Plus eight is...
+05:25 SS: Eight.
+05:26 S-GirlStriped: So three times two is six...
+05:28 [T points to the "x" in the equation "y = 2/3x + 8"]
+05:29 T: ...divided by three is two...
+05:30 S-GirlStriped: Plus eight is ten.
+
+--- CHUNK 8 (05:15 - 06:15) ---
+05:30 S-GirlStriped: Okay, I get it. Thank you Mr. [inaudible].
+05:31 T: Okay.
+05:32 [T stands up from the first group's table and moves to the next table]
+05:33 T: Good job.
+05:34 S-GirlStriped: So six times...
+05:35 [T arrives at a table with four students: S-GirlBlackTop, S-BoyBlonde, S-GirlGlasses, and S-GirlBlonde]
+05:36 [S-GirlGlasses points to her notebook as T leans over the table]
+05:37 S-GirlGlasses: Alright, so, okay, this is what I did. Alright, I put negative three, zero, three, and six.
+05:40 T: How come you have your table backwards? I've never done that before.
+05:42 S-GirlGlasses: [laughs] Why'd I do that?
+05:44 T: Okay.
+05:45 S-GirlGlasses: But it's easier.
+05:46 T: Alright, if you say so.
+05:47 S-GirlGlasses: Anyways, I put negative three, so...
+05:49 [S-GirlBlackTop writes on her paper with a ruler nearby]
+05:50 S-GirlGlasses: ...I put two-thirds times negative three.
+05:53 T: Yeah, negative three goes in the top, right?
+05:54 S-GirlGlasses: Right.
+05:55 T: Well, you... negative three, remember, is negative three over one. There you go.
+05:59 S-GirlGlasses: So it's a one and a one, but that's a negative still, right?
+06:02 T: Right, that's still a negative there.
+06:03 S-GirlGlasses: So it's negative two plus eight is...
+06:06 T: Six.
+06:07 S-GirlGlasses: Six. Yeah.
+06:08 S-GirlGlasses: See?
+06:09 [Camera zooms in on S-GirlGlasses' notebook showing her table of values for y = 2/3x + 8]
+06:10 T: So negative three is six, zero is eight. Now, three I question though
+
+--- CHUNK 9 (06:00 - 07:00) ---
+06:15 T: Try positive three.
+06:16 [S-GirlGlasses writes in her notebook]
+06:17 S-GirlGlasses: Positive, so... two-thirds...
+06:21 S-GirlGlasses: So, three, one...
+06:23 T: Okay.
+06:24 S-GirlGlasses: One, one. And then three, eight... number two... eleven.
+06:27 T: Wait a minute, wait a minute.
+06:28 [T points to the notebook where S-GirlGlasses is working on a table of values for y = 2/3x + 8]
+06:29 T: Two and...
+06:30 S-GirlGlasses: Two plus... wait a minute, no, you're timesing it.
+06:32 S-GirlGlasses: Oh! Two, so... it's ten.
+06:34 T: It's ten.
+06:35 [S-GirlGlasses writes 10 in her y-column for x=3]
+06:36 T: And then six is twelve.
+06:38 S-GirlGlasses: Okay.
+06:39 T: All right. Yes.
+06:40 [T walks over to another table where a boy in a black shirt and S-GirlBlueShirt are sitting]
+06:41 S-GirlBlueShirt: All right, I just totally forgot how to...
+06:44 T: Okay, now what I liked is you at least remembered to use multiples. Like this one, let's try this one right here, right?
+06:50 [T points to S-GirlBlueShirt's notebook showing "2. y = 3/5x - 10" and a table with x values 0, 5, 10]
+06:52 T: You remembered to use fives. Well, let's try zero. If I put in zero there, what's three-fifths times zero?
+06:57 S-GirlBlueShirt: Um... zero?
+06:58 T: Right. Minus ten?
+06:59 S-GirlBlueShirt: Is negative ten.
+07:00 T: So put in negative ten.
+07:01 [S-GirlBlueShirt writes -10 in her table]
+
+--- CHUNK 10 (06:45 - 07:45) ---
+07:00 T: So now you're going to try five in there, right?
+07:03 [T points to the 5 in the x column of the table on S-GirlBlueShirt's paper]
+07:04 T: So just write a little 5 there so you can mentally see it.
+07:06 [S-GirlBlueShirt writes a small 5 above the x in the equation y = 3/5x - 10]
+07:07 T: So if I do three times 5, that's...
+07:09 S-GirlBlueShirt: 15.
+07:10 T: Now remember I'm gonna divide by the 5, which gives me...
+07:12 S-GirlBlueShirt: 3.
+07:13 T: Minus 10.
+07:14 S-GirlBlueShirt: Negative 7.
+07:15 T: Good job.
+07:16 [S-GirlBlueShirt writes -7 in the y column next to the 5]
+07:17 T: I think you got it now. Right? Finish it up.
+07:20 S-GirlBlueShirt: Okay.
+07:21 [T stands up and moves away from the table]
+07:22 [S-GirlBlueShirt continues working on the next row of the table, x=10]
+07:23 [T walks over to a nearby table where three boys are sitting]
+07:24 S-BoyGreySweater: How many points do you want us to plot? [student]
+07:26 T: Just 3.
+07:27 T: Well, that's a very good question. Obviously, how many points do I really need to make a line?
+07:30 S-BoyBlueHoodie: 2. [student]
+07:31 T: 2. Right?
+07:32 T: But just to make sure, plot at least 3 points.
+07:36 T: That way if they're all in a line, you know you did it right. Okay?
+07:39 S-BoyGreySweater: Okay.
+07:40 [T pats S-BoyBlackTee on the shoulder and walks away]
+07:41 [T moves to the back of the classroom, checking on other students]
+07:45 [inaudible conversation, ~4s]
+
+--- CHUNK 11 (07:30 - 08:30) ---
+07:45 [T walks to a table at the back of the room where four students are working]
+07:47 T: Use the whole paper, man.
+07:48 [T leans over the desk of S-BoyRedHoodie and points to a small coordinate plane drawn on a piece of paper]
+07:49 T: Look at these big grid lines here.
+07:51 T: Every one, make it count one. Okay?
+07:53 [S-BoyRedHoodie points to the paper while looking up at T]
+07:54 S-BoyRedHoodie: And we have to graph every single one?
+07:56 T: Yeah, you gotta graph these five, that's why I want you to use the whole paper, make a big coordinate system.
+08:00 S-BoyRedHoodie: Oh, okay.
+08:01 [T picks up the student's paper and starts handing out fresh sheets of graph paper to the group]
+08:02 T: As a matter of fact, let me give you a fresh one to save you some time.
+08:05 [S-BoyGreyShirt and S-BoyRedTee take new sheets of paper]
+08:10 S-BoyRedTee: Make one big, um...
+08:12 T: Got it.
+08:13 S-BoyRedTee: Square?
+08:14 T: Yeah. So start over again.
+08:15 [T places a new sheet in front of S-BoyRedTee and points to the center]
+08:16 T: Use the whole coordinate system. That way all the lines are nicely spaced out and everything.
+08:19 [S-BoyStripedShirt and S-BoyRedTee use rulers to draw axes on their new papers]
+08:20 T: Right?
+08:21 S-BoyStripedShirt: I know how to do these.
+08:23 T: Alright. Well, how you want to graph it?
+08:25 [T leans over between S-BoyStripedShirt and S-BoyGreyShirt, looking at their textbooks]
+08:26 T: Using a X-Y table? Or do you want to learn how to use slope and Y-intercept?
+08:30 [S-BoyStripedShirt points to a table in his book]
+
+--- CHUNK 12 (08:15 - 09:15) ---
+08:30 S-BoyStripedShirt: X-Y table.
+08:31 T: Okay. So you want to make a X-Y table.
+08:33 [T points to S-BoyStripedShirt's paper]
+08:34 T: You agree, Benjamin?
+08:35 [S-BoyStripedShirt starts writing on his paper]
+08:36 T: Alright.
+08:38 T: So if you work with Chris side-by-side, then you can compare answers, right?
+08:43 T: Don't just rely on Chris here.
+08:45 T: Alright now, Chris, the idea is I want to plug in any values I really want for X and figure out my corresponding Y, okay?
+08:52 [T points to S-BoyGreyShirt's paper]
+08:53 T: But because this fraction is a two-thirds, what number should I possibly use that would make it easier for me?
+08:56 [T points to the equation y = 2/3x + 1 in the textbook]
+09:00 S-BoyGreyShirt: Three?
+09:01 T: Numbers based on three. So like maybe negative three, zero, three, six, or zero, three, six would be good enough, right?
+09:09 [S-BoyGreyShirt nods and continues writing]
+09:10 T: That way you can get that graph down.
+09:13 T: Okay?
+09:14 [S-BoyGreyShirt and S-BoyStripedShirt write in their notebooks]
+
+--- CHUNK 13 (09:00 - 10:00) ---
+09:15 [S-BoyGreyShirt writes in his notebook while T watches. S-BoyStripedShirt also writes.]
+09:18 T: So, you need my help? You want to try it on your own first?
+09:20 [Close-up of S-BoyGreyShirt's notebook. He has written "y = 2/3x + 8" and a T-chart for x and y. He writes "0" under x.]
+09:21 T: All right, you ready?
+09:25 T: If you want, we don't have to do the negative.
+09:28 T: You want to do the negative?
+09:29 S-BoyGreyShirt: Yeah.
+09:30 T: Okay, here we go.
+09:31 [T leans over S-BoyStripedShirt's desk and points to his paper.]
+09:32 T: Put a little negative three above there.
+09:34 [S-BoyStripedShirt writes "-3" in the x column of his table.]
+09:36 T: Now you know I'm going to do two times negative three is...
+09:39 S-BoyStripedShirt: Negative six.
+09:40 T: Divide by three is...
+09:42 S-BoyStripedShirt: Negative two.
+09:43 T: Good. Plus eight...
+09:45 S-BoyStripedShirt: Positive six.
+09:46 T: Positive six.
+09:47 [S-BoyStripedShirt writes "6" in the y column next to -3.]
+09:49 T: All right. Now you're going to put in the zero and do the same thing, right?
+09:51 [Close-up of S-BoyStripedShirt's paper. He has "y = 2/3x + 8" written at the top. He writes "0" in the x column.]
+09:59 [T moves to the next desk where S-BoyRedHoodie is sitting.]
+
+--- CHUNK 14 (09:45 - 10:45) ---
+10:00 [T stands between S-BoyStripedShirt and S-BoyGreyShirt, looking at S-BoyStripedShirt's work]
+10:02 [T moves to the adjacent desk where S-BoyRedHoodie is working]
+10:03 T: There you go. See, with zero, you don't even have to bother putting it, right? You already automatically know that that's your y-intercept.
+10:07 [T points to a point on the y-axis of the coordinate plane S-BoyRedHoodie is drawing]
+10:09 T: All right, try three. Now just make that a positive three. Good. You got it. You got it.
+10:14 [Close-up of S-BoyRedHoodie using a blue pen to mark points on a hand-drawn grid]
+10:16 T: Then see what Chris did there. All right?
+10:17 [T points back towards S-BoyStripedShirt's desk]
+10:19 [T stands up and scans the room, then walks toward a group of three students in the corner]
+10:23 [T leans over the table where S-BoyTanShirt, S-BoyGreenShirt, and S-BoyBlueYellowShirt are sitting]
+10:24 T: All right, sir, looks like you're being left out here, aren't you?
+10:26 S-BoyTanShirt: No.
+10:27 T: Okay, you understand what they're doing?
+10:29 S-BoyBlueYellowShirt: We're using slope.
+10:31 T: Okay. So, all right, let- let me test you here. Let's try number four, right?
+10:36 S-BoyBlueYellowShirt: Okay, number four.
+10:37 T: Oh, by the way, guys, I like how you labeled it like that. Excellent job.
+10:39 [T points to S-BoyGreenShirt's paper which has a graph and equations written on it]
+10:41 [Close-up of S-BoyGreenShirt's paper showing a line graphed on a grid with the equation "y = 2/3x - 10" and "m = 2/3" written next to it]
+10:45 T: x minus nine, right?
+
+--- CHUNK 15 (10:30 - 11:30) ---
+10:45 T: So tell me how you would graph that.
+10:46 [T points to equation #4 on the worksheet: "y = 1/4x - 9"]
+10:47 S-BoyGreyShirt: I would...
+10:48 [S-BoyGreyShirt pulls the worksheet closer to look at it]
+10:50 [S-BoyBlueYellowShirt is writing on a coordinate grid in his binder]
+10:51 S-BoyBlueYellowShirt: I'll go...
+10:53 S-BoyBlueYellowShirt: negative nine.
+10:55 [S-BoyGreyShirt points his pencil at the origin on his graph paper and starts counting squares to the left along the x-axis]
+10:56 S-BoyGreyShirt: One, two, three...
+10:58 T: Now that's negative nine for x.
+11:01 S-BoyGreyShirt: Mm-hm.
+11:02 S-BoyGreyShirt: [inaudible]
+11:03 T: That negative nine really is my y-intercept.
+11:07 S-BoyGreyShirt: Oh.
+11:08 S-BoyGreyShirt: Go down...
+11:09 [S-BoyGreyShirt moves his pencil to the origin and counts squares down the y-axis]
+11:10 S-BoyGreyShirt: one, two, three, four, five, six, seven, eight, nine.
+11:14 T: Oh, we only want to go nine. There you go.
+11:17 [S-BoyGreyShirt marks a point on the y-axis at -9]
+11:18 T: Hey, you guys taught him pretty well then, huh?
+11:21 [T looks at the other students at the table]
+11:22 T: And now my slope is one-fourth.
+11:24 S-BoyGreyShirt: Mm-hm.
+11:25 T: So that means...
+11:26 [S-BoyGreyShirt moves his pencil up one square from the y-intercept and then counts squares to the right]
+11:27 S-BoyGreyShirt: One, two, three...
+
+--- CHUNK 16 (11:15 - 12:15) ---
+11:30 [S-BoyGreyShirt continues counting squares on his graph paper]
+11:31 S-BoyGreyShirt: ...four.
+11:32 [S-BoyGreyShirt marks a second point on the graph]
+11:33 T: Good job.
+11:34 [T pats S-BoyGreyShirt on the shoulder and starts to walk away]
+11:35 [S-BoyGreyShirt picks up a ruler to connect the points]
+11:36 T: Good job.
+11:37 [T walks towards the back of the classroom, passing other student groups]
+11:40 [inaudible conversation, ~5s]
+11:45 [T approaches a table where S-GirlBlueShirt has her hand raised]
+11:46 T: What's your question, Brandon?
+11:47 [T leans over the table, looking at the work of S-BoyBlackShirt]
+11:49 S-BoyBlackShirt: I don't get it.
+11:50 T: What about your partner here? She's doing an excellent job here.
+11:52 [T points towards S-GirlBlueShirt's paper]
+11:54 S-BoyBlackShirt: Oh.
+11:55 T: What, are you shy or something?
+11:56 S-BoyBlackShirt: No, I just asked this guy and he said...
+11:57 [S-BoyBlackShirt points towards S-BoyMaroonVest]
+11:58 S-BoyMaroonVest: I'm trying to do it too. I'm trying to figure this one out.
+12:00 S-BoyRedShirt: Yeah, how do you do this?
+12:01 [S-BoyRedShirt points at his paper with a pencil]
+12:03 T: Okay, let me go to this other group, guys.
+12:05 [T turns back to the group and sits down on the edge of the table]
+12:06 T: Brandon. Brandon.
+12:08 T: Do me a favor. All right?
+12:11 T: I'll give you a choice. All right?
+12:13 T: You can pick either Ashley or Nick.
+12:15 T: Either way...
+
+--- CHUNK 17 (12:00 - 13:00) ---
+12:15 T: I want them to teach it to you.
+12:17 [T gestures with both hands towards S-GirlBlue and S-BoyMaroon]
+12:22 T: All right? It's called teamwork here. Okay?
+12:27 T: And if they can't do it, I'll be back in a few minutes to help you.
+12:30 [T points at S-BoyBlack]
+12:31 T: All right?
+12:33 [T leans in and points to a paper in the middle of the table]
+12:34 T: Let's take a look here.
+12:35 [Camera zooms in on a sheet of lined paper with handwritten math equations and x/y tables]
+12:36 SN: [inaudible] fractions.
+12:38 T: I mean, a lot of these tables look great.
+12:39 [T's finger points to the tables on the paper]
+12:40 T: Now let's get them plotted here and we can see what it comes out to be.
+12:44 [Camera zooms out to show the group again]
+12:44 S-BoyMaroon: So after we wrote them all down, we plot them on here?
+12:45 [S-BoyMaroon points to a large sheet of graph paper in front of him]
+12:46 T: Right.
+12:47 S-BoyMaroon: Every single one?
+12:48 T: Right.
+12:49 T: And then you're going to label them.
+12:50 [T points to the graph paper]
+12:51 T: Now, if you don't mind, since this is equation one, just put a little one at the end of it,
+12:54 [T points to the first equation on the list]
+12:55 T: and the equation two, put a two at the end of it, okay?
+12:58 T: Brandon, you had a comment, question?
+12:59 [T looks at S-BoyBlack]
+13:00 S-BoyBlack: I know how to do the regular ones, I don't know how to do the ones with fractions.
+
+--- CHUNK 18 (12:45 - 13:45) ---
+13:00 [S-BoyBlack points to a list of equations on a piece of paper]
+13:00 S-BoyBlack: [inaudible] ones with fractions.
+13:01 S-GirlBlue: Those are the ones I have trouble with too.
+13:03 T: Well, have you seen when Mr. Armstrong's doing it?
+13:05 S-BoyBlack: [inaudible]
+13:06 T: Alright.
+13:07 [T stands up and looks at the group]
+13:08 T: Well, maybe you ought to go to Nick. Sounds like Nick knows what he's doing.
+13:10 S-BoyBlack: I know, but I have trouble.
+13:12 T: Okay, then maybe we ought to go to Ashley.
+13:13 S-BoyMaroon: I have trouble.
+13:14 [S-BoyRed is writing on his paper]
+13:16 S-BoyMaroon: So you want me to put...
+13:17 T: Okay. What have we got going on here?
+13:18 [T walks over to the next table]
+13:20 [T leans over the table with S-BoyAfro, S-BoyFlag, S-GirlWhite, and S-GirlBlack]
+13:21 T: So? What have we got?
+13:22 S-BoyAfro: We're done with all this, so we were going to call you, but you were talking to them.
+13:24 T: Oh, excuse me or something?
+13:26 S-BoyAfro: No, it's okay.
+13:27 T: You're such a character, Nick.
+13:29 S-BoyAfro: For these, for the fractions we did this stuff and then we made the tables and we got it.
+13:32 [S-BoyAfro points to his clipboard which contains a list of equations and several x-y tables]
+13:33 T: And everybody here agrees, right?
+13:35 [T looks at the other students at the table]
+13:36 S-GirlWhite: Yeah.
+13:37 T: All right. So let me just check them real quick.
+13:38 [T leans in closer to look at the work]
+13:39 [Close-up of graph paper showing several intersecting lines. T's finger points to a line labeled with a circled '1' at its end]
+13:39 T: I like how you numbered them one and so on.
+13:42 [T's finger moves to another line on the graph that has a staircase-like slope pattern drawn above it]
+13:43 T: This one you didn't number. What number is that one?
+13:44 S-BoyFlag: I think that was five.
+13:45 T: That was five.
+
+--- CHUNK 19 (13:30 - 14:30) ---
+13:45 T: That one's correct. So put a five there.
+13:48 [S-BoyAfro writes a circled '5' next to a line on the graph paper]
+13:50 T: Okay. I can safely assume that this one must be the four, right?
+13:53 [T points to a segment on the graph]
+13:54 S-BoyAfro: Uh...
+13:55 T: Or is this one the four? Which one's the four?
+13:57 [S-BoyAfro indicates a different path]
+13:58 S-BoyAfro: This one's two.
+14:00 T: Which one's two?
+14:01 S-BoyAfro: Four is negative nine, up one over four. So yeah, this is four.
+14:04 [S-BoyAfro traces a slope on the graph with his finger]
+14:06 T: Are you sure about that?
+14:07 [Close-up of a worksheet titled "ALGEBRA" with five linear equations listed: 1) y = 2/3x + 8, 2) y = 3/5x - 10, 3) y = 3x + 7, 4) y = 1/4x - 9, 5) y = x - 5]
+14:08 T: Because this one...
+14:09 [T's finger counts grid squares along a line on the graph paper]
+14:10 T: ...one, two, three, four, five, six, seven, eight, nine.
+14:13 S-BoyAfro: Oh no, this is two.
+14:14 T: Ah, right.
+14:16 T: So do me a favor, erase the two, okay?
+14:18 [S-BoyAfro uses the eraser on his pencil to remove a number from the graph]
+14:20 T: And label them right near the ends of the segments. How's that?
+14:24 [T gestures toward a cluster of lines and labels in the middle of the graph]
+14:25 T: Because right there, I can't tell which one you're talking about, correct?
+14:28 S-BoyAfro: Right.
+14:29 T: There, I know, hey, two, that's that one.
+14:30 [T points to the end of a segment where a new label is being placed]
+
+--- CHUNK 20 (14:15 - 15:15) ---
+14:30 [T points to a line on the graph paper on the desk]
+14:30 T: So this is the four line. Put the four right there.
+14:32 [S-BoyAfro writes a "4" near the end of the line T pointed to]
+14:33 T: Okay. So both of those look excellent.
+14:36 T: Slope of three-fifths...
+14:37 [T points to a different line on the graph]
+14:38 T: ...and number four, slope of one-fourth. That's good.
+14:41 T: Number one, slope of two-thirds, starting at eight.
+14:44 [T points to the y-intercept of a line]
+14:45 T: And this one is seven, right?
+14:48 T: Uh-oh. I don't like equation three.
+14:51 [T points to a line that is sloping downwards]
+14:52 T: Because look, it's going down.
+14:54 [Camera zooms in on the graph paper and a worksheet with equations]
+14:55 T: That's a positive 3x.
+14:56 [T points to equation #3 on the worksheet: "y = 3x + 7"]
+14:58 S-GirlPonytail: It should be going up.
+14:59 T: It should be going up.
+15:00 [T traces an upward path with his finger on the graph]
+15:01 T: It should be angling up. So correct number three, and then you guys, as soon as you get that corrected, just move on. I'll check that one later, okay?
+15:06 [T stands up and begins walking away from the table]
+15:07 S-BoyAfro: Okay.
+15:08 [T walks past other student desks in the classroom]
+15:10 [A student in the background raises their hand]
+15:12 T: Here we go.
+15:13 [T approaches a student at a different table]
+15:14 T: Yeah.
+
+--- CHUNK 21 (15:00 - 16:00) ---
+15:15 [T walks through the classroom towards a group of students at a back table]
+15:18 T: Number five.
+15:19 [T leans over the desk of S-BoyGrey, pointing at his paper]
+15:20 T: All right, first of all, you know the y-intercept is what?
+15:22 S-BoyGrey: Negative five.
+15:23 T: Right? So put a dot on negative five.
+15:25 [S-BoyGrey uses his pencil to count down the vertical axis on his graph paper]
+15:26 S-BoyGrey: One, two, three, four, five.
+15:28 [Close-up of S-BoyGrey's hand drawing a point on the y-axis at -5]
+15:29 T: Good. We all agree on that?
+15:30 SS: Yes.
+15:32 T: Now, see this is something so simple but very important. See, in algebra we get lazy sometimes, right?
+15:37 [T points to the equation "y = x - 5" on S-BoyGrey's paper]
+15:38 T: Guess what number's in front of that x?
+15:41 S-BoyGrey: A one.
+15:42 T: A one. Right, Robert?
+15:44 T: So therefore, put a one there.
+15:46 [S-BoyGrey writes a "1" in front of the "x" in his equation]
+15:47 T: If the slope is one, what am I going to do?
+15:50 [S-BoyGrey looks at his graph, holding his pencil over the paper]
+15:51 [The camera shows a list of equations on a separate sheet: "3) y = 3x + 7", "4) y = 1/4x - 9", "5) y = x - 5"]
+15:55 T: All right, you ready sir? Make that one a fraction. How do I make one a fraction?
+15:59 S-BoyGrey: One over one.
+16:00 T: One over one. Right, let's just put it...
+
+--- CHUNK 22 (15:45 - 16:45) ---
+16:00 T: Something to look at. All right, that's fine.
+16:02 [S-BoyGrey writes "1/1" on his paper]
+16:03 T: Now, remember slope is rise over run, right?
+16:05 S-BoyGrey: Yeah.
+16:06 T: So 1 over 1 means I rise 1 and I go across 1.
+16:09 [S-BoyGrey uses a ruler to draw a line on the graph paper]
+16:12 T: That's it. That's a slope of 1.
+16:14 [S-BoyGrey continues drawing the line]
+16:17 T: Let me check them real quick.
+16:19 [T leans over the desk to look at the graph]
+16:23 T: All right. Now, do me a favor guys. You labeled these really nice.
+16:26 [T points to the labels on the graph paper]
+16:27 T: Matter of fact, this is the way, ideally, way of labeling it, right? The whole equation.
+16:28 [Camera shows a close-up of the graph paper with several lines and their equations written next to them]
+16:33 T: But, like for example, equation 1 right here...
+16:34 [T points to a specific line on the graph]
+16:35 T: Put a 1 next to it also.
+16:36 [S-BoyGrey writes a "1" next to the line]
+16:37 T: And this one's equation 3, right? So put a 3 next to that one.
+16:39 [S-BoyGrey writes a 3 next to another line]
+16:40 T: So number them, in other words, okay?
+16:41 S-BoyGrey: Okay.
+16:42 T: Because what that's going to do, that's going to help you...
+16:43 [T lifts the top sheet of paper to show the list of equations on the page below]
+
+--- CHUNK 23 (16:30 - 17:30) ---
+16:45 T: ...when I ask these questions about each of the equations.
+16:47 [T points to the list of equations on the worksheet]
+16:49 T: Okay?
+16:51 T: Because that's how I labeled them. I labeled them by numbers.
+16:53 T: Does that make sense?
+16:54 [S-BoyGrey nods while writing on his graph paper]
+16:55 T: All right.
+16:57 T: So, as soon as you get that done, which you're almost done, you get them numbered, just move on to the next set of five.
+17:03 T: All right?
+17:05 [T stands up and walks toward the back of the classroom]
+17:06 [inaudible conversation, ~4s]
+17:10 [T sits down next to S-BoyRed at a different table]
+17:11 T: So, y equals three-fifths x minus ten.
+17:13 [Close-up of S-BoyRed's notebook showing handwritten equations and tables of values for y = 2/3x + 8 and y = 3/5x - 10]
+17:15 T: Okay. So wait a minute. You're try... you're doing negative five, right?
+17:18 S-BoyRed: Yeah.
+17:19 T: Three times negative five is negative fifteen, divided by five, negative three, minus ten is... negative...
+17:28 T: Oh, minus ten?
+17:29 T: Negative three and a negative ten.
+
+--- CHUNK 24 (17:15 - 18:15) ---
+17:30 [T points to the equation y = 3/5x - 10 on the paper of S-BoyRed, who is wearing a red hoodie]
+17:31 T: Negative three and a negative ten.
+17:34 S-BoyRed: Oh, oh, thirteen.
+17:35 T: Negative thirteen.
+17:36 [S-BoyRed writes "-13" in the y column of his table for the x value of -5]
+17:37 T: So let's change that.
+17:38 S-BoyRed: Mm-hm.
+17:39 [S-BoyRed erases the previous value in the table and writes "-13"]
+17:41 T: Well, minus five is going to be not five, but minus thirteen.
+17:46 T: All right?
+17:47 T: Ben?
+17:48 [T looks across the table at S-BoyGrey, who is wearing a grey shirt]
+17:49 T: You look like you're not... you're just coasting [inaudible]. What's going on?
+17:52 [S-BoyGrey looks at his calculator and notebook]
+17:56 T: Chris, make sure you help Ben out [inaudible], man.
+17:58 [T looks at S-BoyStriped, wearing a red and white striped shirt, sitting next to S-BoyGrey]
+18:00 T: [inaudible], I just sense Ben's getting a little lost here.
+18:03 T: All right? This is your chance to ask not only Chris, but also Raymond in here.
+18:07 [T gestures towards S-BoyRed]
+18:09 T: Get some help from them, okay?
+18:12 T: You think you got it? Now zero, of course, is going to be what?
+18:14 [T points to the row for x = 0 in the table on S-BoyRed's paper]
+18:15 T: If I put in zero here, what am I going to get?
+
+--- CHUNK 25 (18:00 - 19:00) ---
+18:15 [T leans over S-BoyRed's desk, pointing at the equation y = 3/5x - 10 written on the paper]
+18:18 T: Wait a minute, what's three-fifths times zero?
+18:20 S-BoyRed: Zero.
+18:21 T: Zero.
+18:22 [T points to the calculation on the paper: 0 - 10]
+18:23 T: Minus ten would be...
+18:26 [S-BoyRed looks at the paper, thinking]
+18:27 T: Zero minus ten would be...
+18:30 S-BoyRed: Negative ten.
+18:31 T: Negative ten.
+18:32 [S-BoyRed writes "-10" in the y-column of his table next to x=0]
+18:33 T: So you want to put a negative ten there. Okay?
+18:38 T: Now try at least one more, for five. Okay?
+18:43 [S-BoyRed points to the next row in his table where x=5]
+18:44 T: Now it's a positive five, right?
+18:46 S-BoyRed: Yeah.
+18:47 T: So it's going to be... well, what's three times a positive five?
+18:50 S-BoyRed: Fifteen.
+18:51 T: Divided by five is...
+18:53 S-BoyRed: Three.
+18:54 T: Three. Minus ten...
+18:56 S-BoyRed: Negative seven.
+18:57 T: Negative seven. Don't forget the negative. Okay.
+18:59 [T stands up and begins to move away from the table]
+
+--- CHUNK 26 (18:45 - 19:45) ---
+19:00 [T stands up from the table with S-BoyRed and begins walking across the classroom]
+19:04 T: All right, guys, thanks for waiting so long.
+19:06 [T approaches a table with S-BoyOrange, S-GirlWhite, and S-BoyBlack]
+19:07 T: All right, you want me to just check the answers?
+19:09 [T leans over the table, looking at a large sheet of graph paper]
+19:09 T: Now, the only favor I need you to do is because for each of these numbered equations, just number them.
+19:14 [T points to a line on the graph paper]
+19:15 T: For example, this is one, correct?
+19:16 S-BoyBlack: Yeah.
+19:17 [T points to another line]
+19:17 T: This one was equation three.
+19:18 S-BoyBlack: Yeah.
+19:19 [T points to a third line]
+19:19 T: This one was equation five. So near the end of each of these arrows...
+19:22 S-BoyBlack: Just put the number?
+19:23 T: Just put... put the number.
+19:24 [T continues pointing to different lines on the graph paper as the students watch]
+19:25 T: And then this one... let me just make sure, 'cause I don't have them all memorized.
+19:29 [T looks at the student's worksheet and then back at the graph]
+19:30 T: Let's see, negative nine was one-fourth. You got the slope perfect there. And this one was three-fifths, right?
+19:35 [S-BoyBlack nods and gestures toward the paper]
+19:36 T: So everything looks perfect. Just number them and move on to the next five.
+19:39 S-GirlWhite: Okay.
+19:40 [T stands up and moves to the next table where S-GirlHoodie has her hand raised]
+19:43 S-GirlHoodie: We're on number six.
+19:45 [T leans over the table to look at S-GirlHoodie's work]
+
+--- CHUNK 27 (19:30 - 20:30) ---
+19:45 [T leans over the table to look at S-GirlHoodie's work]
+19:46 T: Excellent work, man. Excellent work.
+19:48 [T points at the notebook of the student in the black tank top as she writes]
+19:50 [Close-up of a spiral notebook showing handwritten linear equations: 1) y = 2/3x + 8, 2) y = 3/4x - 10, 3) y = 3x + 7]
+19:52 S-GirlHoodie: But they're having problems on number seven.
+19:56 S-BoyRed: Oh, there it is. I found it, I found it. I have no idea what I'm thinking, so don't...
+19:58 T: Okay.
+19:59 [T points to a list of equations on a worksheet: 6) y = -1/2x + 4, 7) y = -2/3x - 5, 8) y = -3/4x + 10, 9) y = -2x - 8, 10) y = -3x + 12]
+20:00 T: You know what, as a matter of fact, I think it's time for me to address the whole class.
+20:03 S-GirlHoodie: Okay.
+20:04 T: Everybody, ladies and gentlemen, listen up.
+20:06 [T walks toward the center of the classroom while counting down on his fingers]
+20:07 T: Five, four, three, two, one, zero.
+20:11 [Students stop their individual work and turn to face the teacher]
+20:12 T: Now, about half of you are already about ready to start the next set of five, right?
+20:17 T: Starting on number six.
+20:19 T: Let me give you a hint, just a little reminder. What you'll notice...
+20:24 [T pauses and looks directly at S-GirlGlasses who is still looking at her paper]
+20:25 T: Julia, you're doing a great job, but please listen, okay?
+20:27 [S-GirlGlasses looks up at the teacher]
+20:28 T: You'll notice on equations six through ten...
+20:30 [T raises his hand to emphasize his point]
+
+--- CHUNK 28 (20:15 - 21:15) ---
+20:30 T: ...the slopes are negative.
+20:32 T: All right?
+20:33 T: So therefore, instead of rise over run meaning you go up and to the right...
+20:39 [T gestures with his hand, moving it upwards and rightward]
+20:41 T: ...with a negative we're going to instead go...
+20:43 SS: Down.
+20:44 T: ...down and to the right. Okay?
+20:46 [T gestures with his hand, moving it downwards and rightward]
+20:47 T: Does that make sense to everybody?
+20:48 SS: Yes.
+20:49 T: So please get going. Please make sure I check your first five and give you the okay to move on. All right?
+20:55 SN: I'm finished.
+20:56 T: Yeah.
+20:57 [T walks over to a group of students at a corner table]
+20:58 T: I'll check yours real quick.
+20:59 [T leans over table to look at students' work]
+21:02 T: All right, good. You guys numbered them?
+21:03 S-BoyWhiteShirt: Yeah.
+21:04 T: Okay. There's one...
+21:05 [T points to a line on a large sheet of graph paper on the desk]
+21:06 T: ...slope two, equation three, two-thirds, equation five looks good.
+21:10 [T continues pointing to different lines on the graph paper while checking them]
+21:12 SN: I haven't even gotten to five, I'm on three.
+21:14 T: Okay. And you got four and two. Looks...
+
+--- CHUNK 29 (21:00 - 22:00) ---
+21:15 [T points to a line on a large sheet of graph paper on the desk]
+21:16 T: ...perfect so far.
+21:17 [T moves to the next student, S-BoyBlackShirt]
+21:18 T: Move on to equation six.
+21:19 [T turns to S-GirlPatternShirt]
+21:19 T: Now, you were saying you're being left behind here a little bit?
+21:22 [T leans over S-GirlPatternShirt's desk to look at her work]
+21:23 T: On which one?
+21:24 S-GirlPatternShirt: Well, they're obviously on five and...
+21:27 T: Okay. Well, Robert here I'm sure can help you. He's got the...
+21:31 [T gestures towards S-BoyRedShirt]
+21:31 T: ...one of the smartest kids in class, right?
+21:33 S-BoyRedShirt: I tried to explain it once, but I'm not so sure.
+21:36 [T turns back to S-BoyBlackShirt and points at his paper]
+21:36 T: Okay. It looks like you made a nice table here, though. You understand what you did there?
+21:39 [Close-up of S-BoyBlackShirt's paper showing equations and a table of values for y = 1/4x - 9]
+21:40 S-BoyBlackShirt: Yeah.
+21:41 T: Okay. So you when you put in zero, one-fourth times zero is what?
+21:44 S-BoyBlackShirt: Zero.
+21:45 T: Minus nine is...
+21:46 S-BoyBlackShirt: Negative nine.
+21:47 T: Okay. Then you tried four, right?
+21:50 S-BoyBlackShirt: Yeah.
+21:51 [T points to the x-values 4 and 8 in the table on the paper]
+21:51 T: All right. Why did you pick four and eight? Why didn't you pick like one and two and three, numbers like that?
+21:57 S-BoyBlackShirt: Because they're divisible by four.
+21:59 T: Exactly.
+
+--- CHUNK 30 (21:45 - 22:45) ---
+22:00 [T points to the equation y = 1/4x - 9 on the paper]
+22:01 T: Well said. Good job.
+22:03 T: So, when I try four, see, what's one-fourth times four?
+22:07 S-BoyBlackShirt: Just one.
+22:08 T: Minus nine is negative eight.
+22:11 [T points to the x-value 8 in the table]
+22:11 T: And then you put in eight. One-fourth of eight is...
+22:14 S-BoyBlackShirt: Two.
+22:15 T: Minus nine is negative seven. So that's perfect.
+22:18 [T points to the graph on the right side of the paper]
+22:19 T: If you plot those three points, you get exactly what is on your graph there. Okay?
+22:22 S-BoyRedShirt: Can I see this real quick?
+22:23 [S-BoyRedShirt reaches for the paper as T stands up to move to another group]
+22:26 S-BoyWhiteShirt: Are you sure this is right?
+22:27 [S-BoyWhiteShirt looks at his own paper while S-BoyRedShirt examines the first paper]
+22:29 [T leans over a different table where three students are working on a large piece of graph paper]
+22:30 T: Oh, so you want me to just check six real quick, right?
+22:32 [T points to a specific line labeled with a circled number on the graph paper]
+22:32 T: So you've got five... and five... five because that's where we messed up on last time.
+22:35 T: Right, five now looks perfect.
+22:37 T: Now three... oh, three was the one we messed up on.
+22:39 [T traces a line on the graph paper with his finger]
+22:40 T: So three is right here, and the idea is you want a positive three slope, which you did perfectly.
+
+--- CHUNK 31 (22:30 - 23:30) ---
+22:45 [T points to a line on the graph paper labeled with a circled 3]
+22:46 T: So three is right here, and the idea is you want a positive three slope, which you did perfectly.
+22:50 T: So three is good. Let's go back to six.
+22:52 [T flips a page on his clipboard to show a list of equations]
+22:53 T: Since we're here.
+22:54 [T points to equation 6: y = -5/3x + 8]
+22:54 T: Here's six. So you started at positive eight.
+22:56 [T points to the y-intercept on the graph paper]
+22:57 T: The slope is negative five-thirds, so you went down five and over three, didn't you?
+23:00 [T traces the slope on the graph paper with his finger]
+23:03 T: Perfect.
+23:04 [T stands up and walks away from the table]
+23:05 [inaudible conversation, ~5s]
+23:10 [T approaches a table where four students are working]
+23:10 T: Okay, Ashley, how is Brandon doing here?
+23:11 S-Girl-BlueShirt: I'm on five.
+23:12 T: Brandon?
+23:13 S-Boy-MaroonVest: Good.
+23:13 T: Good. That's what I want to see.
+23:15 [S-Girl-BlueShirt points to a spot on the graph paper]
+23:17 T: You keep helping Brandon. Let me with Ashley over here.
+23:20 T: Nick, if you want to watch, you can.
+23:22 T: But I can tell you right now, five is good.
+23:26 [T points to the graph paper while S-Boy-BlackShirt watches]
+23:28 T: Okay, we're starting over here. One looks good.
+23:30 S-Boy-MaroonVest: If you put... how many do you add?
+
+--- CHUNK 32 (23:15 - 24:15) ---
+23:30 [T indicates the equation "y = 2/3x + 8" on S-Girl-BlueShirt's sheet]
+23:31 T: One, the slope is 2/3, isn't it?
+23:34 T: Right? So first of all, our y-intercept is eight.
+23:37 [T gestures at the y-axis on the graph page]
+23:39 T: Ashley, let's look at yours since you're more comfortable with yours.
+23:41 [T pulls S-Girl-BlueShirt's work closer towards the table center]
+23:42 T: You agree that 0, 8 should be my first point, right?
+23:45 [T counts up the y-axis starting from origin]
+23:46 T: two, 4, six, 8. Okay, that's good.
+23:49 [T points at the table of values, specifically the row for x=3]
+23:50 T: 3... we went over that, 1, two, 3.
+23:54 T: Oh, here's your mistake. All right. Now watch, Ashley, you ready?
+23:59 [T indicates 'x' in the equation y = 2/3x + 8]
+24:00 T: When I put in three, 2 times that would be...
+24:03 S-Girl-BlueShirt: 6.
+24:04 T: 6. Divided by three would make...
+24:07 [T points at the denominator of the slope]
+24:08 S-Girl-BlueShirt: 2.
+24:09 T: 2. 6 divided by it is two, right? Okay, plus 8 would make ten.
+24:14 T: So three...
+
+--- CHUNK 33 (24:00 - 25:00) ---
+24:15 [T points to the table of values on S-Girl-BlueShirt's paper]
+24:16 T: ...would be ten. Well, what's 2 plus 8? Ten.
+24:21 T: So that's a ten. This one I'm sure has got to be something bigger.
+24:26 [S-Girl-BlueShirt writes "12" in the y-column for x=6 on her paper]
+24:27 S-Girl-BlueShirt: 12? Maybe 12.
+24:29 T: I believe it's 12.
+24:30 S-Girl-BlueShirt: Yeah, I did it on here but I did it wrong on my paper.
+24:32 T: Okay.
+24:34 T: Alright, so sounds like you guys can compare your answers here.
+24:38 T: But I think that's your only mistake.
+24:42 T: Because equation three looks very good.
+24:46 T: Alright. You know what, equation two I don't necessarily like either.
+24:51 [T points to a graph on a separate sheet of paper]
+24:51 T: Is this supposed to be two?
+24:53 T: Two says we're starting at what number?
+24:56 S-Boy-MaroonShirt: -10.
+24:57 T: -10, right? You're not starting at -10 here. What's this number?
+24:59 [T points to the y-intercept on the graph]
+25:00 T: 2, 4... somehow you're starting at -6.
+
+--- CHUNK 34 (24:45 - 25:45) ---
+25:00 [touches graph point]
+25:02 T: So what happened on equation 2, guys?
+25:06 T: Hey, how come we didn't use your table? [gestures to S-Girl-BlueShirt's work]
+25:08 S-Girl-BlueShirt: I don't know.
+25:09 T: We can use... [points at table of S-Girl-BlueShirt's work]
+25:11 [Camera zooms showing equations and grids. Equation 1: y = 2/3x + 8. Table: x=0, y=8; x=3, y=10; x=6, y=12. Equation 2: y = 3/5x - 10. Table: x=0, y=-10; x=5, y=-7; x=10, y=-5.]
+25:14 T: Oh, I know. Look what you did wrong. You copied the equation down wrong. [touches equation of sheet]
+25:17 S-Girl-BlueShirt: That's number 4.
+25:19 T: Oh, oh, I'm sorry. You're right. My mistake.
+25:22 S-Girl-BlueShirt: He put... it looks like a 6. [S-Girl-BlueShirt points to number of grid]
+25:24 T: I can't even read your writing. Yeah, why is that a 6? That should be -10, right?
+25:27 S-Girl-BlueShirt: It looks like six, it's ten.
+25:29 T: Okay. And 5 ya got negative 7. I agree with that. [gestures to grid]
+25:33 T: Okay. Then 10 ya got negative 4?
+25:36 S-Girl-BlueShirt: Negative five.
+25:37 T: Okay. So why don't ya try re-plotting those three points and move on to equation 6 through ten and I'll check... [points to graph]
+25:45 [places hand on graph]
+
+--- CHUNK 35 (25:30 - 26:30) ---
+25:45 T: ...and move on to equation 6 through 10 and I'll check number 2 later on, okay? The rest of them look pretty good though.
+25:51 [T stands up and walks to the next table where two boys are seated]
+25:53 [S-Boy-BlackShirt and S-Boy-GreySweater look at their work as T approaches. A student in the background raises their hand]
+25:56 T: Okay, what are we doing here guys?
+25:57 [T leans over the table, looking at a large sheet of graph paper with several intersecting lines drawn on it]
+25:58 T: Hey, how come none of these lines are labeled?
+26:00 S-Boy-BlackShirt: Whoops.
+26:02 T: Now, what I suggest you do, hold on, what I suggest you do before I come back is...
+26:06 [T points to a worksheet titled "ALGEBRA" that lists five linear equations]
+26:07 T: ...for each of these, just call it equation 1, 2, 3, 4, and 5, right?
+26:11 T: Put a number at the end of each of these lines. [T points to the ends of the lines drawn on the graph paper]
+26:16 S-Boy-BlackShirt: Oh, like number 1, 2...
+26:17 T: Like for example, number 1...
+26:18 [T traces his finger along one of the lines on the graph, following it across the page]
+26:19 T: Whoops. Wait a minute. I don't like what I see here.
+26:25 S-Boy-BlackShirt: What'd you make me do?
+26:27 T: Okay, let's see here. Number 1... [T points to a specific intersection point on the graph paper]
+
+--- CHUNK 36 (26:15 - 27:15) ---
+26:30 [T points to a line on the graph paper]
+26:31 T: I believe this is supposed to be your number one here, right?
+26:33 S-Boy-BlackShirt: I think so. I don't know.
+26:34 T: How come it's going down, guys?
+26:36 S-Boy-BlackShirt: I don't know.
+26:37 T: Aren't all these slopes positive? [T points to the list of equations on the worksheet]
+26:40 T: So all of these should be going up.
+26:41 [T points to the line on the graph again]
+26:42 S-Boy-BlackShirt: How's it going down?
+26:43 T: Look at it. It's going down. [T traces the line from left to right]
+26:46 T: How do you read a book? How do you read a book, sir?
+26:48 S-Boy-BlackShirt: Left to right.
+26:49 T: You read from left to right. So let's start on the left side of the line. [T places his finger on the left side of the line]
+26:51 S-Boy-BlackShirt: Yeah.
+26:52 T: And as I move to the right, I'm going in what direction? [T moves his finger along the line towards the right]
+26:56 S-Boy-BlackShirt: Down.
+26:56 T: Right. Now if you look at all the other lines, see they're all positive.
+26:59 S-Boy-BlackShirt: But it's going up. [S-Boy-BlackShirt points to the line]
+27:01 S-Boy-BlackShirt: Shoot.
+27:02 T: Sir, you have to read from left to right. [T gestures with his hand across the paper]
+27:04 S-Boy-GreyHoodie: Right. [S-Boy-GreyHoodie points to the paper]
+27:05 T: Okay.
+27:06 S-Boy-BlackShirt: It's going down like that. [S-Boy-BlackShirt traces a downward path with his hand]
+27:08 T: So guys, you need to make those corrections. Label the lines. Correct this one at least. [T points to the line again]
+27:12 S-Boy-BlackShirt: I thought we already done this before.
+27:13 T: Okay.
+27:14 [T walks away from the desk]
+
+--- CHUNK 37 (27:00 - 28:00) ---
+27:15 [T walks away from the first group's desk]
+27:18 T: Oh my gosh. Let me make sure I keep track of time too.
+27:20 [T approaches a group of three students: S-Boy-GreyShirt, S-Boy-GreenShirt, and S-Boy-BlueStripedShirt]
+27:21 [T flips through pages in a blue binder on desk]
+27:25 T: Man, this group did an awesome job here.
+27:28 T: Okay. Let's take a look here.
+27:30 [T points to a line labeled with a circled '6' on a hand-drawn graph]
+27:30 T: So here's your number six, right?
+27:33 [T points to y-intercept of line 6]
+27:33 T: We started at eight; slope was negative five-thirds, so you went down five and over three.
+27:38 [T traces slope steps on grid paper with his finger]
+27:41 T: That line looks perfect.
+27:43 T: Let's look at your number seven.
+27:44 [T points to a line labeled with a circled '7']
+27:44 T: Here's negative one.
+27:46 [T points to y-intercept of line 7]
+27:46 T: You went down four and over one.
+27:48 [T traces slope of line 7]
+27:49 T: There's your line there. That looks perfect.
+27:52 T: Let's check next one real quick.
+27:53 [T points to a list of equations on a separate piece of paper]
+27:55 [T points back to graph]
+27:56 T: Oh, that's eighth, right? Okay.
+27:58 T: So on number eight, you started at twelve...
+28:00 [T points to y-intercept of line 8 at top of graph]
+
+--- CHUNK 38 (27:45 - 28:45) ---
+28:00 [T points to a point on the graph paper]
+28:02 T: So on number eight, you started at twelve and negative one-third.
+28:06 T: Looks perfect.
+28:07 T: Number nine is fourteen, which is where?
+28:10 S3: Way up here.
+28:11 T: Way at the very top.
+28:13 T: And negative three-halves means you went down three and over two.
+28:17 [T traces the slope of the line on the graph with his finger]
+28:18 T: So there's your line right there.
+28:21 T: And finally number ten, where three and slope is negative one.
+28:25 T: Perfect.
+28:26 [T flips through papers on the desk]
+28:27 T: So now all you guys have to do is answer these questions.
+28:31 T: The best you can.
+28:33 S2: On this piece of paper?
+28:34 T: On your piece of paper. Okay? On your own piece of paper, okay?
+28:38 [T walks over to another group of students at a different table]
+28:40 T: All right, how are we doing here guys?
+28:42 S5: Good.
+28:43 T: Um... what's the ruler for?
+28:45 [T picks up a wooden ruler from the table]
+28:46 S4: Oh.
+28:47 S4: Look at this.
+
+--- CHUNK 39 (28:30 - 29:30) ---
+28:45 [T gestures toward a graph on S-BoyRedHoodie's work]
+28:48 T: Just from now on, make sure, straighten out these lines, keep going.
+28:51 S-BoyRedHoodie: Okay.
+28:52 T: Are ya labeling? That's one, two...
+28:53 [T gestures toward points on that coordinate plane]
+28:54 S-BoyRedHoodie: Oh, wait, that's number three. I forgot doing that second item.
+28:56 [S-BoyRedHoodie uses some ruler, pen on grid paper]
+28:58 T: Okay, wait a minute. This third thing's concerning me. Ready?
+29:00 [T leans over a desk, looking at S-BoyRedHoodie's worksheet]
+29:01 T: Let's try this again real quick.
+29:02 [T points to a chart of values on S-BoyRedHoodie's work]
+29:03 T: All right, it's 3x plus 7, correct?
+29:05 [The camera zooms in on a worksheet showing "3. y = 3x + 7" and a table with x, y columns]
+29:06 T: So when I put in, let's just start with zero.
+29:08 [T points to a column of the chart]
+29:09 T: When I put in zero, what's 3 times zero?
+29:11 S-BoyRedHoodie: Zero.
+29:12 T: Plus 7's...
+29:13 S-BoyRedHoodie: Seven.
+29:14 T: Why'd ya put negative 7?
+29:15 [T points to a grid showing the '-7' written down]
+29:16 T: What's that plus 7?
+29:17 S-BoyRedHoodie: Well, I started at... oh.
+29:18 T: Chris, let me take a look at your table for three.
+29:20 [T reaches across a desk, takes some paper from S-BoyStripedShirt]
+29:21 S-BoyStripedShirt: [inaudible]
+29:22 T: How come ya're not standing up to Raymond here, saying, "Hey man, look, I got those correct answers."
+29:25 [T indicates S-BoyStripedShirt's paper, then gestures toward S-BoyRedHoodie]
+29:27 S-BoyRedHoodie: [inaudible]
+29:28 T: All right, your table's correct. Gotta believe in yourself.
+
+--- CHUNK 40 (29:15 - 30:15) ---
+29:30 T: All right, your table's correct. You gotta believe in yourself, alright?
+29:33 [T looks at S-BoyRedHoodie and S-BoyStripedShirt]
+29:34 T: You guys gotta start working better together and comparing answers.
+29:37 T: Right?
+29:38 [T turns to S-BoyGreyShirt, who is looking at a textbook]
+29:39 T: Ben, I'm worried about you, man. What are we doing here?
+29:42 [T taps on S-BoyGreyShirt's book, then S-BoyGreyShirt closes it]
+29:42 T: Put away the book.
+29:44 [T points at S-BoyStripedShirt's paper]
+29:44 T: And Chris, you need to work with your partner here a little bit better.
+29:48 [T points back and forth between S-BoyStripedShirt's and S-BoyRedHoodie's papers]
+29:49 T: And compare answers. So, I mean, if you would have compared answers, guys, you would have seen on this table here...
+29:56 [T points at a specific value on S-BoyRedHoodie's chart]
+29:57 T: But hey, someone must be making a mistake because we're getting different results, right?
+30:03 T: So, either correct yours or if you want, you can trust Chris.
+30:06 [Camera zooms in on S-BoyRedHoodie's paper showing two grids for X and Y. One has X values 0, 2, 4, 6, 8 and Y values 7, 13, 19, 25, 31. Another has X values -10, -5, 0, 5, 10 and Y values -16, -13, -10, -7, -4.]
+30:07 T: I would trust Chris's to be honest.
+30:10 T: Okay?
+30:11 [Camera zooms in on S-BoyStripedShirt's paper showing a chart for y = 2/3x + 8 with X values -3, 0, 3, 6, 9 and Y values 6, 8, 10, 12, 14.]
+30:13 T: Right. Now, did you have to go by twos?
+30:15 S-BoyStripedShirt: I don't know.
+
+--- CHUNK 41 (30:00 - 31:00) ---
+30:15 T: Well wait a minute, isn't this just a regular number three?
+30:18 SS: Yeah.
+30:19 [T points to equation #3: y = 3x + 7 on the worksheet]
+30:20 T: So on these kind, I've always told you just use like zero, one, and two, right?
+30:23 [T points to equation #4: y = 1/4x - 9 and #5: y = x - 5]
+30:24 T: You didn't have to go by multiples or anything because there's no fraction to divide by.
+30:27 [T points to equation #1: y = 2/3x + 8 and its corresponding X/Y table]
+30:28 T: You see?
+30:30 T: Alright guys, let's see what we can do here.
+30:31 [T points to equation #2: y = 3/5x - 10 and its corresponding X/Y table]
+30:34 [T stands up and begins walking toward the front of the classroom]
+30:37 T: Can I interrupt the whole class?
+30:39 T: Shhh.
+30:40 [S-GirlWhiteTank spins two wooden rulers on her desk]
+30:41 T: Okay.
+30:42 T: Five, four, three, two, one, zero. Shhh.
+30:46 T: Now please listen, okay?
+30:48 T: The thing is, I-I have to be honest, I'm getting a little-little worried, maybe a little frustrated here...
+30:55 T: ...just because I can see that some of you have some serious weaknesses.
+
+--- CHUNK 42 (30:45 - 31:45) ---
+31:00 [T stands in the center of the room, wearing a yellow long-sleeved shirt and khaki pants, gesturing with his hands as he addresses the class]
+31:02 T: Yet, you have people either across from you or right next to you, your own partner...
+31:06 [T gestures towards the students sitting at their desks]
+31:10 T: ...that seems most of the time have the right answers, yet you're not even asking them.
+31:15 T: So guys, I ask you, starting right now, is check your work with your partner's work. Work together.
+31:22 T: Alright, this is not an individual kind of assignment here.
+31:26 T: Does everything I say make sense so far?
+31:28 SS: Yes.
+31:29 SN: Starting.
+31:30 T: Okay. Now, let me just give you a heads up.
+31:33 T: We've got roughly, what, 12 minutes left in class?
+31:36 SS: No.
+31:37 T: Okay. I want you to keep doing what you're doing.
+31:40 T: If for whatever reason you actually get to the last page...
+31:43 [T walks over to a group of students on the left side of the room and points to the worksheet on their desk]
+31:44 SS: Yeah, we're on it. We're on the last page.
+31:45 T: ...and you've answered these questions the best...
+
+--- CHUNK 43 (31:30 - 32:30) ---
+31:45 T: ...of your ability. Now, obviously today we have no time to discuss it, okay?
+31:48 T: We're going to pick this up again on Monday.
+31:51 T: But, if you happen to answer these questions, yeah, we're back on Monday, alright?
+31:56 T: When we, after you answer these questions, if you get that far, please make sure you do this quickwrite.
+32:03 [S-BlackShirt draws overlapping circles and lines on paper with a pencil]
+32:04 T: Which simply means, all I want you to do is be honest with yourself and with me and just sit there for the remaining time, write a minimum of two paragraphs...
+32:11 [S-GreySweater uses a ruler to draw a straight line through several points on graph paper]
+32:16 T: ...okay, on what we've learned today. What you've actually learned today.
+32:21 [The camera pans to a whiteboard where "Quickwrite" instructions are written in blue marker]
+32:22 T: Okay?
+32:24 T: Those of you that are at this stage, don't worry about it yet. In about, let's say, four or five minutes...
+
+--- CHUNK 44 (32:15 - 33:15) ---
+32:30 [The camera focuses on the whiteboard with the text: "Quickwrite For the remaining time, write a minimum of 2 paragraphs on what we learned today."]
+32:33 T: ...I'm going to make all of you do it anyways.
+32:36 T: So, please keep working wherever you are. I'm still walking around. Yeah.
+32:41 [The camera pans across the classroom showing students working at desks]
+32:43 T: Don't worry about that until Monday. We'll catch up on Monday.
+32:46 T: Let's focus on this.
+32:51 T: Ashley?
+32:52 S-Ashley-GirlBlueShirt: Yeah, um...
+32:53 [T leans over the table to look at the students' work]
+32:54 S-Ashley-GirlBlueShirt: I don't get these two.
+32:55 [S-Ashley-GirlBlueShirt points to a worksheet titled "Now, graph the next 5 equations."]
+32:57 T: Is anyone in this group understand what to do here?
+32:59 SN: No.
+33:00 [T points to the list of equations on the worksheet]
+33:01 S-Ashley-GirlBlueShirt: No, 'cause it's like the different numbers. Which one do we use?
+33:04 [Close-up of the worksheet showing equations 6 through 10, such as y = -5/3x + 8 and y = -4x - 1]
+33:06 T: Alright. Okay. Now, you want to use slope and y-intercept or you want to make tables?
+33:10 [T points to a blank graph on a separate sheet of paper]
+33:11 T: Seems like tables are the way to go here, right?
+33:13 T: So let's, let's go there, alright?
+33:15 T: First of all...
+
+--- CHUNK 45 (33:00 - 34:00) ---
+33:19 [T points to equation 6 on the worksheet: y = -5/3x + 8]
+33:20 T: Ashley, that's a negative five-thirds, isn't it?
+33:21 S-Ashley-GirlBlueShirt: Yeah.
+33:22 T: Okay.
+33:23 T: So now, if I plug in zero, guys...
+33:27 T: Brandon, watch.
+33:28 [Close-up of a hand pointing at a handwritten table on lined paper]
+33:29 T: If I plug in zero, what's negative five-thirds times zero?
+33:32 SN: Zero.
+33:33 T: Plus eight is...
+33:34 SN: Eight.
+33:35 T: Right? That was easy.
+33:35 [S-Ashley-GirlBlueShirt writes "8" in the y-column of a table next to x=0]
+33:37 S-Ashley-GirlBlueShirt: But I don't know what to use, like threes?
+33:38 [S-Ashley-GirlBlueShirt points to the denominator "3" in the fraction -5/3 on her paper]
+33:39 T: You would use threes. Try three and six.
+33:40 [S-Ashley-GirlBlueShirt writes "3" and "6" in the x-column of her table]
+33:43 T: Okay.
+33:46 [Camera zooms out to show the group at the table]
+33:47 S-Boy-BlackShirt: Can I go to the bathroom?
+33:47 T: Sir, no. You're gonna have to stay here. Alright?
+33:50 T: So, alright, let's try three. Nick, Jesse, you ready?
+33:54 T: If I put in a three there...
+33:55 [T points to the "x" in the equation y = -5/3x + 8 on Ashley's paper]
+33:58 T: Okay. It's gonna be five, right?
+33:59 S-Ashley-GirlBlueShirt: Yeah.
+34:00 T: You're gonna get negative five, because of the negative, plus eight. What's negative five plus eight?
+
+--- CHUNK 46 (33:45 - 34:45) ---
+34:01 S-GirlBlueShirt: Three.
+34:02 T: Positive three.
+34:03 [S-GirlBlueShirt writes "3" in the y-column of a table on her paper]
+34:04 S-BoyRedShirt: Then the next one would be negative two. Wait.
+34:06 S-GirlBlueShirt: Is that how you do it?
+34:07 T: Well, you wrote it upside down. That's okay.
+34:08 [T points to the table on S-GirlBlueShirt's paper]
+34:09 T: And then the next one is going to be what?
+34:10 S-GirlBlueShirt: Six?
+34:12 T: It's going to be negative two. You got it.
+34:13 [S-GirlBlueShirt writes "-2" in the table]
+34:14 [inaudible conversation, ~3s]
+34:17 T: Okay, you haven't done it. You did that in your head, huh?
+34:18 [T looks at S-BoyRedShirt]
+34:19 S-BoyRedShirt: Yeah.
+34:19 T: Impressive.
+34:20 S-BoyRedShirt: I always do my math in my head.
+34:21 T: Okay. So, don't let the negative scare you. Just the same ideas as the front.
+34:24 [T stands up and points to the worksheet on the table]
+34:25 T: Just know that when you times, you're going to have a negative, right?
+34:29 T: In your problem. That's all.
+34:30 [S-BoyRedShirt and S-BoyBlackShirt continue writing on their papers]
+34:32 [T walks away from the table]
+34:34 [T approaches another table where S-BoyOrangeShirt and S-GirlWhiteShirt are sitting]
+34:35 T: Why are you out of your seat, Robert?
+34:37 S-BoyOrangeShirt: I don't know.
+34:38 T: Okay. I just kind of noticed out of the corner of my eye.
+34:40 T: So what's going on here? How are we doing?
+34:41 S-GirlWhiteShirt: Okay.
+34:42 [S-GirlWhiteShirt is writing on a large white paper on the desk]
+34:43 [S-GirlWhiteShirt flips a page in her notebook]
+34:45 [S-BoyOrangeShirt looks at his paper]
+
+--- CHUNK 47 (34:30 - 35:30) ---
+34:48 T: Okay.
+34:49 T: So, have I come by to check all ten equations yet?
+34:52 S-GirlWhiteShirt: No.
+34:53 S-BoyBlackShirt: No, just the first five.
+34:54 S-BoyOrangeShirt: Just the first five.
+34:54 T: Okay.
+34:55 [T points to a paper on the desk]
+34:56 T: You are on number ten. You want me to wait till you get number ten done?
+34:58 S-GirlWhiteShirt: Yeah.
+34:59 S-BoyOrangeShirt: Yeah.
+34:59 T: Okay.
+35:00 [T stands up and starts walking towards another group]
+35:01 T: All right. Keep working on that.
+35:02 [T walks across the classroom to a group of four girls]
+35:04 T: Ladies, you've been awful quiet over here. What's going on?
+35:06 S-GirlWhiteLongSleeve: Well, because we've been waiting for you.
+35:08 T: Okay.
+35:09 [T leans over their table; S-GirlPatternShirt is writing]
+35:10 T: All right.
+35:11 T: So where are you stuck? Or if you're not stuck, what would you like me... you want me just check your answers then?
+35:17 S-GirlRedShirt: Yes.
+35:18 S-GirlStripedShirt: Yeah.
+35:19 T: Okay.
+35:20 [T starts flipping through papers on their desk]
+35:21 T: So, I've already checked the first five, yes or no?
+35:24 SS: No.
+35:25 T: Oh, really?
+35:26 S-GirlRedShirt: Well, because you've been over there, you know.
+35:28 T: Yeah, I know. I've been... I've been pretty busy.
+35:30 T: All right, let's start with six through ten. Okay?
+
+--- CHUNK 48 (35:15 - 36:15) ---
+35:30 [T points to a coordinate plane on a piece of paper]
+35:31 S-GirlStripedShirt: We're only on eight.
+35:32 T: Okay, so I'll do... I'll do the first eight. How's that?
+35:34 S-GirlStripedShirt: First eight?
+35:35 T: Okay.
+35:36 [T points to a point on the y-axis of the graph]
+35:37 T: So I agree, that's plus twelve. Wait a minute.
+35:39 T: Which one are we doing? Number six.
+35:41 T: That's plus eight, right? Two, four, six, eight. Good.
+35:43 [T traces a line on the graph with his finger, moving down and to the right]
+35:44 T: Now negative five-thirds would mean you come down five and you go over three, right?
+35:48 T: So that one is perfect.
+35:50 T: Number seven, you would have started at negative one.
+35:52 [T points to -1 on the y-axis]
+35:53 T: And because of the negative four slope, you would have gone down four and over one.
+35:57 [T traces the slope on the graph]
+35:58 T: So that one is perfect.
+36:00 T: Okay.
+36:01 [T moves to the next graph/line on the paper]
+36:02 T: And number eight...
+36:03 T: I'm a little concerned. See how it's slanting up?
+36:06 [T points to a line with a positive slope]
+36:07 T: See, eight's a negative one-third.
+36:08 S-GirlStripedShirt: Yeah, but that's plus twelve.
+36:09 [T points to the equation y = -1/3x + 12 on a separate sheet]
+36:11 T: So you ready? Well, what does plus twelve mean?
+36:13 S-GirlStripedShirt: Up here.
+36:13 [S-GirlStripedShirt points to the top of the y-axis on the graph paper]
+36:14 T: Up at twelve.
+36:15 [T points to the y-intercept at 12]
+
+--- CHUNK 49 (36:00 - 37:00) ---
+36:18 T: Then, erase number eight. Try number eight again. Okay?
+36:21 [S-GirlStripedShirt uses a blue eraser to clear a line from her graph paper]
+36:23 [The camera zooms out to show the teacher sitting at a round table with four female students. All students have papers and writing utensils.]
+36:26 T: All right, Jessica. Let me slow down then.
+36:29 T: 'Cause trust me, I'm sick and I'm also tired, but we can do this. You ready?
+36:33 S-GirlStripedShirt: Zero, three, six is right there.
+36:34 [S-GirlStripedShirt points to points she has plotted on her graph paper]
+36:36 T: Zero was twelve. Why did you plot down here when zero positive twelve is up there?
+36:39 [T points to the top of the y-axis on S-GirlStripedShirt's graph paper]
+36:41 S-GirlStripedShirt: Oh! I made a mistake.
+36:44 T: Okay, let's look at the rest of your table.
+36:45 [T points to a table of values on S-GirlStripedShirt's paper]
+36:46 S-GirlStripedShirt: I put a negative.
+36:48 T: Now...
+36:49 [T points to the number 3 in the x-column of the student's table]
+36:50 T: All right, if I put in three here, DeCarlos...
+36:52 [T points to the equation y = -1/3x + 12 on the instruction sheet]
+36:53 T: What's a third of three?
+36:56 S-GirlStripedShirt: One, right?
+36:57 T: One, right. So that negative makes it a negative one plus twelve, which was a positive...
+37:00 T: You had these points exactly correct.
+
+--- CHUNK 50 (36:45 - 37:45) ---
+37:00 S-GirlStripedShirt: Except I put them...
+37:00 [S-GirlStripedShirt points to her graph paper]
+37:01 T: So you put them down, you plotted them wrong basically, right?
+37:02 S-GirlStripedShirt: Yeah.
+37:03 T: All right.
+37:04 [T stands up and walks away from the first group]
+37:05 SN: Mr. [inaudible]?
+37:07 T: Okay. All right. Yes.
+37:08 [T walks towards the back of the room]
+37:09 T: You're finally done, right?
+37:10 [T sits down at a desk with S-BoyOrangeShirt and S-GirlWhiteTank]
+37:11 T: Okay. If you don't mind, I'll just take a quick glance, spot check a few of them.
+37:16 T: Because I'd like you to move on to the questions.
+37:18 S-GirlWhiteTank: Okay.
+37:19 T: Start answering the questions, okay?
+37:21 [Camera zooms in on a piece of graph paper with multiple lines drawn on it]
+37:22 T: And the ones I'm looking at right now, like for example, this one here...
+37:24 [T points to a line labeled with a circled '7']
+37:25 T: This is number seven, that looks good.
+37:26 [T points to a line labeled with a circled '6']
+37:27 T: Number six.
+37:28 [T points to a line labeled with a circled '5']
+37:28 T: Number five, all the way through, that looks perfect.
+37:31 [T traces his finger along line 5]
+37:32 T: Okay.
+37:33 [T looks at the bottom of the graph]
+37:34 T: Let's see, you just finished ten, right?
+37:35 [T points to a line labeled with a circled '10']
+37:36 T: And that one's also perfect.
+37:38 T: So I can safely say that you guys seem to know what you're doing.
+37:41 [Close up of the graph showing lines 7, 5, and 10]
+37:42 T: So now, please answer these questions.
+37:43 [T points to a worksheet with a list of numbered questions]
+37:44 T: All right? For example...
+
+--- CHUNK 51 (37:30 - 38:30) ---
+37:45 [T leans over a desk where S-Girl-WhiteTank, S-Boy-BlackShirt, and S-Boy-OrangeShirt are working]
+37:46 T: Well, let's go one by one. You're going to have more time on Monday anyway.
+37:51 T: But on number one, what did you notice about the first five equations?
+37:55 [T points to the graph paper on the desk]
+37:56 T: When you graphed them, what did you honestly notice about them all?
+37:58 S-Boy-OrangeShirt: They all went slope right.
+38:00 T: They all went up and to the right.
+38:02 [T traces a diagonal line upwards and to the right on the graph with his finger]
+38:03 T: That's why we always said they had a positive slope, right? Because the positive number in front of X. Right?
+38:08 [T stands up and prepares to address the class]
+38:09 S-Boy-OrangeShirt: Okay.
+38:11 T: All right, ladies and gentlemen.
+38:12 [T claps his hands twice]
+38:13 T: Shhh. Listen up.
+38:15 [S-Girl-WhiteTank passes a sheet of paper to S-Boy-OrangeShirt]
+38:16 T: Wherever you are...
+38:18 [T stands at the front of the classroom, looking at the students]
+38:19 T: Wherever you are honestly guys, it really doesn't matter. I really appreciate the effort you put in for me today.
+38:24 T: That's the important thing.
+38:27 T: What I'd like you to do...
+38:29 T: What I'd like you to do now, whether you're done or not...
+
+--- CHUNK 52 (38:15 - 39:15) ---
+38:30 T: What I'd like you to do now, whether you're done or not guys, I honestly hope that all of you have learned something today. Okay?
+38:40 [T walks towards the whiteboard and points to it]
+38:41 T: So I want everyone now on their own piece of paper, I repeat on your own piece of paper, do this quick write for the remaining part of class. Okay?
+38:50 SN: On that same piece of paper?
+38:52 T: And a few hints would be like, hey, did you learn, you understand, did you understand something about slope maybe a little bit better? Or y-intercepts? Or maybe you got better at making tables? On the same one. Yes sir.
+39:06 [T gestures with his hands while speaking]
+39:07 T: Any questions on that? Alright, quick write time guys. Let's get that done.
+39:11 [T walks down the aisle between desks]
+39:14 S-Boy-BlueJacket: Can you check this?
+39:15 [T stops at a desk and looks at a student's work]
+39:16 T: What's this? School and stuff?
+39:17 S-Boy-BlackHoodie: No.
+
+--- CHUNK 53 (39:00 - 40:00) ---
+39:15 [Close-up of S-Boy-BlackHoodie sketching a cartoon character with a pencil]
+39:17 T: Oh, you're waiting for me because we're done over here?
+39:19 S-Boy-BlackHoodie: Yeah.
+39:19 S-Boy-GreySweater: Yeah, we're done.
+39:20 T: Let me see, let me see the answers.
+39:22 [T picks up the drawing paper from the desk]
+39:23 S-Boy-GreySweater: They're over here.
+39:24 [S-Boy-GreySweater points to a worksheet on his desk]
+39:26 [S-Boy-GreySweater holds up a worksheet titled "ALGEBRA" with linear equations and x/y tables]
+39:30 [Close-up of the worksheet showing equations 1 through 5, such as y = 2/3x + 8, and handwritten coordinate tables]
+39:31 T: But where's your own work though?
+39:32 S-Boy-GreySweater: I don't know.
+39:33 T: And right now what are you supposed to be doing?
+39:34 S-Boy-GreySweater: I was supposed to do that, he was doing this.
+39:35 [S-Boy-GreySweater points to a large sheet of graph paper on the desk]
+39:36 T: I understand, but right now what are you supposed to be doing?
+39:38 [T points to the lines drawn on the large graph paper]
+39:39 S-Boy-GreySweater: We were waiting for you.
+39:40 T: Alright, now that I'm here, what else could you be doing?
+39:42 T: What did I talk about on the board there?
+39:43 [T points towards the front of the classroom]
+39:44 S-Boy-GreySweater: This?
+39:45 [S-Boy-GreySweater flips through a packet of papers]
+39:46 T: The quick write. Right?
+39:48 [T points to the large graph paper]
+39:49 T: See, I can see quickly you haven't even finished graphing these.
+39:51 T: So I want you to do the quick write right now.
+39:52 [Close-up of the worksheet showing a second list of equations, 6 through 10, to be graphed]
+39:54 T: And then I expect better results on Monday.
+39:56 T: I want you to finish this up on Monday. Fair enough?
+39:59 T: Okay, Jeremy? Ricardo
+
+--- CHUNK 54 (39:45 - 40:45) ---
+40:00 T: Fair enough?
+40:01 [T stands over a group of students at a table]
+40:02 T: Okay, Jeremy? Ricardo?
+40:03 [T moves to another table and leans over the desk of S-GreenShirt]
+40:06 T: Ah, see now it gets a little interesting.
+40:08 T: Show me your equation two.
+40:10 S-GreenShirt: Two is... down here.
+40:11 [S-GreenShirt points to a line on his large graph paper]
+40:12 T: Show me your equation six.
+40:14 [Close-up of the graph paper showing several intersecting lines with numbers in circles next to them]
+40:15 T: Now, one thing that I hope you understand is a line...
+40:18 [T points to the arrowheads at the ends of the lines on the graph]
+40:19 T: Those arrows mean they go on... lines go on forever in both directions, right?
+40:22 T: So take your ruler...
+40:24 [T picks up a wooden ruler from the desk and hands it to S-GreenShirt]
+40:26 T: And let's actually extend this line.
+40:28 T: Be very careful. You know, be precise.
+40:30 [S-GreenShirt takes the ruler and places it on the paper]
+40:32 T: Let's extend that line straight down.
+40:34 [T helps S-GreenShirt align the ruler with line number 6]
+40:36 [Close-up of the ruler. S-GreenShirt's hands hold it steady]
+40:37 [S-GreenShirt draws a line with a pencil, extending line 6 further down the grid]
+40:40 T: Good, good, good.
+40:42 T: Now, that's good enough.
+40:44 T: Because the idea is I'm...
+
+--- CHUNK 55 (40:30 - 41:30) ---
+40:45 [T leans over the desk where S-GreenShirt and S-Glasses are working]
+40:46 T: ...asking about what?
+40:48 [T points to a question on the worksheet]
+40:48 T: The intersection. The intersection is where two lines...
+40:52 T: ...meet or cross each other, right?
+40:54 [T points to the intersection of two lines on the graph paper]
+40:54 T: Look where these two lines meet or cross. What do you notice about the angles there?
+41:00 S-Glasses: It's a right angle.
+41:02 T: Well said. Right?
+41:05 T: So, now in mathematics, this is something I haven't mentioned yet, that's also called perpendicular. Have you guys heard of that before?
+41:11 S-Glasses: Yeah.
+41:12 T: So, these two lines therefore you would say are perpendicular. They make right angles, right?
+41:18 [T points to the 90-degree angle formed by the intersection on the paper]
+41:20 [T stands up and begins to walk away from the group]
+41:21 S-Glasses: My pencil.
+41:22 [S-GreenShirt and S-Glasses look down at their papers and continue writing]
+41:24 [Camera pans across the classroom showing other students working in small groups at their desks]
+41:27 [T walks towards a group of students at the back of the room]
+41:30 [inaudible conversation, ~3s]
+
+--- CHUNK 56 (41:15 - 42:15) ---
+41:30 [T walks through the classroom, passing several groups of students working at their desks]
+41:37 T: Have you started your quick write yet, Brittany?
+41:38 [T stops at a table where four students are working. S-GirlPonytail-Brittany looks up at him]
+41:39 S-GirlPonytail-Brittany: No, 'cause I was doing the graphing and they finished all the answers so I had to write down all the answers.
+41:43 [S-GirlBlackTank-Leslie points to her paper while talking to S-GirlPonytail-Brittany]
+41:44 T: Right now I want you to stop what you're doing and, Leslie, just one paragraph now.
+41:48 T: Just write as much as you can.
+41:51 S-GirlBlackTank-Leslie: I didn't learn anything.
+41:53 T: You didn't learn anything?
+41:55 T: You didn't know how to learn how to make tables, or understand slope, or y-intercept or anything like that?
+42:01 S-GirlBlackTank-Leslie: Yes.
+42:02 T: Okay.
+42:03 [T walks away from the group towards the back of the room]
+42:06 [T stands behind S-Boy-BlackShirt who is writing with a ruler on his desk]
+42:07 SN: [inaudible]
+42:10 [Camera pans back to the previous group; S-BlondeBoy-RedShirt and S-GirlBlackTank-Leslie are writing in their notebooks]
+42:13 [T walks past the camera towards the front of the room]
+42:15 [inaudible conversation, ~1s]
+
+--- CHUNK 57 (42:00 - 43:00) ---
+42:15 [T walks towards a group of four students sitting at a cluster of desks]
+42:16 S-Boy-WhiteShirt: That was nice.
+42:17 S-Boy-Blonde: I know.
+42:18 S-Boy-WhiteShirt: But then you crumpled it up.
+42:19 S-Boy-Blonde: Because I screwed up.
+42:20 T: Oh, so you got a new one?
+42:21 S-Boy-Blonde: Yeah.
+42:22 T: So on Monday, you're going to redo it.
+42:23 S-Boy-Blonde: I'm just trying to...
+42:24 [T points at the paper on S-Boy-Blonde's desk]
+42:25 T: Maybe even use a ruler to draw your coordinate system. Make it look professional.
+42:28 [S-Boy-RedShirt reaches across the table and takes a ruler from S-Boy-Blonde]
+42:29 S-Boy-RedShirt: Do it on the back.
+42:30 S-Boy-Blonde: Okay.
+42:31 S-Boy-RedShirt: Over your weekend.
+42:32 S-Boy-Blonde: I'm not gonna do it.
+42:33 T: Okay.
+42:34 [T turns and starts walking towards the front of the classroom]
+42:35 [inaudible conversation, ~5s]
+42:40 T: Last time, ladies and gentlemen. Five, four, three, two, one, zero.
+42:44 [T stands at the front of the room, clapping his hands rhythmically to get the students' attention]
+42:46 T: Okay. Here's the deal.
+42:49 T: Because we're running short on time, and since I'm going to follow up anyways on Monday...
+42:56 T: Okay, and we're actually going to have a little discussion about...
+
+--- CHUNK 58 (42:45 - 43:45) ---
+43:00 T: ...not just graphing, but also what I wanted you to discover about these lines.
+43:08 [S-BoyRedShirt in the foreground puts a paper into a brown folder]
+43:09 T: All right. Please make sure you put away all your work. Do not lose any of it.
+43:14 T: Do not turn anything in today, because you're going to need it on Monday.
+43:16 [S-GirlWhiteStriped raises her hand while holding a large white sheet of paper]
+43:17 S-GirlWhiteStriped: What do we do with this?
+43:19 [T walks towards the group with S-GirlWhiteStriped]
+43:20 T: Can I trust you? Can your group trust you to fold that up and put it away somewhere?
+43:23 S-GirlWhiteStriped: Yeah.
+43:24 S-GirlRedShirt: We trust you.
+43:25 T: All right.
+43:26 [Camera pans left, showing other students packing up books and papers]
+43:28 S-BoyWhiteShirt: Keep it until Monday?
+43:29 T: Keep it until Monday. Okay?
+43:31 S-BoyWhiteShirt: Yep.
+43:32 [inaudible conversation, ~11s]
+43:43 T: You're not going to be here Monday, Tuesday, or Wednesday?
+43:45 [End of clip]
+
+--- CHUNK 59 (43:30 - 44:30) ---
+43:45 [Students are packing up their belongings and moving around the classroom]
+43:49 [S-GirlStripes and S-GirlRedShirt sit at a table, chanting letters]
+43:50 S-GirlStripes: D-O-G.
+43:51 S-GirlRedShirt: D-O-G.
+43:52 S-GirlStripes: D-A-T.
+43:53 S-GirlRedShirt: C-A-T.
+43:54 S-GirlStripes: C-A-C.
+43:55 T: Leave your work with another group member.
+43:57 [S-GirlWhiteShirt raises her hand while holding a paper]
+43:58 S-GirlWhiteShirt: Hey, what do we do with this, Mr. Ormsby?
+44:00 T: Leave that on the desk. That'll be fine.
+44:02 T: Okay, hurry up and go, guys. Have a good weekend.
+44:04 SS: You too!
+44:06 SN: Bye, Mr. Ormsby.
+44:07 T: See ya.
+44:08 [Students continue to exit the room; the camera pans to show the classroom environment]
+44:11 T: Did you have fun? Good.
+44:13 [Camera focuses on a bulletin board titled "MR. ORMSBY" with "CLASSROOM RULES" listed: 1. BE RESPECTFUL, 2. BE READY, 3. BE RESPONSIBLE]
+44:15 SN: I actually learned something without goofing off.
+44:17 T: That was so much fun for me.
+44:19 [The screen goes black for the remainder of the clip]
+44:30 [End of clip]
+
+--- CHUNK 60 (44:15 - 44:31) ---
+44:30 [The screen remains black; no audible speech]
+44:31 [End of clip]

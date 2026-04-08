@@ -1,0 +1,242 @@
+{
+  "lesson": "US1_corr5min",
+  "youtube_url": "x",
+  "gold_path": "dev/active/paper/benchmark_runs/US1_gold_corrected.txt",
+  "v10_output_path": "dev/active/paper/benchmark_runs/US1_first300s_transcript.txt",
+  "n_gold_turns": 74,
+  "n_pred_turns": 82,
+  "n_gold_words": 830,
+  "n_pred_words": 743,
+  "n_visual_events": 5,
+  "visual_events_per_minute": 1.0,
+  "wer": 0.1566,
+  "wer_strict": 0.1609,
+  "wer_per_role": {
+    "wer_weighted": 0.1566,
+    "wer_teacher": 0.1145,
+    "wer_student": 0.4476,
+    "gold_teacher_words": 725,
+    "gold_student_words": 105,
+    "pred_teacher_words": 678,
+    "pred_student_words": 65
+  },
+  "content_equivalence": {
+    "window_seconds": 12.0,
+    "n_gold_words": 801,
+    "n_pred_words": 704,
+    "n_gold_matched": 781,
+    "n_pred_matched": 700,
+    "recall": 0.975,
+    "precision": 0.9943,
+    "f1": 0.9846,
+    "wer_equivalent": 0.03,
+    "gold_unmatched_count": 20,
+    "pred_unmatched_count": 4,
+    "gold_unmatched_sample": [
+      {
+        "t": 38,
+        "w": "piece"
+      },
+      {
+        "t": 58,
+        "w": "Sarah."
+      },
+      {
+        "t": 162,
+        "w": "Nick,"
+      },
+      {
+        "t": 228,
+        "w": "When"
+      },
+      {
+        "t": 228,
+        "w": "like,"
+      },
+      {
+        "t": 228,
+        "w": "like,"
+      },
+      {
+        "t": 238,
+        "w": "Yeah."
+      },
+      {
+        "t": 262,
+        "w": "Ormsby,"
+      },
+      {
+        "t": 262,
+        "w": "whoo-hoo."
+      },
+      {
+        "t": 282,
+        "w": "right?"
+      },
+      {
+        "t": 292,
+        "w": "like-"
+      },
+      {
+        "t": 294,
+        "w": "Negative"
+      },
+      {
+        "t": 294,
+        "w": "three,"
+      },
+      {
+        "t": 294,
+        "w": "three."
+      },
+      {
+        "t": 296,
+        "w": "just"
+      },
+      {
+        "t": 296,
+        "w": "three,"
+      },
+      {
+        "t": 296,
+        "w": "stay"
+      },
+      {
+        "t": 296,
+        "w": "away"
+      },
+      {
+        "t": 296,
+        "w": "from"
+      },
+      {
+        "t": 296,
+        "w": "negatives,"
+      }
+    ],
+    "pred_unmatched_sample": [
+      {
+        "t": 240,
+        "w": "equals"
+      },
+      {
+        "t": 252,
+        "w": "Exactly!"
+      },
+      {
+        "t": 278,
+        "w": "making"
+      },
+      {
+        "t": 278,
+        "w": "correct?"
+      }
+    ]
+  },
+  "wer_n_words_ref": 830,
+  "audit": {
+    "n_gold_verdict": 6,
+    "n_pred_verdict": 0,
+    "n_inaud_verdict": 1,
+    "n_unreviewed": 67,
+    "n_reviewed": 7,
+    "audit_wer_on_reviewed": 1.5,
+    "audit_row_error_rate": 1.0,
+    "audit_error_words": 87.0,
+    "audit_scored_words": 58
+  },
+  "speaker_label_accuracy": 0.6757,
+  "speaker_confusion": {
+    "T": {
+      "T": 44,
+      "UNK": 1,
+      "S": 6
+    },
+    "SN": {
+      "SN": 2,
+      "T": 5,
+      "S": 3
+    },
+    "S": {
+      "T": 7,
+      "SN": 2,
+      "S": 4
+    }
+  },
+  "n_dropped_turns": 10,
+  "dropped_turns": [
+    {
+      "t_seconds": 38,
+      "speaker": "S",
+      "text": "Can I have a piece of paper?",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "What I need for you to do right now is every one of you get out a blank sheet of paper."
+    },
+    {
+      "t_seconds": 62,
+      "speaker": "T",
+      "text": "Okay. Now- Here you go.",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Okay."
+    },
+    {
+      "t_seconds": 163,
+      "speaker": "SN",
+      "text": "Where's the... oh, right here?",
+      "best_pred_overlap": 0.4,
+      "best_pred_text": "Right. So someone here can assign themselves as the grapher or whatever."
+    },
+    {
+      "t_seconds": 181,
+      "speaker": "T",
+      "text": "Yes?",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 228,
+      "speaker": "SN",
+      "text": "When you put, like, a one in here, would you go like, times-",
+      "best_pred_overlap": 0.25,
+      "best_pred_text": "Put in zero, two-thirds times zero equals what?"
+    },
+    {
+      "t_seconds": 238,
+      "speaker": "S",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 262,
+      "speaker": "SN",
+      "text": "Mr. Ormsby, whoo-hoo. Okay. Mister, I forgot how to do these again. Like how do you do X and Y?",
+      "best_pred_overlap": 0.462,
+      "best_pred_text": "I forgot how to do this again. Like, how do you do X and Y?"
+    },
+    {
+      "t_seconds": 285,
+      "speaker": "SN",
+      "text": "Yeah.",
+      "best_pred_overlap": 0.0,
+      "best_pred_text": null
+    },
+    {
+      "t_seconds": 294,
+      "speaker": "S",
+      "text": "Negative three, zero and three.",
+      "best_pred_overlap": 0.333,
+      "best_pred_text": "So zero, one, two, and..."
+    },
+    {
+      "t_seconds": 296,
+      "speaker": "T",
+      "text": "Right, and if you want to just do zero, three, six and stay away from negatives, you can do that too. All right?",
+      "best_pred_overlap": 0.071,
+      "best_pred_text": "So zero, one, two, and..."
+    }
+  ],
+  "projection_warnings": [
+    "unmapped speaker token: 'Girl-WhiteJacket'"
+  ]
+}

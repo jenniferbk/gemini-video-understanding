@@ -1,0 +1,27 @@
+[
+  {
+    "label": "T",
+    "description": "The teacher — the adult leading instruction. Usually at the front of the room, near the board, or moving between student desks. Speaks with instructional or directive intent.",
+    "type": "teacher"
+  },
+  {
+    "label": "S",
+    "description": "An identified student — any student whose face/voice is visible enough to be recognized as a recurring individual within the lesson. When a student is clearly distinguishable, label them S and describe their position or appearance briefly.",
+    "type": "student"
+  },
+  {
+    "label": "SN",
+    "description": "A single unidentified student — a student speaks but cannot be visually attributed to a specific recurring individual (off-camera, brief, ambiguous).",
+    "type": "student"
+  },
+  {
+    "label": "SS",
+    "description": "Multiple students speaking together — choral response, overlapping group talk, or any utterance attributable to two or more students at once.",
+    "type": "student"
+  },
+  {
+    "label": "BS",
+    "description": "Background sound or non-speech vocalization (laughter, classroom noise, brief unintelligible utterance with no clear speaker).",
+    "type": "student"
+  }
+]

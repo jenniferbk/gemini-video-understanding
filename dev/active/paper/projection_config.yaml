@@ -1,0 +1,40 @@
+# Projection rules: v10 pipeline output -> TIMSS-comparable form.
+# Edit freely; benchmark_timss.py reloads this each run.
+
+# Strip these substrings/regexes from each line BEFORE scoring.
+# Order matters; applied top-to-bottom.
+strip_patterns:
+  - '\*LOW CONFIDENCE[^*]*\*'        # 🚨 *LOW CONFIDENCE - Speaker: 40%, Content: 60%*
+  - '\*Speaker:[^*]*\*'              # ⚠️ *Speaker: 80%, Content: 68%*
+  - '🚨|⚠️|✅'                        # confidence emoji badges
+  - '\[[^\]]*\]'                     # [points to screen], [gestures], [inaudible]
+  - '\([^)]*inaudible[^)]*\)'        # (inaudible) — keep token, normalized later
+
+# Normalize tokens AFTER stripping. Applied as literal replacements.
+normalize:
+  '(inaudible)': '[inaudible]'
+  'Mhm.': 'mhm'
+  'Mm-hmm.': 'mhm'
+
+# Speaker label mapping. Keys are regexes against the v10 speaker token
+# (the bit before the colon on each line). First match wins.
+# TIMSS codebook: T=teacher, S=identified student, SN=single unnamed,
+#                 SS=multiple students together, BS=background sound (rare)
+speaker_map:
+  - pattern: '^(Ava|Daisy|Ben|Mr\.|Ms\.|Mrs\.|Teacher|T)$'
+    label: T
+  - pattern: '^A\d+$'         # A04, A06 - named-by-code students
+    label: S
+  - pattern: '^S\d+$'
+    label: S
+  - pattern: '^S[-_].+'       # S-Jenna, S-Boy-Afro, S-WhiteShirt - v10 visual sublabels
+    label: S
+  - pattern: '^S\s*\(.+\)$'   # "S (Boy-Afro)" - parenthetical variant
+    label: S
+  - pattern: '^(BS|Background)$'
+    label: BS
+  - pattern: '^(SN|UnknownStudent|Student)$'
+    label: SN
+  - pattern: '^(Class|All|SS|Students)$'
+    label: SS
+# Anything unmatched -> 'UNK' and logged as a projection warning.

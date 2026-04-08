@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 720" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#444"/>
+    </marker>
+    <marker id="arrowDashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+    </marker>
+    <linearGradient id="phaseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4f7fb"/>
+      <stop offset="100%" stop-color="#e6edf6"/>
+    </linearGradient>
+    <linearGradient id="modelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff4e0"/>
+      <stop offset="100%" stop-color="#ffe6b8"/>
+    </linearGradient>
+    <linearGradient id="outputGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f6ed"/>
+      <stop offset="100%" stop-color="#cfe9d6"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetBlur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="490" y="32" text-anchor="middle" font-size="18" font-weight="600" fill="#1a1a1a">Multimodal Classroom Video Transcription Pipeline</text>
+  <text x="490" y="52" text-anchor="middle" font-size="12" fill="#666">Single-model architecture: Gemini produces interleaved speech + visual transcripts in one pass</text>
+
+  <!-- Input -->
+  <g filter="url(#softShadow)">
+    <rect x="40" y="90" width="170" height="60" rx="8" fill="#fff" stroke="#2c5282" stroke-width="1.5"/>
+    <text x="125" y="115" text-anchor="middle" font-size="13" font-weight="600" fill="#2c5282">Classroom Video</text>
+    <text x="125" y="133" text-anchor="middle" font-size="11" fill="#555">.mp4 / .mov, 30–80 min</text>
+  </g>
+
+  <!-- Phase 1: Chunking -->
+  <g filter="url(#softShadow)">
+    <rect x="260" y="90" width="190" height="60" rx="8" fill="url(#phaseGrad)" stroke="#2c5282" stroke-width="1.2"/>
+    <text x="355" y="113" text-anchor="middle" font-size="13" font-weight="600" fill="#2c5282">Phase 1 — Chunking</text>
+    <text x="355" y="131" text-anchor="middle" font-size="11" fill="#444">60 s chunks • 15 s overlap</text>
+    <text x="355" y="145" text-anchor="middle" font-size="10" fill="#666">~80 chunks for 60 min video</text>
+  </g>
+
+  <!-- Visual chunks strip -->
+  <g transform="translate(490,95)">
+    <rect x="0" y="0" width="450" height="50" rx="4" fill="#fafbfd" stroke="#cfd6e0" stroke-width="0.8"/>
+    <g font-size="9" fill="#444">
+      <rect x="6"   y="8" width="60" height="34" rx="3" fill="#dde7f5" stroke="#7a9bcc"/>
+      <text x="36"  y="29" text-anchor="middle">chunk 1</text>
+      <rect x="56"  y="8" width="60" height="34" rx="3" fill="#dde7f5" stroke="#7a9bcc" opacity="0.85"/>
+      <text x="86"  y="29" text-anchor="middle">chunk 2</text>
+      <rect x="106" y="8" width="60" height="34" rx="3" fill="#dde7f5" stroke="#7a9bcc" opacity="0.85"/>
+      <text x="136" y="29" text-anchor="middle">chunk 3</text>
+      <rect x="156" y="8" width="60" height="34" rx="3" fill="#dde7f5" stroke="#7a9bcc" opacity="0.85"/>
+      <text x="186" y="29" text-anchor="middle">chunk 4</text>
+      <text x="240" y="30" font-size="14" fill="#888">…</text>
+      <rect x="270" y="8" width="60" height="34" rx="3" fill="#dde7f5" stroke="#7a9bcc" opacity="0.85"/>
+      <text x="300" y="29" text-anchor="middle">chunk N-1</text>
+      <rect x="320" y="8" width="60" height="34" rx="3" fill="#dde7f5" stroke="#7a9bcc"/>
+      <text x="350" y="29" text-anchor="middle">chunk N</text>
+    </g>
+    <text x="225" y="62" text-anchor="middle" font-size="9" font-style="italic" fill="#777">15 s overlap shaded between adjacent chunks</text>
+  </g>
+
+  <!-- Phase 2: Speaker ID -->
+  <g filter="url(#softShadow)">
+    <rect x="40" y="200" width="280" height="100" rx="8" fill="url(#phaseGrad)" stroke="#2c5282" stroke-width="1.2"/>
+    <text x="180" y="223" text-anchor="middle" font-size="13" font-weight="600" fill="#2c5282">Phase 2 — Speaker Identification</text>
+    <text x="180" y="244" text-anchor="middle" font-size="11" fill="#444">First 2 chunks → Gemini multimodal call</text>
+    <text x="180" y="262" text-anchor="middle" font-size="11" fill="#444">Returns JSON visual speaker registry</text>
+    <text x="180" y="285" text-anchor="middle" font-size="10" font-style="italic" fill="#666">Girl-BlondeHair • Boy-RedHoodie • Teacher-PinkPants</text>
+  </g>
+
+  <!-- Speaker registry artifact -->
+  <g filter="url(#softShadow)">
+    <rect x="350" y="210" width="200" height="80" rx="6" fill="#fff" stroke="#888" stroke-dasharray="3 2" stroke-width="1"/>
+    <text x="450" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Speaker Registry</text>
+    <text x="360" y="248" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#555">[{"label": "Teacher-PinkPants",</text>
+    <text x="360" y="260" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#555"> "type": "teacher", ...},</text>
+    <text x="360" y="272" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#555"> {"label": "Boy-GreyTShirt",</text>
+    <text x="360" y="284" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#555"> "type": "student", ...}]</text>
+  </g>
+
+  <!-- Phase 3: Per-chunk transcription (the central box) -->
+  <g filter="url(#softShadow)">
+    <rect x="40" y="330" width="900" height="220" rx="10" fill="#fff" stroke="#2c5282" stroke-width="1.5"/>
+    <text x="490" y="355" text-anchor="middle" font-size="14" font-weight="600" fill="#2c5282">Phase 3 — Per-Chunk Multimodal Transcription</text>
+    <line x1="60" y1="368" x2="920" y2="368" stroke="#dde3ec"/>
+
+    <!-- Prompt assembly column -->
+    <g>
+      <text x="80" y="390" font-size="11" font-weight="600" fill="#444">Composed Prompt</text>
+      <rect x="60" y="400" width="260" height="22" rx="3" fill="#f4f7fb" stroke="#bcc7d8"/>
+      <text x="70" y="415" font-size="10" fill="#444">① Base prompt (e.g., wholeclass)</text>
+      <rect x="60" y="426" width="260" height="22" rx="3" fill="#f4f7fb" stroke="#bcc7d8"/>
+      <text x="70" y="441" font-size="10" fill="#444">② Speaker registry (from Phase 2)</text>
+      <rect x="60" y="452" width="260" height="22" rx="3" fill="#fff5e6" stroke="#e6b96b"/>
+      <text x="70" y="467" font-size="10" fill="#7a4f00">③ Anti-hallucination block</text>
+      <rect x="60" y="478" width="260" height="22" rx="3" fill="#f4f7fb" stroke="#bcc7d8"/>
+      <text x="70" y="493" font-size="10" fill="#444">④ Chunk framing (N of M, duration)</text>
+      <rect x="60" y="504" width="260" height="22" rx="3" fill="#f4f7fb" stroke="#bcc7d8"/>
+      <text x="70" y="519" font-size="10" fill="#444">⑤ Continuity context (last 8 lines)</text>
+    </g>
+
+    <!-- Chunk video icon -->
+    <g transform="translate(355,400)">
+      <rect x="0" y="0" width="80" height="55" rx="4" fill="#e3edff" stroke="#7a9bcc"/>
+      <text x="40" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#2c5282">chunk_k.mp4</text>
+      <text x="40" y="38" text-anchor="middle" font-size="9" fill="#555">60 s, 2 fps</text>
+      <text x="40" y="50" text-anchor="middle" font-size="9" fill="#555">HIGH res</text>
+    </g>
+    <text x="395" y="475" text-anchor="middle" font-size="9" fill="#666">single multimodal call</text>
+
+    <!-- Gemini model box -->
+    <g filter="url(#softShadow)">
+      <rect x="465" y="395" width="200" height="120" rx="8" fill="url(#modelGrad)" stroke="#cc8a1f" stroke-width="1.4"/>
+      <text x="565" y="418" text-anchor="middle" font-size="13" font-weight="700" fill="#7a4f00">Gemini 3 Flash</text>
+      <text x="565" y="434" text-anchor="middle" font-size="10" fill="#7a4f00">multimodal video model</text>
+      <line x1="485" y1="442" x2="645" y2="442" stroke="#cc8a1f" stroke-dasharray="2 2" opacity="0.6"/>
+      <text x="565" y="458" text-anchor="middle" font-size="10" fill="#7a4f00">2 FPS • HIGH (280 tok/frame)</text>
+      <text x="565" y="473" text-anchor="middle" font-size="10" fill="#7a4f00">temp 0.2 • thinking 4096</text>
+      <text x="565" y="495" text-anchor="middle" font-size="10" font-style="italic" fill="#7a4f00">speech + visual in ONE pass</text>
+      <text x="565" y="508" text-anchor="middle" font-size="9" fill="#a86a00">(no separate audio pipeline)</text>
+    </g>
+
+    <!-- Transcript output preview -->
+    <g>
+      <rect x="700" y="395" width="220" height="120" rx="6" fill="#fff" stroke="#888" stroke-width="1"/>
+      <text x="810" y="412" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Interleaved chunk output</text>
+      <text x="710" y="430" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#444">02:05 Teacher-PinkPants:</text>
+      <text x="710" y="441" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#444">  What's the angle?</text>
+      <text x="710" y="455" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#0a6635">02:07 [Girl-Glasses traces</text>
+      <text x="710" y="466" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#0a6635">  finger along right side]</text>
+      <text x="710" y="480" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#444">02:09 Girl-Glasses: Eight.</text>
+      <text x="710" y="494" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#0a6635">02:10 [Teacher writes "150°"</text>
+      <text x="710" y="505" font-size="9" font-family="ui-monospace, Menlo, monospace" fill="#0a6635">  on whiteboard]</text>
+    </g>
+
+    <!-- Validator -->
+    <g>
+      <rect x="60" y="540" width="860" height="0" stroke="none"/>
+    </g>
+  </g>
+
+  <!-- Phase 4: Validator + retry (small bar under Phase 3) -->
+  <g>
+    <rect x="60" y="558" width="860" height="32" rx="6" fill="#fdf3f3" stroke="#c97a7a" stroke-width="1"/>
+    <text x="80" y="578" font-size="11" font-weight="600" fill="#882020">Validator</text>
+    <text x="170" y="578" font-size="10" fill="#552020">length • repetition loop • timestamp coverage • error markers</text>
+    <text x="640" y="578" font-size="10" fill="#882020" font-style="italic">→ retry up to 3× on failure</text>
+  </g>
+
+  <!-- Phase 5: Assembly -->
+  <g filter="url(#softShadow)">
+    <rect x="40" y="610" width="280" height="80" rx="8" fill="url(#phaseGrad)" stroke="#2c5282" stroke-width="1.2"/>
+    <text x="180" y="633" text-anchor="middle" font-size="13" font-weight="600" fill="#2c5282">Phase 5 — Assembly</text>
+    <text x="180" y="652" text-anchor="middle" font-size="11" fill="#444">Sort • dedupe overlap • renumber timestamps</text>
+    <text x="180" y="668" text-anchor="middle" font-size="10" font-style="italic" fill="#666">later chunk wins on label refinement</text>
+  </g>
+
+  <!-- Phase 6: Outputs -->
+  <g filter="url(#softShadow)">
+    <rect x="350" y="610" width="590" height="80" rx="8" fill="url(#outputGrad)" stroke="#2e7d4f" stroke-width="1.2"/>
+    <text x="645" y="630" text-anchor="middle" font-size="13" font-weight="600" fill="#2e7d4f">Phase 6 — Dual Output</text>
+    <g font-size="10" fill="#1c4a2e">
+      <rect x="370" y="640" width="170" height="38" rx="4" fill="#fff" stroke="#7ab592"/>
+      <text x="455" y="655" text-anchor="middle" font-weight="600">Research transcript</text>
+      <text x="455" y="670" text-anchor="middle" font-size="9">speech + visual interleaved</text>
+      <rect x="555" y="640" width="170" height="38" rx="4" fill="#fff" stroke="#7ab592"/>
+      <text x="640" y="655" text-anchor="middle" font-weight="600">Transana transcript</text>
+      <text x="640" y="670" text-anchor="middle" font-size="9">dialogue-only, clean</text>
+      <rect x="740" y="640" width="170" height="38" rx="4" fill="#fff" stroke="#7ab592"/>
+      <text x="825" y="655" text-anchor="middle" font-weight="600">SRT subtitles</text>
+      <text x="825" y="670" text-anchor="middle" font-size="9">standard timed subs</text>
+    </g>
+  </g>
+
+  <!-- Arrows -->
+  <!-- Input → Chunking -->
+  <line x1="210" y1="120" x2="258" y2="120" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Chunking → strip (visual) -->
+  <line x1="450" y1="120" x2="490" y2="120" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Chunking → Speaker ID (down) -->
+  <path d="M 180 152 L 180 198" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Speaker ID → Registry artifact -->
+  <line x1="320" y1="250" x2="348" y2="250" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Chunks (strip) → Phase 3 (chunk_k icon) -->
+  <path d="M 715 148 C 715 250 395 280 395 398" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrowDashed)"/>
+  <!-- Registry → Phase 3 prompt block -->
+  <path d="M 450 290 C 450 320 230 320 230 398" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrowDashed)"/>
+  <!-- Prompt block → Gemini -->
+  <line x1="320" y1="455" x2="463" y2="455" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Chunk video → Gemini -->
+  <line x1="435" y1="430" x2="463" y2="430" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Gemini → output -->
+  <line x1="665" y1="455" x2="698" y2="455" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Phase 3 → validator -->
+  <path d="M 490 550 L 490 558" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Validator → assembly -->
+  <path d="M 180 590 L 180 608" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Validator retry loop -->
+  <path d="M 800 558 C 850 540 870 480 820 460" fill="none" stroke="#c97a7a" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#arrowDashed)"/>
+  <text x="868" y="510" font-size="9" fill="#882020" font-style="italic">retry</text>
+  <!-- Assembly → output -->
+  <line x1="320" y1="650" x2="348" y2="650" stroke="#444" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <g transform="translate(40,700)">
+    <rect x="0" y="-12" width="12" height="12" rx="2" fill="url(#modelGrad)" stroke="#cc8a1f"/>
+    <text x="18" y="-2" font-size="10" fill="#444">Multimodal model call</text>
+    <rect x="160" y="-12" width="12" height="12" rx="2" fill="url(#phaseGrad)" stroke="#2c5282"/>
+    <text x="178" y="-2" font-size="10" fill="#444">Pipeline phase</text>
+    <rect x="290" y="-12" width="12" height="12" rx="2" fill="url(#outputGrad)" stroke="#2e7d4f"/>
+    <text x="308" y="-2" font-size="10" fill="#444">Output artifact</text>
+    <line x1="410" y1="-6" x2="430" y2="-6" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="436" y="-2" font-size="10" fill="#444">Data flow</text>
+  </g>
+</svg>

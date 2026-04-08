@@ -1,0 +1,1241 @@
+=== WHISPER large-v3 + pyannote 3.1 ===
+
+00:00 SPEAKER_00: for each group of four, okay, or three.
+00:04 UNK: Okay.
+00:06 SPEAKER_00: Okay, guys, let's get started here.
+00:09 SPEAKER_00: Okay, listen closely.
+00:11 SPEAKER_00: To save a little time, I won't bring out my overhead like you're usually accustomed to.
+00:15 SPEAKER_00: Okay?
+00:17 SPEAKER_00: Instead, let me just tell you, what I'm going to give you for each group
+00:21 SPEAKER_00: is a little three-page packet, okay?
+00:25 SPEAKER_00: What I need for you to do right now is every one of you get out a blank sheet of paper.
+00:30 SPEAKER_00: Every one of you needs a blank sheet of paper.
+00:34 SPEAKER_01: Thank you.
+00:40 SPEAKER_00: Just put it right on the table back there.
+00:42 SPEAKER_01: Thank you.
+00:55 SPEAKER_00: Thank you, sir.
+00:58 SPEAKER_00: Don't leave without it, all right?
+01:01 SPEAKER_00: Okay.
+01:03 UNK: Now.
+01:07 SPEAKER_00: There we go.
+01:10 SPEAKER_00: All right.
+01:13 SPEAKER_00: Okay.
+01:14 SPEAKER_00: So, listen closely now.
+01:17 SPEAKER_00: Everybody ready?
+01:18 SPEAKER_01: Yep.
+01:19 SPEAKER_00: Okay, everybody within your group of four or three, you need to work together.
+01:24 SPEAKER_00: I know normally we work together.
+01:25 SPEAKER_00: We work in pairs.
+01:27 SPEAKER_00: Okay?
+01:28 SPEAKER_00: But I figured today you have another pair of students, you know,
+01:33 SPEAKER_00: a couple extra brains there to help you get through this little lesson.
+01:37 SPEAKER_00: Okay?
+01:38 SPEAKER_00: We've done this plenty of times before.
+01:41 SPEAKER_00: Some of you, honestly, are still a little shaky.
+01:44 SPEAKER_00: So, if you look at the packet, which you're all sharing as a group,
+01:49 SPEAKER_00: page one has five equations I want you to graph.
+01:54 SPEAKER_00: Now, you can graph it any way.
+01:55 SPEAKER_00: You can graph it any way that you know how to do it, as long as you do it correctly.
+01:59 SPEAKER_00: Can someone raise their hand and tell me what's one obvious thing I could do to graph?
+02:04 SPEAKER_00: Nick?
+02:05 SPEAKER_00: Use the slope with the y-intercept, right?
+02:09 SPEAKER_00: That's probably the way you'll probably want to do it, right, Nick?
+02:12 SPEAKER_00: Is there another way, though?
+02:14 SPEAKER_00: Robert?
+02:14 SPEAKER_01: Use the tables.
+02:16 SPEAKER_00: Right, to make a table for the equation, right, and then plot the points from the table.
+02:20 SPEAKER_00: Everyone got that?
+02:21 SPEAKER_00: So, those are the two main ways, right?
+02:23 SPEAKER_00: We can graph those equations.
+02:25 SPEAKER_00: So, Robert?
+02:26 SPEAKER_00: Right now, I need you to get started.
+02:27 SPEAKER_00: The key thing is when you're done with the first five, the first page, as noted on the paper,
+02:32 SPEAKER_00: please make sure I check to make sure you did it right before you move on.
+02:37 SPEAKER_00: Okay?
+02:38 SPEAKER_00: So, go ahead and get started.
+02:41 SPEAKER_00: Nick, question?
+02:43 SPEAKER_00: Yeah, you're going to graph on that.
+02:45 SPEAKER_00: That is your result for your group.
+02:47 SPEAKER_00: Right.
+02:47 SPEAKER_00: So, someone here can assign themselves as the grapher or whatever.
+02:53 SPEAKER_00: The rest of you kind of work together.
+02:55 SPEAKER_00: Make sure it's accurate.
+02:56 SPEAKER_00: Okay?
+02:56 SPEAKER_00: You're going to do it?
+02:57 SPEAKER_00: Good job, Nick.
+02:58 SPEAKER_00: Yes.
+02:59 SPEAKER_00: All right, the grid paper.
+03:00 SPEAKER_01: All right, you know what?
+03:01 SPEAKER_00: Hey, listen up real quick.
+03:02 SPEAKER_00: Five, four, three, two, one, zero.
+03:03 SPEAKER_00: I probably forgot because I'm still a little nervous.
+03:04 SPEAKER_00: Okay?
+03:05 SPEAKER_00: But the grid paper, you have one per group, right?
+03:06 SPEAKER_00: So, I'm relying on one of you in that group to be the designated grapher for the group.
+03:07 SPEAKER_00: But the rest of you, please, you're going to do it.
+03:08 SPEAKER_00: You're going to do it.
+03:09 SPEAKER_00: You're going to do it.
+03:10 SPEAKER_00: You're going to do it.
+03:11 SPEAKER_00: You're going to do it.
+03:12 SPEAKER_00: You're going to do it.
+03:13 SPEAKER_00: You're going to do it.
+03:14 SPEAKER_00: You're going to do it.
+03:15 SPEAKER_00: You're going to do it.
+03:16 SPEAKER_00: You're going to do it.
+03:17 SPEAKER_00: You're going to do it.
+03:18 SPEAKER_00: Right?
+03:19 SPEAKER_00: So, I'm relying on one of you in that group to be the designated grapher for the group.
+03:24 SPEAKER_00: But the rest of you, please help out, you know, help each other.
+03:29 SPEAKER_00: Get the graphs done correctly.
+03:32 UNK: Okay?
+03:33 SPEAKER_00: There you go, Robert.
+03:35 SPEAKER_00: So, while he's doing that, let's get started on this, guys.
+03:37 SPEAKER_00: What are we going to do?
+03:38 SPEAKER_01: Do we write this on our paper, Mr. Paper?
+03:40 SPEAKER_01: Yeah.
+03:41 SPEAKER_00: All right.
+03:42 SPEAKER_00: This is actually, use the ruler, Robert.
+03:43 SPEAKER_01: Use the ruler, man.
+03:44 SPEAKER_00: Make it neat.
+03:45 SPEAKER_01: Okay.
+03:46 SPEAKER_01: All right.
+03:47 SPEAKER_01: You know, when you put like a one in here, would you go like times?
+03:52 SPEAKER_00: Ah, see, so now you've already forgotten, right?
+03:55 SPEAKER_00: First of all, zero is our favorite number, right?
+03:58 SPEAKER_00: You put in zero, two-thirds times zero is what?
+04:01 SPEAKER_00: Plus eight is eight.
+04:03 SPEAKER_00: Now because this fraction is a two-thirds, do you remember what I told you what numbers
+04:08 SPEAKER_00: you should pick now?
+04:09 SPEAKER_01: All these.
+04:10 SPEAKER_01: All these.
+04:11 SPEAKER_00: All these.
+04:12 SPEAKER_00: All these.
+04:13 SPEAKER_00: All these.
+04:14 SPEAKER_00: All these.
+04:15 SPEAKER_00: All these.
+04:16 SPEAKER_00: All these.
+04:17 SPEAKER_00: All these.
+04:18 SPEAKER_00: All these.
+04:19 SPEAKER_00: You don't have to worry about fractions or mixed numbers.
+04:20 SPEAKER_00: Okay?
+04:21 SPEAKER_01: All right.
+04:22 SPEAKER_01: Mr. Art, I forgot how to do this again.
+04:23 SPEAKER_01: Like how do you do X and Y?
+04:24 SPEAKER_01: Okay.
+04:25 SPEAKER_01: So now, wait a minute.
+04:26 SPEAKER_01: You want to make a table then, right?
+04:27 SPEAKER_01: So you're going to make an X-Y table.
+04:28 SPEAKER_00: Okay.
+04:29 SPEAKER_00: Now, the idea again is to make our points, we just pick any number we want for X. We
+04:30 SPEAKER_00: can do that, right?
+04:31 SPEAKER_00: Everybody agree, Jenna?
+04:32 SPEAKER_00: Yeah.
+04:33 SPEAKER_00: Okay.
+04:34 SPEAKER_00: So zero, one, two.
+04:35 UNK: All right.
+04:36 SPEAKER_00: So, you're going to make your points right.
+04:37 SPEAKER_00: Okay.
+04:38 SPEAKER_00: So, you're going to make your points right.
+04:39 SPEAKER_00: Okay.
+04:40 SPEAKER_00: So, you're going to make your points right.
+04:41 SPEAKER_00: All right.
+04:42 SPEAKER_00: Everybody agree? Jenna?
+04:44 SPEAKER_01: So 0, 1, 2.
+04:46 SPEAKER_00: Ah, that's true, except because this is a 2 thirds fraction.
+04:50 SPEAKER_01: You want to pick 3's.
+04:52 SPEAKER_01: Exactly.
+04:53 SPEAKER_01: Like negative 3, 0, and 3.
+04:55 SPEAKER_00: Right, and if you want to just do 0, 3, 6 and stay away from negatives, you can do that too.
+05:00 SPEAKER_01: Alright?
+05:01 SPEAKER_01: So 0, 3, 6, 10.
+05:07 SPEAKER_00: You think you can do it on your own now?
+05:10 SPEAKER_01: You just want to be on the camera.
+05:12 SPEAKER_01: No, that's not true.
+05:13 SPEAKER_00: Okay, we're going to put in 0 here, right?
+05:16 SPEAKER_00: Okay.
+05:17 SPEAKER_00: What's 2 thirds times 0?
+05:18 SPEAKER_00: 0.
+05:19 SPEAKER_00: Everybody watching, right?
+05:20 SPEAKER_00: Plus 8 is?
+05:21 SPEAKER_00: 8.
+05:22 SPEAKER_01: 8.
+05:23 SPEAKER_01: So 3 times 2 is 6.
+05:25 SPEAKER_01: 6.
+05:26 SPEAKER_00: Divided by 3 is?
+05:27 SPEAKER_00: 3 is 2.
+05:28 SPEAKER_00: Plus 8 is?
+05:29 SPEAKER_00: 8 is 10.
+05:30 SPEAKER_01: Okay, I get it.
+05:31 SPEAKER_00: Thank you Mr. Orsi.
+05:32 SPEAKER_00: Okay.
+05:33 SPEAKER_01: Good job.
+05:34 SPEAKER_01: So 6 times, alright.
+05:35 SPEAKER_01: Okay.
+05:36 SPEAKER_01: So, okay, this is what I did.
+05:37 SPEAKER_01: Alright, I put negative 3, 0, 3, and 6.
+05:39 SPEAKER_00: Alright.
+05:40 SPEAKER_00: So I'm going to put the table backwards.
+05:41 SPEAKER_00: I've never done that before.
+05:42 SPEAKER_01: Well, I did that.
+05:43 SPEAKER_00: Okay.
+05:44 SPEAKER_00: Okay, but it's easier.
+05:45 SPEAKER_01: Alright, if you say so.
+05:46 SPEAKER_01: Anyways, I put negative 3, so I put 2 thirds.
+05:51 SPEAKER_00: Times negative 3.
+05:52 SPEAKER_01: Yeah, negative 3 goes on the top, right?
+05:55 SPEAKER_00: Right.
+05:56 SPEAKER_00: Well, negative 3, remember, is negative 3 over 1.
+05:58 SPEAKER_01: There you go.
+05:59 SPEAKER_01: So it's a 1 and 1.
+06:00 SPEAKER_01: But that's a negative, though, right?
+06:01 SPEAKER_00: Right, that's still a negative there.
+06:03 SPEAKER_01: So it's negative 2.
+06:04 SPEAKER_01: It's negative 2.
+06:05 SPEAKER_00: Plus 8 is?
+06:06 SPEAKER_01: 6.
+06:07 SPEAKER_01: Yeah.
+06:08 SPEAKER_01: See?
+06:09 SPEAKER_01: So negative 3 is 6, 0 is 8.
+06:11 SPEAKER_00: Now 3 I question, though.
+06:13 SPEAKER_01: Try positive 3.
+06:15 SPEAKER_01: What's the whole positive sign?
+06:17 SPEAKER_01: 2 thirds, so 3, 1, 1, 1, and then 3, 8.
+06:22 SPEAKER_01: Number 2.
+06:23 SPEAKER_01: 11.
+06:24 SPEAKER_01: Plus 8.
+06:25 SPEAKER_00: Wait a minute, wait a minute.
+06:26 SPEAKER_01: 2 and 5 is 10.
+06:27 SPEAKER_00: 2 plus, wait a minute, no, what time is it?
+06:29 SPEAKER_01: Oh, it's 2, so.
+06:30 SPEAKER_01: It's 10.
+06:31 SPEAKER_00: It's 10.
+06:32 SPEAKER_01: Yeah.
+06:33 SPEAKER_01: And then 6 is 12.
+06:34 SPEAKER_01: Okay.
+06:35 SPEAKER_01: Alright, yes.
+06:36 SPEAKER_00: Alright, I just told you about it.
+06:37 SPEAKER_00: I just told you about it.
+06:38 SPEAKER_01: I just told you about how to do the problem.
+06:41 SPEAKER_00: Okay, now what I like is you at least remember to use multiples.
+06:45 SPEAKER_00: Like this one, let's try this one right here, right?
+06:48 SPEAKER_00: Okay.
+06:49 SPEAKER_00: You remember to use 5's.
+06:50 SPEAKER_00: Well, let's try 0.
+06:51 SPEAKER_00: If I put in 0 there, what's 3 fifths times 0?
+06:53 SPEAKER_01: Zero.
+06:54 SPEAKER_01: Right, minus 10.
+06:55 SPEAKER_01: Minus 10.
+06:56 SPEAKER_00: So put a negative 10 there.
+06:57 SPEAKER_00: So now you're going to now try 5 in there, right?
+06:58 SPEAKER_01: So just write a little 5 there so you can mentally see it.
+06:59 SPEAKER_00: So if I do that, I'm going to write a little 5 in there.
+07:00 SPEAKER_00: So I'm going to write a little 5 in there.
+07:01 SPEAKER_00: So I'm going to write a little 5 in there.
+07:02 SPEAKER_00: So I'm going to write a little 5 in there.
+07:03 SPEAKER_01: So I'm going to write a little 5 in there.
+07:04 SPEAKER_00: So just write a little 5 there so you can mentally see it.
+07:07 SPEAKER_00: So if I do 3 times 5, that's, now remember I'm going to divide by the 5, which gives
+07:12 SPEAKER_00: me minus 10.
+07:14 SPEAKER_01: Minus 10.
+07:15 SPEAKER_01: Minus 7.
+07:16 SPEAKER_01: Good job.
+07:17 SPEAKER_01: I think you got it now.
+07:18 SPEAKER_01: Oh, okay.
+07:19 SPEAKER_00: All right, finish it up.
+07:20 SPEAKER_00: All right.
+07:21 SPEAKER_00: How many points do you want to split?
+07:22 SPEAKER_00: Two or three?
+07:23 SPEAKER_01: Well, that's a very good question.
+07:24 SPEAKER_01: Obviously, how many points do I really need to make a line?
+07:27 SPEAKER_00: Two.
+07:28 SPEAKER_00: Two, right?
+07:29 SPEAKER_00: But just to make sure, I'm going to make sure that I'm not going to make a line.
+07:32 SPEAKER_00: Okay.
+07:33 SPEAKER_00: Okay.
+07:34 SPEAKER_00: So you're going to plot at least three points.
+07:35 SPEAKER_00: Okay.
+07:36 SPEAKER_00: That way if they're all in a line, you know you did it right.
+07:39 SPEAKER_00: Okay?
+07:40 UNK: Yeah.
+07:41 SPEAKER_00: Use the whole paper, man.
+07:44 SPEAKER_00: Look at these big grid lines here.
+07:49 SPEAKER_00: Every one, make it count one.
+07:51 SPEAKER_01: Okay?
+07:52 SPEAKER_01: Do we have to use, graph every single one?
+07:54 SPEAKER_00: Yeah, you're going to graph these five.
+07:56 SPEAKER_00: That's why I want you to use the whole paper.
+07:57 SPEAKER_00: Make a big coordinate system.
+07:58 SPEAKER_00: Oh.
+07:59 SPEAKER_00: As a matter of fact, let me give you a fresh one to save you some time.
+08:03 SPEAKER_01: All right, now I'm going to.
+08:04 SPEAKER_01: Okay.
+08:05 SPEAKER_00: So start over again.
+08:14 SPEAKER_00: Use the whole coordinate system.
+08:15 SPEAKER_00: That way all the lines are nicely spaced out and everything.
+08:18 SPEAKER_01: All right.
+08:19 SPEAKER_01: Okay?
+08:20 SPEAKER_00: Okay.
+08:21 SPEAKER_00: Well how you want to graph it?
+08:23 SPEAKER_00: Using a X-Y table?
+08:24 SPEAKER_00: X-Y.
+08:25 SPEAKER_00: Or do you want to learn how to use slope and Y intercept?
+08:28 SPEAKER_00: X-Y table.
+08:29 SPEAKER_01: Okay?
+08:30 SPEAKER_01: Okay.
+08:31 SPEAKER_00: So you're going to make an X-Y table.
+08:32 SPEAKER_00: Okay.
+08:33 SPEAKER_01: You agree, Ben?
+08:36 SPEAKER_00: All right.
+08:39 SPEAKER_00: So if you work with Chris side by side, then you can compare answers, right?
+08:43 SPEAKER_00: Don't just rely on Chris here.
+08:46 SPEAKER_00: All right, now, Chris, the idea is I want to plug in any values I really want for X
+08:49 SPEAKER_00: and figure out my corresponding Y, okay?
+08:53 SPEAKER_00: But because this fraction is a two-thirds, what numbers should I possibly use
+08:58 SPEAKER_00: that would make it easier for me?
+09:01 SPEAKER_00: Numbers based on three.
+09:02 SPEAKER_00: So, like, maybe negative 3, 0, 3, 6, or 0, 3, 6 would be good enough, right?
+09:09 SPEAKER_00: That way you can get that graph down.
+09:12 SPEAKER_00: Okay?
+09:16 SPEAKER_00: So you need my help?
+09:18 SPEAKER_00: You want to try it on your own first.
+09:19 SPEAKER_00: All right, you ready?
+09:22 SPEAKER_00: Well, if you want, we don't have to do the negative.
+09:28 SPEAKER_00: You want to do the negative?
+09:30 SPEAKER_00: Okay, here we go.
+09:31 SPEAKER_00: Put it on.
+09:32 SPEAKER_00: Put a little negative 3 above there.
+09:35 SPEAKER_00: Now, you know I'm going to do 2 times negative 3 is?
+09:39 SPEAKER_00: Negative 6.
+09:40 SPEAKER_00: Divide by 3 is?
+09:42 SPEAKER_00: Negative 2.
+09:43 SPEAKER_00: Good.
+09:43 SPEAKER_00: Plus 8.
+09:44 SPEAKER_00: Negative 6.
+09:46 SPEAKER_01: Positive 6.
+09:48 SPEAKER_00: All right, now you're going to put in the 0 and do the same thing, right?
+09:59 SPEAKER_00: All right, there you go.
+10:00 SPEAKER_00: See, with 0, you don't even have to do the negative.
+10:02 SPEAKER_00: You don't even have to bother putting it, right?
+10:03 SPEAKER_00: You should automatically know that it's your y-intercept.
+10:06 SPEAKER_00: All right, try 3.
+10:07 SPEAKER_00: Now, just make that a positive 3.
+10:09 SPEAKER_00: 10.
+10:10 SPEAKER_00: You got it.
+10:11 SPEAKER_00: You got it.
+10:13 SPEAKER_00: Then see what Chris did there, all right?
+10:17 SPEAKER_01: Okay.
+10:20 SPEAKER_00: All right, so it looks like you're being left out here, aren't you?
+10:24 SPEAKER_01: No.
+10:25 SPEAKER_00: Okay, you understand what they're doing?
+10:26 SPEAKER_01: We're using slope.
+10:28 SPEAKER_00: Okay.
+10:29 SPEAKER_00: So, all right, let me test you here.
+10:31 SPEAKER_00: Let's see.
+10:32 SPEAKER_00: Let's try number 4, right?
+10:33 SPEAKER_00: Okay, number 4.
+10:34 SPEAKER_00: Okay.
+10:35 SPEAKER_00: Oh, by the way, guys, I like how you labeled them like that.
+10:39 SPEAKER_00: Excellent job.
+10:42 SPEAKER_00: X minus 9, right?
+10:44 SPEAKER_01: Minus 9.
+10:45 SPEAKER_00: So tell me how you would graph that.
+10:47 SPEAKER_01: I would.
+10:49 SPEAKER_00: You would go?
+10:51 SPEAKER_01: I would go negative 9.
+10:56 SPEAKER_01: 1, 2, 3.
+10:57 SPEAKER_00: Now, that's negative 9 for X.
+11:01 SPEAKER_00: Right?
+11:01 SPEAKER_00: Okay.
+11:02 SPEAKER_01: So, I'm going to go negative 9.
+11:03 SPEAKER_00: That negative 9 really is my Y-intercept.
+11:05 SPEAKER_00: I'm going to go down.
+11:06 SPEAKER_01: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+11:09 SPEAKER_01: Good.
+11:10 SPEAKER_01: No, we only want to go 9.
+11:11 SPEAKER_01: There you go.
+11:12 SPEAKER_01: Hey, you guys taught them pretty well then, huh?
+11:13 SPEAKER_00: And now my slope is 1-4.
+11:14 SPEAKER_00: So that means?
+11:15 SPEAKER_00: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+11:16 SPEAKER_01: Good job.
+11:17 SPEAKER_00: All right, so now we're going to go down.
+11:18 SPEAKER_00: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+11:19 SPEAKER_00: Good job.
+11:20 SPEAKER_01: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+11:21 SPEAKER_01: Good job.
+11:22 SPEAKER_00: Now, my slope is 1-4.
+11:23 SPEAKER_00: So that means?
+11:24 SPEAKER_00: 1, 2, 3, 4, 5, 6, 7, 8, 10.
+11:25 SPEAKER_01: Good job.
+11:26 SPEAKER_01: That's not going straight line.
+11:27 SPEAKER_01: That's not going straight line.
+11:28 SPEAKER_01: Good job.
+11:29 SPEAKER_01: Oh, damn.
+11:30 SPEAKER_01: All right.
+11:31 SPEAKER_00: 5, 2, 6.
+11:32 SPEAKER_01: Negative.
+11:33 SPEAKER_01: No.
+11:34 SPEAKER_00: This is 7, 10, 13, and 16.
+11:35 SPEAKER_01: Yeah, this time.
+11:36 SPEAKER_01: Okay.
+11:37 SPEAKER_01: Is this right?
+11:38 SPEAKER_00: What's your question, Brian?
+11:39 SPEAKER_01: I don't get it.
+11:40 SPEAKER_01: What about your partner here?
+11:41 SPEAKER_01: She's doing an excellent job here.
+11:42 SPEAKER_01: She's doing a great job.
+11:43 SPEAKER_01: I'm going to give her my number.
+11:44 SPEAKER_01: A-B-O-C.
+11:45 SPEAKER_01: Okay.
+11:46 SPEAKER_01: I'm going to give her my number.
+11:47 SPEAKER_01: All right, so now we're going to go down.
+11:48 SPEAKER_00: What about your partner here?
+11:50 SPEAKER_00: She's doing an excellent job here.
+11:52 SPEAKER_01: What, are you shy or something?
+11:53 SPEAKER_01: No, I just have to .
+11:54 SPEAKER_01: I'm trying to do it, too.
+11:55 SPEAKER_01: I'm trying to figure this one out.
+11:56 SPEAKER_01: Yeah, how do you do this?
+11:57 SPEAKER_01: Okay, let me go to this other group, guys.
+11:58 SPEAKER_01: Brandon, Brandon, do me a favor.
+11:59 SPEAKER_01: All right?
+12:00 SPEAKER_00: I'll give you a choice.
+12:01 SPEAKER_00: All right?
+12:02 SPEAKER_00: You can pick either Ashley or Nick.
+12:03 SPEAKER_00: Either way, I want them to teach it to you.
+12:04 SPEAKER_00: Okay.
+12:05 SPEAKER_00: So, I'm going to give you a choice.
+12:06 SPEAKER_00: All right?
+12:07 SPEAKER_01: You can pick either Ashley or Nick.
+12:08 SPEAKER_01: Either way, I want them to teach it to you.
+12:09 SPEAKER_00: Okay.
+12:10 SPEAKER_00: All right.
+12:11 SPEAKER_00: So, I'm going to give you a choice.
+12:12 SPEAKER_00: All right?
+12:13 SPEAKER_00: You can pick either Ashley or Nick.
+12:14 SPEAKER_00: Either way, I want them to teach it to you.
+12:18 SPEAKER_00: All right?
+12:19 SPEAKER_00: It's called teamwork here.
+12:21 SPEAKER_01: Okay?
+12:22 SPEAKER_01: All right?
+12:23 SPEAKER_00: And if they can't do it, I'll be back in a few minutes to help you.
+12:25 SPEAKER_00: All right?
+12:26 SPEAKER_01: This is the same thing as I did not do before.
+12:27 SPEAKER_01: Okay?
+12:28 SPEAKER_01: Let's take a look here.
+12:29 SPEAKER_01: I know what you mean, but I need fractions.
+12:30 SPEAKER_01: I mean, a lot of these tables look great.
+12:31 SPEAKER_01: Now, let's get them plotted here.
+12:32 SPEAKER_01: Okay.
+12:33 SPEAKER_01: And we can see what it comes out to be.
+12:34 SPEAKER_00: So, after we wrote them all down, we plot them on here?
+12:35 SPEAKER_00: Right.
+12:36 SPEAKER_00: Every single one?
+12:37 SPEAKER_00: Right.
+12:38 SPEAKER_00: So, I'm going to pick this one.
+12:39 SPEAKER_00: I'm going to pick this one.
+12:40 SPEAKER_01: Okay.
+12:41 SPEAKER_01: So, I'm going to pick this one.
+12:42 SPEAKER_01: Right.
+12:43 SPEAKER_00: Every single one?
+12:44 SPEAKER_00: Right.
+12:45 SPEAKER_00: And then you're going to label them.
+12:46 SPEAKER_00: Now, if you don't mind, since this is equation one, just put a little one at the end of it.
+12:50 SPEAKER_00: And then equation two, put a two at the end of it.
+12:53 SPEAKER_00: Okay?
+12:54 SPEAKER_00: All right.
+12:55 SPEAKER_00: Brandon, you had a comment, question?
+12:56 SPEAKER_01: I don't know if these are regular ones.
+12:57 SPEAKER_01: I don't know if these are fractions.
+12:58 SPEAKER_01: That's cool if I have trouble.
+12:59 SPEAKER_01: Well.
+13:00 SPEAKER_01: Are you listening when Mr. Armstrong says?
+13:01 SPEAKER_01: Okay.
+13:02 SPEAKER_01: Well, maybe you ought to go to Nick.
+13:07 SPEAKER_00: Sounds like Nick knows what he's doing.
+13:09 SPEAKER_01: Now, I said I have trouble.
+13:10 SPEAKER_00: Okay.
+13:11 SPEAKER_00: Then maybe we ought to go to Ashley.
+13:12 SPEAKER_01: Okay.
+13:13 UNK: So, you want to put.
+13:14 SPEAKER_00: Okay.
+13:15 SPEAKER_01: What do we got going on here?
+13:16 SPEAKER_00: We're done.
+13:17 SPEAKER_00: Sir?
+13:18 SPEAKER_01: We got done with all the, we were going to call you, but you're talking right now.
+13:23 SPEAKER_01: Are you trying to embarrass me here or something?
+13:24 SPEAKER_01: Of course not.
+13:25 SPEAKER_01: Uh-huh.
+13:26 SPEAKER_00: No, it's for, for these ones we used.
+13:27 SPEAKER_00: You're such a character, Nick.
+13:28 SPEAKER_01: For these, for the fractions, we did the slope and then we made the tables and then we went
+13:31 SPEAKER_01: on.
+13:32 SPEAKER_00: And everybody here agrees, right?
+13:33 SPEAKER_00: Okay.
+13:34 SPEAKER_00: So, let me just check them real quick.
+13:35 SPEAKER_00: I like how you numbered them one and so on.
+13:41 SPEAKER_00: This one you didn't number.
+13:42 SPEAKER_00: What number is that one?
+13:43 SPEAKER_01: I think that was five.
+13:44 SPEAKER_01: That was five.
+13:45 SPEAKER_00: That one's correct.
+13:46 SPEAKER_00: So, put a five there.
+13:47 SPEAKER_00: Okay.
+13:48 SPEAKER_01: I can safely assume that this one must be the four, right?
+13:49 SPEAKER_00: Or is this one the four?
+13:50 SPEAKER_00: Which one's the four?
+13:51 SPEAKER_00: This one's two.
+13:52 SPEAKER_00: Which one's two?
+13:53 SPEAKER_00: Four.
+13:54 SPEAKER_00: Four is negative nine, up one, and then four.
+13:55 SPEAKER_00: So, that, yeah, this is four.
+13:56 SPEAKER_01: Are you sure about that?
+13:57 SPEAKER_01: Yeah.
+13:58 SPEAKER_00: Because this one.
+13:59 SPEAKER_01: One, two, three, four, five, six, seven, eight, nine.
+14:00 SPEAKER_01: Oh, no, this one.
+14:01 SPEAKER_01: Ah.
+14:02 SPEAKER_01: This one's four.
+14:03 SPEAKER_01: Four.
+14:04 SPEAKER_01: Four.
+14:05 SPEAKER_00: Four.
+14:06 SPEAKER_00: Four.
+14:07 SPEAKER_01: Four.
+14:08 SPEAKER_01: Four.
+14:09 SPEAKER_01: Four.
+14:10 SPEAKER_01: Four.
+14:11 SPEAKER_00: Four.
+14:12 SPEAKER_00: Four.
+14:13 SPEAKER_00: Right.
+14:14 SPEAKER_00: So, do me a favor.
+14:15 SPEAKER_00: Race the two, right, and label them right near the ends of the lines.
+14:22 SPEAKER_00: How's that?
+14:23 SPEAKER_00: Because right there I can't tell which line you're talking about, right?
+14:26 SPEAKER_00: There I know, hey, two, that's that line.
+14:29 SPEAKER_00: So, this is a four line.
+14:30 SPEAKER_00: Put the four right there.
+14:32 SPEAKER_00: Okay.
+14:33 SPEAKER_00: So, both of those look excellent.
+14:36 SPEAKER_00: Slope of three-fifths and number four, slope of one-fourth.
+14:40 SPEAKER_00: That's good.
+14:41 SPEAKER_00: one, slope of two-thirds starting at eight, and this one is seven, right? Uh-oh. I don't
+14:50 SPEAKER_00: like equation three because, look, it's going down. That's a positive three-x. It should
+14:59 SPEAKER_00: be going, should be angling up. So correct number three, and then you guys, as soon as
+15:03 SPEAKER_01: you get that corrected, just move on. I'll check that one later, okay? Here we go. Yeah.
+15:13 SPEAKER_00: Number five. All right. First of all, you know the y-intercept is what? Negative five.
+15:20 SPEAKER_01: All right. So put a dot on negative five. One, two, three, four, five. Good. We all
+15:27 SPEAKER_00: agree on that? Yes. Now, see, this is something so simple but very important. See, in algebra,
+15:32 SPEAKER_00: we get lazy sometimes, right? We get lazy. We get lazy. We get lazy. We get lazy. We
+15:33 SPEAKER_00: get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get
+15:33 SPEAKER_00: lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We
+15:34 SPEAKER_00: get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get lazy. We get lazy.
+15:36 SPEAKER_00: All right, guess what number's in front of that x? A one. Right, Robert? So, therefore,
+15:41 SPEAKER_01: put a one there. If the slope is one, what am I going to do? All right. You ready,
+15:52 SPEAKER_00: sir? Make that one a fraction. How do I make one a fraction? One over one. One over one,
+16:03 SPEAKER_00: right? Right? Let's just put it underneath there. One over one. Something to look at.
+16:03 SPEAKER_00: over 1, right? So 1 over 1 means I rise 1 and I go across 1. That's it. That's the slope of 1.
+16:13 SPEAKER_01: Alright? So let me check them real quick. Alright? Now do me a favor guys. You labeled these really nice.
+16:25 SPEAKER_00: Matter of fact, this is the way, ideally way of labeling it, right? The whole equation. But like for example,
+16:31 SPEAKER_00: equation 1 right here, put a 1 next to it also. And this one's equation 3, right? So put a 3 next to that one.
+16:39 SPEAKER_00: So number them in other words, okay? Because what that's going to do, that's going to help you when I ask these questions
+16:45 SPEAKER_00: about each of the equations. Okay? Because that's how I label them. I label them by numbers. Does that make sense?
+16:52 SPEAKER_00: Alright. So as soon as you get that done, which you're almost done, you get them numbered, just move on to the next step.
+17:01 SPEAKER_01: A 5. Alright? Alright.
+17:05 SPEAKER_01: So y increases x to the negative 10.
+17:12 SPEAKER_00: Okay. So wait a minute. You try, you do a negative 5, right?
+17:16 SPEAKER_00: Yeah.
+17:17 SPEAKER_00: 3 times negative 5 is negative 15 divided by 5, negative 3 minus 10?
+17:23 SPEAKER_01: Is negative 10. Oh, minus 10?
+17:27 SPEAKER_00: Negative 3 and a negative 10.
+17:29 SPEAKER_01: Oh, 13.
+17:30 SPEAKER_00: Negative 13.
+17:31 SPEAKER_00: So let's change that.
+17:33 SPEAKER_00: Well, negative 5 is going to be not 5 but negative 13.
+17:40 SPEAKER_00: Alright? Ben? You look like you're not, you're just coasting here, man. What's going on?
+17:51 SPEAKER_00: Chris, make sure you help Ben out here, man.
+17:54 SPEAKER_00: Ben, I just sense Ben's getting a little lost here. Alright? This is your chance to ask not only Chris but also,
+18:00 SPEAKER_00: Raymond here. Get some help from him. Okay?
+18:07 SPEAKER_00: You think you got it? Now 0 of course is going to be what?
+18:11 SPEAKER_00: If I put in 0 here, what am I going to get?
+18:14 UNK: Uh, 0.
+18:16 SPEAKER_00: Wait a minute. What's 3 fifths times 0?
+18:18 SPEAKER_01: 3 fifths times 0?
+18:20 SPEAKER_00: 0 minus 10 would be?
+18:23 SPEAKER_01: 10.
+18:24 SPEAKER_00: 0 minus 10 would be?
+18:26 SPEAKER_01: 10.
+18:28 SPEAKER_01: Not positive 10.
+18:30 SPEAKER_01: Negative 10.
+18:31 SPEAKER_00: Negative 10. So you want to put a negative 10 there. Okay?
+18:34 SPEAKER_01: Okay.
+18:36 SPEAKER_00: Now try at least one more 5. Okay?
+18:39 SPEAKER_00: Uh, we do that, uh,
+18:42 SPEAKER_00: Now it's a positive 5, right?
+18:44 SPEAKER_00: Yeah.
+18:45 SPEAKER_00: So it's going to be, well, what's 3 times a positive 5? 15.
+18:49 SPEAKER_00: Yes, 15.
+18:50 SPEAKER_00: Divided by 5 is?
+18:51 SPEAKER_00: 3.
+18:52 SPEAKER_00: 3. Minus 10?
+18:54 SPEAKER_01: 7.
+18:55 SPEAKER_00: Negative 7. Don't forget the negative. Okay?
+18:57 SPEAKER_01: Alright.
+18:58 SPEAKER_01: Alright.
+18:59 SPEAKER_00: Alright.
+19:00 SPEAKER_00: Alright, guys, thanks for waiting so long.
+19:02 SPEAKER_00: Alright, you want me to just check the answers?
+19:04 SPEAKER_00: Now the only failure I need you to do is because for each of these numbered equations, just number.
+19:10 SPEAKER_00: For example, this is 1, correct?
+19:12 SPEAKER_00: Yeah.
+19:13 SPEAKER_00: This one was equation 3.
+19:14 SPEAKER_00: Yeah.
+19:15 SPEAKER_00: This one was equation 5. So near the end of each of these arrows, just put the number.
+19:20 SPEAKER_00: And then this one, let me just make sure, because I don't have them all memorized.
+19:25 SPEAKER_00: See.
+19:26 SPEAKER_00: Negative 9 was 1 fourth. You got the slope perfect there. And this one was 3 fifths, right?
+19:31 SPEAKER_00: So everything looks perfect. Just number them and move on to the next 5.
+19:35 SPEAKER_00: Okay.
+19:36 SPEAKER_01: Okay?
+19:37 SPEAKER_01: It's going to be 3 8 10 13.
+19:40 SPEAKER_01: We're on number 6.
+19:41 SPEAKER_01: I got it, guys. I got it.
+19:42 SPEAKER_01: So here's all the number 5.
+19:44 SPEAKER_00: Look at that. Excellent work, man. Excellent work.
+19:47 SPEAKER_01: There's 1, there's 2, there's 3, there's 4, there's 5.
+19:51 SPEAKER_01: Excellent.
+19:52 SPEAKER_01: But they're having problems on the regular.
+19:54 SPEAKER_01: Well, there is. I started out. I started out.
+19:56 SPEAKER_01: Okay.
+19:57 SPEAKER_00: You know what? As a matter of fact, I think it's time for me to address the whole class.
+20:02 SPEAKER_00: Everybody, ladies and gentlemen, listen up. 5, 4, 3, 2, 1, 0.
+20:09 SPEAKER_00: Now, about half of you are already about ready to start the next set of 5, right?
+20:15 SPEAKER_00: Starting on number 6?
+20:17 SPEAKER_00: Let me give you a hint. Just a little reminder.
+20:20 SPEAKER_00: What you'll notice.
+20:23 SPEAKER_00: Julie, you're doing a great job, but please listen. Okay?
+20:24 SPEAKER_00: You'll notice on equations 6 through 10, the slopes are negative.
+20:31 SPEAKER_01: Yep.
+20:32 SPEAKER_00: All right?
+20:33 SPEAKER_00: So therefore, instead of rise or run, meaning you go up and to the right, with a negative, we're going to instead go down and to the right.
+20:43 SPEAKER_00: Okay?
+20:44 SPEAKER_00: Does that make sense to everybody?
+20:46 SPEAKER_00: Yeah.
+20:47 SPEAKER_00: So please get going. Please make sure I check your first 5 and give you the okay to move on.
+20:51 SPEAKER_00: Okay?
+20:52 SPEAKER_00: Okay.
+20:53 SPEAKER_00: Yeah.
+20:54 SPEAKER_00: I'll check yours real quick.
+20:56 SPEAKER_00: Okay.
+20:57 SPEAKER_00: All right, good.
+20:58 SPEAKER_00: You guys numbered them?
+20:59 SPEAKER_00: Yeah.
+21:00 SPEAKER_01: Okay.
+21:01 SPEAKER_00: There's 1.
+21:02 SPEAKER_00: Slope equation 3.
+21:03 SPEAKER_00: Two-thirds.
+21:04 SPEAKER_00: Two-thirds.
+21:05 SPEAKER_00: Equation 5 looks good.
+21:06 SPEAKER_00: I haven't even gotten to 5.
+21:07 SPEAKER_00: Okay.
+21:08 SPEAKER_00: And you got 4 and 2.
+21:09 SPEAKER_01: It looks perfect so far.
+21:10 SPEAKER_01: Okay.
+21:11 SPEAKER_00: I'm going to just...
+21:12 SPEAKER_00: Move on to equation 6 then.
+21:13 SPEAKER_00: Okay.
+21:14 SPEAKER_00: Now, you were saying you're being left behind here a little bit?
+21:15 SPEAKER_01: On which one?
+21:16 SPEAKER_00: On the left.
+21:17 SPEAKER_00: On the left.
+21:18 SPEAKER_00: Okay.
+21:19 SPEAKER_00: So you're saying you're being left behind here a little bit?
+21:20 SPEAKER_00: On which one?
+21:21 SPEAKER_00: On the left.
+21:22 SPEAKER_00: Okay.
+21:23 SPEAKER_01: Is it just the one on the left?
+21:24 SPEAKER_01: Or is it...
+21:25 SPEAKER_01: Well, there are obviously 5 and wrong.
+21:26 SPEAKER_00: Now, Robert here I'm sure can help you.
+21:30 SPEAKER_00: You've got the smartest kids in class right?
+21:33 SPEAKER_01: He tried to explain it once, but I'm not so sure.
+21:35 SPEAKER_00: Okay.
+21:36 SPEAKER_00: It looks like you made a nice table here though.
+21:38 SPEAKER_00: You understand what you did there?
+21:39 SPEAKER_01: Yeah.
+21:40 SPEAKER_00: Okay.
+21:41 SPEAKER_00: So when you put in 0, one-fourth times 0 is what?
+21:45 SPEAKER_00: Minus 9 is?
+21:47 SPEAKER_00: Okay.
+21:48 SPEAKER_00: Then you tried 4, right?
+21:50 SPEAKER_00: Yeah.
+21:51 SPEAKER_00: All right.
+21:52 SPEAKER_00: Why didn't you pick 4 and 8? Why didn't you pick like 1 and 2 and 3? Numbers like that.
+21:57 SPEAKER_01: Because they're divisible by 4.
+21:59 SPEAKER_00: Well said. Good job. So, when I try 4, see, what's 1 fourth times 4? Just 1 minus 9 is negative 8.
+22:09 SPEAKER_00: And then you put in 8, 1 fourth of 8 is minus 9 is negative 7. So that's perfect.
+22:15 SPEAKER_00: If you plot those three points, you get exactly what is on your graph there. Okay?
+22:20 SPEAKER_01: Alright. Guys?
+22:24 SPEAKER_01: Are you sure this is right?
+22:26 SPEAKER_00: Oh, so you want me to just check 6 real quick, right?
+22:29 SPEAKER_00: No, 5. And 5.
+22:30 SPEAKER_00: 5 and 1 because that's the one we messed up on last time.
+22:32 SPEAKER_00: Right. 5 now looks perfect.
+22:34 SPEAKER_00: No, 3. 3.
+22:35 SPEAKER_00: Oh, 3 was the one we messed up on. So 3 is right here.
+22:40 SPEAKER_00: And the idea is you want a positive 3 slope, which you did perfectly.
+22:44 SPEAKER_00: So 3 is good. Let's go back to 6 since we're here.
+22:49 SPEAKER_00: Here's the 3.
+22:50 SPEAKER_00: Here's 6. So you started at positive 8. The slope is negative 5 thirds. So you went down 5 and over 3, didn't you?
+22:57 SPEAKER_01: Yes.
+22:58 SPEAKER_01: Perfect. Okay.
+23:03 SPEAKER_00: Okay. Ashley, how is Brandon doing here?
+23:06 SPEAKER_00: I'm good.
+23:07 SPEAKER_01: Brandon? Good. That's what I want to see.
+23:09 SPEAKER_01: If you want to put the graphs.
+23:11 SPEAKER_00: Alright. You keep helping Brandon. Let me with Ashley over here. Nick, if you want to watch, you can.
+23:17 SPEAKER_00: But I can tell you right now.
+23:19 SPEAKER_00: 5 is good.
+23:21 SPEAKER_01: Okay. We're starting to learn here.
+23:24 SPEAKER_01: 1 looks good.
+23:25 SPEAKER_01: If you put...
+23:26 SPEAKER_01: Wait a minute.
+23:27 SPEAKER_01: How many do you add to 10?
+23:28 SPEAKER_01: Yeah, it'd be 12.
+23:29 SPEAKER_00: 1, the slope is 2 thirds, isn't it?
+23:31 SPEAKER_01: Yeah.
+23:32 SPEAKER_00: Right? So first of all, our y intercept is 8. Ashley, let's look at yours since you're more comfortable with yours.
+23:39 SPEAKER_00: You agree that 0, 8 should be my first point, right?
+23:42 SPEAKER_00: 2, 4, 6, 8. Okay? That's good.
+23:47 SPEAKER_00: 3.
+23:48 SPEAKER_01: 3.
+23:49 SPEAKER_01: Let me go over 3. 1, 2, 3.
+23:51 SPEAKER_00: Oh, here's your mistake.
+23:53 SPEAKER_00: Yeah, just.
+23:54 SPEAKER_00: Alright. Now watch, Ashley. You ready? When I put in 3, 2 times a 3 would be?
+24:01 SPEAKER_01: 6.
+24:02 SPEAKER_00: 6.
+24:03 SPEAKER_00: Okay.
+24:04 SPEAKER_00: Divided by 3 would make?
+24:06 UNK: 2.
+24:07 SPEAKER_00: 2. 6 divided by 3 is 2, right?
+24:10 SPEAKER_00: Yeah, that's a 2.
+24:11 SPEAKER_00: Okay. Plus 8 would make?
+24:12 SPEAKER_00: 10.
+24:13 SPEAKER_00: 10.
+24:14 SPEAKER_00: So 3 would be 10. Well, what's 2 plus 8? 10.
+24:16 SPEAKER_00: So...
+24:17 SPEAKER_00: So that's a 10.
+24:19 SPEAKER_00: 14.
+24:20 SPEAKER_00: This one, I'm sure, has got to be something bigger.
+24:22 SPEAKER_01: 11?
+24:23 SPEAKER_00: Okay.
+24:24 SPEAKER_01: 12?
+24:25 SPEAKER_00: It's going to be 12.
+24:26 SPEAKER_01: I believe it's 12.
+24:27 SPEAKER_01: Yeah. See, I did it on hand, but I did it on my paper.
+24:28 SPEAKER_01: Okay.
+24:29 SPEAKER_01: Yeah.
+24:30 SPEAKER_00: Alright. So it sounds like you guys didn't compare your answers here. But I think that's your only mistake. Because equation 3 looks very good. Alright. You know what? Equation 2 I don't necessarily like either. Is this supposed to be a good one?
+24:45 SPEAKER_00: Yeah.
+24:46 SPEAKER_00: Is this supposed to be 2?
+24:47 SPEAKER_00: 2.
+24:48 SPEAKER_00: 2 says we're starting at what number?
+24:49 SPEAKER_00: Negative 10.
+24:50 SPEAKER_00: Negative 10, right? You're not starting at negative 10 here. What's this number? 2, 4. Somehow you're starting at negative 6. So what happened on equation 2, guys?
+25:03 UNK: 1.
+25:04 UNK: 1 times...
+25:05 SPEAKER_00: Hey, how come we didn't use your table?
+25:07 SPEAKER_01: I don't know. I don't know what that is.
+25:09 SPEAKER_01: So if we start at 10, then...
+25:11 SPEAKER_01: Oh, I know. Look what you did wrong. You copied the equation down wrong.
+25:13 SPEAKER_00: I know.
+25:14 SPEAKER_00: I know.
+25:16 SPEAKER_01: That's number 4.
+25:18 SPEAKER_00: Oh, I'm sorry. You're right. My mistake.
+25:21 SPEAKER_01: Oh, yeah. It looks like a 6.
+25:23 SPEAKER_00: I can't even read it right. Yeah, why is that a 6? It should be a negative 10, right?
+25:26 SPEAKER_01: Yeah, it looks like a 6, and it's 10.
+25:28 SPEAKER_00: Okay. And 5, you got negative 7. I agree with that.
+25:31 SPEAKER_00: Yeah.
+25:32 SPEAKER_00: Okay. And then 10, you got negative 4. Okay. So why don't you try re-plotting those three points and move on to equation 6 through 10. And I'll check number 2 later on.
+25:45 SPEAKER_00: Okay. The rest of them look pretty good, though. All right?
+25:48 SPEAKER_00: All right.
+25:49 SPEAKER_00: Okay. What are we doing here, guys? Hey, how come none of these lines are labeled?
+25:55 SPEAKER_01: Whoops.
+25:56 SPEAKER_00: Now, what I suggest you do... Hold on. What I suggest you do before I come back is for each of these... Just call it equation 1, 2, 3, 4, and 5, right?
+26:07 SPEAKER_00: Put a number at the end of each of these lines.
+26:10 SPEAKER_00: So like number 1, 2...
+26:13 SPEAKER_01: Like, for example, number 1...
+26:14 SPEAKER_00: For example, number 1...
+26:16 SPEAKER_00: Uh-oh.
+26:17 SPEAKER_00: Wait a minute. I don't like what I see here.
+26:22 SPEAKER_01: What you make me do?
+26:23 SPEAKER_01: You probably saw it.
+26:24 SPEAKER_00: Okay. Let's see here. Number 1... I believe this is supposed to be your number 1 here, right?
+26:33 SPEAKER_01: I think so.
+26:34 SPEAKER_00: How come it's going down, guys?
+26:36 SPEAKER_00: Aren't all these slopes positive? So all of these should be going up.
+26:42 SPEAKER_01: How's it going down?
+26:43 SPEAKER_00: Look at it. It's going down.
+26:45 SPEAKER_01: It's going up.
+26:46 SPEAKER_00: How do you read a book? How do you read a book, sir?
+26:48 SPEAKER_00: Left to right.
+26:49 SPEAKER_00: You read from left to right. So let's start on the left side of the line.
+26:51 SPEAKER_01: Yeah.
+26:52 SPEAKER_00: And as I move to the right, I'm going in which direction?
+26:55 SPEAKER_01: Down.
+26:56 SPEAKER_00: Right? Now, if you look at all the other lines, see, they're all positive.
+26:59 SPEAKER_01: But it's going up.
+27:01 SPEAKER_00: Sir, you have to read from left to right. Okay?
+27:04 SPEAKER_01: Right.
+27:05 SPEAKER_00: All right?
+27:06 SPEAKER_01: It's going down.
+27:07 SPEAKER_00: So, guys, you need to make those corrections. Label the lines. Correct this one at least.
+27:11 SPEAKER_01: I've never done this before.
+27:12 SPEAKER_00: Okay?
+27:13 SPEAKER_00: Oh, my gosh. Let me make sure I keep track of the time, too. All right.
+27:20 SPEAKER_00: Man, you guys did an awesome job here. Okay? Let's take a look here.
+27:27 SPEAKER_00: So here's your number 6, right?
+27:29 SPEAKER_00: Uh-huh.
+27:30 SPEAKER_00: And we started at 8, and the slope was negative 5 thirds, so you went down 5 and over 3.
+27:37 SPEAKER_00: That line looks perfect. Let's look at your number 7.
+27:41 SPEAKER_00: Here's negative 1. You went down 4 and over 1. There's your line there. That looks perfect.
+27:49 SPEAKER_00: Let's check number 8 real quick.
+27:51 SPEAKER_01: All right.
+27:52 SPEAKER_00: Oh, that's an 8, right? Okay.
+27:55 SPEAKER_00: So number 8, you started at 12 and negative 1 third. Looks perfect.
+28:02 SPEAKER_00: Number 9 is 14, which is where?
+28:05 SPEAKER_01: It's all the way up here.
+28:06 SPEAKER_00: Way at the very top. And negative 3 halves means you went down 3.
+28:10 SPEAKER_00: And over 2. So there's your line right there.
+28:14 SPEAKER_00: And finally, number 10. We're at 3, and slope is negative 1. Perfect.
+28:20 SPEAKER_00: Cool.
+28:21 SPEAKER_00: So now all you guys have to do is answer these questions. Okay? The best you can.
+28:28 SPEAKER_01: On this piece of paper?
+28:29 SPEAKER_01: On your piece of paper.
+28:30 SPEAKER_01: Okay.
+28:31 SPEAKER_00: On your own piece of paper. Okay?
+28:32 SPEAKER_00: Okay.
+28:33 SPEAKER_01: All right. How are we doing here, guys?
+28:36 SPEAKER_01: I don't know, sir. I don't think so.
+28:38 SPEAKER_00: What's the rule of thumb?
+28:39 SPEAKER_00: What's the rule of thumb?
+28:40 SPEAKER_00: What's the rule of 4?
+28:41 SPEAKER_01: Look at this.
+28:42 SPEAKER_00: Just from now on, make sure to straighten out these lines and keep going.
+28:49 SPEAKER_00: All right.
+28:50 SPEAKER_00: And are you labeling? That's number 1.
+28:51 SPEAKER_01: Number 2.
+28:52 SPEAKER_01: No, that's number 3. I forgot to do number 2.
+28:55 SPEAKER_00: Okay. Wait a minute. All right. Number 3 is concerning me. You ready?
+28:58 SPEAKER_00: Yeah.
+28:59 SPEAKER_00: Let's try this again real quick. All right. It's 3x plus 7, right?
+29:02 SPEAKER_00: Yeah.
+29:03 SPEAKER_00: So when I put in, let's just start with 0. When I put in 0, what's 3 times 0?
+29:08 SPEAKER_00: 0.
+29:09 SPEAKER_00: 0 plus 7 is?
+29:10 SPEAKER_00: 7.
+29:11 SPEAKER_00: Why you put negative 7?
+29:12 SPEAKER_00: What's 0 plus 7?
+29:13 SPEAKER_00: Well, I started...
+29:14 SPEAKER_00: Chris, let me take a look at your table for 3. How come you're not standing up to Raymond
+29:20 SPEAKER_00: here and saying, hey, man, look, I got the right answers?
+29:23 SPEAKER_00: I didn't know.
+29:24 SPEAKER_00: All right. Your table is correct. You got to believe in yourself, all right? You guys
+29:29 SPEAKER_00: got to start working better together and comparing answers. All right?
+29:32 SPEAKER_00: All right.
+29:33 SPEAKER_00: Ben, I'm worried about you, man. What are we doing here? Put away the book.
+29:37 SPEAKER_00: Okay.
+29:39 SPEAKER_00: And Chris, you need to work with your normal partner here a little bit better and compare
+29:46 SPEAKER_00: answers. So, I mean, if you would have compared answers, guys, you would have seen on this
+29:50 SPEAKER_00: table here, right, that, hey, someone must be making a mistake because we're getting
+29:55 SPEAKER_00: different answers here, right?
+29:57 SPEAKER_01: Yeah.
+29:58 SPEAKER_00: So either correct yours or if you want, you can trust Chris. I would trust Chris's, to
+30:05 SPEAKER_00: be honest.
+30:06 SPEAKER_00: Yeah.
+30:07 SPEAKER_01: Okay?
+30:08 SPEAKER_00: All right. Now, did you have to go by twos?
+30:11 SPEAKER_00: Well, wait a minute. Isn't this just a regular number three?
+30:17 SPEAKER_01: Yeah.
+30:18 SPEAKER_00: So on these kind, I always told you just use like zero, one, and two, right? You didn't
+30:22 SPEAKER_00: have to go by multiples or anything because there's no fraction to divide by. You see?
+30:27 SPEAKER_00: All right, guys. Let's see what we can do here. Okay. Can I interrupt the whole class?
+30:37 SPEAKER_00: Okay. Five, four, three, two, one, zero. Now, please listen, okay? The thing is I have to
+30:47 SPEAKER_00: be honest. I'm getting a little worried, maybe a little frustrated here just because I could
+30:55 SPEAKER_00: see that some of you have some serious weaknesses. Yet, you have people either across from you
+31:02 SPEAKER_00: or right next to you, your own partner, that seems, most of the time, to be a little bit
+31:05 SPEAKER_00: more sensitive. That seems, most of the time, have the right answers, yet you're not even
+31:09 SPEAKER_00: asking them. So, guys, I ask you, starting right now, is check your work with your partner's
+31:16 SPEAKER_00: work. Work together. All right? This is not an individual kind of assignment here. Everything
+31:23 SPEAKER_00: I say makes sense so far?
+31:24 SPEAKER_01: Yes, Mr. Arndt.
+31:25 SPEAKER_00: Okay. Now, let me just give you a heads up. We've got roughly, what, twelve minutes left
+31:32 SPEAKER_00: in class?
+31:33 SPEAKER_00: Yes.
+31:34 SPEAKER_00: I want you to keep doing what you're doing. If, for whatever reason, you actually get
+31:39 SPEAKER_00: to the last page and you've answered these questions to the best of your ability, now,
+31:45 SPEAKER_00: obviously, today we have no time to discuss it, okay? We're going to pick this up again
+31:50 SPEAKER_00: on Monday. But, if you happen to ask these questions, yeah, we're back on Monday, all
+31:57 SPEAKER_00: right?
+31:58 SPEAKER_00: Yeah.
+31:59 SPEAKER_00: When we, after you answer these questions, if you get that far, please, if you get that
+32:04 SPEAKER_00: far, please, make sure you do this quick write, all right? Which simply means, all I want
+32:10 SPEAKER_00: you to do is be honest with yourself and with me and just sit there for the remaining time,
+32:14 SPEAKER_00: write a minimum of two paragraphs, okay, on what we've learned today, what you've actually
+32:20 SPEAKER_00: learned today, okay? Those of you that aren't at this stage, don't worry about it yet. In
+32:27 SPEAKER_00: about, let's say, four or five minutes, I'm going to make all of you do it anyways.
+32:31 SPEAKER_01: You're so generous.
+32:32 SPEAKER_00: So, please keep working.
+32:33 SPEAKER_00: Please keep working wherever you are.
+32:35 SPEAKER_00: I know.
+32:36 SPEAKER_00: I'm still walking around. Yeah.
+32:37 SPEAKER_00: Don't worry about that until Monday. We'll catch up on Monday, all right?
+32:43 SPEAKER_00: Yeah.
+32:44 SPEAKER_00: Let's focus on this. All right. Ashley?
+32:49 SPEAKER_01: Yeah. I don't get these two.
+32:54 SPEAKER_00: All right. Is anyone in this group understand what to do here?
+32:58 SPEAKER_01: No.
+32:59 SPEAKER_01: No, because they're like different numbers, which one to choose.
+33:01 SPEAKER_00: Okay. All right. Okay.
+33:03 SPEAKER_00: Okay. Now, you want to use slope and y intercept or you want to make tables?
+33:07 SPEAKER_00: Tables.
+33:08 SPEAKER_00: Seems like tables are the way to go here, right?
+33:10 SPEAKER_00: Yeah.
+33:11 SPEAKER_00: So, let's go there, all right? First of all, Ashley, that's a negative five-thirds,
+33:16 SPEAKER_00: isn't it?
+33:17 SPEAKER_00: No.
+33:18 SPEAKER_00: Okay. So, now, if I plug in zero, guys, Brandon, watch. If I plug in zero, what's negative
+33:25 SPEAKER_00: five-thirds times zero?
+33:27 SPEAKER_01: Zero.
+33:28 SPEAKER_01: Plus eight is?
+33:29 SPEAKER_01: Eight.
+33:30 SPEAKER_01: Right. That was easy.
+33:31 SPEAKER_01: But I don't know what to use.
+33:32 SPEAKER_01: Like threes?
+33:33 SPEAKER_01: You would use threes. Try three and six. Okay?
+33:34 SPEAKER_01: My stomach's got the right amount of water.
+33:35 SPEAKER_00: Uh-uh.
+33:36 SPEAKER_00: Sir, no. You have to stay here. All right? So, all right. Let's try three. Nick, Jesse,
+33:37 SPEAKER_00: you ready?
+33:38 SPEAKER_00: Right here.
+33:39 SPEAKER_01: If I put in a three there, okay?
+33:40 SPEAKER_01: It's going to be five, right?
+33:41 SPEAKER_00: You're going to get negative five because of the negative plus eight. What's negative
+33:46 SPEAKER_00: five plus eight?
+33:47 SPEAKER_00: Three.
+33:48 SPEAKER_01: Positive three.
+33:49 SPEAKER_00: Right.
+33:50 SPEAKER_01: So, you're going to get negative five because of the negative plus eight. What's negative
+33:53 SPEAKER_01: five plus eight?
+33:54 SPEAKER_01: Three.
+33:55 SPEAKER_00: Positive three.
+33:56 SPEAKER_00: Positive three.
+33:57 SPEAKER_00: Negative three.
+33:58 SPEAKER_00: Negative three.
+33:59 SPEAKER_01: Negative three.
+34:00 SPEAKER_01: Negative three.
+34:02 SPEAKER_01: Positive three.
+34:03 SPEAKER_01: Negative three.
+34:04 SPEAKER_01: Negative three.
+34:05 SPEAKER_00: Positive three.
+34:06 SPEAKER_00: Oh, you wrote it upside down. That's okay. And then the next one is going to be what?
+34:09 SPEAKER_01: Negative two?
+34:10 SPEAKER_00: Negative six.
+34:11 SPEAKER_01: It's going to be negative two. You got it.
+34:12 SPEAKER_01: Oh.
+34:13 SPEAKER_01: Oh.
+34:14 SPEAKER_01: Oh, no. I didn't know that.
+34:15 SPEAKER_00: Okay. You didn't know that. You did that in your head, huh?
+34:16 SPEAKER_00: Yeah.
+34:17 SPEAKER_01: Impressive.
+34:18 SPEAKER_00: I always do my best, man.
+34:19 SPEAKER_00: Okay. So, don't let the negative scare you. Just the same idea as the front. Just know
+34:23 SPEAKER_00: that when you time, you're going to have a negative, right, in your problem. That's all.
+34:29 UNK: All right.
+34:31 SPEAKER_00: Why don't you get out of your seat, Robert?
+34:33 SPEAKER_00: I kind of noticed.
+34:35 SPEAKER_00: Okay, I just kind of noticed out of the corner of my eye.
+34:37 SPEAKER_00: So what's going on here? How are we doing?
+34:39 SPEAKER_01: Okay.
+34:41 SPEAKER_01: Hi.
+34:43 SPEAKER_00: Okay.
+34:45 SPEAKER_00: So, have I come by to check all ten equations yet?
+34:47 SPEAKER_00: No, not all ten. Just the first five.
+34:49 SPEAKER_00: I'm on number ten.
+34:51 SPEAKER_00: Okay. You are on number ten. You want me to wait until you get number ten done?
+34:53 SPEAKER_00: Yeah.
+34:55 SPEAKER_00: Okay. All right.
+34:57 SPEAKER_01: Ladies, you've been awful quiet over here. What's going on?
+34:59 SPEAKER_01: Well, because we've been waiting for you.
+35:01 SPEAKER_00: Okay. All right.
+35:03 SPEAKER_01: For like a century.
+35:05 SPEAKER_00: So where are you stuck? Or if you're not stuck, what do you want me to do?
+35:07 SPEAKER_00: You want me to just check your answers then?
+35:09 SPEAKER_00: I do.
+35:11 SPEAKER_00: Is that what you're saying?
+35:13 SPEAKER_01: Yes.
+35:15 SPEAKER_00: Okay. So?
+35:17 SPEAKER_00: So I've already checked the first five. Yes or no?
+35:19 SPEAKER_00: No.
+35:21 SPEAKER_01: Oh, really?
+35:23 SPEAKER_00: Well, because you've been over there, you know.
+35:25 SPEAKER_00: Yeah, I know. I've been pretty busy.
+35:27 SPEAKER_01: Okay.
+35:29 SPEAKER_00: So, six through ten.
+35:31 SPEAKER_00: Okay. So, I'll do the first eight. How's that?
+35:33 SPEAKER_01: First eight?
+35:35 SPEAKER_00: Okay.
+35:37 SPEAKER_00: All right. So, I agree. That's plus twelve.
+35:39 SPEAKER_00: Wait a minute. Which one are we doing?
+35:41 SPEAKER_00: Number six. That's plus eight, right?
+35:43 SPEAKER_00: Two, four, six, eight. Good.
+35:45 SPEAKER_00: Now, negative five-thirds would mean you come down five and you go over three, right?
+35:47 SPEAKER_00: So that one's perfect.
+35:49 SPEAKER_00: Number seven. You would have started at negative one.
+35:51 SPEAKER_01: And because of the negative four slope,
+35:53 SPEAKER_00: you would have gone down four and over one.
+35:55 SPEAKER_00: Okay.
+35:57 SPEAKER_00: So that one is perfect.
+35:59 SPEAKER_00: Okay. And number eight.
+36:01 SPEAKER_00: I'm a little concerned.
+36:03 SPEAKER_00: See how it's slanting up?
+36:05 SPEAKER_00: See, eight's a negative one-third.
+36:07 SPEAKER_01: So, you ready?
+36:09 SPEAKER_00: Well, what does plus twelve mean?
+36:11 SPEAKER_00: Up here.
+36:15 SPEAKER_00: So, erase number eight.
+36:17 SPEAKER_00: Try number eight again.
+36:19 SPEAKER_01: Okay?
+36:21 SPEAKER_00: Okay. All right, Jessica.
+36:23 SPEAKER_00: Let me slow down there.
+36:25 SPEAKER_00: I'm sick and I'm also tired, but we can do this.
+36:27 SPEAKER_00: All right? You ready?
+36:29 SPEAKER_01: Zero, three, and six is right now, right?
+36:31 SPEAKER_01: Zero was twelve.
+36:33 SPEAKER_00: So, why did you plot down here when zero positive twelve is up there?
+36:37 SPEAKER_01: Oh, I made a mistake.
+36:39 SPEAKER_01: Okay. Let's look at the rest of your table.
+36:41 SPEAKER_00: I put a negative.
+36:43 SPEAKER_01: So, three.
+36:45 SPEAKER_00: All right.
+36:47 SPEAKER_00: If I put in three here, DeCarlos,
+36:49 SPEAKER_00: what's one-third of three?
+36:51 SPEAKER_01: One, right?
+36:53 SPEAKER_00: So, that negative makes it a negative one plus twelve,
+36:55 SPEAKER_00: which was a positive.
+36:57 SPEAKER_00: So, you had these points exactly right.
+36:59 SPEAKER_01: So, you put them down.
+37:01 SPEAKER_00: You plotted wrong, basically, right?
+37:03 SPEAKER_01: All right.
+37:05 SPEAKER_01: Okay. All right.
+37:07 SPEAKER_01: Yes. You're finally done, right?
+37:09 SPEAKER_01: Okay.
+37:11 SPEAKER_00: If you don't mind,
+37:13 SPEAKER_00: I'll just take a quick glance,
+37:15 SPEAKER_00: spot check a few of them,
+37:17 SPEAKER_00: because I'd like you to move on to the questions.
+37:19 SPEAKER_00: Sorry, answering the questions, okay?
+37:21 SPEAKER_00: And the ones I'm looking at right now,
+37:23 SPEAKER_00: for example, this one here,
+37:25 SPEAKER_00: this is number seven. That looks good.
+37:27 SPEAKER_00: Number six, down five over three.
+37:29 SPEAKER_00: That looks perfect.
+37:31 SPEAKER_00: Okay.
+37:33 SPEAKER_00: Let's see. You just finished ten, right?
+37:35 SPEAKER_00: And that one's also perfect.
+37:37 SPEAKER_00: So, I can safely say that you guys seem to know
+37:39 SPEAKER_00: what you're doing.
+37:41 SPEAKER_00: So, now, please answer these questions.
+37:43 SPEAKER_00: For example,
+37:45 SPEAKER_00: well, just go one by one.
+37:47 SPEAKER_00: You're going to have more time on Monday, anyways.
+37:49 SPEAKER_00: But on number one, what did you notice
+37:51 SPEAKER_00: about the first five equations?
+37:53 SPEAKER_00: When you graphed them, what did you honestly notice
+37:55 SPEAKER_01: about them all?
+37:57 SPEAKER_00: They all went up and to the right.
+37:59 SPEAKER_00: That's why we always said
+38:01 SPEAKER_00: they had a positive slope, right?
+38:03 SPEAKER_00: Because a positive number in front of x.
+38:05 SPEAKER_00: Right? Okay.
+38:07 SPEAKER_00: All right.
+38:09 SPEAKER_00: Ladies and gentlemen, shhh.
+38:11 SPEAKER_00: Listen up.
+38:13 SPEAKER_00: Wherever you are,
+38:15 SPEAKER_00: wherever you are,
+38:17 SPEAKER_00: honestly, guys, it really doesn't matter.
+38:19 SPEAKER_00: I really appreciate the effort you put in for me today.
+38:21 SPEAKER_00: That's the important thing.
+38:23 SPEAKER_00: What I'd like you to do,
+38:25 SPEAKER_00: what I'd like you to do now,
+38:27 SPEAKER_00: whether you're done or not, guys,
+38:29 SPEAKER_00: I honestly hope that all of you
+38:31 SPEAKER_00: have learned something today.
+38:33 SPEAKER_00: Okay?
+38:35 SPEAKER_00: So, I want everyone now,
+38:37 SPEAKER_00: on their own piece of paper,
+38:39 SPEAKER_00: I repeat, on your own piece of paper,
+38:41 SPEAKER_00: do this quick write for the remaining part of class.
+38:43 SPEAKER_00: Okay?
+38:45 SPEAKER_01: And a few hints would be like,
+38:47 SPEAKER_00: hey, did you learn,
+38:49 SPEAKER_00: did you understand?
+38:51 SPEAKER_00: Did you understand something about slope?
+38:53 SPEAKER_00: Maybe a little bit better.
+38:55 SPEAKER_00: Or y intercepts.
+38:57 SPEAKER_00: Or maybe you got better at making tables.
+38:59 SPEAKER_00: On the same piece of paper.
+39:01 SPEAKER_00: Yes, sir.
+39:03 SPEAKER_00: Any questions on that?
+39:05 SPEAKER_01: All right, quick write time, guys.
+39:07 SPEAKER_01: Let's get that done.
+39:09 SPEAKER_01: Can you check this?
+39:11 SPEAKER_00: What's this school, low and stuff?
+39:13 SPEAKER_01: Jeremy?
+39:15 SPEAKER_00: Oh, you're waiting for me because we're done over here?
+39:17 SPEAKER_00: Yeah.
+39:19 SPEAKER_00: Let me see the answers.
+39:21 SPEAKER_01: Throw it over here.
+39:23 SPEAKER_01: I don't know.
+39:25 SPEAKER_00: Okay.
+39:27 SPEAKER_00: But where's your homework, though?
+39:29 SPEAKER_00: I don't know.
+39:31 SPEAKER_00: And right now, what are you supposed to be doing?
+39:33 SPEAKER_00: I was doing that. He was doing this.
+39:35 SPEAKER_00: I understand, but right now, what are you supposed to be doing then?
+39:37 SPEAKER_00: We're waiting for you.
+39:39 SPEAKER_00: All right, now that I'm here,
+39:41 SPEAKER_00: what else could you be doing right now?
+39:43 SPEAKER_01: What did I talk about on the board there?
+39:45 SPEAKER_00: Quick write.
+39:47 SPEAKER_00: Right? See, I can see quickly you haven't even finished graphing these yet.
+39:49 SPEAKER_00: So I want you to do the quick write right now.
+39:51 SPEAKER_00: And then I expect better results from you.
+39:53 SPEAKER_00: I want you to finish this up on Monday.
+39:55 SPEAKER_01: Fair enough?
+39:57 SPEAKER_01: Okay, Jeremy?
+39:59 SPEAKER_01: The Army on Route 6 says,
+40:01 SPEAKER_01: what do you know about the intersection between two...
+40:03 SPEAKER_00: Ah, see, now it gets a little interesting.
+40:05 SPEAKER_00: Show me your equation two.
+40:07 SPEAKER_01: Two is down here.
+40:09 SPEAKER_01: Show me your equation six.
+40:11 SPEAKER_01: Now, one thing
+40:13 SPEAKER_00: that hopefully you understand is
+40:15 SPEAKER_00: see, a line, those arrows mean
+40:17 SPEAKER_00: lines go on forever in both directions, right?
+40:19 SPEAKER_00: Oh, yeah.
+40:21 SPEAKER_00: So take your ruler.
+40:23 SPEAKER_00: And let's actually extend this line.
+40:25 SPEAKER_00: Be very careful.
+40:27 SPEAKER_00: You know, be precise.
+40:29 SPEAKER_00: Let's extend that line straight down.
+40:31 SPEAKER_00: Okay?
+40:33 SPEAKER_00: Go all the way down to there somewhere.
+40:35 SPEAKER_01: There we go.
+40:39 SPEAKER_00: Good, good, good, good.
+40:41 SPEAKER_00: Now, that's good enough.
+40:43 SPEAKER_00: Because the idea is, I'm asking
+40:45 SPEAKER_00: about what?
+40:47 SPEAKER_00: The intersection.
+40:49 SPEAKER_00: Intersection is where two lines
+40:51 SPEAKER_00: meet or cross each other, right?
+40:53 SPEAKER_00: Yeah.
+40:55 SPEAKER_00: So look where these two lines meet or cross.
+40:57 SPEAKER_01: What do you notice about the angles there?
+40:59 SPEAKER_01: It's a right angle.
+41:01 SPEAKER_01: Well said.
+41:03 SPEAKER_00: Right?
+41:05 SPEAKER_00: So, now in mathematics,
+41:07 SPEAKER_00: this is something I haven't mentioned yet,
+41:09 SPEAKER_00: that's also called perpendicular.
+41:11 SPEAKER_00: Have you guys heard about that before?
+41:13 SPEAKER_00: So, these two lines, therefore,
+41:15 SPEAKER_00: you would say are perpendicular.
+41:17 SPEAKER_00: They make right angles.
+41:19 UNK: Right?
+41:21 UNK: I think so.
+41:23 UNK: Okay.
+41:25 SPEAKER_01: I screwed up on a graph.
+41:27 SPEAKER_00: Okay.
+41:33 SPEAKER_00: Have you started your quick write yet, Brittany?
+41:35 SPEAKER_01: No, because I was doing the graphing
+41:37 SPEAKER_01: and they finished all the answers,
+41:39 SPEAKER_00: so I had to write down all the answers.
+41:41 SPEAKER_00: Right now, I want you to stop what you're doing
+41:43 SPEAKER_00: and let's say just one paragraph now.
+41:45 SPEAKER_00: Just write as much as you can.
+41:47 SPEAKER_01: I didn't learn anything.
+41:49 SPEAKER_00: Alright.
+41:51 SPEAKER_00: You didn't learn anything. You didn't learn how to make
+41:53 SPEAKER_00: tables or understand slope
+41:55 SPEAKER_00: or y-intercept or anything like that.
+41:57 SPEAKER_00: Okay?
+42:15 SPEAKER_01: You look nice.
+42:17 SPEAKER_01: How come you crumpled it up?
+42:19 SPEAKER_00: I screwed up.
+42:21 SPEAKER_00: So, you got a new one?
+42:23 SPEAKER_01: I'm just trying.
+42:25 SPEAKER_00: Maybe even use a ruler to draw your coordinate system.
+42:27 SPEAKER_00: Make it look professional.
+42:29 SPEAKER_01: Do it over here. Over here.
+42:31 SPEAKER_01: Okay?
+42:33 SPEAKER_01: I'm not going to do that.
+42:35 SPEAKER_01: Okay.
+42:39 SPEAKER_00: Last time, ladies and gentlemen.
+42:41 SPEAKER_00: Five, four, three,
+42:43 SPEAKER_00: two, one, zero.
+42:45 SPEAKER_00: Okay?
+42:47 SPEAKER_00: Here's the deal.
+42:49 SPEAKER_00: Because we're running short on time
+42:51 SPEAKER_00: and since I'm going to follow up anyways on Monday,
+42:55 SPEAKER_00: okay,
+42:57 SPEAKER_00: and we're actually going to have a little discussion about
+42:59 SPEAKER_00: not just graphing but also
+43:01 SPEAKER_00: what I wanted you to discover
+43:03 SPEAKER_00: about these lines.
+43:05 SPEAKER_00: Alright?
+43:07 SPEAKER_00: Please make sure you
+43:09 SPEAKER_00: put away all your work.
+43:11 SPEAKER_00: Do not lose any of it.
+43:13 SPEAKER_00: Do not turn anything in today
+43:15 SPEAKER_01: because you're going to need it on Monday.
+43:17 SPEAKER_00: Can I trust you?
+43:19 SPEAKER_01: Can you fold that up and put it away somewhere?
+43:21 SPEAKER_01: Alright.
+43:25 SPEAKER_01: Keep it until Monday.
+43:27 SPEAKER_01: Okay? Yep.
+43:29 SPEAKER_01: Okay.
+43:39 SPEAKER_01: Okay.
+43:41 SPEAKER_00: You're not even going to be here
+43:43 SPEAKER_00: Monday, Tuesday, or Wednesday?
+43:45 SPEAKER_01: D-O-D-R-D
+43:47 SPEAKER_01: D-C-A-T-C
+43:49 SPEAKER_01: Leave your work with another group member then.
+43:51 SPEAKER_00: Hey, what do we do with this Mr. R-E-E-R?
+43:53 SPEAKER_01: Leave that on the desk.
+43:55 SPEAKER_00: That'll be fine.
+43:57 SPEAKER_00: Okay, hurry up and go guys.
+43:59 SPEAKER_01: Have a good weekend.
+44:01 SPEAKER_01: Wait, Mr. R-E-E-R.
+44:03 SPEAKER_01: That was fun.
+44:05 SPEAKER_00: Did you have fun?
+44:07 SPEAKER_00: Good.
+44:09 SPEAKER_01: Max learned something without looking back.
+44:11 SPEAKER_01: That was so much fun.
+44:13 SPEAKER_01: That was so much fun.
+44:19 UNK: Bye.
+44:21 UNK: Bye.
+44:23 UNK: Thank you.
+44:25 UNK: Have a good weekend.
+44:27 UNK: Bye.
+44:29 UNK: Bye.
+44:31 UNK: Bye.
+44:33 UNK: Bye.
+44:35 UNK: Bye.
+44:37 UNK: Bye.
+44:39 UNK: Bye.
+44:41 UNK: Bye.
+44:43 UNK: Bye.
+44:45 UNK: Bye.

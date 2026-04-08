@@ -1,0 +1,34 @@
+# Paper project .gitignore
+# Excludes large reproducible artifacts (video/audio/intermediate chunks)
+# and transient files; keeps all code, configs, transcripts, and reports.
+
+# The repo root .gitignore excludes all *.txt — but the paper transcripts
+# are essential artifacts, so re-include them here.
+!*.txt
+!**/*.txt
+
+# Source video/audio (re-downloadable via yt-dlp from the URL recorded in
+# benchmark_US1*.json, or extractable from the mp4 via ffmpeg).
+benchmark_runs/*.mp4
+benchmark_runs/*.wav
+benchmark_runs/*.mp3
+benchmark_runs/*.MP3
+benchmark_runs/*.m4a
+
+# Per-chunk intermediate pipeline outputs (the assembled *_transcript.txt
+# captures the final content; the per-chunk files are regeneratable).
+benchmark_runs/**/chunks/
+benchmark_runs/**/chunk_*.txt
+benchmark_runs/chunk_*.txt
+
+# Local audio spotcheck clips (extracted from mp4 for listening tests).
+benchmark_runs/audio_spotcheck/
+
+# Whisper intermediate (full result.json is multi-MB and largely redundant
+# with the derived *_transcript.txt; regeneratable from the wav).
+benchmark_runs/whisper_us1/result.json
+
+# HuggingFace cache dir if it happens to land here.
+.cache/
+__pycache__/
+*.pyc

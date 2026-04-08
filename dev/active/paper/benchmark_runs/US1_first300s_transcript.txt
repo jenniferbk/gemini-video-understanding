@@ -1,0 +1,162 @@
+================================================================================
+COMPLETE TRANSCRIPT - V10
+================================================================================
+Video: US1_first300s.mp4
+Generated: 2026-04-07 15:06:15
+Model: gemini-3-flash-preview
+Media Resolution: HIGH
+Chunk Duration: 60s, Overlap: 15s
+Speakers: T, S, SN, SS, BS
+================================================================================
+
+--- CHUNK 1 (00:00 - 01:00) ---
+00:00 T: One for each group of four.
+00:02 T: Okay, or three.
+00:03 [Teacher stands at the front of the classroom, addressing students seated at grouped desks.]
+00:06 T: Okay guys, let's get started here.
+00:09 T: Okay, listen closely. To save a little time, I won't bring out my overhead like you're usually accustomed to.
+00:15 [Teacher holds up a stapled packet of papers.]
+00:16 T: Okay. Instead, let me just tell you. What I'm going to give you for each group is a little three-page packet. Okay.
+00:26 T: What I need for you to do right now is every one of you get out a blank sheet of paper.
+00:30 T: Every one of you needs a blank sheet of paper.
+00:32 [Teacher and a student in a black shirt walk between desks, handing out the packets.]
+00:34 SN: Thank you.
+00:40 [Camera zooms in on a worksheet on a desk. The text reads: "ALGEBRA. Using a pencil and the large piece of graph paper, graph the following linear equations. 1) y = 2/3x + 8, 2) y = -3/5x - 10, 3) y = 3x + 7, 4) y = -1/4x - 9, 5) y = x - 5. After these 5 equations are graphed, check with me before..."]
+00:41 T: Just put it right on the table back there, man.
+00:43 SN: Thank you.
+00:46 [Students at a table group, including Boy-RedShirt and Girl-WhiteJacket, prepare their materials.]
+00:52 [Teacher continues walking around the room, handing out packets to different groups.]
+00:57 T: Thank you, sir. Don't leave without it, alright?
+
+--- CHUNK 2 (00:45 - 01:45) ---
+01:00 [Teacher walks between desks, handing out packets.]
+01:03 T: Okay.
+01:04 [Teacher walks towards the back of the room.]
+01:11 [Teacher points to a student's paper at a back table.]
+01:13 T: Alright.
+01:14 [Teacher walks to the front of the room, standing near the whiteboard.]
+01:15 T: Okay. So...
+01:17 [Teacher clasps his hands together.]
+01:18 T: Listen closely now. Everybody ready?
+01:20 Girl-WhiteJacket: Yep.
+01:21 T: Okay everybody within your group of four or three, you need to work together.
+01:26 [Teacher gestures with his hands while speaking.]
+01:27 T: I know normally we work in pairs. Alright?
+01:30 [Girl-WhiteJacket and Girl-WhiteTshirt look at the teacher.]
+01:31 T: But I figured today you have another pair of students, you know, a couple extra brains there to help you get through this little lesson.
+01:39 [Teacher points towards the students.]
+01:40 T: Right? We've done this plenty times before.
+01:43 [Teacher gestures with both hands.]
+01:44 T: Some of y'all honestly are still a little shaky. So...
+
+--- CHUNK 3 (01:30 - 02:30) ---
+01:45 [Teacher stands in the middle of the classroom, gesturing with his hands as he speaks to the students.]
+01:49 T: If you look at the packet, which you're all sharing as a group, page one has five equations I want you to graph.
+01:57 [Teacher moves his hands in a circular motion.]
+01:58 T: Now you can graph it anyway that you know how to do it, as long as you do it correctly.
+02:03 T: Can someone raise their hand and tell me what's one obvious thing I could do to graph?
+02:07 [Teacher points to a student in the back of the room.]
+02:08 T: Nick.
+02:09 SN: Slope.
+02:09 [Camera pans left across the classroom, showing students at their desks including S-Boy-Afro and S-Girl-LongHair.]
+02:10 T: Use the slope with the...
+02:11 SN: Y-intercept.
+02:12 T: Y-intercept, right. That's probably the way you're probably gonna want to do it, right Nick?
+02:15 SN: Yeah.
+02:16 T: Is there another way though?
+02:18 [Teacher points to another student.]
+02:18 T: Robert.
+02:19 [Camera focuses on a group of students at a table. S-Boy-Glasses is looking at the teacher.]
+02:19 SN: Use the um, tables.
+02:20 T: Right, to make a table for the equation, and then plot the points from the table.
+02:24 [Teacher gestures with his hand.]
+02:25 T: Everyone got that? So those are the two main ways, right, we can graph those equations.
+02:28 [Camera pans back to the teacher standing near the front table.]
+02:29 [Teacher holds up one finger.]
+02:30 T: So right now I need you to get started. The key thing is when you're done with the first five...
+
+--- CHUNK 4 (02:15 - 03:15) ---
+02:30 T: ...the first page, as noted on the paper, please make sure I check to make sure you did it right before you move on.
+02:37 [T points to the paper on the desk of S-Girl-Glasses]
+02:38 T: Okay? So go ahead and get started.
+02:40 [T walks away from the table and moves towards the center of the room]
+02:42 [S-Boy-BlueShirt raises his hand as the teacher approaches]
+02:43 S-Boy-BlueShirt: I have a question.
+02:44 T: Yeah?
+02:45 [T leans over the table where S-Boy-Afro and S-Boy-BlueShirt are sitting]
+02:46 T: You're going to graph on that. That is your result for your group.
+02:48 [T points to a large sheet of white paper on the desk]
+02:49 S-Boy-BlueShirt: Everybody has to do a graph?
+02:50 T: Right. So someone here can assign themselves as the grapher or whatever.
+02:54 [S-Girl-Ponytail raises her hand]
+02:55 T: The rest of you kind of work together to make sure it's accurate.
+02:57 [S-Boy-Afro flips through a stack of papers and books on the desk]
+02:58 T: Okay? You're going to do it?
+02:59 [S-Boy-BlueShirt nods]
+03:00 T: Good job, Nick.
+03:01 [T moves to the next table where S-Boy-Glasses is sitting]
+03:03 [T leans over the table and looks at the papers]
+03:04 T: Alright, the grid paper...
+03:06 [T stands up and addresses the whole class, raising his hand]
+03:07 T: Alright, you know what? Hey, listen up real quick.
+03:09 [T starts counting down on his fingers]
+03:09 T: Five, four, three, two, one, zero.
+03:11 [Students stop talking and look at the teacher]
+03:12 T: I probably forgot because I'm still a little nervous.
+03:14 T: Okay. But the grid paper...
+
+--- CHUNK 5 (03:00 - 04:00) ---
+03:15 T: ...but the grid paper, you have one per group, right?
+03:21 T: So I'm relying on one of you in that group to be the designated grapher for the group.
+03:28 T: But the rest of you please help out, you know, help each other get the graphs done correctly. Okay?
+03:36 [T walks over to a group of four students: S-Robert (red shirt, spiky blonde hair), S-AsianBoy (white shirt, glasses), S-Girl-Glasses (patterned shirt, glasses), and S-Boy-BlackShirt (black shirt, back to camera)]
+03:37 T: There you go, Robert.
+03:39 [T leans over the desk, pointing at a worksheet in front of S-Robert]
+03:39 T: So while he's doing that, let's get started on this guys. What are we going to do?
+03:42 S-Robert: Do we write this on our piece of paper?
+03:43 T: Yeah.
+03:44 S-Robert: Oh, okay.
+03:45 [T picks up a wooden ruler from the desk and hands it to S-Boy-BlackShirt]
+03:45 T: Alright. This is actually... use a ruler. Use a ruler, man. Make it neat. Alright?
+03:50 [S-AsianBoy and S-Robert start writing on their papers as T watches them]
+03:51 [inaudible conversation, ~5s]
+03:56 T: Ah, see, so now you've already forgotten, right?
+03:58 [Close-up of the worksheet titled "Using a pencil and the large piece of graph paper, graph the following linear equations:"]
+03:59 T: First of all, zero's our favorite number, right?
+04:00 [T's finger points to the first equation on the worksheet: y = 2/3x + 8]
+
+--- CHUNK 6 (03:45 - 04:45) ---
+04:00 T: Put in zero, two-thirds times zero equals what?
+04:01 S-Boy-RedShirt: Zero.
+04:02 T: Plus eight is eight. Now because this fraction is a two-thirds...
+04:06 [T points at fraction "2/3" in first equation on worksheet]
+04:07 T: Remember what numbers I told you should pick now?
+04:11 S-Boy-RedShirt: Um, threes?
+04:12 T: Exactly! So maybe zero, three, six would be good numbers to try with this one, right?
+04:17 T: That way you don't have to worry about fractions or mixed numbers.
+04:20 S-Boy-RedShirt: Okay.
+04:21 [T turns and begins walking away from table]
+04:22 T: Alright.
+04:23 S-Girl-Striped: Mr. [inaudible]?
+04:24 [T walks across classroom to another group of students]
+04:25 S-Girl-Striped: I forgot how to do this again. Like, how do you do X and Y?
+04:29 T: Okay, so now wait a minute. Want to make a table then, right? So gonna make an XY table.
+04:33 [S-Girl-Striped begins drawing T-chart on blank sheet of paper]
+04:34 T: Okay.
+04:35 [Close-up of S-Girl-Striped's hand drawing vertical line and labeling columns "X" and "Y"]
+04:38 T: Idea again is making our points. We just pick any number we want for X. We can do that, correct?
+04:44 T: Everybody agree, Jenna?
+04:45 S-Girl-Striped: Yes.
+
+--- CHUNK 7 (04:30 - 05:00) ---
+04:45 [T points to the first equation on the worksheet: "y = 2/3x + 8"]
+04:51 S-Jenna-StripedShirt: So zero, one, two, and...
+04:52 [S-Jenna-StripedShirt writes "0" in the X column of her T-chart]
+04:53 T: Ah, that's true, except because this is a two-thirds fraction...
+04:54 [S-Girl-Braids is writing on her own paper at the adjacent desk]
+04:57 S-Jenna-StripedShirt: You want to pick threes?
+04:58 [S-Jenna-StripedShirt looks up from her paper to the teacher]
+04:59 T: Exactly.
+05:00 S-Jenna-StripedShirt: Like negative three, zero, and three?
+05:01 [T gestures with his hand while explaining the choice of X values]
+05:02 T: Right. And if you want to just do zero, three, six and stay away from negatives, you can do that.
