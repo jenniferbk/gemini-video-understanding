@@ -122,6 +122,17 @@ class TranscriptionConfigV10:
     enable_caching: bool = True
     cache_ttl_seconds: int = 7200  # 2 hours
 
+    # Timestamp anchoring: burn a visible HH:MM:SS timer into each chunk
+    # before sending to Gemini, and instruct the model to read the timer
+    # for all its timestamps. Prevents the model's internal clock from
+    # drifting across long videos (observed up to 14s on TIMSS AU4). When
+    # enabled, Gemini emits video-global timestamps directly so assembly
+    # skips the chunk_start-offset step.
+    burn_timestamps: bool = False
+    # Path to an ffmpeg binary that has drawtext (libfreetype) support.
+    # Homebrew's default `ffmpeg` lacks it; `ffmpeg-full` has it.
+    drawtext_ffmpeg: str = "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
+
 
 # =============================================================================
 # UTILITY CLASSES (ported from v08/v09)
@@ -777,6 +788,14 @@ class OverlapChunker:
     def _extract_chunk(self, input_path: str, output_path: str,
                        start_time: float, duration: float) -> bool:
         """Extract chunk using stream copy first, re-encode fallback"""
+        # Timestamp burn-in mode: always re-encode with a drawtext overlay
+        # that shows the real video time. Gemini reads the clock for its
+        # timestamps, eliminating intra-chunk clock drift.
+        if self.config.burn_timestamps:
+            return self._extract_chunk_with_timer(
+                input_path, output_path, start_time, duration,
+            )
+
         # Try stream copy (fast, no quality loss)
         if self._try_stream_copy(input_path, output_path, start_time, duration):
             return True
@@ -789,6 +808,45 @@ class OverlapChunker:
         else:
             print(" FAILED")
         return success
+
+    def _extract_chunk_with_timer(self, input_path: str, output_path: str,
+                                  start_time: float, duration: float) -> bool:
+        """Extract chunk AND burn a HH:MM:SS timer in the top-left corner.
+
+        The overlay shows absolute video time, so chunk N starting at
+        45 minutes will show 00:45:00.000 at its first frame. Gemini reads
+        this clock for its timestamps, making intra-chunk drift impossible.
+        """
+        ffmpeg = self.config.drawtext_ffmpeg
+        # %{pts\:hms\:<offset>} adds the offset (seconds) to the
+        # presentation timestamp before formatting as H:M:S.
+        offset = int(round(start_time))
+        drawtext = (
+            f"drawtext=text='%{{pts\\:hms\\:{offset}}}':"
+            "fontsize=36:fontcolor=yellow:borderw=3:bordercolor=black:"
+            "box=1:boxcolor=black@0.6:boxborderw=8:x=20:y=20"
+        )
+        cmd = [
+            ffmpeg, "-y", "-loglevel", "error",
+            "-ss", str(start_time), "-i", input_path,
+            "-t", str(duration),
+            "-vf", drawtext,
+            "-c:v", "libx264", "-preset", "fast",
+            "-c:a", "copy",
+            output_path,
+        ]
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+            if result.returncode == 0 and Path(output_path).exists():
+                return True
+            # Print ffmpeg's error so failures are diagnosable.
+            err = (result.stderr or "").strip()
+            if err:
+                print(f"    drawtext ffmpeg failed: {err[:300]}")
+            return False
+        except (subprocess.TimeoutExpired, FileNotFoundError) as e:
+            print(f"    drawtext ffmpeg error: {e}")
+            return False
 
     def _try_stream_copy(self, input_path: str, output_path: str,
                          start_time: float, duration: float) -> bool:
@@ -1169,14 +1227,53 @@ HALLUCINATION CHECK - watch for these patterns in your own output:
         chunk_duration_mm = chunk_duration_secs // 60
         chunk_duration_ss = chunk_duration_secs % 60
         parts.append(f"\n--- CHUNK {chunk_number}/{total_chunks} ---")
-        parts.append(f"This video clip is {chunk_duration_mm}:{chunk_duration_ss:02d} long ({chunk_duration_secs} seconds).")
-        parts.append(f"Transcribe the ENTIRE clip from start to finish. Your last timestamp should be near {chunk_duration_mm}:{chunk_duration_ss:02d}.")
-        parts.append(f"Do NOT stop early and do NOT generate timestamps beyond {chunk_duration_mm}:{chunk_duration_ss:02d}.")
+
+        if self.config.burn_timestamps:
+            # The chunk clip has a burned-in HH:MM:SS.mmm timer in the
+            # top-left corner. Its starting value is the chunk's global
+            # video time. Gemini should output timestamps derived from
+            # the visible clock (global video time), not clip-local time.
+            start_hhmm = f"{int(chunk_info['start_time']) // 60}:{int(chunk_info['start_time']) % 60:02d}"
+            end_hhmm = f"{int(chunk_info['end_time']) // 60}:{int(chunk_info['end_time']) % 60:02d}"
+            parts.append(
+                "A HH:MM:SS.mmm timer is burned into the top-left corner of every "
+                "frame. It shows the real video time. READ THIS TIMER when each "
+                f"utterance begins and use the MM:SS fields for your timestamps."
+            )
+            parts.append(
+                f"The timer in this clip runs from {start_hhmm} to {end_hhmm}. "
+                f"Your first timestamp should be {start_hhmm} or later; your last "
+                f"should be {end_hhmm} or slightly earlier. Do NOT emit timestamps "
+                f"outside this range."
+            )
+        else:
+            parts.append(f"This video clip is {chunk_duration_mm}:{chunk_duration_ss:02d} long ({chunk_duration_secs} seconds).")
+            parts.append(f"Transcribe the ENTIRE clip from start to finish. Your last timestamp should be near {chunk_duration_mm}:{chunk_duration_ss:02d}.")
+            parts.append(f"Do NOT stop early and do NOT generate timestamps beyond {chunk_duration_mm}:{chunk_duration_ss:02d}.")
 
         # Overlap instruction for chunks 2+
         if chunk_info.get('has_overlap', False):
             overlap_secs = self.config.overlap_seconds
-            parts.append(f"""
+            if self.config.burn_timestamps:
+                # In burn mode, timestamps are global video time. The
+                # overlap region is the first overlap_secs of the clip,
+                # which corresponds to the timer range
+                # [start_time, start_time + overlap_secs).
+                overlap_end_sec = int(chunk_info['start_time']) + overlap_secs
+                overlap_end_hhmm = f"{overlap_end_sec // 60}:{overlap_end_sec % 60:02d}"
+                parts.append(f"""
+IMPORTANT - VIDEO OVERLAP HANDLING:
+The first {overlap_secs} seconds of this clip (timer up to {overlap_end_hhmm}) are REPEATED
+from the previous chunk. You have already transcribed that content. Do NOT transcribe it again.
+
+Use those first {overlap_secs} seconds ONLY to visually identify speakers so your labels
+stay consistent with the previous chunk. Then begin your actual transcript at the moment
+the timer reads {overlap_end_hhmm} or later.
+
+Your FIRST transcript line must have a timestamp of {overlap_end_hhmm} or later.
+Do NOT re-transcribe dialogue from the CONTINUITY CONTEXT below - that is already captured.""")
+            else:
+                parts.append(f"""
 IMPORTANT - VIDEO OVERLAP HANDLING:
 The first {overlap_secs} seconds of this video (00:00 to 00:{overlap_secs:02d}) are REPEATED
 from the previous chunk. You have already transcribed this content. Do NOT transcribe it again.
@@ -1192,12 +1289,19 @@ Do NOT re-transcribe dialogue from the CONTINUITY CONTEXT below - that is alread
         if previous_context and chunk_number > 1:
             context_lines = self._extract_context_lines(previous_context)
             if context_lines:
+                if self.config.burn_timestamps:
+                    overlap_end_sec = int(chunk_info['start_time']) + self.config.overlap_seconds
+                    start_instr = (f"Start timestamps at timer value "
+                                   f"{overlap_end_sec // 60}:{overlap_end_sec % 60:02d} or later.")
+                else:
+                    start_instr = (f"Start timestamps from 00:"
+                                   f"{self.config.overlap_seconds:02d} for this chunk.")
                 parts.append(f"""
 CONTINUITY CONTEXT (last lines from previous chunk):
 {context_lines}
 
 Continue naturally from this context. Maintain speaker label consistency.
-Start timestamps from 00:{self.config.overlap_seconds:02d} for this chunk.""")
+{start_instr}""")
 
         parts.append("\nBegin transcription:")
         return "\n".join(parts)
@@ -1367,6 +1471,27 @@ class VideoTranscriptionPipelineV10:
                 chunk_num = chunk_info['chunk_number']
                 total = len(chunk_list)
                 percent = 30 + int((chunk_num / total) * 60)
+
+                # Resume: skip inference if a usable per-chunk transcript
+                # was written by a prior run (checkpointed to disk before
+                # crash/sleep/SIGKILL).
+                chunk_file = output_dir / f"chunk_{chunk_num:03d}_transcript.txt"
+                if chunk_file.exists() and chunk_file.stat().st_size > 0:
+                    cached = chunk_file.read_text(encoding='utf-8')
+                    if 'FAILED' not in cached and cached.strip():
+                        print(f"  Chunk {chunk_num}/{total}: reusing cached "
+                              f"transcript ({len(cached)} chars)")
+                        report_progress(self.config, "progress",
+                                        chunk=chunk_num, total=total,
+                                        percent=percent, status="cached")
+                        all_transcripts.append({
+                            'chunk_number': chunk_num,
+                            'chunk_info': chunk_info,
+                            'transcript': cached,
+                        })
+                        if not cached.startswith('['):
+                            previous_transcript = cached
+                        continue
 
                 print(f"\n  Transcribing chunk {chunk_num}/{total}...")
                 report_progress(self.config, "progress", chunk=chunk_num, total=total,
@@ -1539,12 +1664,12 @@ class VideoTranscriptionPipelineV10:
             chunk_info = td['chunk_info']
             transcript = td['transcript'].strip()
 
-            # The model outputs timestamps relative to the chunk video file.
-            # For chunk 2+, the model starts at 00:15 (skipping overlap).
-            # We add start_time (when the chunk begins in absolute video time)
-            # to convert to absolute timestamps. NOT transcript_start_time,
-            # which would double-count the overlap offset.
-            offset_seconds = chunk_info['start_time']
+            # In standard mode, the model outputs chunk-local timestamps
+            # (00:00..chunk_duration) and we add chunk_start to get global
+            # video time. In burn-timestamps mode, the model reads the
+            # burned-in clock and emits global video time directly, so no
+            # offset adjustment is needed (and adding it would double-count).
+            offset_seconds = 0 if self.config.burn_timestamps else chunk_info['start_time']
             start_label = TimestampNormalizer.from_seconds(chunk_info['start_time'])
             end_label = TimestampNormalizer.from_seconds(chunk_info['end_time'])
 
@@ -1977,6 +2102,9 @@ def cmd_process(args):
         json_progress=args.json_progress,
         thinking_budget=args.thinking_budget,
         video_fps=args.fps,
+        burn_timestamps=getattr(args, 'burn_timestamps', False),
+        drawtext_ffmpeg=getattr(args, 'drawtext_ffmpeg',
+                                TranscriptionConfigV10.drawtext_ffmpeg),
     )
 
     # Load speakers from manifest if provided
@@ -2125,6 +2253,13 @@ EXAMPLES:
                        help="Chunk duration in minutes (default: 1.0)")
         p.add_argument("--overlap", type=int, default=15,
                        help="Overlap seconds between chunks (default: 15)")
+        p.add_argument("--burn-timestamps", action="store_true",
+                       help=("Burn a HH:MM:SS timer into each chunk and ask the "
+                             "model to read it for timestamps. Eliminates model-"
+                             "internal clock drift; requires ffmpeg-full (drawtext)."))
+        p.add_argument("--drawtext-ffmpeg",
+                       default="/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg",
+                       help="Path to an ffmpeg build that supports drawtext.")
 
     # identify
     p_identify = subparsers.add_parser('identify',
