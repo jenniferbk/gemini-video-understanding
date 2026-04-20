@@ -1,3 +1,6 @@
+# Git worktrees (isolated branches)
+.worktrees/
+
 # Dependencies
 node_modules/
 
