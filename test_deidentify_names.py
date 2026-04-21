@@ -260,3 +260,96 @@ def test_build_name_map_preserves_visual_labels_and_nicknames():
     entry = name_map.students[0]
     assert entry.visual_label == "Girl-PinkShirtBlackPants"
     assert entry.nicknames == ["Mel"]
+
+
+from deidentify_names import apply_name_map
+
+
+def _name_map_melanie():
+    return NameMap(
+        students=[NameEntry(
+            real_name="Melanie", gender="F",
+            visual_label="Girl-PinkShirtBlackPants",
+            pseudonym="Student-Hannah", nicknames=["Mel"],
+        )],
+        adults=[AdultEntry(
+            real_name="Sheridan", honorific="Ms.",
+            pseudonym="Ms. Kelly",
+        )],
+    )
+
+
+def test_apply_replaces_real_name_label():
+    src = "43:02 Melanie: Two sides are the same."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == "43:02 Student-Hannah: Two sides are the same."
+
+
+def test_apply_replaces_visual_label_to_retire_it():
+    # Policy A: the visual label is also rewritten to the pseudonym
+    src = "39:58 Girl-PinkShirtBlackPants: I have a question."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == "39:58 Student-Hannah: I have a question."
+
+
+def test_apply_replaces_real_name_in_dialogue():
+    src = "39:43 Teacher-PinkPants: Melanie, come on up."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == "39:43 Teacher-PinkPants: Student-Hannah, come on up."
+
+
+def test_apply_replaces_possessive():
+    src = "Teacher-PinkPants: That's Melanie's answer."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == "Teacher-PinkPants: That's Student-Hannah's answer."
+
+
+def test_apply_replaces_nickname():
+    src = "Teacher-PinkPants: Good job, Mel."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == "Teacher-PinkPants: Good job, Student-Hannah."
+
+
+def test_apply_replaces_adult_honorific_name():
+    src = "Teacher-PinkPants: You've done it with Ms. Sheridan."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == "Teacher-PinkPants: You've done it with Ms. Kelly."
+
+
+def test_apply_does_not_touch_unrelated_words():
+    # "Graham" is a real name in some classrooms but also a cracker;
+    # if not in the map, must not be replaced.
+    src = "Teacher-PinkPants: Let's eat graham crackers."
+    out = apply_name_map(src, _name_map_melanie())
+    assert out == src
+
+
+def test_apply_is_case_sensitive_word_boundary():
+    # Must match "Melanie" but not "melanies" (no lowercase in classroom transcripts anyway)
+    src = "Teacher-PinkPants: melanies are a type of flower."
+    out = apply_name_map(src, _name_map_melanie())
+    # Lowercase 'melanies' is not a real reference; should be left alone.
+    assert out == src
+
+
+def test_apply_multiple_names_across_transcript():
+    name_map = NameMap(
+        students=[
+            NameEntry(real_name="Melanie", gender="F", visual_label=None,
+                      pseudonym="Student-Hannah", nicknames=[]),
+            NameEntry(real_name="James", gender="M", visual_label=None,
+                      pseudonym="Student-Michael", nicknames=[]),
+        ],
+        adults=[],
+    )
+    src = (
+        "Teacher-PinkPants: Melanie, walk forward.\n"
+        "Teacher-PinkPants: James, what's next?\n"
+        "James: Turn left."
+    )
+    expected = (
+        "Teacher-PinkPants: Student-Hannah, walk forward.\n"
+        "Teacher-PinkPants: Student-Michael, what's next?\n"
+        "Student-Michael: Turn left."
+    )
+    assert apply_name_map(src, name_map) == expected

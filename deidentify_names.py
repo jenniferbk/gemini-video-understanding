@@ -256,3 +256,56 @@ def build_name_map(detected: Dict, pool: Dict[str, List[str]]) -> NameMap:
         ))
 
     return NameMap(students=students, adults=adults)
+
+
+def _compile_token_pattern(token: str) -> "re.Pattern":
+    """Word-boundary, case-sensitive regex that also matches possessive `'s`.
+
+    Classroom transcripts preserve case on names, so we match case-sensitively
+    to avoid false positives on common-noun collisions (e.g., "graham crackers").
+    """
+    escaped = re.escape(token)
+    return re.compile(rf"\b{escaped}(?P<poss>'s)?\b")
+
+
+def _replace_token(text: str, token: str, replacement: str) -> str:
+    pattern = _compile_token_pattern(token)
+
+    def sub(m: "re.Match") -> str:
+        return replacement + (m.group("poss") or "")
+
+    return pattern.sub(sub, text)
+
+
+def apply_name_map(text: str, name_map: NameMap) -> str:
+    """Substitute real names and visual labels with pseudonyms throughout.
+
+    Order matters: we process students first (each student: visual_label,
+    real_name, nicknames), then adults (honorific + last name as one unit,
+    then bare last name guarded by honorific). Within students, longer
+    nicknames are substituted before shorter ones to avoid partial overlaps.
+    """
+    out = text
+
+    for entry in name_map.students:
+        tokens: List[str] = []
+        if entry.visual_label:
+            # Visual label may contain hyphens (e.g., "Girl-PinkShirtBlackPants")
+            # \b works on alphanumerics; hyphens count as boundaries,
+            # so full-label regex match is still valid.
+            tokens.append(entry.visual_label)
+        tokens.append(entry.real_name)
+        # Nicknames: longest first to avoid "Mel" eating part of "Melanie"
+        for nick in sorted(entry.nicknames, key=len, reverse=True):
+            tokens.append(nick)
+        for token in tokens:
+            out = _replace_token(out, token, entry.pseudonym)
+
+    for adult in name_map.adults:
+        # Match "<Honorific> <LastName>" as one unit (stops bare-lastname false positives)
+        combo_pattern = re.compile(rf"\b{re.escape(adult.honorific)}\s+{re.escape(adult.real_name)}\b")
+        out = combo_pattern.sub(adult.pseudonym, out)
+        if adult.visual_label:
+            out = _replace_token(out, adult.visual_label, adult.pseudonym)
+
+    return out
