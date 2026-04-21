@@ -316,8 +316,8 @@ def deidentify_transcript(
     Args:
         transcript_text: the stitched v10 transcript.
         gemini_client: a `GeminiClient` (from video_transcription_pipeline_v10)
-            or any object with a `.generate(contents, ...)` method that returns
-            an object with a `.text` attribute.
+            or any object with a `.generate(contents, temperature=...)` method
+            that returns the model's response text as a string.
         pool_path: path to pseudonym_pool.json.
 
     Returns:
@@ -326,8 +326,7 @@ def deidentify_transcript(
     """
     pool = load_pseudonym_pool(pool_path)
     prompt = build_name_extraction_prompt(transcript_text)
-    response = gemini_client.generate([prompt], temperature=0.0)
-    raw = response.text if hasattr(response, "text") else str(response)
+    raw = gemini_client.generate([prompt], temperature=0.0)
     detected = parse_name_extraction_response(raw)
     name_map = build_name_map(detected, pool)
     return apply_name_map(transcript_text, name_map), name_map

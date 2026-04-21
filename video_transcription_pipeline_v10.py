@@ -1550,41 +1550,65 @@ class VideoTranscriptionPipelineV10:
 
             # Phase 6.5: Name de-identification (optional)
             # When enabled, substitute real names with pseudonyms BEFORE any
-            # write-to-disk so the PII-containing original never hits the
-            # filesystem. Emits an audit file so researchers can map back.
+            # write-to-disk. Per-chunk files at output_dir/chunk_NNN_transcript.txt
+            # contain the original PII-bearing transcripts. They are cleaned up
+            # after this phase when keep_chunks=False (default). Combining
+            # --deidentify-names with --keep-chunks retains PII on disk; see
+            # CLAUDE.md caveat.
+            deidentify_failed = False
             if self.config.deidentify_names:
-                from deidentify_names import deidentify_transcript
-                pool_path = str(Path(__file__).parent / "pseudonym_pool.json")
-                report_progress(self.config, "progress",
-                                status="deidentifying_names", percent=98)
-                combined, name_map = deidentify_transcript(
-                    combined, self.client, pool_path,
-                )
-                # Write audit trail alongside transcript
-                name_map_path = output_dir / "transcript_name_map.json"
-                with open(name_map_path, "w", encoding="utf-8") as f:
-                    json.dump(name_map.to_dict(), f, indent=2, ensure_ascii=False)
+                try:
+                    from deidentify_names import deidentify_transcript
+                    pool_path = str(Path(__file__).parent / "pseudonym_pool.json")
+                    report_progress(self.config, "progress",
+                                    status="deidentifying_names", percent=98)
+                    combined, name_map = deidentify_transcript(
+                        combined, self.client, pool_path,
+                    )
+                    # Write audit trail alongside transcript (restricted perms).
+                    name_map_path = output_dir / "transcript_name_map.json"
+                    with open(name_map_path, "w", encoding="utf-8") as f:
+                        json.dump(name_map.to_dict(), f, indent=2, ensure_ascii=False)
+                    try:
+                        os.chmod(name_map_path, 0o600)
+                    except OSError:
+                        pass  # non-fatal on unusual filesystems
+                except Exception as e:
+                    deidentify_failed = True
+                    print(f"\n  WARNING: de-identification failed: {e}", file=sys.stderr)
+                    print("  Writing original (PII-bearing) transcript with "
+                          "DEIDENTIFICATION_FAILED marker so you can decide "
+                          "whether to retry or use as-is.", file=sys.stderr)
+                    report_progress(self.config, "progress",
+                                    status="deidentify_failed",
+                                    error=str(e))
+
+            # Compute output stem. If de-identification failed, prefix the
+            # stem with a visible marker so downstream consumers see PII risk.
+            stem = video_path.stem
+            if deidentify_failed:
+                stem = f"{stem}_DEIDENTIFICATION_FAILED"
 
             # Save outputs
             if self.config.dual_output:
-                research_file = output_dir / f"{video_path.stem}_transcript.txt"
+                research_file = output_dir / f"{stem}_transcript.txt"
                 with open(research_file, 'w', encoding='utf-8') as f:
                     f.write(combined)
 
                 clean = self._create_clean_transcript(combined)
-                transana_file = output_dir / f"{video_path.stem}_transana.txt"
+                transana_file = output_dir / f"{stem}_transana.txt"
                 with open(transana_file, 'w', encoding='utf-8') as f:
                     f.write(clean)
 
                 # SRT export
-                srt_file = output_dir / f"{video_path.stem}.srt"
+                srt_file = output_dir / f"{stem}.srt"
                 SubtitleExporter.to_srt(clean, str(srt_file))
 
                 print(f"\n  Research (annotated): {research_file}")
                 print(f"  Transana (clean):     {transana_file}")
                 print(f"  Subtitles (SRT):      {srt_file}")
             else:
-                final_file = output_dir / f"{video_path.stem}_transcript.txt"
+                final_file = output_dir / f"{stem}_transcript.txt"
                 with open(final_file, 'w', encoding='utf-8') as f:
                     f.write(combined)
                 print(f"\n  Transcript: {final_file}")

@@ -410,15 +410,13 @@ def test_deidentify_transcript_end_to_end_with_mock():
         "40:47 Piper: Fake code.\n"
         "43:02 Girl-PinkShirtBlackPants: Two sides are the same."
     )
-    # Mock Gemini: returns a canned JSON response for the prompt
+    # Mock Gemini: GeminiClient.generate() returns a str (the response text).
     mock_client = MagicMock()
     canned = '''{"students": [
         {"real_name": "Melanie", "gender": "F", "visual_label": "Girl-PinkShirtBlackPants", "nicknames": []},
         {"real_name": "Piper", "gender": "F", "visual_label": null, "nicknames": []}
     ], "adults": []}'''
-    mock_response = MagicMock()
-    mock_response.text = canned
-    mock_client.generate.return_value = mock_response
+    mock_client.generate.return_value = canned
 
     result_text, name_map = deidentify_transcript(
         transcript, mock_client, str(POOL_PATH),
@@ -471,9 +469,7 @@ def test_melanie_excerpt_no_real_names_leak():
         ],
     })
     mock_client = MagicMock()
-    mock_response = MagicMock()
-    mock_response.text = canned
-    mock_client.generate.return_value = mock_response
+    mock_client.generate.return_value = canned
 
     result_text, name_map = deidentify_transcript(
         excerpt, mock_client, str(POOL_PATH),
