@@ -126,4 +126,6 @@ def test_prompt_includes_transcript_and_schema():
 
 def test_prompt_handles_empty_transcript():
     prompt = build_name_extraction_prompt("")
-    assert "students" in prompt
+    # An empty transcript should produce an empty TRANSCRIPT: section,
+    # not raise and not drop the section header.
+    assert prompt.rstrip("\n").endswith("TRANSCRIPT:")
