@@ -24,6 +24,7 @@ export interface TranscriptionConfig {
   apiKey: string;
   speakersManifestPath?: string;
   audioOnly?: boolean;
+  deidentifyNames?: boolean;
 }
 
 export interface SpeakerDetectionConfig {
@@ -328,6 +329,17 @@ export class PythonTranscriptionRunner extends EventEmitter {
     // Audio-only mode
     if (config.audioOnly) {
       args.push('--audio-only');
+    }
+
+    // Always burn timestamps (ffmpeg clock overlay + per-chunk resume). Closes
+    // up-to-14s intra-chunk clock drift; not a user-facing choice.
+    args.push('--burn-timestamps');
+
+    // Optional second Gemini pass that replaces real names with pseudonyms
+    // and writes transcript_name_map.json. Off by default; toggled from the
+    // ConfigScreen Advanced section.
+    if (config.deidentifyNames) {
+      args.push('--deidentify-names');
     }
 
     console.log('Starting V10 transcription:', {
