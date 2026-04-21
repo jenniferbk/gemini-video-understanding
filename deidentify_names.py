@@ -13,6 +13,7 @@ mention and the visual-description label everywhere in the transcript.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -153,3 +154,45 @@ TRANSCRIPT:
 
 def build_name_extraction_prompt(transcript_text: str) -> str:
     return _NAME_EXTRACTION_PROMPT_TEMPLATE.format(transcript=transcript_text)
+
+
+_CODE_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
+_VALID_GENDERS = {"F", "M", "N"}
+
+
+def parse_name_extraction_response(raw: str) -> Dict:
+    """Parse Gemini's JSON response into a normalized dict.
+
+    Strips code fences if present, coerces missing `nicknames` to `[]`, and
+    coerces out-of-vocabulary genders to `N`.
+
+    Returns dict with keys "students", "adults" — each a list of plain dicts.
+    Raises ValueError on unparseable input.
+    """
+    cleaned = _CODE_FENCE_RE.sub("", raw).strip()
+    try:
+        data = json.loads(cleaned)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"could not parse name extraction response: {e}")
+
+    students = []
+    for s in data.get("students", []):
+        gender = s.get("gender", "N")
+        if gender not in _VALID_GENDERS:
+            gender = "N"
+        students.append({
+            "real_name": s["real_name"],
+            "gender": gender,
+            "visual_label": s.get("visual_label"),
+            "nicknames": s.get("nicknames") or [],
+        })
+
+    adults = []
+    for a in data.get("adults", []):
+        adults.append({
+            "real_name": a["real_name"],
+            "honorific": a.get("honorific", "Ms."),
+            "visual_label": a.get("visual_label"),
+        })
+
+    return {"students": students, "adults": adults}

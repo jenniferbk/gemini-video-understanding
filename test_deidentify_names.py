@@ -129,3 +129,44 @@ def test_prompt_handles_empty_transcript():
     # An empty transcript should produce an empty TRANSCRIPT: section,
     # not raise and not drop the section header.
     assert prompt.rstrip("\n").endswith("TRANSCRIPT:")
+
+
+from deidentify_names import parse_name_extraction_response
+
+
+def test_parse_happy_path():
+    raw = '''{"students": [{"real_name": "Melanie", "gender": "F", "visual_label": "Girl-PinkShirtBlackPants", "nicknames": ["Mel"]}], "adults": [{"real_name": "Sheridan", "honorific": "Ms.", "visual_label": null}]}'''
+    detected = parse_name_extraction_response(raw)
+    assert len(detected["students"]) == 1
+    assert detected["students"][0]["real_name"] == "Melanie"
+    assert detected["students"][0]["nicknames"] == ["Mel"]
+    assert detected["adults"][0]["honorific"] == "Ms."
+
+
+def test_parse_strips_code_fences():
+    raw = '```json\n{"students": [], "adults": []}\n```'
+    detected = parse_name_extraction_response(raw)
+    assert detected == {"students": [], "adults": []}
+
+
+def test_parse_empty():
+    raw = '{"students": [], "adults": []}'
+    detected = parse_name_extraction_response(raw)
+    assert detected == {"students": [], "adults": []}
+
+
+def test_parse_malformed_raises():
+    with pytest.raises(ValueError, match="could not parse"):
+        parse_name_extraction_response("not json at all")
+
+
+def test_parse_fills_missing_nicknames():
+    raw = '{"students": [{"real_name": "Piper", "gender": "F", "visual_label": null}], "adults": []}'
+    detected = parse_name_extraction_response(raw)
+    assert detected["students"][0]["nicknames"] == []
+
+
+def test_parse_rejects_bad_gender():
+    raw = '{"students": [{"real_name": "Piper", "gender": "Q", "visual_label": null, "nicknames": []}], "adults": []}'
+    detected = parse_name_extraction_response(raw)
+    assert detected["students"][0]["gender"] == "N"  # coerced to neutral
