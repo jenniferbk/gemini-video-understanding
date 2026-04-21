@@ -133,6 +133,12 @@ class TranscriptionConfigV10:
     # Homebrew's default `ffmpeg` lacks it; `ffmpeg-full` has it.
     drawtext_ffmpeg: str = "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
 
+    # De-identification: optional second Gemini pass that detects real names
+    # and substitutes realistic pseudonyms (Student-Hannah, Ms. Kelly). Off
+    # by default. When on, writes transcript_name_map.json audit file and
+    # NEVER writes the PII-containing original transcript to disk.
+    deidentify_names: bool = False
+
 
 # =============================================================================
 # UTILITY CLASSES (ported from v08/v09)
@@ -1542,26 +1548,67 @@ class VideoTranscriptionPipelineV10:
 
             combined = self._assemble_transcript(all_transcripts, video_path, speakers)
 
+            # Phase 6.5: Name de-identification (optional)
+            # When enabled, substitute real names with pseudonyms BEFORE any
+            # write-to-disk. Per-chunk files at output_dir/chunk_NNN_transcript.txt
+            # contain the original PII-bearing transcripts. They are cleaned up
+            # after this phase when keep_chunks=False (default). Combining
+            # --deidentify-names with --keep-chunks retains PII on disk; see
+            # CLAUDE.md caveat.
+            deidentify_failed = False
+            if self.config.deidentify_names:
+                try:
+                    from deidentify_names import deidentify_transcript
+                    pool_path = str(Path(__file__).parent / "pseudonym_pool.json")
+                    report_progress(self.config, "progress",
+                                    status="deidentifying_names", percent=98)
+                    combined, name_map = deidentify_transcript(
+                        combined, self.client, pool_path,
+                    )
+                    # Write audit trail alongside transcript (restricted perms).
+                    name_map_path = output_dir / "transcript_name_map.json"
+                    with open(name_map_path, "w", encoding="utf-8") as f:
+                        json.dump(name_map.to_dict(), f, indent=2, ensure_ascii=False)
+                    try:
+                        os.chmod(name_map_path, 0o600)
+                    except OSError:
+                        pass  # non-fatal on unusual filesystems
+                except Exception as e:
+                    deidentify_failed = True
+                    print(f"\n  WARNING: de-identification failed: {e}", file=sys.stderr)
+                    print("  Writing original (PII-bearing) transcript with "
+                          "DEIDENTIFICATION_FAILED marker so you can decide "
+                          "whether to retry or use as-is.", file=sys.stderr)
+                    report_progress(self.config, "progress",
+                                    status="deidentify_failed",
+                                    error=str(e))
+
+            # Compute output stem. If de-identification failed, prefix the
+            # stem with a visible marker so downstream consumers see PII risk.
+            stem = video_path.stem
+            if deidentify_failed:
+                stem = f"{stem}_DEIDENTIFICATION_FAILED"
+
             # Save outputs
             if self.config.dual_output:
-                research_file = output_dir / f"{video_path.stem}_transcript.txt"
+                research_file = output_dir / f"{stem}_transcript.txt"
                 with open(research_file, 'w', encoding='utf-8') as f:
                     f.write(combined)
 
                 clean = self._create_clean_transcript(combined)
-                transana_file = output_dir / f"{video_path.stem}_transana.txt"
+                transana_file = output_dir / f"{stem}_transana.txt"
                 with open(transana_file, 'w', encoding='utf-8') as f:
                     f.write(clean)
 
                 # SRT export
-                srt_file = output_dir / f"{video_path.stem}.srt"
+                srt_file = output_dir / f"{stem}.srt"
                 SubtitleExporter.to_srt(clean, str(srt_file))
 
                 print(f"\n  Research (annotated): {research_file}")
                 print(f"  Transana (clean):     {transana_file}")
                 print(f"  Subtitles (SRT):      {srt_file}")
             else:
-                final_file = output_dir / f"{video_path.stem}_transcript.txt"
+                final_file = output_dir / f"{stem}_transcript.txt"
                 with open(final_file, 'w', encoding='utf-8') as f:
                     f.write(combined)
                 print(f"\n  Transcript: {final_file}")
@@ -2105,6 +2152,7 @@ def cmd_process(args):
         burn_timestamps=getattr(args, 'burn_timestamps', False),
         drawtext_ffmpeg=getattr(args, 'drawtext_ffmpeg',
                                 TranscriptionConfigV10.drawtext_ffmpeg),
+        deidentify_names=args.deidentify_names,
     )
 
     # Load speakers from manifest if provided
@@ -2290,6 +2338,11 @@ EXAMPLES:
                           help="Output JSON progress for Electron integration")
     p_process.add_argument("--thinking-budget", type=int, default=4096,
                           help="Thinking token budget (default: 4096)")
+    p_process.add_argument("--deidentify-names", action="store_true",
+        help="Run a second Gemini pass after transcription to detect real "
+             "names (students and adults) and substitute realistic "
+             "pseudonyms. Writes an audit file transcript_name_map.json. "
+             "Off by default.")
     add_common_args(p_process)
     add_chunk_args(p_process)
     p_process.set_defaults(func=cmd_process)

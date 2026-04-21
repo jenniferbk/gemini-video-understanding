@@ -1,0 +1,24 @@
+{
+  "student_female": [
+    "Hannah", "Ava", "Sophia", "Emma", "Olivia", "Isabella", "Mia", "Charlotte",
+    "Amelia", "Harper", "Evelyn", "Abigail", "Emily", "Ella", "Madison",
+    "Scarlett", "Victoria", "Aria", "Grace", "Chloe", "Camila", "Penelope",
+    "Riley", "Layla", "Lillian", "Nora", "Zoey", "Mila", "Aubrey", "Hazel"
+  ],
+  "student_male": [
+    "Michael", "Ethan", "Noah", "Liam", "Lucas", "Mason", "Logan", "Oliver",
+    "Elijah", "James", "Benjamin", "Jacob", "William", "Daniel", "Henry",
+    "Alexander", "Owen", "Sebastian", "Jack", "Samuel", "David", "Joseph",
+    "Carter", "Wyatt", "Jayden", "John", "Dylan", "Luke", "Gabriel", "Anthony"
+  ],
+  "student_neutral": [
+    "Alex", "Jordan", "Riley", "Taylor", "Casey", "Avery", "Morgan", "Quinn",
+    "Reese", "Rowan", "Sage", "Parker", "Charlie", "Emerson", "Finley"
+  ],
+  "adult_last": [
+    "Kelly", "Walker", "Martinez", "Harris", "Clark", "Lewis", "Robinson",
+    "Young", "King", "Wright", "Scott", "Green", "Baker", "Adams", "Nelson",
+    "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell",
+    "Parker", "Evans", "Edwards", "Collins", "Stewart", "Morris", "Rogers", "Reed"
+  ]
+}

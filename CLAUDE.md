@@ -92,6 +92,8 @@ The Python script outputs JSON on stdout for the Electron app:
 
 Prefix markers: `GVU_PROGRESS:`, `GVU_COMPLETE:`, `GVU_ERROR:`
 
+**De-identification (optional, off by default):** `--deidentify-names` runs a second Gemini pass after transcription to detect real names (students and adults) and substitute realistic pseudonyms (`Student-Hannah`, `Ms. Kelly`, etc.). Visual-description labels linked to a real name are retired in favor of the pseudonym. Writes `transcript_name_map.json` alongside the transcript as an audit trail. Module: `deidentify_names.py`; curated pool: `pseudonym_pool.json`. The name-map audit file contains the real-name↔pseudonym mapping and should be stored under separate access control from the deidentified transcript. **Caveat:** combining `--deidentify-names` with `--keep-chunks` retains PII in per-chunk files (chunks are written during transcription, before the de-identification pass); omit `--keep-chunks` when privacy matters.
+
 ### Database Location
 
 - Development: `database/gvu.db` (created on first run)

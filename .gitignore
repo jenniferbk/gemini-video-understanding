@@ -43,6 +43,7 @@ npm-debug.log*
 *_transcription_*/
 *.txt
 !requirements.txt
+!test_fixtures/**/*.txt
 chunks/
 __pycache__/video_transcription_pipeline_v03.cpython-313.pyc
 __pycache__/video_transcription_pipeline_v04.cpython-313.pyc
