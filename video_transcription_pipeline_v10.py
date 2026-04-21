@@ -1615,7 +1615,7 @@ class VideoTranscriptionPipelineV10:
 
             # Cleanup
             if not self.config.keep_chunks:
-                self._cleanup_chunks(chunks_dir)
+                self._cleanup_chunks(chunks_dir, output_dir)
 
             elapsed = time.time() - start_time
             successful = sum(1 for t in all_transcripts if not t['transcript'].startswith('['))
@@ -1816,14 +1816,27 @@ class VideoTranscriptionPipelineV10:
         print(f"  Estimated cost:   ${est['total_cost']:.3f}")
         print(f"  Tokens/frame:     {est['tokens_per_frame']}")
 
-    def _cleanup_chunks(self, chunks_dir: Path):
-        """Remove temporary chunk files"""
+    def _cleanup_chunks(self, chunks_dir: Path, output_dir: Path = None):
+        """Remove temporary chunk files and per-chunk transcript .txt files.
+
+        The per-chunk transcript files (chunk_NNN_transcript.txt) hold the
+        original PII-bearing text before any de-identification pass, so they
+        must be removed on successful completion unless --keep-chunks is set.
+        """
         try:
             if chunks_dir.exists():
                 shutil.rmtree(chunks_dir)
                 print(f"  Cleaned up: {chunks_dir}")
         except Exception as e:
-            print(f"  Cleanup warning: {e}")
+            print(f"  Cleanup warning (chunks dir): {e}")
+
+        if output_dir is not None:
+            try:
+                for p in output_dir.glob("chunk_*_transcript.txt"):
+                    p.unlink()
+                    print(f"  Cleaned up: {p.name}")
+            except Exception as e:
+                print(f"  Cleanup warning (per-chunk txt): {e}")
 
 
 class BatchProcessor:
