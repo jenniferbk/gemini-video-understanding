@@ -189,3 +189,74 @@ def test_parse_rejects_student_missing_real_name():
     raw = '{"students": [{"gender": "F"}], "adults": []}'
     with pytest.raises(ValueError, match="missing 'real_name'"):
         parse_name_extraction_response(raw)
+
+
+from deidentify_names import build_name_map
+
+
+def test_build_name_map_assigns_distinct_pseudonyms():
+    detected = {
+        "students": [
+            {"real_name": "Melanie", "gender": "F", "visual_label": "Girl-PinkShirtBlackPants", "nicknames": ["Mel"]},
+            {"real_name": "Piper", "gender": "F", "visual_label": None, "nicknames": []},
+            {"real_name": "James", "gender": "M", "visual_label": None, "nicknames": []},
+        ],
+        "adults": [
+            {"real_name": "Sheridan", "honorific": "Ms.", "visual_label": None},
+        ],
+    }
+    pool = {
+        "student_female": ["Hannah", "Ava", "Sophia"],
+        "student_male": ["Michael", "Ethan"],
+        "student_neutral": ["Alex"],
+        "adult_last": ["Kelly", "Walker"],
+    }
+    name_map = build_name_map(detected, pool)
+    assert len(name_map.students) == 3
+    pseudonyms = [s.pseudonym for s in name_map.students]
+    assert len(set(pseudonyms)) == 3  # all distinct
+    # Melanie is F → female bucket
+    melanie = next(s for s in name_map.students if s.real_name == "Melanie")
+    assert melanie.pseudonym.startswith("Student-")
+    assert melanie.pseudonym in {"Student-Hannah", "Student-Ava", "Student-Sophia"}
+    # James is M → male bucket
+    james = next(s for s in name_map.students if s.real_name == "James")
+    assert james.pseudonym in {"Student-Michael", "Student-Ethan"}
+    # Adult
+    assert name_map.adults[0].pseudonym == "Ms. Kelly"
+
+
+def test_build_name_map_avoids_real_name_collision():
+    # If "Hannah" appears as a real student name, don't pick Student-Hannah for anyone
+    detected = {
+        "students": [
+            {"real_name": "Hannah", "gender": "F", "visual_label": None, "nicknames": []},
+            {"real_name": "Melanie", "gender": "F", "visual_label": None, "nicknames": []},
+        ],
+        "adults": [],
+    }
+    pool = {
+        "student_female": ["Hannah", "Ava", "Sophia"],
+        "student_male": [],
+        "student_neutral": [],
+        "adult_last": [],
+    }
+    name_map = build_name_map(detected, pool)
+    pseudonyms = {s.pseudonym for s in name_map.students}
+    assert "Student-Hannah" not in pseudonyms
+
+
+def test_build_name_map_preserves_visual_labels_and_nicknames():
+    detected = {
+        "students": [
+            {"real_name": "Melanie", "gender": "F",
+             "visual_label": "Girl-PinkShirtBlackPants", "nicknames": ["Mel"]},
+        ],
+        "adults": [],
+    }
+    pool = {"student_female": ["Hannah"], "student_male": [],
+            "student_neutral": [], "adult_last": []}
+    name_map = build_name_map(detected, pool)
+    entry = name_map.students[0]
+    assert entry.visual_label == "Girl-PinkShirtBlackPants"
+    assert entry.nicknames == ["Mel"]

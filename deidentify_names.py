@@ -205,3 +205,54 @@ def parse_name_extraction_response(raw: str) -> Dict:
         })
 
     return {"students": students, "adults": adults}
+
+
+def build_name_map(detected: Dict, pool: Dict[str, List[str]]) -> NameMap:
+    """Assign non-colliding pseudonyms to detected names and return a NameMap.
+
+    `detected` is the dict returned by `parse_name_extraction_response`.
+    """
+    # All real first and last names detected — pseudonyms must avoid any of these
+    avoid_real = set()
+    for s in detected.get("students", []):
+        avoid_real.add(s["real_name"])
+        for nick in s.get("nicknames", []):
+            avoid_real.add(nick)
+    for a in detected.get("adults", []):
+        avoid_real.add(a["real_name"])
+
+    assigned: set = set()
+    students: List[NameEntry] = []
+    for s in detected.get("students", []):
+        pseudonym = assign_pseudonym(
+            gender=s["gender"],
+            pool=pool,
+            avoid_real_names=avoid_real,
+            already_assigned=assigned,
+        )
+        assigned.add(pseudonym)
+        students.append(NameEntry(
+            real_name=s["real_name"],
+            gender=s["gender"],
+            visual_label=s.get("visual_label"),
+            pseudonym=pseudonym,
+            nicknames=list(s.get("nicknames", [])),
+        ))
+
+    adults: List[AdultEntry] = []
+    for a in detected.get("adults", []):
+        pseudonym = assign_adult_pseudonym(
+            honorific=a["honorific"],
+            pool=pool,
+            avoid_real_names=avoid_real,
+            already_assigned=assigned,
+        )
+        assigned.add(pseudonym)
+        adults.append(AdultEntry(
+            real_name=a["real_name"],
+            honorific=a["honorific"],
+            pseudonym=pseudonym,
+            visual_label=a.get("visual_label"),
+        ))
+
+    return NameMap(students=students, adults=adults)
