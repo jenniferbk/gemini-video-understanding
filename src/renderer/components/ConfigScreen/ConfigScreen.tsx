@@ -111,6 +111,9 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
   // Auto-detect audio-only mode from file extension
   const isAudioFile = /\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(videoInfo.filename);
   const [audioOnly, setAudioOnly] = useState(isAudioFile);
+  // Off by default — privacy feature with cost implications. Not persisted
+  // between sessions.
+  const [deidentifyNames, setDeidentifyNames] = useState(false);
 
   // Load prompts and check API key on mount
   useEffect(() => {
@@ -231,6 +234,7 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
       overlapSeconds,
       thinkingBudget,
       audioOnly,
+      deidentifyNames,
     };
 
     onStart(config);
@@ -245,6 +249,7 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
     overlapSeconds,
     thinkingBudget,
     audioOnly,
+    deidentifyNames,
     onStart
   ]);
 
@@ -456,6 +461,24 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({
                     onChange={(e) => setThinkingBudget(parseInt(e.target.value) || 4096)}
                     className={styles.numberInput}
                   />
+                </label>
+              </div>
+              <div className={styles.advancedRow}>
+                <label className={styles.audioOnlyToggle}>
+                  <input
+                    type="checkbox"
+                    checked={deidentifyNames}
+                    onChange={(e) => setDeidentifyNames(e.target.checked)}
+                  />
+                  <div className={styles.audioOnlyContent}>
+                    <span className={styles.audioOnlyLabel}>De-identify student and adult names</span>
+                    <span className={styles.audioOnlyDesc}>
+                      Runs a second Gemini pass to replace real names with realistic pseudonyms
+                      (e.g., Student-Hannah, Ms. Kelly). Writes an audit file
+                      (transcript_name_map.json) next to the transcript — store this file under
+                      separate access control. Adds processing time and API cost.
+                    </span>
+                  </div>
                 </label>
               </div>
             </div>
