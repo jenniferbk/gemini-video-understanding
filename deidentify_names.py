@@ -112,3 +112,44 @@ def assign_adult_pseudonym(
             continue
         return proposed
     raise ValueError("pool exhausted for bucket 'adult_last'")
+
+
+_NAME_EXTRACTION_PROMPT_TEMPLATE = '''You are helping de-identify a classroom transcript for educational research.
+
+The transcript uses VISUAL-DESCRIPTION labels for speakers (e.g., "Teacher-PinkPants", "Boy-BlackTShirtGlasses", "Girl-PinkShirtBlackPants"). But real first names may still appear in TWO places:
+
+1. As speaker labels — when the transcription model switched from a visual description to a real name it heard (e.g., `Melanie: Two sides are the same.`).
+2. Inside dialogue — when someone addresses another person by name (e.g., `Teacher-PinkPants: Melanie, come on up.`, `Piper, what's pseudo-code?`).
+
+YOUR TASK: Identify every real first name and adult honorific-name that refers to an actual person present in this classroom, and for each one return structured JSON.
+
+For each student real name:
+- `real_name`: the first name as spelled in the transcript
+- `gender`: "F", "M", or "N" (use "N" only when you genuinely cannot tell from context/pronouns)
+- `visual_label`: if you can link this name to an existing visual-description speaker label in the transcript, give the EXACT label string. Otherwise null.
+- `nicknames`: list of nicknames that clearly refer to this same person (e.g., "Mel" for "Melanie"). ONLY include when linkage is unambiguous. Prefer [] when in doubt.
+
+For each adult real name (teacher, aide, principal mentioned by name):
+- `real_name`: last name only (e.g., "Sheridan")
+- `honorific`: "Ms.", "Mr.", "Mrs.", "Mx.", or "Dr."
+- `visual_label`: usually null unless the named adult is also a visible speaker
+- Do NOT include the primary classroom teacher if they are already labeled `Teacher-*` with no name spoken.
+
+EXCLUDE:
+- Names from curriculum content (historical figures, book characters, math-problem characters)
+- Pronoun antecedents that are not actual names
+- Last names used alone without honorific (too risky; skip them)
+
+OUTPUT JSON ONLY, matching this schema exactly. No prose, no code fences.
+
+{{"students": [{{"real_name": "Melanie", "gender": "F", "visual_label": "Girl-PinkShirtBlackPants", "nicknames": ["Mel"]}}], "adults": [{{"real_name": "Sheridan", "honorific": "Ms.", "visual_label": null}}]}}
+
+If no names are found, return {{"students": [], "adults": []}}.
+
+TRANSCRIPT:
+{transcript}
+'''
+
+
+def build_name_extraction_prompt(transcript_text: str) -> str:
+    return _NAME_EXTRACTION_PROMPT_TEMPLATE.format(transcript=transcript_text)

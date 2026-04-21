@@ -104,3 +104,26 @@ def test_assign_adult_pseudonym_avoids_real_last_name():
         already_assigned=set(),
     )
     assert result == "Ms. Walker"
+
+
+from deidentify_names import build_name_extraction_prompt
+
+
+def test_prompt_includes_transcript_and_schema():
+    transcript = "39:43 Teacher-PinkPants: Melanie, come on up."
+    prompt = build_name_extraction_prompt(transcript)
+    # Prompt must embed the transcript verbatim
+    assert transcript in prompt
+    # Prompt must describe the output JSON schema
+    assert '"students"' in prompt
+    assert '"adults"' in prompt
+    assert "real_name" in prompt
+    assert "visual_label" in prompt
+    assert "honorific" in prompt
+    # Prompt must tell the model to output JSON only
+    assert "JSON" in prompt
+
+
+def test_prompt_handles_empty_transcript():
+    prompt = build_name_extraction_prompt("")
+    assert "students" in prompt
