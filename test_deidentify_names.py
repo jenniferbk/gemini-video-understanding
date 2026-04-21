@@ -397,3 +397,44 @@ def test_apply_visual_label_possessive():
     )
     out = apply_name_map(src, nm)
     assert out == "That is Student-Hannah's book."
+
+
+from unittest.mock import MagicMock
+from deidentify_names import deidentify_transcript
+
+
+def test_deidentify_transcript_end_to_end_with_mock():
+    transcript = (
+        "39:43 Teacher-PinkPants: Melanie, come on up.\n"
+        "40:45 Teacher-PinkPants: Piper, what's pseudo-code?\n"
+        "40:47 Piper: Fake code.\n"
+        "43:02 Girl-PinkShirtBlackPants: Two sides are the same."
+    )
+    # Mock Gemini: returns a canned JSON response for the prompt
+    mock_client = MagicMock()
+    canned = '''{"students": [
+        {"real_name": "Melanie", "gender": "F", "visual_label": "Girl-PinkShirtBlackPants", "nicknames": []},
+        {"real_name": "Piper", "gender": "F", "visual_label": null, "nicknames": []}
+    ], "adults": []}'''
+    mock_response = MagicMock()
+    mock_response.text = canned
+    mock_client.generate.return_value = mock_response
+
+    result_text, name_map = deidentify_transcript(
+        transcript, mock_client, str(POOL_PATH),
+    )
+
+    # Melanie -> Student-<female>; Piper -> Student-<different female>
+    melanie_pseudo = next(s.pseudonym for s in name_map.students if s.real_name == "Melanie")
+    piper_pseudo = next(s.pseudonym for s in name_map.students if s.real_name == "Piper")
+    assert melanie_pseudo != piper_pseudo
+    # No real names leak
+    assert "Melanie" not in result_text
+    assert "Piper" not in result_text
+    # Visual label retired
+    assert "Girl-PinkShirtBlackPants" not in result_text
+    # Pseudonyms appear in place of both labels and in-text mentions
+    assert melanie_pseudo in result_text
+    assert piper_pseudo in result_text
+    # Gemini was called exactly once with a prompt containing the transcript
+    assert mock_client.generate.call_count == 1

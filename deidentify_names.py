@@ -304,3 +304,30 @@ def apply_name_map(text: str, name_map: NameMap) -> str:
         return lookup[m.group("tok")] + (m.group("poss") or "")
 
     return pattern.sub(_sub, text)
+
+
+def deidentify_transcript(
+    transcript_text: str,
+    gemini_client,
+    pool_path: str,
+) -> "tuple[str, NameMap]":
+    """Run the full de-identification pipeline.
+
+    Args:
+        transcript_text: the stitched v10 transcript.
+        gemini_client: a `GeminiClient` (from video_transcription_pipeline_v10)
+            or any object with a `.generate(contents, ...)` method that returns
+            an object with a `.text` attribute.
+        pool_path: path to pseudonym_pool.json.
+
+    Returns:
+        (deidentified_text, name_map) -- writing the name_map alongside the
+        transcript gives researchers an audit trail.
+    """
+    pool = load_pseudonym_pool(pool_path)
+    prompt = build_name_extraction_prompt(transcript_text)
+    response = gemini_client.generate([prompt], temperature=0.0)
+    raw = response.text if hasattr(response, "text") else str(response)
+    detected = parse_name_extraction_response(raw)
+    name_map = build_name_map(detected, pool)
+    return apply_name_map(transcript_text, name_map), name_map
