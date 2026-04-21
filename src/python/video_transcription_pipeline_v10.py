@@ -118,12 +118,26 @@ class TranscriptionConfigV10:
     # Progress reporting (for future Electron integration)
     json_progress: bool = False
 
-    # Audio-only mode
-    audio_only: bool = False
-
     # Context caching
     enable_caching: bool = True
     cache_ttl_seconds: int = 7200  # 2 hours
+
+    # Timestamp anchoring: burn a visible HH:MM:SS timer into each chunk
+    # before sending to Gemini, and instruct the model to read the timer
+    # for all its timestamps. Prevents the model's internal clock from
+    # drifting across long videos (observed up to 14s on TIMSS AU4). When
+    # enabled, Gemini emits video-global timestamps directly so assembly
+    # skips the chunk_start-offset step.
+    burn_timestamps: bool = False
+    # Path to an ffmpeg binary that has drawtext (libfreetype) support.
+    # Homebrew's default `ffmpeg` lacks it; `ffmpeg-full` has it.
+    drawtext_ffmpeg: str = "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
+
+    # De-identification: optional second Gemini pass that detects real names
+    # and substitutes realistic pseudonyms (Student-Hannah, Ms. Kelly). Off
+    # by default. When on, writes transcript_name_map.json audit file and
+    # NEVER writes the PII-containing original transcript to disk.
+    deidentify_names: bool = False
 
 
 # =============================================================================
@@ -528,7 +542,7 @@ class GeminiClient:
 
     def _apply_video_fps(self, contents: List) -> List:
         """Wrap uploaded video files with videoMetadata(fps=N) when fps != 1."""
-        if self.config.video_fps == 1 or self.config.audio_only:
+        if self.config.video_fps == 1:
             return contents
 
         wrapped = []
@@ -601,15 +615,14 @@ class GeminiClient:
             'safety_settings': safety,
         }
 
-        # Add media_resolution if available in SDK (skip for audio-only, not relevant)
-        if not self.config.audio_only:
-            try:
-                res_value = resolution_map.get(self.config.media_resolution, 'MEDIA_RESOLUTION_MEDIUM')
-                media_res = getattr(types.MediaResolution, res_value, None)
-                if media_res is not None:
-                    kwargs['media_resolution'] = media_res
-            except (AttributeError, TypeError):
-                pass  # SDK version doesn't support media_resolution
+        # Add media_resolution if available in SDK
+        try:
+            res_value = resolution_map.get(self.config.media_resolution, 'MEDIA_RESOLUTION_MEDIUM')
+            media_res = getattr(types.MediaResolution, res_value, None)
+            if media_res is not None:
+                kwargs['media_resolution'] = media_res
+        except (AttributeError, TypeError):
+            pass  # SDK version doesn't support media_resolution
 
         # Add thinking config if available
         try:
@@ -741,17 +754,11 @@ class OverlapChunker:
             if actual_duration < 10 and chunk_num > 1:
                 break
 
-            ext = ".m4a" if self.config.audio_only else ".mp4"
-            chunk_file = output_dir / f"{video_path.stem}_chunk_{chunk_num:03d}{ext}"
+            chunk_file = output_dir / f"{video_path.stem}_chunk_{chunk_num:03d}.mp4"
 
-            if self.config.audio_only:
-                success = self._extract_audio_chunk(
-                    str(video_path), str(chunk_file), start_time, actual_duration
-                )
-            else:
-                success = self._extract_chunk(
-                    str(video_path), str(chunk_file), start_time, actual_duration
-                )
+            success = self._extract_chunk(
+                str(video_path), str(chunk_file), start_time, actual_duration
+            )
 
             if success:
                 # transcript_start_time: where actual new content begins
@@ -787,6 +794,14 @@ class OverlapChunker:
     def _extract_chunk(self, input_path: str, output_path: str,
                        start_time: float, duration: float) -> bool:
         """Extract chunk using stream copy first, re-encode fallback"""
+        # Timestamp burn-in mode: always re-encode with a drawtext overlay
+        # that shows the real video time. Gemini reads the clock for its
+        # timestamps, eliminating intra-chunk clock drift.
+        if self.config.burn_timestamps:
+            return self._extract_chunk_with_timer(
+                input_path, output_path, start_time, duration,
+            )
+
         # Try stream copy (fast, no quality loss)
         if self._try_stream_copy(input_path, output_path, start_time, duration):
             return True
@@ -799,6 +814,45 @@ class OverlapChunker:
         else:
             print(" FAILED")
         return success
+
+    def _extract_chunk_with_timer(self, input_path: str, output_path: str,
+                                  start_time: float, duration: float) -> bool:
+        """Extract chunk AND burn a HH:MM:SS timer in the top-left corner.
+
+        The overlay shows absolute video time, so chunk N starting at
+        45 minutes will show 00:45:00.000 at its first frame. Gemini reads
+        this clock for its timestamps, making intra-chunk drift impossible.
+        """
+        ffmpeg = self.config.drawtext_ffmpeg
+        # %{pts\:hms\:<offset>} adds the offset (seconds) to the
+        # presentation timestamp before formatting as H:M:S.
+        offset = int(round(start_time))
+        drawtext = (
+            f"drawtext=text='%{{pts\\:hms\\:{offset}}}':"
+            "fontsize=36:fontcolor=yellow:borderw=3:bordercolor=black:"
+            "box=1:boxcolor=black@0.6:boxborderw=8:x=20:y=20"
+        )
+        cmd = [
+            ffmpeg, "-y", "-loglevel", "error",
+            "-ss", str(start_time), "-i", input_path,
+            "-t", str(duration),
+            "-vf", drawtext,
+            "-c:v", "libx264", "-preset", "fast",
+            "-c:a", "copy",
+            output_path,
+        ]
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+            if result.returncode == 0 and Path(output_path).exists():
+                return True
+            # Print ffmpeg's error so failures are diagnosable.
+            err = (result.stderr or "").strip()
+            if err:
+                print(f"    drawtext ffmpeg failed: {err[:300]}")
+            return False
+        except (subprocess.TimeoutExpired, FileNotFoundError) as e:
+            print(f"    drawtext ffmpeg error: {e}")
+            return False
 
     def _try_stream_copy(self, input_path: str, output_path: str,
                          start_time: float, duration: float) -> bool:
@@ -833,23 +887,6 @@ class OverlapChunker:
             subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=300)
             return Path(output_path).exists()
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-            return False
-
-    def _extract_audio_chunk(self, input_path: str, output_path: str,
-                             start_time: float, duration: float) -> bool:
-        """Extract audio-only chunk (strips video track, keeps audio as AAC in m4a)"""
-        cmd = [
-            "ffmpeg", "-ss", str(start_time), "-i", input_path,
-            "-t", str(duration), "-vn", "-c:a", "aac",
-            "-b:a", "128k", output_path, "-y"
-        ]
-        try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-            if result.returncode != 0:
-                return False
-            output = Path(output_path)
-            return output.exists() and output.stat().st_size > 500
-        except (subprocess.TimeoutExpired, Exception):
             return False
 
 
@@ -890,58 +927,19 @@ Return ONLY a JSON array with no other text:
   {"label": "Girl-BlondeHair", "description": "Girl with shoulder-length blonde hair, sitting at center desk, wearing grey t-shirt with blue text", "type": "student"}
 ]"""
 
-    SPEAKER_ID_PROMPT_AUDIO = """Analyze this audio carefully and identify ALL distinct speakers you can hear.
-
-For each speaker, provide:
-1. A descriptive label based on VOICE CHARACTERISTICS that uniquely identifies this person.
-   The label must use a vocal feature that distinguishes them from every other speaker.
-   CRITICAL: Before finalizing labels, check that no two speakers share the same distinguishing
-   feature in their label. Use their MOST UNIQUE vocal trait: pitch, tone, accent, speaking style, etc.
-
-   Good labels (unique voice identifiers):
-   - "Female-DeepVoice" (only one female with a notably deep voice)
-   - "Male-HighPitch" (only one male with a high-pitched voice)
-   - "Female-SoftSpoken" (only one soft-spoken female)
-   - "Male-FastTalker" (the one male who speaks rapidly)
-   - "Female-AccentSouthern" (only one speaker with a southern accent)
-
-   Bad labels (too generic, will cause confusion):
-   - "Female1", "Female2" (not descriptive at all)
-   - "Speaker-Talking" (meaningless)
-   - "Male-Voice" (when multiple males are present)
-
-2. A detailed voice description covering: pitch (high/medium/low), volume (loud/medium/soft),
-   speaking pace (fast/medium/slow), tone quality (raspy, clear, nasal, warm, etc.),
-   any accent or speech patterns, and approximate age range (child/teen/adult).
-   This description will be used throughout a long recording to consistently identify this person,
-   so include as many distinguishing vocal details as possible.
-
-3. Their role: "teacher", "student", or "researcher".
-   Hint: Teachers typically have adult voices, speak with authority, give instructions,
-   and address the group. Students typically have younger voices.
-
-Return ONLY a JSON array with no other text:
-[
-  {"label": "Teacher", "description": "Adult female, medium pitch, clear and projected voice, speaks at moderate pace with authority, warm tone", "type": "teacher"},
-  {"label": "Female-HighPitch", "description": "Young female, high-pitched voice, speaks quickly, often giggles, soft volume", "type": "student"}
-]"""
-
     def __init__(self, gemini_client: GeminiClient, config: TranscriptionConfigV10):
         self.client = gemini_client
         self.config = config
 
     def identify_speakers(self, uploaded_files: List[Any]) -> List[SpeakerInfo]:
-        """Auto-detect speakers from uploaded video/audio chunks"""
-        mode_label = "audio" if self.config.audio_only else "video"
-        print(f"\n  Auto-detecting speakers from {mode_label}...")
-
-        prompt = self.SPEAKER_ID_PROMPT_AUDIO if self.config.audio_only else self.SPEAKER_ID_PROMPT
+        """Auto-detect speakers from uploaded video chunks"""
+        print("\n  Auto-detecting speakers...")
 
         contents = []
         for f in uploaded_files:
             if f is not None:
                 contents.append(f)
-        contents.append(prompt)
+        contents.append(self.SPEAKER_ID_PROMPT)
 
         try:
             response_text = self.client.generate(contents, temperature=0.1)
@@ -1153,68 +1151,7 @@ class PromptBuilder:
 
         speaker_section = self._build_speaker_section(speakers)
 
-        if self.config.audio_only:
-            anti_hallucination = """
-FORMAT RULES:
-1. Use MM:SS timestamp format for each speaker turn and audio description.
-2. Use the exact speaker labels from the SPEAKER REGISTRY above.
-3. Do NOT repeat any word, phrase, or line more than 3 times.
-
-PURPOSE - EDUCATIONAL RESEARCH OBSERVATION:
-You are a research assistant helping education researchers understand what is happening
-in a classroom. You are working from AUDIO ONLY (no video). Your job is to produce a
-transcript that lets a researcher who wasn't in the room understand:
-  - What activity or lesson is happening (what's the task? what's being taught?)
-  - What students and the teacher are saying
-  - The tone and dynamics of the conversation (who's leading, who's engaged)
-  - Any audible non-speech sounds that provide context (shuffling papers, writing, movement)
-
-SPEECH TRANSCRIPTION:
-- Write what you actually HEAR, not what "makes sense" in context.
-- Messy, partial, incomplete speech is expected and valuable. Kids talk over each other.
-- If audio is unclear: use [inaudible]. Use [word?] for uncertain words.
-- Do NOT rephrase or clean up what someone said. "We gotta do the thing" stays as-is.
-- Teachers typically project more clearly than students - listen carefully for their words.
-- For stretches with no audible speech: ONE "[inaudible conversation, ~Ns]" line.
-
-AUDIO CONTEXT - WHAT MATTERS FOR UNDERSTANDING THE ACTIVITY:
-Interleave [bracketed descriptions] of non-speech audio that helps a researcher understand what's happening:
-  - SOUNDS: writing on board, paper shuffling, materials being moved, calculator clicking
-  - TONE: laughter, excitement, confusion, frustration (when clearly audible)
-  - DYNAMICS: multiple students talking at once, long pauses, whispering
-  - BACKGROUND: if background noise changes significantly (e.g., bell rings, door opens)
-
-Do NOT describe visual actions you cannot hear. You have NO video - only audio.
-Do NOT guess what people are doing physically. Only note what you can HEAR.
-
-SPEAKER IDENTIFICATION:
-Identify speakers by their voice characteristics (pitch, tone, speaking style).
-If you can't identify a specific student by voice, use "Student" rather than guessing wrong.
-Track recurring speakers consistently - if Female-DeepVoice speaks in one segment, use the same label later.
-
-Example - GOOD (audio-only, helps understand the activity):
-  00:08 Teacher: Okay, so how many sides does this shape have?
-  00:11 Female-HighPitch: Um... one, two, three, four, five, six, seven, eight.
-  00:16 Female-HighPitch: That's only eight steps.
-  00:18 [sound of marker on paper]
-  00:20 Male-DeepVoice: Wait, I got a different number.
-  00:22 Teacher: Let's count together. Everyone point and count with me.
-  00:25 [inaudible conversation, ~5s]
-  00:30 [multiple students counting aloud together]
-
-Example - BAD (describes visuals that can't be heard):
-  00:08 [The students look at items on the desk]
-  00:09 Female-HighPitch: One, two, three, four, five, six, seven, eight.
-  00:18 [Male-DeepVoice picks up a marker]
-  00:22 [Female-HighPitch points to the whiteboard]
-
-HALLUCINATION CHECK - watch for these patterns in your own output:
-- Rapid back-and-forth where each person says one clean sentence (real kids interrupt and overlap)
-- Synonymous rephrasing in consecutive lines ("rotate/turn/pivot/spin" - pick what you hear)
-- Dialogue that reads like a textbook example of classroom interaction
-- Describing visual actions (pointing, looking, writing) - you can only HEAR, not see"""
-        else:
-            anti_hallucination = """
+        anti_hallucination = """
 FORMAT RULES:
 1. Use MM:SS timestamp format for each speaker turn and visual description.
 2. Use the exact speaker labels from the SPEAKER REGISTRY above.
@@ -1295,26 +1232,51 @@ HALLUCINATION CHECK - watch for these patterns in your own output:
         chunk_duration_secs = int(chunk_info['end_time'] - chunk_info['start_time'])
         chunk_duration_mm = chunk_duration_secs // 60
         chunk_duration_ss = chunk_duration_secs % 60
-        clip_type = "audio clip" if self.config.audio_only else "video clip"
         parts.append(f"\n--- CHUNK {chunk_number}/{total_chunks} ---")
-        parts.append(f"This {clip_type} is {chunk_duration_mm}:{chunk_duration_ss:02d} long ({chunk_duration_secs} seconds).")
-        parts.append(f"Transcribe the ENTIRE clip from start to finish. Your last timestamp should be near {chunk_duration_mm}:{chunk_duration_ss:02d}.")
-        parts.append(f"Do NOT stop early and do NOT generate timestamps beyond {chunk_duration_mm}:{chunk_duration_ss:02d}.")
+
+        if self.config.burn_timestamps:
+            # The chunk clip has a burned-in HH:MM:SS.mmm timer in the
+            # top-left corner. Its starting value is the chunk's global
+            # video time. Gemini should output timestamps derived from
+            # the visible clock (global video time), not clip-local time.
+            start_hhmm = f"{int(chunk_info['start_time']) // 60}:{int(chunk_info['start_time']) % 60:02d}"
+            end_hhmm = f"{int(chunk_info['end_time']) // 60}:{int(chunk_info['end_time']) % 60:02d}"
+            parts.append(
+                "A HH:MM:SS.mmm timer is burned into the top-left corner of every "
+                "frame. It shows the real video time. READ THIS TIMER when each "
+                f"utterance begins and use the MM:SS fields for your timestamps."
+            )
+            parts.append(
+                f"The timer in this clip runs from {start_hhmm} to {end_hhmm}. "
+                f"Your first timestamp should be {start_hhmm} or later; your last "
+                f"should be {end_hhmm} or slightly earlier. Do NOT emit timestamps "
+                f"outside this range."
+            )
+        else:
+            parts.append(f"This video clip is {chunk_duration_mm}:{chunk_duration_ss:02d} long ({chunk_duration_secs} seconds).")
+            parts.append(f"Transcribe the ENTIRE clip from start to finish. Your last timestamp should be near {chunk_duration_mm}:{chunk_duration_ss:02d}.")
+            parts.append(f"Do NOT stop early and do NOT generate timestamps beyond {chunk_duration_mm}:{chunk_duration_ss:02d}.")
 
         # Overlap instruction for chunks 2+
         if chunk_info.get('has_overlap', False):
             overlap_secs = self.config.overlap_seconds
-            if self.config.audio_only:
+            if self.config.burn_timestamps:
+                # In burn mode, timestamps are global video time. The
+                # overlap region is the first overlap_secs of the clip,
+                # which corresponds to the timer range
+                # [start_time, start_time + overlap_secs).
+                overlap_end_sec = int(chunk_info['start_time']) + overlap_secs
+                overlap_end_hhmm = f"{overlap_end_sec // 60}:{overlap_end_sec % 60:02d}"
                 parts.append(f"""
-IMPORTANT - AUDIO OVERLAP HANDLING:
-The first {overlap_secs} seconds of this audio (00:00 to 00:{overlap_secs:02d}) are REPEATED
-from the previous chunk. You have already transcribed this content. Do NOT transcribe it again.
+IMPORTANT - VIDEO OVERLAP HANDLING:
+The first {overlap_secs} seconds of this clip (timer up to {overlap_end_hhmm}) are REPEATED
+from the previous chunk. You have already transcribed that content. Do NOT transcribe it again.
 
-Use those first {overlap_secs} seconds ONLY to identify which speakers are which by their voices,
-so you can maintain consistent speaker labels. Then begin your actual transcript at 00:{overlap_secs:02d}.
+Use those first {overlap_secs} seconds ONLY to visually identify speakers so your labels
+stay consistent with the previous chunk. Then begin your actual transcript at the moment
+the timer reads {overlap_end_hhmm} or later.
 
-Your FIRST transcript line must have a timestamp of 00:{overlap_secs:02d} or later.
-Do NOT output any lines with timestamps before 00:{overlap_secs:02d}.
+Your FIRST transcript line must have a timestamp of {overlap_end_hhmm} or later.
 Do NOT re-transcribe dialogue from the CONTINUITY CONTEXT below - that is already captured.""")
             else:
                 parts.append(f"""
@@ -1333,12 +1295,19 @@ Do NOT re-transcribe dialogue from the CONTINUITY CONTEXT below - that is alread
         if previous_context and chunk_number > 1:
             context_lines = self._extract_context_lines(previous_context)
             if context_lines:
+                if self.config.burn_timestamps:
+                    overlap_end_sec = int(chunk_info['start_time']) + self.config.overlap_seconds
+                    start_instr = (f"Start timestamps at timer value "
+                                   f"{overlap_end_sec // 60}:{overlap_end_sec % 60:02d} or later.")
+                else:
+                    start_instr = (f"Start timestamps from 00:"
+                                   f"{self.config.overlap_seconds:02d} for this chunk.")
                 parts.append(f"""
 CONTINUITY CONTEXT (last lines from previous chunk):
 {context_lines}
 
 Continue naturally from this context. Maintain speaker label consistency.
-Start timestamps from 00:{self.config.overlap_seconds:02d} for this chunk.""")
+{start_instr}""")
 
         parts.append("\nBegin transcription:")
         return "\n".join(parts)
@@ -1385,20 +1354,17 @@ Start timestamps from 00:{self.config.overlap_seconds:02d} for this chunk.""")
 class VideoTranscriptionPipelineV10:
     """Single-video transcription pipeline"""
 
-    def __init__(self, api_key: str, config: TranscriptionConfigV10, prompts_file: str = None):
+    def __init__(self, api_key: str, config: TranscriptionConfigV10):
         self.config = config
         self.client = GeminiClient(api_key, config)
         self.chunker = OverlapChunker(config)
         self.speaker_registry = SpeakerRegistry(self.client, config)
         self.cost_calculator = VideoCostCalculator()
 
-        # Load prompts (custom file or bundled)
-        if prompts_file:
-            self.prompt_manager = PromptManager(prompts_file)
-        else:
-            script_dir = Path(__file__).parent
-            prompts_file = str(script_dir / "prompts.json")
-            self.prompt_manager = PromptManager(prompts_file)
+        # Load prompts
+        script_dir = Path(__file__).parent
+        prompts_file = script_dir / "prompts.json"
+        self.prompt_manager = PromptManager(str(prompts_file))
         self.prompt_builder = PromptBuilder(self.prompt_manager, config)
         self.validator = TranscriptValidator(config.min_transcript_length)
 
@@ -1512,6 +1478,27 @@ class VideoTranscriptionPipelineV10:
                 total = len(chunk_list)
                 percent = 30 + int((chunk_num / total) * 60)
 
+                # Resume: skip inference if a usable per-chunk transcript
+                # was written by a prior run (checkpointed to disk before
+                # crash/sleep/SIGKILL).
+                chunk_file = output_dir / f"chunk_{chunk_num:03d}_transcript.txt"
+                if chunk_file.exists() and chunk_file.stat().st_size > 0:
+                    cached = chunk_file.read_text(encoding='utf-8')
+                    if 'FAILED' not in cached and cached.strip():
+                        print(f"  Chunk {chunk_num}/{total}: reusing cached "
+                              f"transcript ({len(cached)} chars)")
+                        report_progress(self.config, "progress",
+                                        chunk=chunk_num, total=total,
+                                        percent=percent, status="cached")
+                        all_transcripts.append({
+                            'chunk_number': chunk_num,
+                            'chunk_info': chunk_info,
+                            'transcript': cached,
+                        })
+                        if not cached.startswith('['):
+                            previous_transcript = cached
+                        continue
+
                 print(f"\n  Transcribing chunk {chunk_num}/{total}...")
                 report_progress(self.config, "progress", chunk=chunk_num, total=total,
                               percent=percent, status="transcribing")
@@ -1561,33 +1548,74 @@ class VideoTranscriptionPipelineV10:
 
             combined = self._assemble_transcript(all_transcripts, video_path, speakers)
 
+            # Phase 6.5: Name de-identification (optional)
+            # When enabled, substitute real names with pseudonyms BEFORE any
+            # write-to-disk. Per-chunk files at output_dir/chunk_NNN_transcript.txt
+            # contain the original PII-bearing transcripts. They are cleaned up
+            # after this phase when keep_chunks=False (default). Combining
+            # --deidentify-names with --keep-chunks retains PII on disk; see
+            # CLAUDE.md caveat.
+            deidentify_failed = False
+            if self.config.deidentify_names:
+                try:
+                    from deidentify_names import deidentify_transcript
+                    pool_path = str(Path(__file__).parent / "pseudonym_pool.json")
+                    report_progress(self.config, "progress",
+                                    status="deidentifying_names", percent=98)
+                    combined, name_map = deidentify_transcript(
+                        combined, self.client, pool_path,
+                    )
+                    # Write audit trail alongside transcript (restricted perms).
+                    name_map_path = output_dir / "transcript_name_map.json"
+                    with open(name_map_path, "w", encoding="utf-8") as f:
+                        json.dump(name_map.to_dict(), f, indent=2, ensure_ascii=False)
+                    try:
+                        os.chmod(name_map_path, 0o600)
+                    except OSError:
+                        pass  # non-fatal on unusual filesystems
+                except Exception as e:
+                    deidentify_failed = True
+                    print(f"\n  WARNING: de-identification failed: {e}", file=sys.stderr)
+                    print("  Writing original (PII-bearing) transcript with "
+                          "DEIDENTIFICATION_FAILED marker so you can decide "
+                          "whether to retry or use as-is.", file=sys.stderr)
+                    report_progress(self.config, "progress",
+                                    status="deidentify_failed",
+                                    error=str(e))
+
+            # Compute output stem. If de-identification failed, prefix the
+            # stem with a visible marker so downstream consumers see PII risk.
+            stem = video_path.stem
+            if deidentify_failed:
+                stem = f"{stem}_DEIDENTIFICATION_FAILED"
+
             # Save outputs
             if self.config.dual_output:
-                research_file = output_dir / f"{video_path.stem}_transcript.txt"
+                research_file = output_dir / f"{stem}_transcript.txt"
                 with open(research_file, 'w', encoding='utf-8') as f:
                     f.write(combined)
 
                 clean = self._create_clean_transcript(combined)
-                transana_file = output_dir / f"{video_path.stem}_transana.txt"
+                transana_file = output_dir / f"{stem}_transana.txt"
                 with open(transana_file, 'w', encoding='utf-8') as f:
                     f.write(clean)
 
                 # SRT export
-                srt_file = output_dir / f"{video_path.stem}.srt"
+                srt_file = output_dir / f"{stem}.srt"
                 SubtitleExporter.to_srt(clean, str(srt_file))
 
                 print(f"\n  Research (annotated): {research_file}")
                 print(f"  Transana (clean):     {transana_file}")
                 print(f"  Subtitles (SRT):      {srt_file}")
             else:
-                final_file = output_dir / f"{video_path.stem}_transcript.txt"
+                final_file = output_dir / f"{stem}_transcript.txt"
                 with open(final_file, 'w', encoding='utf-8') as f:
                     f.write(combined)
                 print(f"\n  Transcript: {final_file}")
 
             # Cleanup
             if not self.config.keep_chunks:
-                self._cleanup_chunks(chunks_dir)
+                self._cleanup_chunks(chunks_dir, output_dir)
 
             elapsed = time.time() - start_time
             successful = sum(1 for t in all_transcripts if not t['transcript'].startswith('['))
@@ -1683,12 +1711,12 @@ class VideoTranscriptionPipelineV10:
             chunk_info = td['chunk_info']
             transcript = td['transcript'].strip()
 
-            # The model outputs timestamps relative to the chunk video file.
-            # For chunk 2+, the model starts at 00:15 (skipping overlap).
-            # We add start_time (when the chunk begins in absolute video time)
-            # to convert to absolute timestamps. NOT transcript_start_time,
-            # which would double-count the overlap offset.
-            offset_seconds = chunk_info['start_time']
+            # In standard mode, the model outputs chunk-local timestamps
+            # (00:00..chunk_duration) and we add chunk_start to get global
+            # video time. In burn-timestamps mode, the model reads the
+            # burned-in clock and emits global video time directly, so no
+            # offset adjustment is needed (and adding it would double-count).
+            offset_seconds = 0 if self.config.burn_timestamps else chunk_info['start_time']
             start_label = TimestampNormalizer.from_seconds(chunk_info['start_time'])
             end_label = TimestampNormalizer.from_seconds(chunk_info['end_time'])
 
@@ -1772,17 +1800,14 @@ class VideoTranscriptionPipelineV10:
 
     def _display_info(self, video_path: Path, duration_minutes: float):
         """Display processing info and cost estimate"""
-        mode_label = "AUDIO-ONLY" if self.config.audio_only else "VIDEO"
         print(f"\n{'='*60}")
-        print(f"{mode_label} TRANSCRIPTION PIPELINE V10")
+        print("VIDEO TRANSCRIPTION PIPELINE V10")
         print(f"{'='*60}")
-        print(f"  File:        {video_path.name}")
-        print(f"  Mode:        {'Audio-only (no video frames)' if self.config.audio_only else 'Video + Audio'}")
+        print(f"  Video:       {video_path.name}")
         print(f"  Duration:    {duration_minutes:.1f} minutes")
         print(f"  Model:       {self.config.model_name}")
-        if not self.config.audio_only:
-            print(f"  Resolution:  {self.config.media_resolution}")
-            print(f"  FPS:         {self.config.video_fps}")
+        print(f"  Resolution:  {self.config.media_resolution}")
+        print(f"  FPS:         {self.config.video_fps}")
         print(f"  Chunk:       {self.config.chunk_duration_seconds}s + {self.config.overlap_seconds}s overlap")
         print(f"  Thinking:    budget={self.config.thinking_budget}")
 
@@ -1791,14 +1816,27 @@ class VideoTranscriptionPipelineV10:
         print(f"  Estimated cost:   ${est['total_cost']:.3f}")
         print(f"  Tokens/frame:     {est['tokens_per_frame']}")
 
-    def _cleanup_chunks(self, chunks_dir: Path):
-        """Remove temporary chunk files"""
+    def _cleanup_chunks(self, chunks_dir: Path, output_dir: Path = None):
+        """Remove temporary chunk files and per-chunk transcript .txt files.
+
+        The per-chunk transcript files (chunk_NNN_transcript.txt) hold the
+        original PII-bearing text before any de-identification pass, so they
+        must be removed on successful completion unless --keep-chunks is set.
+        """
         try:
             if chunks_dir.exists():
                 shutil.rmtree(chunks_dir)
                 print(f"  Cleaned up: {chunks_dir}")
         except Exception as e:
-            print(f"  Cleanup warning: {e}")
+            print(f"  Cleanup warning (chunks dir): {e}")
+
+        if output_dir is not None:
+            try:
+                for p in output_dir.glob("chunk_*_transcript.txt"):
+                    p.unlink()
+                    print(f"  Cleaned up: {p.name}")
+            except Exception as e:
+                print(f"  Cleanup warning (per-chunk txt): {e}")
 
 
 class BatchProcessor:
@@ -1980,7 +2018,6 @@ class BatchProcessor:
                     json_progress=False,  # No JSON in batch mode
                     enable_caching=self.config.enable_caching,
                     cache_ttl_seconds=self.config.cache_ttl_seconds,
-                    audio_only=self.config.audio_only,
                 )
 
                 future = executor.submit(
@@ -2060,7 +2097,6 @@ def cmd_identify(args):
         prompt_key=args.prompt,
         media_resolution=args.resolution,
         video_fps=args.fps,
-        audio_only=args.audio_only,
     )
 
     if path.is_file():
@@ -2126,7 +2162,10 @@ def cmd_process(args):
         json_progress=args.json_progress,
         thinking_budget=args.thinking_budget,
         video_fps=args.fps,
-        audio_only=args.audio_only,
+        burn_timestamps=getattr(args, 'burn_timestamps', False),
+        drawtext_ffmpeg=getattr(args, 'drawtext_ffmpeg',
+                                TranscriptionConfigV10.drawtext_ffmpeg),
+        deidentify_names=args.deidentify_names,
     )
 
     # Load speakers from manifest if provided
@@ -2137,8 +2176,7 @@ def cmd_process(args):
             speakers = SpeakerRegistry.load_manifest(str(speaker_path))
             print(f"Loaded {len(speakers)} speakers from {speaker_path.name}")
 
-    prompts_file = getattr(args, 'prompts_file', None)
-    pipeline = VideoTranscriptionPipelineV10(api_key, config, prompts_file=prompts_file)
+    pipeline = VideoTranscriptionPipelineV10(api_key, config)
     pipeline.process(
         str(video_path), args.output,
         speakers=speakers,
@@ -2168,7 +2206,6 @@ def cmd_batch(args):
         keep_chunks=args.keep_chunks,
         thinking_budget=args.thinking_budget,
         video_fps=args.fps,
-        audio_only=args.audio_only,
     )
 
     batch = BatchProcessor(api_key, config)
@@ -2188,7 +2225,6 @@ def cmd_estimate(args):
         chunk_duration_seconds=int(args.chunk_minutes * 60),
         overlap_seconds=args.overlap,
         video_fps=args.fps,
-        audio_only=args.audio_only,
     )
 
     cost_calc = VideoCostCalculator()
@@ -2240,89 +2276,6 @@ def cmd_estimate(args):
                   f"{v['num_chunks']} chunks  ${v['total_cost']:.3f}")
 
 
-def cmd_detect_speakers(args):
-    """Handle 'detect-speakers' subcommand (non-interactive, for Electron)"""
-    api_key = args.api_key or os.getenv('GOOGLE_API_KEY')
-    if not api_key:
-        print('GVU_ERROR:' + json.dumps({"type": "error", "message": "No API key provided", "fatal": True}), flush=True)
-        sys.exit(1)
-
-    video_path = Path(args.video)
-    if not video_path.exists():
-        print('GVU_ERROR:' + json.dumps({"type": "error", "message": f"Video not found: {video_path}", "fatal": True}), flush=True)
-        sys.exit(1)
-
-    config = TranscriptionConfigV10(
-        model_name=args.model,
-        media_resolution=args.resolution,
-        video_fps=args.fps,
-        chunk_duration_seconds=int(args.chunk_minutes * 60),
-        overlap_seconds=args.overlap,
-        json_progress=True,  # Always emit JSON for Electron
-        audio_only=args.audio_only,
-    )
-
-    tmp_dir = None
-    uploaded_files = []
-    try:
-        # Progress: starting
-        report_progress(config, "progress", chunk=0, total=3, percent=0, status="Preparing video for speaker detection...")
-
-        # Create temp dir for chunks
-        tmp_dir = tempfile.mkdtemp(prefix="gvu_detect_")
-
-        # Extract first N chunks for speaker detection
-        report_progress(config, "progress", chunk=1, total=3, percent=10, status="Extracting video chunks...")
-        chunker = OverlapChunker(config)
-        id_chunks = chunker.extract_speaker_id_chunks(str(video_path), tmp_dir, config.speaker_id_chunks)
-        if not id_chunks:
-            print('GVU_ERROR:' + json.dumps({"type": "error", "message": "Could not extract video chunks", "fatal": True}), flush=True)
-            sys.exit(1)
-
-        # Upload chunks to Gemini
-        report_progress(config, "progress", chunk=1, total=3, percent=30, status="Uploading video to Gemini...")
-        client = GeminiClient(api_key, config)
-        id_paths = [c['file_path'] for c in id_chunks]
-        id_uploaded = client.upload_files_parallel(id_paths)
-        id_files = [id_uploaded[p] for p in id_paths if id_uploaded.get(p)]
-        uploaded_files = [f for f in id_uploaded.values() if f is not None]
-
-        if not id_files:
-            print('GVU_ERROR:' + json.dumps({"type": "error", "message": "Failed to upload video chunks to Gemini", "fatal": True}), flush=True)
-            sys.exit(1)
-
-        # Run speaker detection
-        report_progress(config, "progress", chunk=2, total=3, percent=60, status="Detecting speakers with AI...")
-        registry = SpeakerRegistry(client, config)
-        speakers = registry.identify_speakers(id_files)
-
-        # Output speakers as JSON
-        speaker_data = [s.to_dict() for s in speakers]
-        report_progress(config, "progress", chunk=3, total=3, percent=90, status="Speaker detection complete")
-        print('GVU_SPEAKERS:' + json.dumps({"type": "speakers", "speakers": speaker_data}), flush=True)
-        report_progress(config, "progress", chunk=3, total=3, percent=100, status="Done")
-
-    except Exception as e:
-        print('GVU_ERROR:' + json.dumps({"type": "error", "message": str(e), "fatal": True}), flush=True)
-        sys.exit(1)
-    finally:
-        # Cleanup uploaded files
-        if uploaded_files:
-            try:
-                client_for_cleanup = client if 'client' in dir() else None
-                if client_for_cleanup:
-                    for f in uploaded_files:
-                        client_for_cleanup.delete_file(f)
-            except Exception:
-                pass
-        # Cleanup temp dir
-        if tmp_dir and os.path.exists(tmp_dir):
-            try:
-                shutil.rmtree(tmp_dir)
-            except Exception:
-                pass
-
-
 def main():
     parser = argparse.ArgumentParser(
         prog="v10",
@@ -2355,14 +2308,19 @@ EXAMPLES:
                        help="Media resolution (default: HIGH)")
         p.add_argument("--fps", type=int, default=2,
                        help="Video frame sampling rate in FPS (default: 2). Higher = more visual detail but more tokens.")
-        p.add_argument("--audio-only", action="store_true",
-                       help="Audio-only mode: extract audio tracks only, use voice-based speaker ID, skip visual descriptions.")
 
     def add_chunk_args(p):
         p.add_argument("-c", "--chunk-minutes", type=float, default=1.0,
                        help="Chunk duration in minutes (default: 1.0)")
         p.add_argument("--overlap", type=int, default=15,
                        help="Overlap seconds between chunks (default: 15)")
+        p.add_argument("--burn-timestamps", action="store_true",
+                       help=("Burn a HH:MM:SS timer into each chunk and ask the "
+                             "model to read it for timestamps. Eliminates model-"
+                             "internal clock drift; requires ffmpeg-full (drawtext)."))
+        p.add_argument("--drawtext-ffmpeg",
+                       default="/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg",
+                       help="Path to an ffmpeg build that supports drawtext.")
 
     # identify
     p_identify = subparsers.add_parser('identify',
@@ -2393,7 +2351,11 @@ EXAMPLES:
                           help="Output JSON progress for Electron integration")
     p_process.add_argument("--thinking-budget", type=int, default=4096,
                           help="Thinking token budget (default: 4096)")
-    p_process.add_argument("--prompts-file", help="Path to custom prompts.json file")
+    p_process.add_argument("--deidentify-names", action="store_true",
+        help="Run a second Gemini pass after transcription to detect real "
+             "names (students and adults) and substitute realistic "
+             "pseudonyms. Writes an audit file transcript_name_map.json. "
+             "Off by default.")
     add_common_args(p_process)
     add_chunk_args(p_process)
     p_process.set_defaults(func=cmd_process)
@@ -2422,14 +2384,6 @@ EXAMPLES:
     add_common_args(p_estimate)
     add_chunk_args(p_estimate)
     p_estimate.set_defaults(func=cmd_estimate)
-
-    # detect-speakers (non-interactive, for Electron app)
-    p_detect = subparsers.add_parser('detect-speakers',
-        help='Auto-detect speakers from video (non-interactive, outputs JSON)')
-    p_detect.add_argument("video", help="Path to video file")
-    add_common_args(p_detect)
-    add_chunk_args(p_detect)
-    p_detect.set_defaults(func=cmd_detect_speakers)
 
     args = parser.parse_args()
 

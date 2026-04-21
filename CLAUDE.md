@@ -79,7 +79,7 @@ When exiting plan mode with an accepted plan:
 ### Python Integration
 
 **Script Location:**
-- Development: `src/python/video_transcription_pipeline_v04.py`
+- Development: `src/python/video_transcription_pipeline_v10.py` (synced from repo root via `npm run sync-pipeline`)
 - Production: App resources bundle
 
 **JSON Progress Format:**
