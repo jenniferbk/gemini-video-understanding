@@ -120,3 +120,12 @@ CLAUDE.md.backup-*
 # Transcription output directories
 *_v10_*/
 batch_*_output/
+
+# Reorganization (2026-04-20)
+sensitive/
+_to_relocate/
+transcription_runs/
+timss_videos/
+misc/
+archive/logs/
+REORG_INVENTORY.md
