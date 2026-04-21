@@ -368,6 +368,22 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
     }
   });
 
+  // Check whether transcript_name_map.json exists in the same directory as
+  // a given transcript. Narrow by design — we don't want to expose generic
+  // fs.existsSync to the renderer, and this is the only file we need to probe.
+  ipcMain.handle('transcription:hasAuditFile', async (_event, transcriptPath: string) => {
+    try {
+      if (!transcriptPath || typeof transcriptPath !== 'string') {
+        return { exists: false };
+      }
+      const auditPath = path.join(path.dirname(transcriptPath), 'transcript_name_map.json');
+      return { exists: fs.existsSync(auditPath), path: auditPath };
+    } catch (error) {
+      console.error('hasAuditFile check failed:', error);
+      return { exists: false };
+    }
+  });
+
   console.log('Transcription IPC handlers registered');
 }
 

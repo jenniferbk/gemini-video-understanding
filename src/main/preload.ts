@@ -31,6 +31,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   readTranscript: (filePath: string) =>
     ipcRenderer.invoke('transcription:readTranscript', filePath),
 
+  hasAuditFile: (transcriptPath: string) =>
+    ipcRenderer.invoke('transcription:hasAuditFile', transcriptPath),
+
   // Get file path from dropped file (for drag-and-drop)
   getDroppedFilePath: (file: File) => {
     // In Electron, File objects from drag-drop events have a path property
@@ -225,6 +228,7 @@ export interface ElectronAPI {
   validateVideo: (videoPath: string) => Promise<{valid: boolean; filename?: string; sizeInMB?: number; error?: string}>;
   selectVideo: () => Promise<{success: boolean; path?: string; filename?: string; sizeInMB?: number; durationMinutes?: number; cancelled?: boolean; error?: string}>;
   readTranscript: (filePath: string) => Promise<{success: boolean; content: string; totalLines: number; truncated: boolean}>;
+  hasAuditFile: (transcriptPath: string) => Promise<{exists: boolean; path?: string}>;
   getDroppedFilePath: (file: File) => string | null;
   onProgress: (callback: (data: any) => void) => () => void;
   onLog: (callback: (data: any) => void) => () => void;
