@@ -1,6 +1,6 @@
 """
 JSON Progress Wrapper for Electron Integration
-Adds --json-progress flag to video_transcription_pipeline_v04.py
+Adds --json-progress flag to video_transcription_pipeline.
 """
 import json
 import sys
