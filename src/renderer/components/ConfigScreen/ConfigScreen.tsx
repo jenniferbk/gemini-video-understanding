@@ -29,6 +29,7 @@ interface V10Config {
   overlapSeconds: number;
   thinkingBudget: number;
   audioOnly?: boolean;
+  deidentifyNames?: boolean;
 }
 
 interface ConfigScreenProps {

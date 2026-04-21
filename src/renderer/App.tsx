@@ -24,6 +24,7 @@ interface V10Config {
   overlapSeconds: number;
   thinkingBudget: number;
   audioOnly?: boolean;
+  deidentifyNames?: boolean;
 }
 
 const App: React.FC = () => {
@@ -135,6 +136,7 @@ const App: React.FC = () => {
         apiKey,
         speakersManifestPath: manifestResult.path,
         audioOnly: v10Config.audioOnly,
+        deidentifyNames: v10Config.deidentifyNames,
       });
 
       if (result.success) {

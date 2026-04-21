@@ -200,6 +200,7 @@ export interface TranscriptionConfig {
   apiKey: string;
   speakersManifestPath?: string;
   audioOnly?: boolean;
+  deidentifyNames?: boolean;
 }
 
 export interface SpeakerDetectionConfig {
