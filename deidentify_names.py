@@ -258,54 +258,49 @@ def build_name_map(detected: Dict, pool: Dict[str, List[str]]) -> NameMap:
     return NameMap(students=students, adults=adults)
 
 
-def _compile_token_pattern(token: str) -> "re.Pattern":
-    """Word-boundary, case-sensitive regex that also matches possessive `'s`.
-
-    Classroom transcripts preserve case on names, so we match case-sensitively
-    to avoid false positives on common-noun collisions (e.g., "graham crackers").
-    """
-    escaped = re.escape(token)
-    return re.compile(rf"\b{escaped}(?P<poss>'s)?\b")
-
-
-def _replace_token(text: str, token: str, replacement: str) -> str:
-    pattern = _compile_token_pattern(token)
-
-    def sub(m: "re.Match") -> str:
-        return replacement + (m.group("poss") or "")
-
-    return pattern.sub(sub, text)
-
-
 def apply_name_map(text: str, name_map: NameMap) -> str:
     """Substitute real names and visual labels with pseudonyms throughout.
 
-    Order matters: we process students first (each student: visual_label,
-    real_name, nicknames), then adults (honorific + last name as one unit,
-    then bare last name guarded by honorific). Within students, longer
-    nicknames are substituted before shorter ones to avoid partial overlaps.
+    Single-pass substitution: one regex matches any token (real name, visual
+    label, nickname, or honorific-last-name pair) and the callback looks up
+    the pseudonym. Because each input position is consumed at most once,
+    pseudonyms written into the output are never re-scanned -- this prevents
+    chain-corruption when a real name happens to be a substring of another
+    student's pseudonym.
+
+    Longer tokens are tried first so "Mel" doesn't eat part of "Melanie" and
+    "Ms. Sheridan" wins over a lone "Sheridan" (which wouldn't match anyway
+    because bare last names are not registered).
     """
-    out = text
-
+    # Build (token, pseudonym) list. Later tokens with the same text overwrite
+    # earlier ones in the lookup; if a nickname collides with another student's
+    # real name the LLM prompt should have prevented it, but last-write-wins
+    # gives deterministic behavior.
+    mappings: List[tuple] = []
     for entry in name_map.students:
-        tokens: List[str] = []
         if entry.visual_label:
-            # Visual label may contain hyphens (e.g., "Girl-PinkShirtBlackPants")
-            # \b works on alphanumerics; hyphens count as boundaries,
-            # so full-label regex match is still valid.
-            tokens.append(entry.visual_label)
-        tokens.append(entry.real_name)
-        # Nicknames: longest first to avoid "Mel" eating part of "Melanie"
-        for nick in sorted(entry.nicknames, key=len, reverse=True):
-            tokens.append(nick)
-        for token in tokens:
-            out = _replace_token(out, token, entry.pseudonym)
-
+            mappings.append((entry.visual_label, entry.pseudonym))
+        mappings.append((entry.real_name, entry.pseudonym))
+        for nick in entry.nicknames:
+            mappings.append((nick, entry.pseudonym))
     for adult in name_map.adults:
-        # Match "<Honorific> <LastName>" as one unit (stops bare-lastname false positives)
-        combo_pattern = re.compile(rf"\b{re.escape(adult.honorific)}\s+{re.escape(adult.real_name)}\b")
-        out = combo_pattern.sub(adult.pseudonym, out)
+        mappings.append((f"{adult.honorific} {adult.real_name}", adult.pseudonym))
         if adult.visual_label:
-            out = _replace_token(out, adult.visual_label, adult.pseudonym)
+            mappings.append((adult.visual_label, adult.pseudonym))
 
-    return out
+    if not mappings:
+        return text
+
+    # Sort by token length descending so the alternation prefers the longest
+    # match at any given position (regex alternation is left-to-right / first-
+    # match, not longest-match, so ordering matters).
+    mappings.sort(key=lambda m: len(m[0]), reverse=True)
+
+    lookup = {tok: ps for tok, ps in mappings}
+    alternation = "|".join(re.escape(tok) for tok, _ in mappings)
+    pattern = re.compile(rf"\b(?P<tok>{alternation})(?P<poss>'s)?\b")
+
+    def _sub(m: "re.Match") -> str:
+        return lookup[m.group("tok")] + (m.group("poss") or "")
+
+    return pattern.sub(_sub, text)

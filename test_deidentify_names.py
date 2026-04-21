@@ -325,10 +325,11 @@ def test_apply_does_not_touch_unrelated_words():
 
 
 def test_apply_is_case_sensitive_word_boundary():
-    # Must match "Melanie" but not "melanies" (no lowercase in classroom transcripts anyway)
-    src = "Teacher-PinkPants: melanies are a type of flower."
+    # Lowercase "melanie" at a proper word boundary -- should NOT match
+    # because classroom transcripts preserve name casing and lowercase
+    # occurrences are almost always common-word collisions.
+    src = "Teacher-PinkPants: Let's go see melanie at lunch."
     out = apply_name_map(src, _name_map_melanie())
-    # Lowercase 'melanies' is not a real reference; should be left alone.
     assert out == src
 
 
@@ -353,3 +354,46 @@ def test_apply_multiple_names_across_transcript():
         "Student-Michael: Turn left."
     )
     assert apply_name_map(src, name_map) == expected
+
+
+def test_apply_no_pseudonym_chain_corruption():
+    # Regression test for the chain-corruption bug. If Melanie's pseudonym
+    # contains "Hannah" as a substring and "Hannah" is also a real student,
+    # the naive sequential-replace approach would corrupt the output.
+    nm = NameMap(
+        students=[
+            NameEntry(real_name="Melanie", gender="F", visual_label=None,
+                      pseudonym="Student-Hannah", nicknames=[]),
+            NameEntry(real_name="Hannah", gender="F", visual_label=None,
+                      pseudonym="Student-Ava", nicknames=[]),
+        ],
+        adults=[],
+    )
+    src = "Teacher-PinkPants: Melanie and Hannah are here."
+    out = apply_name_map(src, nm)
+    assert out == "Teacher-PinkPants: Student-Hannah and Student-Ava are here."
+
+
+def test_apply_handles_trailing_punctuation():
+    # Names followed by various punctuation should still match.
+    src = "Teacher: Is James? (James, not Jim.) James's book."
+    nm = NameMap(
+        students=[NameEntry(real_name="James", gender="M", visual_label=None,
+                            pseudonym="Student-Michael", nicknames=[])],
+        adults=[],
+    )
+    out = apply_name_map(src, nm)
+    assert out == "Teacher: Is Student-Michael? (Student-Michael, not Jim.) Student-Michael's book."
+
+
+def test_apply_visual_label_possessive():
+    # Visual labels can have possessive too (though rare in practice).
+    src = "That is Girl-PinkShirtBlackPants's book."
+    nm = NameMap(
+        students=[NameEntry(real_name="Melanie", gender="F",
+                            visual_label="Girl-PinkShirtBlackPants",
+                            pseudonym="Student-Hannah", nicknames=[])],
+        adults=[],
+    )
+    out = apply_name_map(src, nm)
+    assert out == "That is Student-Hannah's book."
