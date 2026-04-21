@@ -28,6 +28,7 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showAbout, setShowAbout] = useState(false);
+  const [hasAuditFile, setHasAuditFile] = useState(false);
 
   useEffect(() => {
     async function loadResults() {
@@ -48,6 +49,15 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
         } catch (error) {
           console.error('Failed to read transcript:', error);
           transcript = 'Failed to load transcript. File may have been moved or deleted.';
+        }
+
+        // Check for the deidentification audit file next to the transcript.
+        try {
+          const audit = await window.electronAPI.hasAuditFile(job.output_path);
+          setHasAuditFile(audit.exists);
+        } catch (error) {
+          console.error('Failed to check for audit file:', error);
+          setHasAuditFile(false);
         }
 
         const stats = job.stats_json ? JSON.parse(job.stats_json) : {
@@ -145,6 +155,18 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({
             <div className={styles.statLabel}>Minutes</div>
           </div>
         </div>
+
+        {/* Deidentification Audit File Notice */}
+        {hasAuditFile && (
+          <div className={styles.outputSection}>
+            <div className={styles.outputLabel}>Name audit file:</div>
+            <div>
+              <code>transcript_name_map.json</code> was saved alongside this transcript.
+              It contains the real-name↔pseudonym mapping and should be stored under
+              separate access control from the transcript itself.
+            </div>
+          </div>
+        )}
 
         {/* Transcript Preview */}
         <div className={styles.transcriptSection}>
