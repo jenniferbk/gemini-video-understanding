@@ -438,3 +438,60 @@ def test_deidentify_transcript_end_to_end_with_mock():
     assert piper_pseudo in result_text
     # Gemini was called exactly once with a prompt containing the transcript
     assert mock_client.generate.call_count == 1
+
+
+FIXTURE_DIR = REPO_ROOT / "test_fixtures" / "deidentify"
+
+
+def test_melanie_excerpt_no_real_names_leak():
+    """Integration check: run the pipeline with a realistic canned Gemini
+    response and verify no real names survive in the output."""
+    excerpt = (FIXTURE_DIR / "melanie_excerpt.txt").read_text()
+
+    # Real names observed in the excerpt by manual review:
+    real_names = {"Melanie", "Piper", "Vera", "Chevy", "River", "Graham",
+                  "James", "Shavy", "Aubrey"}
+    # Plus the adult reference "Ms. Sheridan"
+
+    canned = json.dumps({
+        "students": [
+            {"real_name": "Melanie", "gender": "F",
+             "visual_label": "Girl-PinkShirtBlackPants", "nicknames": []},
+            {"real_name": "Piper", "gender": "F", "visual_label": None, "nicknames": []},
+            {"real_name": "Vera", "gender": "F", "visual_label": None, "nicknames": []},
+            {"real_name": "Chevy", "gender": "N", "visual_label": None, "nicknames": []},
+            {"real_name": "River", "gender": "N", "visual_label": None, "nicknames": []},
+            {"real_name": "Graham", "gender": "M", "visual_label": None, "nicknames": []},
+            {"real_name": "James", "gender": "M", "visual_label": None, "nicknames": []},
+            {"real_name": "Shavy", "gender": "N", "visual_label": None, "nicknames": []},
+            {"real_name": "Aubrey", "gender": "F", "visual_label": None, "nicknames": []},
+        ],
+        "adults": [
+            {"real_name": "Sheridan", "honorific": "Ms.", "visual_label": None},
+        ],
+    })
+    mock_client = MagicMock()
+    mock_response = MagicMock()
+    mock_response.text = canned
+    mock_client.generate.return_value = mock_response
+
+    result_text, name_map = deidentify_transcript(
+        excerpt, mock_client, str(POOL_PATH),
+    )
+
+    # No real name should appear anywhere in the output
+    for name in real_names:
+        assert name not in result_text, (
+            f"Real name {name!r} leaked into deidentified output"
+        )
+    # "Ms. Sheridan" should be gone
+    assert "Ms. Sheridan" not in result_text
+    # The visual label linked to Melanie should be retired
+    assert "Girl-PinkShirtBlackPants" not in result_text
+    # All students got distinct pseudonyms
+    pseudonyms = [s.pseudonym for s in name_map.students]
+    assert len(set(pseudonyms)) == len(pseudonyms)
+    # All pseudonyms use the Student- prefix
+    assert all(p.startswith("Student-") for p in pseudonyms)
+    # Adult pseudonym uses Ms. prefix
+    assert name_map.adults[0].pseudonym.startswith("Ms. ")

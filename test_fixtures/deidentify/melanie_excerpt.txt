@@ -1,0 +1,146 @@
+39:28 Teacher-PinkPants: I need someone to come pretend they are an Ozobot.
+39:33 Students (chorus): Me! Me! Me!
+39:36 Student: I have a question.
+39:37 Teacher-PinkPants: Yes.
+39:38 Boy-BlackTShirtGlasses: Why is the tape on the other side a different color?
+39:40 Teacher-PinkPants: Uh, because I ran out of that one when I first started.
+39:43 Teacher-PinkPants: Melanie, come on up.
+39:44 [A girl in a pink shirt and black pants, Melanie, walks to the front of the room]
+39:46 Students (chorus): No fair! She's gonna be doing it.
+39:48 Teacher-PinkPants: You're going to get a turn.
+39:49 Teacher-PinkPants: All right. We're going to start here.
+39:51 [Teacher-PinkPants points to a corner of the blue tape rectangle on the floor]
+39:52 Teacher-PinkPants: So stand right here on this corner.
+39:53 [Melanie stands on the corner of the rectangle]
+39:54 Teacher-PinkPants: I need everyone else to be looking at where Melanie is.
+39:58 [Teacher-PinkPants points to the whiteboard where "triangles" and "quadrilaterals" are listed with sub-points like "angles", "sides", "congruent sides", "right angles", "obtuse/acute angles", and "parallel sides"]
+40:00 [Teacher-PinkPants erases the bottom half of the "Quadrilaterals" list on the whiteboard]
+40:06 [A student in a white t-shirt walks across the foreground from left to right]
+40:10 [inaudible conversation, ~10s]
+40:21 Teacher-PinkPants: You saw the shape when you came in.
+40:23 Teacher-PinkPants: You can see well enough.
+40:25 Teacher-PinkPants: Everyone needs to be in their seat.
+40:27 Student: I can't see.
+40:28 Teacher-PinkPants: In your seat.
+40:29 Student: No I can't.
+40:30 Student: I cannot see.
+40:32 Teacher-PinkPants: All right.
+40:33 Teacher-PinkPants: We are going to write on the board pseudo-code for what Melanie our robot is going to do.
+40:39 [Teacher-PinkPants points to the blank space she cleared on the whiteboard under the heading "Quadrilaterals"]
+40:44 Teacher-PinkPants: Raise your hand if you can tell me what pseudo-code is.
+40:45 Teacher-PinkPants: You've done it with Ms. Sheridan.
+40:45 Teacher-PinkPants: Piper, what's pseudo-code?
+40:47 Piper: Fake code.
+40:49 Teacher-PinkPants: Fake code. Okay.
+40:50 Student: A robot command.
+40:52 Teacher-PinkPants: Fake command? Vera?
+40:54 Vera: A command.
+40:55 Teacher-PinkPants: Just a command. Okay.
+40:57 Teacher-PinkPants: So Melanie our Ozobot is starting here.
+40:59 [Teacher-PinkPants stands behind Melanie and puts her hands on her shoulders]
+41:00 Teacher-PinkPants: What is the first thing Melanie is going to do?
+41:03 Teacher-PinkPants: Vera.
+41:04 Vera: Go forward.
+41:05 Teacher-PinkPants: Move forward. Melanie, walk forward until you get to the next corner.
+41:09 [Melanie walks forward along the blue tape line on the rug]
+41:10 Students (chorus): One, two, three.
+41:12 Teacher-PinkPants: How many steps did Melanie take?
+41:14 Students (chorus): Three!
+41:15 Teacher-PinkPants: So what would be my first step on my pseudo-code? Raise your hand.
+41:19 Teacher-PinkPants: Chevy.
+41:20 Chevy: Go forward three steps.
+41:21 Teacher-PinkPants: Forward three steps.
+41:22 [Teacher-PinkPants walks to the whiteboard and writes "Forward 3 steps" under the "Quadrilaterals" heading]
+41:27 Student: Fast forward to speed.
+41:29 Teacher-PinkPants: I'm not worried about speed right now.
+41:30 [Teacher-PinkPants finishes writing "Forward 3 steps" on the whiteboard]
+41:33 Teacher-PinkPants: I'm not worried about the speed right now.
+41:36 Teacher-PinkPants: What is Melanie going to do next?
+41:41 Teacher-PinkPants: River.
+41:42 River: Turn right.
+41:43 Teacher-PinkPants: Turn right. Melanie, turn right.
+41:44 [Melanie turns 90 degrees to her right]
+41:46 Students (chorus): No! That's left!
+41:48 Teacher-PinkPants: Is that right?
+41:49 Students (chorus): No, that's left! Turn right! I mean left!
+41:50 Teacher-PinkPants: So, turn left.
+41:51 [Melanie turns back and then 90 degrees to her left]
+41:52 Teacher-PinkPants: Left and right.
+41:53 Teacher-PinkPants: So what am I going... what's going to come next?
+41:55 Teacher-PinkPants: Are you sure?
+41:56 Teacher-PinkPants: Graham, thank you for raising your hand.
+41:58 Graham: Turn right.
+41:59 Teacher-PinkPants: Turn right.
+42:00 Students (chorus): I mean turn left!
+42:01 Teacher-PinkPants: There we go. Turn left.
+42:02 [Teacher-PinkPants writes "turn left" on the whiteboard]
+42:05 Student: Even the teacher doesn't know it.
+42:06 Teacher-PinkPants: No, I was going to have you all do right and then see what she did.
+42:11 Teacher-PinkPants: All right. She turned left. What's going to happen next?
+42:15 Teacher-PinkPants: Are you sure?
+42:15 [Teacher-PinkPants stands by whiteboard. Melanie, wearing pink and black hoodie, stands on blue tape rectangle on rug]
+42:16 Teacher-PinkPants: All right, Melanie, go forward to the next corner.
+42:18 [Melanie walks along blue tape line]
+42:18 Students (chorus): One, two, three, four, five, six.
+42:22 Teacher-PinkPants: We're going to say six. It's not perfect. We're going to say six.
+42:25 [Teacher-PinkPants writes "Forward 6 steps" on whiteboard]
+42:33 Teacher-PinkPants: What is my next command going to be?
+42:42 Teacher-PinkPants: James.
+42:43 James: Turn left.
+42:44 Teacher-PinkPants: Turn left.
+42:45 [She turns left]
+42:46 [Teacher-PinkPants writes that instruction on whiteboard]
+42:47 Students (chorus): Whee! Whoo!
+42:50 Teacher-PinkPants: All right. This shape is a rectangle.
+42:54 Teacher-PinkPants: What do you know about rectangles?
+42:57 Teacher-PinkPants: Shavy.
+42:58 Shavy: Two sides are the same.
+43:00 [She claps hands together]
+43:00 Teacher-PinkPants: What do you know about rectangles?
+43:02 Melanie: Two sides are the same. There's two pairs.
+43:04 [Melanie claps her hands together while standing on the blue tape rectangle on the rug]
+43:05 Teacher-PinkPants: Two pairs of congruent sides.
+43:08 Teacher-PinkPants: They are parallel. So what does that mean? Do we have to count our next steps?
+43:13 Students (chorus): No!
+43:15 Teacher-PinkPants: No. What can we do?
+43:17 Student: Just write forward three.
+43:18 Teacher-PinkPants: We know that it's going to be another forward three.
+43:20 [Teacher-PinkPants walks towards the whiteboard]
+43:21 Teacher-PinkPants: Melanie, go forward three.
+43:22 [Melanie walks three steps forward along the blue tape line]
+43:23 Students (chorus): One, two, three. Whee!
+43:26 [Teacher-PinkPants writes "Forward 3 steps" on the whiteboard below "Turn left"]
+43:27 Students (chorus): Turn right! Turn left! Turn right!
+43:30 Teacher-PinkPants: Raise your hand if you think she needs to turn left.
+43:34 [Girl-BlueTieDieHoodie raises her hand at the front-left table]
+43:35 Teacher-PinkPants: Raise your hand if you think she needs to turn right.
+43:38 [Several students raise their hands]
+43:39 Teacher-PinkPants: Melanie, turn right.
+43:41 [Melanie turns to her right, facing away from the next tape line]
+43:42 Students (chorus): Bruh! Yeah! Wait!
+43:44 Teacher-PinkPants: Which way does she need to turn?
+43:45 [Teacher-PinkPants finishes writing on the whiteboard. The board displays a list of commands including forward movements of 3 and 6 steps, interspersed with left turns]
+43:45 Melanie: [flexes her muscles and smiles at the class]
+43:46 Students (chorus): Left! Left! Left!
+43:46 Teacher-PinkPants: All right, turn left.
+43:47 [Melanie turns 90 degrees to her left, now facing the next blue tape line on the rug]
+43:48 Students (chorus): Whoa!
+43:49 Teacher-PinkPants: What is the last thing?
+43:52 Teacher-PinkPants: James?
+43:53 James: Go forward six steps.
+43:54 Teacher-PinkPants: Forward six steps.
+43:55 [Teacher-PinkPants writes the next instruction on the whiteboard below the previous ones]
+43:56 Students (chorus): One, two, three, four, five, six.
+43:58 [Melanie walks 6 steps along the blue tape line, returning to her starting position at the corner]
+44:00 Teacher-PinkPants: Okay. Now...
+44:02 Teacher-PinkPants: ...has she 100% completed the rectangle?
+44:05 Students (chorus): Yes! No! No!
+44:07 Teacher-PinkPants: Why no? Graham?
+44:09 Graham: Because you didn't put the blue thing up there.
+44:11 Teacher-PinkPants: Okay, I didn't give her a color yet, but why else has she not completed the rectangle? Vera?
+44:17 Vera: She's not facing the way that she first started.
+44:19 Teacher-PinkPants: She is not facing the way she first started. So what is the last thing I need to include to finish our rectangle? Aubrey?
+44:25 Aubrey: Rotate...
+44:27 Aubrey: ...left.
+44:28 Teacher-PinkPants: Rotate left.
+44:29 [Teacher-PinkPants writes the final turn on the whiteboard at the bottom of the list]
