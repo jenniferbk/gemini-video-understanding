@@ -170,3 +170,22 @@ def test_parse_rejects_bad_gender():
     raw = '{"students": [{"real_name": "Piper", "gender": "Q", "visual_label": null, "nicknames": []}], "adults": []}'
     detected = parse_name_extraction_response(raw)
     assert detected["students"][0]["gender"] == "N"  # coerced to neutral
+
+
+def test_parse_rejects_non_dict_top_level():
+    with pytest.raises(ValueError, match="expected JSON object"):
+        parse_name_extraction_response("[]")
+    with pytest.raises(ValueError, match="expected JSON object"):
+        parse_name_extraction_response('"not a dict"')
+
+
+def test_parse_rejects_adult_missing_honorific():
+    raw = '{"students": [], "adults": [{"real_name": "Sheridan", "visual_label": null}]}'
+    with pytest.raises(ValueError, match="missing 'honorific'"):
+        parse_name_extraction_response(raw)
+
+
+def test_parse_rejects_student_missing_real_name():
+    raw = '{"students": [{"gender": "F"}], "adults": []}'
+    with pytest.raises(ValueError, match="missing 'real_name'"):
+        parse_name_extraction_response(raw)

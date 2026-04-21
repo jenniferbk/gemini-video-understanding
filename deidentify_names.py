@@ -175,8 +175,13 @@ def parse_name_extraction_response(raw: str) -> Dict:
     except json.JSONDecodeError as e:
         raise ValueError(f"could not parse name extraction response: {e}")
 
+    if not isinstance(data, dict):
+        raise ValueError(f"expected JSON object, got {type(data).__name__}")
+
     students = []
     for s in data.get("students", []):
+        if "real_name" not in s:
+            raise ValueError(f"student entry missing 'real_name': {s!r}")
         gender = s.get("gender", "N")
         if gender not in _VALID_GENDERS:
             gender = "N"
@@ -189,9 +194,13 @@ def parse_name_extraction_response(raw: str) -> Dict:
 
     adults = []
     for a in data.get("adults", []):
+        if "real_name" not in a:
+            raise ValueError(f"adult entry missing 'real_name': {a!r}")
+        if "honorific" not in a:
+            raise ValueError(f"adult entry missing 'honorific': {a!r}")
         adults.append({
             "real_name": a["real_name"],
-            "honorific": a.get("honorific", "Ms."),
+            "honorific": a["honorific"],
             "visual_label": a.get("visual_label"),
         })
 
