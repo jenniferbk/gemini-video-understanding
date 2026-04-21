@@ -42,3 +42,65 @@ def test_load_pool_returns_four_buckets():
 def test_load_pool_missing_file_raises():
     with pytest.raises(FileNotFoundError):
         load_pseudonym_pool("/nonexistent/pool.json")
+
+
+from deidentify_names import assign_pseudonym, assign_adult_pseudonym
+
+
+def test_assign_pseudonym_avoids_real_names():
+    # If "Hannah" is in the transcript as a real name, don't pick Student-Hannah
+    pool = {"student_female": ["Hannah", "Ava", "Sophia"]}
+    result = assign_pseudonym(
+        gender="F", pool=pool, avoid_real_names={"Hannah", "Melanie"},
+        already_assigned=set(),
+    )
+    assert result == "Student-Ava"
+
+
+def test_assign_pseudonym_avoids_already_assigned():
+    pool = {"student_female": ["Hannah", "Ava", "Sophia"]}
+    result = assign_pseudonym(
+        gender="F", pool=pool, avoid_real_names=set(),
+        already_assigned={"Student-Hannah", "Student-Ava"},
+    )
+    assert result == "Student-Sophia"
+
+
+def test_assign_pseudonym_neutral_when_unknown_gender():
+    pool = {
+        "student_female": ["Hannah"],
+        "student_male": ["Michael"],
+        "student_neutral": ["Alex", "Jordan"],
+    }
+    result = assign_pseudonym(
+        gender="N", pool=pool, avoid_real_names=set(),
+        already_assigned=set(),
+    )
+    assert result == "Student-Alex"
+
+
+def test_assign_pseudonym_exhausted_pool_raises():
+    pool = {"student_female": ["Hannah"]}
+    with pytest.raises(ValueError, match="pool exhausted"):
+        assign_pseudonym(
+            gender="F", pool=pool, avoid_real_names={"Hannah"},
+            already_assigned=set(),
+        )
+
+
+def test_assign_adult_pseudonym():
+    pool = {"adult_last": ["Kelly", "Walker"]}
+    result = assign_adult_pseudonym(
+        honorific="Ms.", pool=pool, avoid_real_names=set(),
+        already_assigned=set(),
+    )
+    assert result == "Ms. Kelly"
+
+
+def test_assign_adult_pseudonym_avoids_real_last_name():
+    pool = {"adult_last": ["Kelly", "Walker"]}
+    result = assign_adult_pseudonym(
+        honorific="Ms.", pool=pool, avoid_real_names={"Kelly"},
+        already_assigned=set(),
+    )
+    assert result == "Ms. Walker"
