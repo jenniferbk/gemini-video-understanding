@@ -154,7 +154,9 @@ export function setupTranscriptionHandlers(mainWindow: BrowserWindow, db: Databa
         console.log('Transcription complete:', completion);
 
         // Update database
-        await db.updateJobOutput(jobId, completion.outputFile || '', completion.stats || {});
+        // Python sends snake_case `output_file`; accept either for safety.
+        const outputFile = completion.output_file || completion.outputFile || '';
+        await db.updateJobOutput(jobId, outputFile, completion.stats || {});
 
         // Notify renderer
         mainWindow.webContents.send('transcription:complete', {

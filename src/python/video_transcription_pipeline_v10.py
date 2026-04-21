@@ -1636,8 +1636,14 @@ class VideoTranscriptionPipelineV10:
                 'speakers': [s.to_dict() for s in speakers],
             }
 
+            # `output_file` goes to the Electron results screen, which expects
+            # a file path (readTranscript is called on it). Both dual_output
+            # and single-output branches write the primary transcript to the
+            # same filename, so that's what the GUI gets. The containing
+            # folder is still in `result['output_dir']` for anyone who wants it.
+            main_transcript_path = output_dir / f"{stem}_transcript.txt"
             report_progress(self.config, "complete",
-                          output_file=str(output_dir), stats=result)
+                          output_file=str(main_transcript_path), stats=result)
             return result
 
         except Exception as e:
@@ -2080,6 +2086,20 @@ class BatchProcessor:
 # CLI
 # =============================================================================
 
+def emit_speakers_json_line(speakers: List[SpeakerInfo], manifest_path: str) -> None:
+    """Emit one GVU_SPEAKERS: line for the Electron GUI to parse.
+
+    Consumed by src/main/python/pythonRunner.ts handleStdout (slices after the
+    13-char 'GVU_SPEAKERS:' prefix). Shape:
+        {"speakers": [{label, description, type}, ...], "manifest_path": "..."}
+    """
+    payload = {
+        "speakers": [s.to_dict() for s in speakers],
+        "manifest_path": str(manifest_path),
+    }
+    print(f"GVU_SPEAKERS: {json.dumps(payload)}")
+
+
 def cmd_identify(args):
     """Handle 'identify' subcommand"""
     api_key = args.api_key or os.getenv('GOOGLE_API_KEY')
@@ -2091,6 +2111,8 @@ def cmd_identify(args):
     if not path.exists():
         print(f"ERROR: Path not found: {path}")
         sys.exit(1)
+
+    json_speakers = getattr(args, 'json_speakers', False)
 
     config = TranscriptionConfigV10(
         model_name=args.model,
@@ -2125,14 +2147,20 @@ def cmd_identify(args):
 
             try:
                 speakers = registry.identify_speakers(id_files)
-                speakers = registry.interactive_edit(speakers, path.name)
+                if not json_speakers:
+                    speakers = registry.interactive_edit(speakers, path.name)
                 manifest_out = video_dir / f"{path.stem}_speakers.json"
                 SpeakerRegistry.save_manifest(speakers, str(manifest_out))
+                if json_speakers:
+                    emit_speakers_json_line(speakers, str(manifest_out))
             finally:
                 for f in id_uploaded.values():
                     if f is not None:
                         client.delete_file(f)
     else:
+        if json_speakers:
+            print("ERROR: --json-speakers requires a single video file, not a directory")
+            sys.exit(1)
         # Directory: identify all videos
         batch = BatchProcessor(api_key, config)
         batch.identify_all(path, prompt_key=args.prompt)
@@ -2328,6 +2356,10 @@ EXAMPLES:
     p_identify.add_argument("path", help="Video file or directory")
     p_identify.add_argument("-p", "--prompt", default="default",
                            help="Prompt key from prompts.json")
+    p_identify.add_argument("--json-speakers", action="store_true",
+        help=("Headless mode for the Electron GUI: skip the interactive "
+              "terminal editor and emit one 'GVU_SPEAKERS: <json>' line on "
+              "stdout. Requires a single video file (not a directory)."))
     add_common_args(p_identify)
     p_identify.set_defaults(func=cmd_identify)
 

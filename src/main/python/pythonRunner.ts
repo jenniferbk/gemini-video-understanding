@@ -47,6 +47,9 @@ export interface ProgressUpdate {
   message?: string;
   level?: 'info' | 'warning' | 'error';
   outputFile?: string;
+  // Python emits snake_case (`output_file` in GVU_COMPLETE); kept alongside
+  // `outputFile` for compatibility with any code that already reads the latter.
+  output_file?: string;
   stats?: any;
   timestamp?: string;
   speakers?: SpeakerInfo[];
@@ -74,8 +77,8 @@ export class PythonTranscriptionRunner extends EventEmitter {
       // Production: bundled Python in resources
       return path.join(process.resourcesPath, 'python', 'bin', 'python3');
     } else {
-      // Development: use project venv
-      return path.join(app.getAppPath(), 'venv', 'bin', 'python3');
+      // Development: project venv lives at src/python/venv per CLAUDE.md
+      return path.join(app.getAppPath(), 'src', 'python', 'venv', 'bin', 'python3');
     }
   }
 
@@ -192,8 +195,12 @@ export class PythonTranscriptionRunner extends EventEmitter {
   }
 
   /**
-   * Detect speakers from video (Phase 1)
-   * Spawns V10 with detect-speakers subcommand
+   * Detect speakers from video (Phase 1).
+   * Spawns v10 `identify --json-speakers` — headless mode that skips the
+   * interactive terminal editor and emits one `GVU_SPEAKERS:` line on stdout
+   * for handleStdout to parse. Chunk-grid args are intentionally omitted:
+   * identification uses v10's internal speaker_id_chunks constant, not the
+   * transcription chunk grid.
    */
   detectSpeakers(config: SpeakerDetectionConfig): void {
     if (this.process) {
@@ -202,8 +209,9 @@ export class PythonTranscriptionRunner extends EventEmitter {
 
     const args = [
       this.scriptPath,
-      'detect-speakers',
+      'identify',
       config.videoPath,
+      '--json-speakers',
       '--api-key',
       config.apiKey,
       '-m',
@@ -212,15 +220,7 @@ export class PythonTranscriptionRunner extends EventEmitter {
       config.resolution,
       '--fps',
       config.fps.toString(),
-      '--chunk-minutes',
-      config.chunkMinutes.toString(),
-      '--overlap',
-      config.overlapSeconds.toString(),
     ];
-
-    if (config.audioOnly) {
-      args.push('--audio-only');
-    }
 
     console.log('Starting speaker detection:', {
       python: this.pythonPath,
@@ -321,15 +321,11 @@ export class PythonTranscriptionRunner extends EventEmitter {
       args.push('--speakers', config.speakersManifestPath);
     }
 
-    // Add prompts file if successfully created
-    if (this.tempPromptsFile) {
-      args.push('--prompts-file', this.tempPromptsFile);
-    }
-
-    // Audio-only mode
-    if (config.audioOnly) {
-      args.push('--audio-only');
-    }
+    // `--prompts-file` and `--audio-only` pushes intentionally removed:
+    // neither flag exists in v10. See dev/active/electron-v10-integration/
+    // v10-integration-gaps.md (Gap #2 + its --audio-only cousin). The UI
+    // state and tempfile generation are left in place pending the Gap #2
+    // decision (add flag to v10, remove the UI, or inline prompt text).
 
     // Always burn timestamps (ffmpeg clock overlay + per-chunk resume). Closes
     // up-to-14s intra-chunk clock drift; not a user-facing choice.
