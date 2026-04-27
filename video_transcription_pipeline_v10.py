@@ -470,6 +470,38 @@ def get_video_duration(video_path: str) -> float:
         return 0
 
 
+def get_video_stream_start_time(video_path: str) -> float:
+    """Wall-clock time of the first video frame, in seconds.
+
+    Some sources (YouTube re-encodes, screen recordings) emit audio that
+    starts before the first video frame. With `-ss 0` and a drawtext clock
+    starting from PTS=0, that first visible frame ends up labelled 00:00
+    even though its true wall-clock is several seconds in. Burn-mode reads
+    that clock as truth, producing a constant N-second early offset on the
+    first chunk only — chunks 2+ start mid-stream where audio and video
+    are aligned.
+
+    Returns 0.0 when the streams are aligned, when no video stream is
+    found, or when ffprobe fails (the latter is logged but not raised).
+    """
+    try:
+        cmd = [
+            "ffprobe", "-v", "quiet",
+            "-select_streams", "v:0",
+            "-show_entries", "stream=start_time",
+            "-of", "default=noprint_wrappers=1:nokey=1",
+            video_path,
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        raw = result.stdout.strip()
+        if not raw or raw == "N/A":
+            return 0.0
+        return max(0.0, float(raw))
+    except (subprocess.CalledProcessError, ValueError, FileNotFoundError) as e:
+        print(f"Warning: could not probe video stream start_time: {e}")
+        return 0.0
+
+
 def find_videos(directory: Path) -> List[Path]:
     """Find all video files in a directory"""
     videos = []
@@ -724,6 +756,7 @@ class OverlapChunker:
 
     def __init__(self, config: TranscriptionConfigV10):
         self.config = config
+        self._video_stream_start: float = 0.0
 
     def split_video(self, video_path: str, output_dir: str) -> List[Dict]:
         """Split video into overlapping chunks"""
@@ -734,6 +767,12 @@ class OverlapChunker:
         duration_minutes = get_video_duration(str(video_path))
         if duration_minutes <= 0:
             raise ValueError(f"Could not determine duration for {video_path.name}")
+
+        # See get_video_stream_start_time() for why this matters in burn mode.
+        self._video_stream_start = get_video_stream_start_time(str(video_path))
+        if self._video_stream_start > 0.05:
+            print(f"  Video stream starts at {self._video_stream_start:.2f}s "
+                  f"(audio leads video); chunk-1 drawtext offset will compensate.")
 
         total_seconds = duration_minutes * 60
         chunk_duration = self.config.chunk_duration_seconds
@@ -826,7 +865,12 @@ class OverlapChunker:
         ffmpeg = self.config.drawtext_ffmpeg
         # %{pts\:hms\:<offset>} adds the offset (seconds) to the
         # presentation timestamp before formatting as H:M:S.
-        offset = int(round(start_time))
+        # When audio leads video (see get_video_stream_start_time), the
+        # first visible frame's true wall-clock is video_stream_start, not
+        # the requested start_time. Floor at video_stream_start so chunk 1
+        # burns the correct clock; chunks 2+ are unaffected because their
+        # start_time already exceeds video_stream_start.
+        offset = int(round(max(start_time, self._video_stream_start)))
         drawtext = (
             f"drawtext=text='%{{pts\\:hms\\:{offset}}}':"
             "fontsize=36:fontcolor=yellow:borderw=3:bordercolor=black:"

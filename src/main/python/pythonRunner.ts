@@ -256,10 +256,12 @@ export class PythonTranscriptionRunner extends EventEmitter {
     this.process.on('exit', (code, signal) => {
       console.log(`Speaker detection process exited: code=${code}, signal=${signal}`);
 
-      if (code !== 0 && code !== null) {
+      if ((code !== null && code !== 0) || signal !== null) {
         this.emit('error', {
           type: 'error',
-          message: `Speaker detection exited with code ${code}`,
+          message: signal !== null
+            ? `Speaker detection terminated by signal ${signal}`
+            : `Speaker detection exited with code ${code}`,
           fatal: true
         });
       }
@@ -379,10 +381,12 @@ export class PythonTranscriptionRunner extends EventEmitter {
     this.process.on('exit', (code, signal) => {
       console.log(`Python process exited: code=${code}, signal=${signal}`);
 
-      if (code !== 0 && code !== null) {
+      if ((code !== null && code !== 0) || signal !== null) {
         this.emit('error', {
           type: 'error',
-          message: `Process exited with code ${code}`,
+          message: signal !== null
+            ? `Process terminated by signal ${signal}`
+            : `Process exited with code ${code}`,
           fatal: true
         });
       }
