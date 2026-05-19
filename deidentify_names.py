@@ -18,6 +18,26 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from pydantic import BaseModel
+
+
+class _StudentSchema(BaseModel):
+    real_name: str
+    gender: str  # "F" | "M" | "N"
+    visual_label: Optional[str] = None
+    nicknames: List[str] = []
+
+
+class _AdultSchema(BaseModel):
+    real_name: str
+    honorific: str  # "Ms." | "Mr." | "Mrs." | "Mx." | "Dr."
+    visual_label: Optional[str] = None
+
+
+class _NameExtractionSchema(BaseModel):
+    students: List[_StudentSchema]
+    adults: List[_AdultSchema]
+
 
 @dataclass
 class NameEntry:
@@ -326,7 +346,24 @@ def deidentify_transcript(
     """
     pool = load_pseudonym_pool(pool_path)
     prompt = build_name_extraction_prompt(transcript_text)
-    raw = gemini_client.generate([prompt], temperature=0.0)
+    # Force structured output so Gemini returns JSON conforming to the schema,
+    # AND request a generous output budget. On Gemini 3 thinking models the
+    # default max_output_tokens=16384 covers BOTH thinking and output: long
+    # transcripts produced ~15K thinking tokens leaving only ~640 output tokens
+    # before MAX_TOKENS truncated the JSON mid-string. 65536 leaves ample
+    # headroom for thinking + the full names JSON.
+    try:
+        raw = gemini_client.generate(
+            [prompt],
+            temperature=0.0,
+            response_mime_type="application/json",
+            response_schema=_NameExtractionSchema,
+            max_output_tokens=65536,
+        )
+    except TypeError:
+        # Older GeminiClient without structured-output / token-override support
+        # — fall back to plain-text generation and tolerate occasional truncation.
+        raw = gemini_client.generate([prompt], temperature=0.0)
     detected = parse_name_extraction_response(raw)
     name_map = build_name_map(detected, pool)
     return apply_name_map(transcript_text, name_map), name_map

@@ -599,15 +599,33 @@ class GeminiClient:
         return wrapped
 
     def generate(self, contents: List, temperature: float = None,
-                 cached_content: str = None) -> str:
-        """Generate content with v10 settings (media_resolution, thinking, safety)"""
+                 cached_content: str = None,
+                 response_mime_type: str = None,
+                 response_schema=None,
+                 max_output_tokens: int = None) -> str:
+        """Generate content with v10 settings (media_resolution, thinking, safety).
+
+        `response_mime_type` + `response_schema` force structured output (e.g.
+        valid JSON conforming to a Pydantic model). Used by the de-identification
+        pass to avoid truncated/malformed JSON on long transcripts.
+
+        `max_output_tokens` overrides the config default. On Gemini 3 thinking
+        models this cap covers BOTH thinking tokens AND output tokens, so the
+        de-id pass needs a generous budget (~64K) to avoid MAX_TOKENS truncation
+        after a long internal thinking trace consumes most of the default 16K.
+        """
         if temperature is None:
             temperature = self.config.temperature
 
         # Apply custom FPS to video parts
         contents = self._apply_video_fps(contents)
 
-        gen_config = self._build_gen_config(temperature, cached_content)
+        gen_config = self._build_gen_config(
+            temperature, cached_content,
+            response_mime_type=response_mime_type,
+            response_schema=response_schema,
+            max_output_tokens=max_output_tokens,
+        )
 
         try:
             response = self.client.models.generate_content(
@@ -621,10 +639,18 @@ class GeminiClient:
             # If media_resolution or thinking not supported, retry without them
             if "media_resolution" in error_msg.lower() or "thinking" in error_msg.lower():
                 print(f"  Note: Falling back to basic config ({e})")
-                return self._generate_fallback(contents, temperature, cached_content)
+                return self._generate_fallback(
+                    contents, temperature, cached_content,
+                    response_mime_type=response_mime_type,
+                    response_schema=response_schema,
+                    max_output_tokens=max_output_tokens,
+                )
             raise
 
-    def _build_gen_config(self, temperature: float, cached_content: str = None) -> types.GenerateContentConfig:
+    def _build_gen_config(self, temperature: float, cached_content: str = None,
+                          response_mime_type: str = None,
+                          response_schema=None,
+                          max_output_tokens: int = None) -> types.GenerateContentConfig:
         """Build generation config with all v10 features"""
         safety = [
             types.SafetySetting(category='HARM_CATEGORY_HATE_SPEECH', threshold='BLOCK_NONE'),
@@ -643,7 +669,7 @@ class GeminiClient:
 
         kwargs = {
             'temperature': temperature,
-            'max_output_tokens': self.config.max_output_tokens,
+            'max_output_tokens': max_output_tokens if max_output_tokens is not None else self.config.max_output_tokens,
             'safety_settings': safety,
         }
 
@@ -667,10 +693,18 @@ class GeminiClient:
         if cached_content:
             kwargs['cached_content'] = cached_content
 
+        if response_mime_type:
+            kwargs['response_mime_type'] = response_mime_type
+        if response_schema is not None:
+            kwargs['response_schema'] = response_schema
+
         return types.GenerateContentConfig(**kwargs)
 
     def _generate_fallback(self, contents: List, temperature: float,
-                           cached_content: str = None) -> str:
+                           cached_content: str = None,
+                           response_mime_type: str = None,
+                           response_schema=None,
+                           max_output_tokens: int = None) -> str:
         """Fallback generation without media_resolution/thinking"""
         safety = [
             types.SafetySetting(category='HARM_CATEGORY_HATE_SPEECH', threshold='BLOCK_NONE'),
@@ -681,11 +715,15 @@ class GeminiClient:
 
         kwargs = {
             'temperature': temperature,
-            'max_output_tokens': self.config.max_output_tokens,
+            'max_output_tokens': max_output_tokens if max_output_tokens is not None else self.config.max_output_tokens,
             'safety_settings': safety,
         }
         if cached_content:
             kwargs['cached_content'] = cached_content
+        if response_mime_type:
+            kwargs['response_mime_type'] = response_mime_type
+        if response_schema is not None:
+            kwargs['response_schema'] = response_schema
 
         response = self.client.models.generate_content(
             model=self.config.model_name,
