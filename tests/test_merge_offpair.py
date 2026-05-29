@@ -68,6 +68,16 @@ def test_cross_correlate_offset_finds_excerpt():
     assert strength > 0.9
 
 
+def test_cross_correlate_offset_rejects_oversized_signal():
+    import numpy as np
+    import pytest
+    from merge_offpair_transcript import cross_correlate_offset
+    ref = np.zeros(100, dtype=np.float32)
+    sig = np.zeros(200, dtype=np.float32)
+    with pytest.raises(ValueError):
+        cross_correlate_offset(ref, sig, 16000)
+
+
 def test_fit_time_map_recovers_offset_and_drift():
     from merge_offpair_transcript import fit_time_map
     # true map: video_t = 1.002*mp3_t + 480   (drift + 8 min offset)

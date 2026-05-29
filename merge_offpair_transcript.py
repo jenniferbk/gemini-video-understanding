@@ -20,8 +20,8 @@ import wave
 from pathlib import Path
 
 import numpy as np
-from dataclasses import dataclass, field  # field used by later tasks  # noqa: F401
-from typing import List, Literal, Optional, Tuple  # Tuple used by later tasks  # noqa: F401
+from dataclasses import dataclass, field
+from typing import List, Literal, Optional, Tuple
 
 _TS_RE = re.compile(r"^(\d{1,3}):(\d{2})\s+(.*)$")
 
@@ -112,6 +112,8 @@ def cross_correlate_offset(ref: "np.ndarray", sig: "np.ndarray", sr: int) -> Tup
     sig = np.asarray(sig, dtype=np.float64)
     ref = ref - ref.mean()
     sig = sig - sig.mean()
+    if len(sig) > len(ref):
+        raise ValueError("cross_correlate_offset: signal longer than reference")
     nfft = 1 << int(np.ceil(np.log2(len(ref) + len(sig))))
     corr = np.fft.irfft(np.fft.rfft(ref, nfft) * np.conj(np.fft.rfft(sig, nfft)), nfft)
     valid = corr[: len(ref) - len(sig) + 1]
@@ -290,12 +292,14 @@ def extract_audio(media_path: str) -> Tuple["np.ndarray", int]:
     sr = 16000
     with tempfile.TemporaryDirectory(prefix="merge_audio_") as tmp:
         wav_path = Path(tmp) / "a.wav"
-        subprocess.run(
+        proc = subprocess.run(
             ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
              "-i", str(media_path), "-ac", "1", "-ar", str(sr),
              "-c:a", "pcm_s16le", str(wav_path)],
-            check=True,
+            capture_output=True, text=True,
         )
+        if proc.returncode != 0:
+            raise RuntimeError(f"ffmpeg failed on {media_path}:\n{proc.stderr}")
         with wave.open(str(wav_path), "rb") as w:
             sr = w.getframerate()
             frames = w.readframes(w.getnframes())
