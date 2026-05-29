@@ -149,3 +149,27 @@ def test_merge_gated_gapfill():
     assert all(e.text != "faint bleed words" for e in merged)
     # sorted by time
     assert [e.time_s for e in merged] == sorted(e.time_s for e in merged)
+
+
+def test_format_transcript_and_audit():
+    from merge_offpair_transcript import Entry, TimeMap, PairMap, format_transcript, build_audit
+    entries = [
+        Entry(63.0, "Student-Maya", "spin it again", "speech", "video"),
+        Entry(75.0, None, "[Student-Omar points at screen]", "visual", "video"),
+        Entry(200.0, "Student-Omar", "maybe its a hexagon", "speech", "offpair"),
+    ]
+    out = format_transcript(entries, header_lines=["Unified transcript", "Source: SG2"])
+    assert "Unified transcript" in out
+    assert "01:03 Student-Maya: spin it again" in out
+    assert "01:15 [Student-Omar points at screen]" in out
+    assert "03:20 Student-Omar: maybe its a hexagon" in out
+
+    tm = TimeMap(a=1.0, b=480.0, residual=0.2, confidence=0.8)
+    pm = PairMap(mapping={"Speaker-B": "Student-Omar"}, confidence=0.9)
+    audit = build_audit(tm, threshold=0.5, close_count=120, faint_count=300,
+                        pair_map=pm, inserted=2, discarded=5, warnings=["low overlap"])
+    assert audit["time_map"]["b"] == 480.0
+    assert audit["energy"]["close_count"] == 120
+    assert audit["pair2"]["mapping"]["Speaker-B"] == "Student-Omar"
+    assert audit["counts"] == {"inserted": 2, "discarded": 5}
+    assert audit["warnings"] == ["low overlap"]

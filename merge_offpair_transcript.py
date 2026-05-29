@@ -237,3 +237,32 @@ def merge(video_entries: List[Entry],
         merged.append(Entry(vt, pair_map.label_for(off.speaker), off.text, "speech", "offpair"))
     merged.sort(key=lambda e: e.time_s)
     return merged
+
+
+def _fmt_ts(t: float) -> str:
+    total = int(round(t))
+    return f"{total // 60:02d}:{total % 60:02d}"
+
+
+def format_transcript(entries: List[Entry], header_lines: List[str]) -> str:
+    lines = list(header_lines) + [""]
+    for e in entries:
+        if e.kind == "visual":
+            lines.append(f"{_fmt_ts(e.time_s)} {e.text}")
+        else:
+            lines.append(f"{_fmt_ts(e.time_s)} {e.speaker}: {e.text}")
+    return "\n".join(lines) + "\n"
+
+
+def build_audit(time_map: TimeMap, threshold: float, close_count: int, faint_count: int,
+                pair_map: PairMap, inserted: int, discarded: int, warnings: list) -> dict:
+    return {
+        "time_map": {"a": time_map.a, "b": time_map.b,
+                     "residual": time_map.residual, "confidence": time_map.confidence,
+                     "windows": time_map.windows},
+        "energy": {"threshold": threshold, "close_count": close_count,
+                   "faint_count": faint_count},
+        "pair2": {"mapping": pair_map.mapping, "confidence": pair_map.confidence},
+        "counts": {"inserted": inserted, "discarded": discarded},
+        "warnings": warnings,
+    }
