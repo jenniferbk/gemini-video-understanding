@@ -11,8 +11,8 @@ See docs/superpowers/specs/2026-05-29-offpair-merge-design.md
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
-from typing import List, Optional, Tuple
+from dataclasses import dataclass, field  # field used by later tasks  # noqa: F401
+from typing import List, Literal, Optional, Tuple  # Tuple used by later tasks  # noqa: F401
 
 _TS_RE = re.compile(r"^(\d{1,3}):(\d{2})\s+(.*)$")
 
@@ -22,8 +22,8 @@ class Entry:
     time_s: float
     speaker: Optional[str]
     text: str
-    kind: str          # "speech" | "visual"
-    source: str        # "video" | "offpair"
+    kind: Literal["speech", "visual"]
+    source: Literal["video", "offpair"]
 
 
 def parse_transcript_text(text: str, source: str) -> List[Entry]:
@@ -42,6 +42,10 @@ def parse_transcript_text(text: str, source: str) -> List[Entry]:
         if not m:
             continue  # header / banner / non-timestamped line
         mm, ss, rest = int(m.group(1)), int(m.group(2)), m.group(3).strip()
+        if ss >= 60:
+            continue  # malformed seconds field (e.g. '40:60')
+        if not rest:
+            continue  # timestamp with no body (e.g. '41:00 ')
         t = mm * 60 + ss
         if rest.startswith("[") and rest.endswith("]"):
             entries.append(Entry(t, None, rest, "visual", source))

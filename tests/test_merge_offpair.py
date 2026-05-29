@@ -29,3 +29,18 @@ def test_parse_speech_visual_and_skips_headers():
     assert maya.text == "Spin it again." and maya.time_s == 40 * 60 + 3
     assert teacher.time_s == 75 * 60 + 10  # minutes > 59 supported
     assert all(e.source == "video" for e in entries)
+
+
+def test_parse_skips_malformed_and_empty():
+    text = (
+        "40:60 Student-Maya: hi\n"   # malformed seconds (>= 60), skipped
+        "41:00 \n"                   # timestamp-only empty body, skipped
+        "41:05 Student-Maya: ok\n"   # normal line, parsed
+    )
+    entries = parse_transcript_text(text, source="video")
+    assert len(entries) == 1
+    only = entries[0]
+    assert only.kind == "speech"
+    assert only.speaker == "Student-Maya"
+    assert only.text == "ok"
+    assert only.time_s == 41 * 60 + 5
