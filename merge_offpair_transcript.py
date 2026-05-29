@@ -105,6 +105,33 @@ def cross_correlate_offset(ref: "np.ndarray", sig: "np.ndarray", sr: int) -> Tup
     return idx / sr, float(valid[idx] / denom)
 
 
+def rms_envelope(samples: "np.ndarray", sr: int, hop_s: float = 0.5) -> "np.ndarray":
+    """RMS per non-overlapping hop window. Returns a 1-D array (one value per hop)."""
+    samples = np.asarray(samples, dtype=np.float64)
+    hop = max(1, int(round(hop_s * sr)))
+    n = len(samples) // hop
+    if n == 0:
+        return np.array([np.sqrt(np.mean(samples ** 2))]) if len(samples) else np.array([0.0])
+    trimmed = samples[: n * hop].reshape(n, hop)
+    return np.sqrt(np.mean(trimmed ** 2, axis=1))
+
+
+def choose_threshold(env: "np.ndarray", k: float = 1.0) -> float:
+    """Adaptive close-speech threshold: median + k * MAD of the envelope."""
+    env = np.asarray(env, dtype=np.float64)
+    med = float(np.median(env))
+    mad = float(np.median(np.abs(env - med)))
+    return med + k * mad
+
+
+def is_close(env: "np.ndarray", hop_s: float, t: float, threshold: float) -> bool:
+    """True if the off-pair energy at time t (seconds) is at/above threshold (close speech)."""
+    idx = int(t // hop_s)
+    if idx < 0 or idx >= len(env):
+        return False
+    return bool(env[idx] >= threshold)
+
+
 def fit_time_map(pairs: List[Tuple[float, float]]) -> TimeMap:
     """Least-squares fit video_t = a*mp3_t + b over (mp3_t, video_t) pairs.
 

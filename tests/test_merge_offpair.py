@@ -77,3 +77,17 @@ def test_fit_time_map_recovers_offset_and_drift():
     assert abs(tm.b - 480.0) < 0.5
     assert abs(tm.map(1800.0) - (1.002 * 1800.0 + 480.0)) < 0.5
     assert tm.residual < 1e-3
+
+
+def test_energy_envelope_and_gating():
+    import numpy as np
+    from merge_offpair_transcript import rms_envelope, choose_threshold, is_close
+    sr = 16000
+    quiet = 0.02 * np.random.default_rng(1).standard_normal(sr * 4).astype(np.float32)
+    loud = quiet.copy()
+    loud[sr * 1: sr * 2] += 0.8 * np.random.default_rng(2).standard_normal(sr).astype(np.float32)
+    env = rms_envelope(loud, sr, hop_s=0.5)
+    assert len(env) == 8  # 4 s / 0.5 s
+    thr = choose_threshold(env, k=1.0)
+    assert is_close(env, 0.5, 1.4, thr) is True     # inside the loud second
+    assert is_close(env, 0.5, 3.2, thr) is False    # quiet region
