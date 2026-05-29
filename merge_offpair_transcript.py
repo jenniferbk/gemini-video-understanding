@@ -28,6 +28,18 @@ class Entry:
     source: Literal["video", "offpair"]
 
 
+@dataclass
+class TimeMap:
+    a: float
+    b: float
+    windows: list = field(default_factory=list)
+    residual: float = 0.0
+    confidence: float = 0.0
+
+    def map(self, mp3_t: float) -> float:
+        return self.a * mp3_t + self.b
+
+
 def parse_transcript_text(text: str, source: str) -> List[Entry]:
     """Parse a v10 / off-pair transcript into timestamped entries.
 
@@ -91,3 +103,20 @@ def cross_correlate_offset(ref: "np.ndarray", sig: "np.ndarray", sr: int) -> Tup
     window = ref[idx: idx + len(sig)]
     denom = np.linalg.norm(window) * np.linalg.norm(sig) + 1e-9
     return idx / sr, float(valid[idx] / denom)
+
+
+def fit_time_map(pairs: List[Tuple[float, float]]) -> TimeMap:
+    """Least-squares fit video_t = a*mp3_t + b over (mp3_t, video_t) pairs.
+
+    With a single pair, assume no drift (a=1). Residual is RMS error in seconds.
+    """
+    if not pairs:
+        raise ValueError("fit_time_map needs at least one (mp3_t, video_t) pair")
+    xs = np.array([p[0] for p in pairs], dtype=np.float64)
+    ys = np.array([p[1] for p in pairs], dtype=np.float64)
+    if len(pairs) == 1:
+        a, b = 1.0, float(ys[0] - xs[0])
+    else:
+        a, b = np.polyfit(xs, ys, 1)
+    resid = float(np.sqrt(np.mean((ys - (a * xs + b)) ** 2)))
+    return TimeMap(a=float(a), b=float(b), residual=resid)

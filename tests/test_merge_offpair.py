@@ -66,3 +66,14 @@ def test_cross_correlate_offset_finds_excerpt():
     offset, strength = cross_correlate_offset(ref, sig, sr)
     assert abs(offset - 0.4) < 0.01
     assert strength > 0.9
+
+
+def test_fit_time_map_recovers_offset_and_drift():
+    from merge_offpair_transcript import fit_time_map
+    # true map: video_t = 1.002*mp3_t + 480   (drift + 8 min offset)
+    pairs = [(t, 1.002 * t + 480.0) for t in (60.0, 1200.0, 2400.0, 3600.0)]
+    tm = fit_time_map(pairs)
+    assert abs(tm.a - 1.002) < 1e-4
+    assert abs(tm.b - 480.0) < 0.5
+    assert abs(tm.map(1800.0) - (1.002 * 1800.0 + 480.0)) < 0.5
+    assert tm.residual < 1e-3
