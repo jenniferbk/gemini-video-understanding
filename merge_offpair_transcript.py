@@ -275,6 +275,16 @@ def build_audit(time_map: TimeMap, threshold: float, close_count: int, faint_cou
     }
 
 
+def needs_ab_fallback(pair_map: PairMap, min_confidence: float) -> bool:
+    """Keep generic Speaker-A/B labels (don't trust detected identities) when detection
+    is weak: low confidence, OR the mapping is not injective (distinct off-pair speakers
+    collapsed onto the same video student — a sign of bleed-dominated matching)."""
+    if pair_map.confidence < min_confidence:
+        return True
+    values = list(pair_map.mapping.values())
+    return len(set(values)) < len(values)
+
+
 def extract_audio(media_path: str) -> Tuple["np.ndarray", int]:
     """Decode any media to mono 16 kHz float32 in [-1,1] via ffmpeg -> temp WAV -> numpy."""
     sr = 16000
@@ -353,8 +363,9 @@ def main():
                      if e.kind == "speech" and is_close(env, hop_s, e.time_s, threshold)
                      and video_has_coverage(video_entries, tm.map(e.time_s), args.window)]
     pair_map = detect_pair2(video_entries, close_overlap, tm, window=args.window)
-    if pair_map.confidence < args.min_pair2_confidence:
-        warnings.append(f"low Pair-2 confidence {pair_map.confidence:.2f} — keeping Speaker-A/B labels")
+    if needs_ab_fallback(pair_map, args.min_pair2_confidence):
+        warnings.append(f"Pair-2 detection unreliable (confidence {pair_map.confidence:.2f}, "
+                        f"mapping {pair_map.mapping}) — keeping Speaker-A/B labels")
         pair_map = PairMap(mapping={}, confidence=pair_map.confidence)
 
     close_count = sum(1 for e in offpair_entries

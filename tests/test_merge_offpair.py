@@ -175,6 +175,16 @@ def test_format_transcript_and_audit():
     assert audit["warnings"] == ["low overlap"]
 
 
+def test_needs_ab_fallback():
+    from merge_offpair_transcript import PairMap, needs_ab_fallback
+    distinct = PairMap(mapping={"Speaker-A": "Student-Maya", "Speaker-B": "Student-Omar"}, confidence=0.9)
+    collide = PairMap(mapping={"Speaker-A": "Student-Maya", "Speaker-B": "Student-Maya"}, confidence=0.9)
+    lowconf = PairMap(mapping={"Speaker-A": "Student-Maya", "Speaker-B": "Student-Omar"}, confidence=0.05)
+    assert needs_ab_fallback(distinct, 0.15) is False
+    assert needs_ab_fallback(collide, 0.15) is True     # A==B collision
+    assert needs_ab_fallback(lowconf, 0.15) is True     # low confidence
+
+
 def test_extract_audio_reads_wav(tmp_path):
     import wave
     import numpy as np
