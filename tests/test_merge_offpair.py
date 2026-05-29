@@ -31,6 +31,15 @@ def test_parse_speech_visual_and_skips_headers():
     assert all(e.source == "video" for e in entries)
 
 
+def test_text_similarity():
+    from merge_offpair_transcript import text_similarity
+    assert text_similarity("Spin it again!", "spin it again") == 1.0
+    assert text_similarity("rotate it sideways", "no way") == 0.0
+    mid = text_similarity("we counted to forty", "we counted to fifty")
+    assert 0.4 < mid < 0.9
+    assert text_similarity("", "anything") == 0.0
+
+
 def test_parse_skips_malformed_and_empty():
     text = (
         "40:60 Student-Maya: hi\n"   # malformed seconds (>= 60), skipped

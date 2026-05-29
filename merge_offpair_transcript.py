@@ -57,3 +57,18 @@ def parse_transcript_text(text: str, source: str) -> List[Entry]:
         else:
             entries.append(Entry(t, None, rest, "visual", source))
     return entries
+
+
+_WORD_RE = re.compile(r"[a-z0-9]+")
+
+
+def _tokens(s: str) -> set:
+    return set(_WORD_RE.findall(s.lower()))
+
+
+def text_similarity(a: str, b: str) -> float:
+    """Token Jaccard similarity in [0, 1]; 0 if either side has no word tokens."""
+    ta, tb = _tokens(a), _tokens(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / len(ta | tb)
