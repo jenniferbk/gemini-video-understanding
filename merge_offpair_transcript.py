@@ -40,6 +40,15 @@ class TimeMap:
         return self.a * mp3_t + self.b
 
 
+@dataclass
+class PairMap:
+    mapping: dict = field(default_factory=dict)
+    confidence: float = 0.0
+
+    def label_for(self, speaker: str) -> str:
+        return self.mapping.get(speaker, speaker)
+
+
 def parse_transcript_text(text: str, source: str) -> List[Entry]:
     """Parse a v10 / off-pair transcript into timestamped entries.
 
@@ -147,3 +156,44 @@ def fit_time_map(pairs: List[Tuple[float, float]]) -> TimeMap:
         a, b = np.polyfit(xs, ys, 1)
     resid = float(np.sqrt(np.mean((ys - (a * xs + b)) ** 2)))
     return TimeMap(a=float(a), b=float(b), residual=resid)
+
+
+def is_student_speaker(speaker: Optional[str],
+                       teacher_markers=("Teacher", "Ms.", "Mr.", "Mrs.")) -> bool:
+    """True if the label looks like a student (not the teacher / not a visual line)."""
+    if not speaker:
+        return False
+    return not any(marker in speaker for marker in teacher_markers)
+
+
+def detect_pair2(video_entries: List[Entry],
+                 offpair_close_overlap: List[Entry],
+                 time_map: TimeMap,
+                 window: float = 8.0) -> PairMap:
+    """Learn off-pair Speaker-A/B -> student identity from off-pair lines that overlap a
+    video student line (bleed excluded by the caller via energy gating). For each off-pair
+    speaker, accumulate text-similarity mass per candidate video student; assign the best.
+    Confidence = winner mass margin over runner-up, averaged across assigned speakers."""
+    from collections import defaultdict
+    vid = [e for e in video_entries if e.kind == "speech" and is_student_speaker(e.speaker)]
+    mass: dict = defaultdict(lambda: defaultdict(float))
+    for off in offpair_close_overlap:
+        if off.kind != "speech":
+            continue
+        vt = time_map.map(off.time_s)
+        for ve in vid:
+            if abs(ve.time_s - vt) <= window:
+                sim = text_similarity(off.text, ve.text)
+                if sim > 0:
+                    mass[off.speaker][ve.speaker] += sim
+    mapping, margins = {}, []
+    for off_spk, cands in mass.items():
+        ranked = sorted(cands.items(), key=lambda kv: kv[1], reverse=True)
+        if not ranked:
+            continue
+        mapping[off_spk] = ranked[0][0]
+        total = sum(v for _, v in ranked) or 1.0
+        runner = ranked[1][1] if len(ranked) > 1 else 0.0
+        margins.append((ranked[0][1] - runner) / total)
+    confidence = float(sum(margins) / len(margins)) if margins else 0.0
+    return PairMap(mapping=mapping, confidence=confidence)

@@ -91,3 +91,23 @@ def test_energy_envelope_and_gating():
     thr = choose_threshold(env, k=1.0)
     assert is_close(env, 0.5, 1.4, thr) is True     # inside the loud second
     assert is_close(env, 0.5, 3.2, thr) is False    # quiet region
+
+
+def test_detect_pair2_maps_speakers_to_best_match():
+    from merge_offpair_transcript import Entry, TimeMap, detect_pair2
+    tm = TimeMap(a=1.0, b=0.0)
+    video = [
+        Entry(100.0, "Student-Maya", "spin it again you got this", "speech", "video"),
+        Entry(130.0, "Student-Omar", "try the other arrow key", "speech", "video"),
+        Entry(160.0, "Teacher-Lee", "eyes up here everyone", "speech", "video"),
+    ]
+    offpair_close_overlap = [
+        Entry(101.0, "Speaker-A", "spin it again you got this", "speech", "offpair"),
+        Entry(131.0, "Speaker-B", "try the other arrow key", "speech", "offpair"),
+    ]
+    pm = detect_pair2(video, offpair_close_overlap, tm, window=8.0)
+    assert pm.mapping["Speaker-A"] == "Student-Maya"
+    assert pm.mapping["Speaker-B"] == "Student-Omar"
+    assert pm.label_for("Speaker-A") == "Student-Maya"
+    assert pm.label_for("Speaker-Z") == "Speaker-Z"  # unknown passes through
+    assert pm.confidence > 0.0
