@@ -53,3 +53,16 @@ def test_parse_skips_malformed_and_empty():
     assert only.speaker == "Student-Maya"
     assert only.text == "ok"
     assert only.time_s == 41 * 60 + 5
+
+
+def test_cross_correlate_offset_finds_excerpt():
+    import numpy as np
+    from merge_offpair_transcript import cross_correlate_offset
+    rng = np.random.default_rng(0)
+    sr = 16000
+    ref = rng.standard_normal(sr * 2).astype(np.float32)  # 2 s reference
+    start = int(0.4 * sr)
+    sig = ref[start:start + sr // 2].copy()                # 0.5 s excerpt at t=0.4s
+    offset, strength = cross_correlate_offset(ref, sig, sr)
+    assert abs(offset - 0.4) < 0.01
+    assert strength > 0.9

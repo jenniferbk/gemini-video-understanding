@@ -11,6 +11,8 @@ See docs/superpowers/specs/2026-05-29-offpair-merge-design.md
 from __future__ import annotations
 
 import re
+
+import numpy as np
 from dataclasses import dataclass, field  # field used by later tasks  # noqa: F401
 from typing import List, Literal, Optional, Tuple  # Tuple used by later tasks  # noqa: F401
 
@@ -72,3 +74,20 @@ def text_similarity(a: str, b: str) -> float:
     if not ta or not tb:
         return 0.0
     return len(ta & tb) / len(ta | tb)
+
+
+def cross_correlate_offset(ref: "np.ndarray", sig: "np.ndarray", sr: int) -> Tuple[float, float]:
+    """Find the offset (seconds from ref start) where the shorter `sig` best aligns
+    inside `ref`. Returns (offset_seconds, strength) where strength is the normalized
+    correlation peak in roughly [0, 1] (1.0 = perfect match)."""
+    ref = np.asarray(ref, dtype=np.float64)
+    sig = np.asarray(sig, dtype=np.float64)
+    ref = ref - ref.mean()
+    sig = sig - sig.mean()
+    nfft = 1 << int(np.ceil(np.log2(len(ref) + len(sig))))
+    corr = np.fft.irfft(np.fft.rfft(ref, nfft) * np.conj(np.fft.rfft(sig, nfft)), nfft)
+    valid = corr[: len(ref) - len(sig) + 1]
+    idx = int(np.argmax(valid))
+    window = ref[idx: idx + len(sig)]
+    denom = np.linalg.norm(window) * np.linalg.norm(sig) + 1e-9
+    return idx / sr, float(valid[idx] / denom)
