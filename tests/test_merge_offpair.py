@@ -111,3 +111,41 @@ def test_detect_pair2_maps_speakers_to_best_match():
     assert pm.label_for("Speaker-A") == "Student-Maya"
     assert pm.label_for("Speaker-Z") == "Speaker-Z"  # unknown passes through
     assert pm.confidence > 0.0
+
+
+def test_merge_gated_gapfill():
+    import numpy as np
+    from merge_offpair_transcript import Entry, TimeMap, PairMap, merge
+    tm = TimeMap(a=1.0, b=0.0)
+    video = [
+        Entry(100.0, "Student-Maya", "spin it again", "speech", "video"),      # reliable
+        Entry(200.0, "Student-Maya", "[inaudible]", "speech", "video"),        # gap (inaudible)
+        Entry(300.0, "Teacher-Lee", "eyes up here", "speech", "video"),            # teacher only -> gap for students
+    ]
+    offpair = [
+        Entry(100.0, "Speaker-B", "spin it again", "speech", "offpair"),        # redundant -> drop
+        Entry(200.0, "Speaker-B", "maybe its a hexagon", "speech", "offpair"),  # fills inaudible -> insert
+        Entry(300.0, "Speaker-B", "try the green block", "speech", "offpair"),  # student gap under teacher -> insert
+        Entry(400.0, "Speaker-B", "faint bleed words", "speech", "offpair"),   # faint -> drop
+    ]
+    # energy: close at 100/200/300, faint at 400 (hop_s=0.5 -> index = t/0.5)
+    env = np.zeros(900)
+    for t in (100.0, 200.0, 300.0):
+        env[int(t / 0.5)] = 1.0
+    threshold = 0.5
+    pm = PairMap(mapping={"Speaker-B": "Student-Omar"}, confidence=0.9)
+    merged = merge(video, offpair, tm, env, 0.5, threshold, pm, window=8.0)
+
+    texts = [(e.time_s, e.speaker, e.text, e.source) for e in merged]
+    # all video lines preserved
+    assert (100.0, "Student-Maya", "spin it again", "video") in texts
+    assert (300.0, "Teacher-Lee", "eyes up here", "video") in texts
+    # inaudible-gap filled, relabeled, sourced offpair
+    assert (200.0, "Student-Omar", "maybe its a hexagon", "offpair") in texts
+    # student gap under teacher filled
+    assert (300.0, "Student-Omar", "try the green block", "offpair") in texts
+    # redundant + faint NOT inserted
+    assert all(e.text != "spin it again" or e.source == "video" for e in merged)
+    assert all(e.text != "faint bleed words" for e in merged)
+    # sorted by time
+    assert [e.time_s for e in merged] == sorted(e.time_s for e in merged)

@@ -197,3 +197,43 @@ def detect_pair2(video_entries: List[Entry],
         margins.append((ranked[0][1] - runner) / total)
     confidence = float(sum(margins) / len(margins)) if margins else 0.0
     return PairMap(mapping=mapping, confidence=confidence)
+
+
+def video_has_coverage(video_entries: List[Entry], vt: float, window: float,
+                       teacher_markers=("Teacher", "Ms.", "Mr.", "Mrs.")) -> bool:
+    """True if the video already has RELIABLE student speech near vt (so an off-pair line
+    there is redundant/bleed). Teacher-only moments and [inaudible] do NOT count as
+    coverage — those are gaps the off-pair may fill."""
+    for ve in video_entries:
+        if ve.kind != "speech" or not is_student_speaker(ve.speaker, teacher_markers):
+            continue
+        if "[inaudible]" in ve.text.lower() or not ve.text.strip():
+            continue
+        if abs(ve.time_s - vt) <= window:
+            return True
+    return False
+
+
+def merge(video_entries: List[Entry],
+          offpair_entries: List[Entry],
+          time_map: TimeMap,
+          env: "np.ndarray",
+          hop_s: float,
+          threshold: float,
+          pair_map: PairMap,
+          window: float = 8.0) -> List[Entry]:
+    """Video is the spine (all entries kept). Add an off-pair speech line only if it is
+    close (energy >= threshold) AND the video has no reliable student coverage at the
+    mapped time. Inserted lines are relabeled via pair_map and tagged source='offpair'."""
+    merged: List[Entry] = list(video_entries)
+    for off in offpair_entries:
+        if off.kind != "speech":
+            continue
+        if not is_close(env, hop_s, off.time_s, threshold):
+            continue  # faint bleed -> drop
+        vt = time_map.map(off.time_s)
+        if video_has_coverage(video_entries, vt, window):
+            continue  # redundant / captured talk -> drop
+        merged.append(Entry(vt, pair_map.label_for(off.speaker), off.text, "speech", "offpair"))
+    merged.sort(key=lambda e: e.time_s)
+    return merged
