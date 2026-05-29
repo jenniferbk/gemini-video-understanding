@@ -10,7 +10,14 @@ See docs/superpowers/specs/2026-05-29-offpair-merge-design.md
 """
 from __future__ import annotations
 
+import argparse
+import json
 import re
+import subprocess
+import sys
+import tempfile
+import wave
+from pathlib import Path
 
 import numpy as np
 from dataclasses import dataclass, field  # field used by later tasks  # noqa: F401
@@ -266,3 +273,120 @@ def build_audit(time_map: TimeMap, threshold: float, close_count: int, faint_cou
         "counts": {"inserted": inserted, "discarded": discarded},
         "warnings": warnings,
     }
+
+
+def extract_audio(media_path: str) -> Tuple["np.ndarray", int]:
+    """Decode any media to mono 16 kHz float32 in [-1,1] via ffmpeg -> temp WAV -> numpy."""
+    sr = 16000
+    with tempfile.TemporaryDirectory(prefix="merge_audio_") as tmp:
+        wav_path = Path(tmp) / "a.wav"
+        subprocess.run(
+            ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+             "-i", str(media_path), "-ac", "1", "-ar", str(sr),
+             "-c:a", "pcm_s16le", str(wav_path)],
+            check=True,
+        )
+        with wave.open(str(wav_path), "rb") as w:
+            sr = w.getframerate()
+            frames = w.readframes(w.getnframes())
+    samples = np.frombuffer(frames, dtype="<i2").astype(np.float32) / 32768.0
+    return samples, sr
+
+
+def compute_time_map(video_media: str, offpair_mp3: str,
+                     n_windows: int = 4, win_s: float = 60.0) -> TimeMap:
+    """Estimate video_t = a*mp3_t + b by cross-correlating n_windows off-pair slices
+    against the full video audio. Drops windows whose correlation strength < 0.15."""
+    vid, sr = extract_audio(video_media)
+    mp3, _ = extract_audio(offpair_mp3)
+    mp3_dur = len(mp3) / sr
+    win = int(win_s * sr)
+    centers = np.linspace(0.15, 0.85, n_windows) * mp3_dur
+    pairs, windows = [], []
+    for c in centers:
+        start = int(max(0, c * sr - win // 2))
+        sig = mp3[start:start + win]
+        if len(sig) < win // 2:
+            continue
+        offset, strength = cross_correlate_offset(vid, sig, sr)
+        mp3_t = start / sr
+        windows.append({"mp3_t": mp3_t, "video_t": offset, "strength": strength})
+        if strength >= 0.15:
+            pairs.append((mp3_t, offset))
+    if not pairs:
+        raise RuntimeError("time-map: no window correlated above 0.15 — audio may not overlap")
+    tm = fit_time_map(pairs)
+    tm.windows = windows
+    tm.confidence = min(w["strength"] for w in windows if w["strength"] >= 0.15)
+    return tm
+
+
+def offpair_energy(offpair_mp3: str, hop_s: float = 0.5, k: float = 1.0):
+    samples, sr = extract_audio(offpair_mp3)
+    env = rms_envelope(samples, sr, hop_s=hop_s)
+    return env, hop_s, choose_threshold(env, k=k)
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Merge off-pair transcript into video transcript")
+    ap.add_argument("--video-transcript", required=True)
+    ap.add_argument("--offpair-transcript", required=True)
+    ap.add_argument("--video-media", required=True)
+    ap.add_argument("--offpair-mp3", required=True)
+    ap.add_argument("-o", "--output", required=True)
+    ap.add_argument("--energy-k", type=float, default=1.0, help="close-speech threshold = median + k*MAD")
+    ap.add_argument("--window", type=float, default=8.0, help="alignment match window (s)")
+    ap.add_argument("--min-pair2-confidence", type=float, default=0.15,
+                    help="below this, keep Speaker-A/B labels instead of student names")
+    args = ap.parse_args()
+
+    video_entries = parse_transcript_text(Path(args.video_transcript).read_text("utf-8"), "video")
+    offpair_entries = parse_transcript_text(Path(args.offpair_transcript).read_text("utf-8"), "offpair")
+
+    warnings: list = []
+    tm = compute_time_map(args.video_media, args.offpair_mp3)
+    if tm.residual > 5.0:
+        warnings.append(f"time-map residual {tm.residual:.1f}s — alignment may be poor")
+    env, hop_s, threshold = offpair_energy(args.offpair_mp3, k=args.energy_k)
+
+    close_overlap = [e for e in offpair_entries
+                     if e.kind == "speech" and is_close(env, hop_s, e.time_s, threshold)
+                     and video_has_coverage(video_entries, tm.map(e.time_s), args.window)]
+    pair_map = detect_pair2(video_entries, close_overlap, tm, window=args.window)
+    if pair_map.confidence < args.min_pair2_confidence:
+        warnings.append(f"low Pair-2 confidence {pair_map.confidence:.2f} — keeping Speaker-A/B labels")
+        pair_map = PairMap(mapping={}, confidence=pair_map.confidence)
+
+    close_count = sum(1 for e in offpair_entries
+                      if e.kind == "speech" and is_close(env, hop_s, e.time_s, threshold))
+    faint_count = sum(1 for e in offpair_entries if e.kind == "speech") - close_count
+
+    merged = merge(video_entries, offpair_entries, tm, env, hop_s, threshold, pair_map,
+                   window=args.window)
+    inserted = sum(1 for e in merged if e.source == "offpair")
+    discarded = sum(1 for e in offpair_entries if e.kind == "speech") - inserted
+
+    header = [
+        "=" * 80,
+        "UNIFIED TRANSCRIPT (video + off-pair gap-fill, video timeline)",
+        "=" * 80,
+        f"Video transcript: {Path(args.video_transcript).name}",
+        f"Off-pair transcript: {Path(args.offpair_transcript).name}",
+        f"Time map: video_t = {tm.a:.5f}*mp3_t + {tm.b:.1f}  (residual {tm.residual:.2f}s)",
+        f"Off-pair lines inserted: {inserted}  |  discarded (faint/redundant): {discarded}",
+        "NOTE: off-pair fills only gaps the video missed; video is authoritative elsewhere.",
+        "=" * 80,
+    ]
+    Path(args.output).write_text(format_transcript(merged, header), encoding="utf-8")
+    audit = build_audit(tm, threshold, close_count, faint_count, pair_map,
+                        inserted, discarded, warnings)
+    audit_path = str(Path(args.output).with_name(Path(args.output).stem + "_merge_audit.json"))
+    Path(audit_path).write_text(json.dumps(audit, indent=2), encoding="utf-8")
+    print(f"Wrote {args.output}")
+    print(f"Wrote {audit_path}")
+    for w in warnings:
+        print(f"WARNING: {w}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

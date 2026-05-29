@@ -173,3 +173,21 @@ def test_format_transcript_and_audit():
     assert audit["pair2"]["mapping"]["Speaker-B"] == "Student-Omar"
     assert audit["counts"] == {"inserted": 2, "discarded": 5}
     assert audit["warnings"] == ["low overlap"]
+
+
+def test_extract_audio_reads_wav(tmp_path):
+    import wave
+    import numpy as np
+    from merge_offpair_transcript import extract_audio
+    sr = 16000
+    sig = (0.5 * np.sin(2 * np.pi * 220 * np.arange(sr) / sr)).astype(np.float32)
+    pcm = (sig * 32767).astype("<i2")
+    wav_path = tmp_path / "tone.wav"
+    with wave.open(str(wav_path), "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr)
+        w.writeframes(pcm.tobytes())
+    samples, got_sr = extract_audio(str(wav_path))
+    assert got_sr == sr
+    assert len(samples) == sr
+    assert float(np.max(np.abs(samples))) <= 1.0
+    assert abs(float(np.max(np.abs(samples))) - 0.5) < 0.05
