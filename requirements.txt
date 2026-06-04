@@ -1,0 +1,11 @@
+# Video Transcription Pipeline V10 Requirements
+# Python 3.13. Also requires ffmpeg + ffprobe on PATH (see README).
+
+# Core pipeline (video_transcription_pipeline_v10.py)
+google-genai>=1.0.0
+
+# Name de-identification pass (deidentify_names.py)
+pydantic>=2.0
+
+# Off-pair merge tool (merge_offpair_transcript.py) — optional
+numpy>=2.0.0
