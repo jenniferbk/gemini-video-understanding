@@ -60,4 +60,5 @@ echo "Testing Python..."
 $PYTHON_BIN --version
 echo ""
 echo "Testing imports..."
-$PYTHON_BIN -c "import google.generativeai; import librosa; import torch; print('✅ All dependencies loaded successfully!')" || echo "⚠️  Some dependencies failed to load"
+# v10 pipeline deps — hard-fail the build if any are missing
+$PYTHON_BIN -c "from google import genai; import pydantic; import numpy; print('✅ All dependencies loaded successfully!')"
