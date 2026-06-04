@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './About.module.css';
 import { Button } from '../shared/Button';
 
+// Injected by webpack DefinePlugin from package.json
+declare const APP_VERSION: string;
+
 interface AboutProps {
   onClose: () => void;
 }
@@ -23,7 +26,7 @@ export const About: React.FC<AboutProps> = ({ onClose }) => {
           </div>
 
           <div className={styles.version}>
-            Version 1.0.2
+            Version {APP_VERSION}
           </div>
 
           <div className={styles.description}>
@@ -50,10 +53,10 @@ export const About: React.FC<AboutProps> = ({ onClose }) => {
               <strong>Lead Designer & Researcher</strong>
               <p className={styles.leadName}>Jennifer Kleiman</p>
               <p className={styles.leadDescription}>
-                Designed and developed the sophisticated multi-stage transcription pipeline,
-                integrating voice activity detection, audio denoising, adaptive chunking,
-                multimodal AI analysis, and consensus-based verification for reliable
-                educational video transcription.
+                Designed and developed the multi-stage transcription pipeline, integrating
+                chunked multimodal AI analysis, two-pass speaker identification with
+                human review, burned-in timestamp correction, and optional name
+                de-identification for reliable educational video transcription.
               </p>
             </div>
             <div className={styles.teamMembers}>
@@ -96,12 +99,12 @@ export const About: React.FC<AboutProps> = ({ onClose }) => {
               This application implements a sophisticated multi-stage processing pipeline that combines:
             </p>
             <ul className={styles.techList}>
-              <li><strong>Voice Activity Detection (VAD)</strong> – Silero VAD for intelligent audio segmentation</li>
-              <li><strong>Audio Preprocessing</strong> – Noise reduction and signal enhancement</li>
-              <li><strong>Adaptive Chunking</strong> – Intelligent video segmentation optimized for context</li>
-              <li><strong>Multimodal AI Analysis</strong> – Google Gemini 2.5 Pro for simultaneous video and audio analysis</li>
-              <li><strong>Consensus Verification</strong> – Multiple-run analysis with semantic similarity scoring</li>
-              <li><strong>Speaker Diarization</strong> – AI-powered speaker identification and turn-taking analysis</li>
+              <li><strong>Multimodal AI Analysis</strong> – Google Gemini 3 Flash analyzes video and audio together, capturing gesture, written work, and screen content</li>
+              <li><strong>Chunked Processing</strong> – 60-second chunks with 15-second overlap for speaker continuity across long recordings</li>
+              <li><strong>Two-Pass Speaker Identification</strong> – Auto-detected speakers with visual descriptions, confirmed by a human before transcription</li>
+              <li><strong>Speaker Registry</strong> – Structured speaker context passed to every chunk for consistent labels</li>
+              <li><strong>Burned-In Timestamps</strong> – On-screen timer read by the model, eliminating clock drift</li>
+              <li><strong>Name De-identification</strong> – Optional second pass replacing real names with pseudonyms, with an audit trail</li>
             </ul>
             <p className={styles.techNote}>
               The integration and orchestration of these components was designed and implemented

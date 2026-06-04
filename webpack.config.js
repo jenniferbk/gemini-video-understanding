@@ -1,5 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const APP_VERSION = require('./package.json').version;
 
 module.exports = [
   // Main process configuration
@@ -93,6 +95,9 @@ module.exports = [
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/renderer/index.html'
+      }),
+      new webpack.DefinePlugin({
+        APP_VERSION: JSON.stringify(APP_VERSION)
       })
     ],
     resolve: {
